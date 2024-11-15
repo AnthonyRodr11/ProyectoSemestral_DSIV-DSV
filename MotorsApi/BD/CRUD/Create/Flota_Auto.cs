@@ -8,8 +8,11 @@ namespace MotorsApi.BD.CRUD.Create
     {
 
         //Metodo para registrar un nuevo auto a la tabla Flota_Carro
-        public void registraAutoflota(Flota_Carro regAuto)
+        public int registraAutoflota(Flota_Carro regAuto)
         {
+            //declaracion de variables de trabajo
+            int insercion;
+
             try
             {
                 //Limpiamos parametros
@@ -39,11 +42,13 @@ namespace MotorsApi.BD.CRUD.Create
                 abrirConexion();
 
                 //validamos si se inserto el auto
-                int insercion = Convert.ToInt32(cmd.ExecuteNonQuery());
+                insercion = Convert.ToInt32(cmd.ExecuteNonQuery());
 
                 if (insercion > 0)
                 {
                     Console.WriteLine("Se registro el Auto correctamente");
+
+                    return insercion;
                 }
             }
             catch (Exception e)
@@ -53,6 +58,8 @@ namespace MotorsApi.BD.CRUD.Create
             finally
             {
                 cerrarConexion();
+
+                return insercion = 0;
             }
         }
 
