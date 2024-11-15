@@ -6,6 +6,7 @@ namespace MotorsApi.BD.CRUD.Update
 {
     public class Alquiler_Auto : Conexiondb
     {
+        //Editamos la tarifa respecto al tipo de auto
         public int EditarTarifa(int id, Tarifas_Alquiler tarifas_Alquiler)
         {
             try
@@ -17,23 +18,29 @@ namespace MotorsApi.BD.CRUD.Update
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 //asignamos el cod
-                cmd.CommandText = "UPDATE Tarifas_Alquiler SET tipo_auto = @tipo_auto, tarifaxauto = @tarifaxauto WHERE id_tipo = " + id;
+                cmd.CommandText = "UPDATE Tarifas_Alquiler SET  tarifaxauto = @tarifaxauto WHERE id_tipo = " + id;
 
                 //asignamos parametros
-                cmd.Parameters.Add(new MySqlParameter("@tipo_auto", tarifas_Alquiler.tipo_auto));
                 cmd.Parameters.Add(new MySqlParameter("@tarifaxauto", tarifas_Alquiler.tarifaxauto));
+
 
                 //Abrimos conexion
                 abrirConexion();
+
+                //Validacion de Actualizacion
                 int insertedId = Convert.ToInt32(cmd.ExecuteNonQuery());
                 if (insertedId > 0)
-                    return insertedId;
+                {
+
+                    Console.WriteLine("Se registro el Auto correctamente");
+                }
+                
 
             }
 
             catch (Exception e)
             {
-                throw;
+                Console.WriteLine("No se pudo registrar el Auto" + e);
 
             }
             finally
@@ -44,6 +51,7 @@ namespace MotorsApi.BD.CRUD.Update
             return 0;
         }
 
+        //Actualiza el estado en el que se encuentra el veehiculo(Vender, alquilar, subastar)
         public int ActualizarEstado(int id, Flota_Carro flota_Carro)
         {
             try
@@ -55,24 +63,29 @@ namespace MotorsApi.BD.CRUD.Update
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 //asignamos el cod
-                cmd.CommandText = "UPDATE Tarifas_Alquiler SET estado = @estado WHERE placa = " + id;
+                cmd.CommandText = "UPDATE Flota_Carro SET estado = @estado WHERE placa = " + id;
 
                 //asignamos parametros
                 cmd.Parameters.Add(new MySqlParameter("@estado", flota_Carro.estado));
-                
+
 
                 //Abrimos conexion
                 abrirConexion();
+
+                //Validacion de Actualizacion
                 int insertedId = Convert.ToInt32(cmd.ExecuteNonQuery());
                 if (insertedId > 0)
-                    return insertedId;
+                {
+                    Console.WriteLine("Se actualizo correctamente");
+                }
+                    
 
             }
 
             catch (Exception e)
             {
-                throw;
-
+                
+                Console.WriteLine("No pudo actualizarce" + e);
             }
             finally
             {
@@ -80,7 +93,6 @@ namespace MotorsApi.BD.CRUD.Update
                 cerrarConexion();
             }
             return 0;
-
         }
 
     }
