@@ -10,17 +10,11 @@ using System.Windows.Forms;
 
 namespace MotorsForm
 {
-    public partial class Login : Form
+    public partial class Home : Form
     {
-        public Login()
+        public Home()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Home home = new Home();
-
         }
     }
 }
