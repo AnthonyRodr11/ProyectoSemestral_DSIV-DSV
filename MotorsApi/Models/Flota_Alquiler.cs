@@ -2,6 +2,7 @@
 {
     public class Flota_Alquiler
     {
+        //Atributos de la entidad
 
         public int cod_alquiler { get; set; }
         public string id_vehiculo { get; set; }
