@@ -4,6 +4,7 @@ namespace MotorsApi.Models
 {
     public class Solicitud
     {
+        //Atributos de la entidad
         public int id_solicitud { get; set; }
         public int id_usuario { get; set; }
         public string id_vehiculo { get; set; }
