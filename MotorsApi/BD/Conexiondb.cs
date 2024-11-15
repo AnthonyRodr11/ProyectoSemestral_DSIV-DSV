@@ -11,16 +11,13 @@ namespace MotorsApi.BD
         public MySqlDataAdapter adapter;
         public DataSet ds;
 
-        //Objeto de la clase Notificando para hacer saber problemas
-        private Notificacion noti = new Notificacion();
-
         //Metodo constructor para inicializar los atributos
         public Conexiondb()
         {
             try
             {
-
-                string cadenaConexion = ConfigurationManager.ConnectionStrings["conexion"].ConnectionString;
+                //cadena de conexion por arreglar
+                string cadenaConexion = "server=localhost;Port=3306;user id=root;password=ls131133;database=cafecitos;persistsecurityinfo=True";
                 conexion = new MySqlConnection(cadenaConexion);
                 cmd = new MySqlCommand();
                 cmd.Connection = conexion;
@@ -28,7 +25,7 @@ namespace MotorsApi.BD
             catch (Exception e)
             {
 
-                noti.notificarError("No se pudo inicializar la cadena de Conexion " + e.Message);
+                Console.WriteLine("No se pudo inicializar la cadena de Conexion ");
             }
         }
 
@@ -51,7 +48,7 @@ namespace MotorsApi.BD
             catch (Exception e)
             {
 
-                noti.notificarError("No pudimos conectarnos a la base de datos");
+                Console.WriteLine("No pudimos conectarnos a la base de datos");
             }
         }
 
@@ -69,7 +66,7 @@ namespace MotorsApi.BD
             catch (Exception e)
             {
 
-                noti.notificarError("No pudimos cerrar la conexion a la base de datos");
+                Console.WriteLine("No pudimos cerrar la conexion a la base de datos");
             }
         }
 
