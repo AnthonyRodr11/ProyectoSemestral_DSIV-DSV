@@ -31,7 +31,7 @@ namespace MotorsApi.BD.CRUD.Update
                 int insertedId = Convert.ToInt32(cmd.ExecuteNonQuery());
                 if (insertedId > 0)
                 {
-
+                    return insertedId;
                     Console.WriteLine("Se registro el Auto correctamente");
                 }
                 
@@ -76,9 +76,9 @@ namespace MotorsApi.BD.CRUD.Update
                 int insertedId = Convert.ToInt32(cmd.ExecuteNonQuery());
                 if (insertedId > 0)
                 {
-                    Console.WriteLine("Se actualizo correctamente");
-                }
-                    
+                    return insertedId;
+
+                }   
 
             }
 
