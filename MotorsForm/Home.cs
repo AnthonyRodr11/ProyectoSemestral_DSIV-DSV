@@ -22,5 +22,13 @@ namespace MotorsForm
         {
 
         }
+
+        private void flotaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Flota flota = new Flota();
+            flota.MdiParent = this;
+            this.toolStripContainer1.ContentPanel.Controls.Add(flota);
+            flota.Show();
+        }
     }
 }

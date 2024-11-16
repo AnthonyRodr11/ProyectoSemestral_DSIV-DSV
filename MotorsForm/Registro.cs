@@ -10,18 +10,11 @@ using System.Windows.Forms;
 
 namespace MotorsForm
 {
-    public partial class Login : Form
+    public partial class Registro : Form
     {
-        public Login()
+        public Registro()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Home home = new Home();
-            this.Hide();
-            home.Show();
         }
     }
 }
