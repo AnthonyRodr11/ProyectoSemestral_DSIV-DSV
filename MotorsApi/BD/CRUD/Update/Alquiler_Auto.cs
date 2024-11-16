@@ -32,7 +32,7 @@ namespace MotorsApi.BD.CRUD.Update
                 if (insertedId > 0)
                 {
                     return insertedId;
-                    Console.WriteLine("Se registro el Auto correctamente");
+
                 }
                 
 
@@ -77,8 +77,8 @@ namespace MotorsApi.BD.CRUD.Update
                 if (insertedId > 0)
                 {
                     return insertedId;
-
-                }   
+                }
+                    
 
             }
 
