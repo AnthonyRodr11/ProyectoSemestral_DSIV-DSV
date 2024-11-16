@@ -26,7 +26,7 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.Parameters.Add(new MySqlParameter("@placa", flota_Venta.placa));
                 cmd.Parameters.Add(new MySqlParameter("@precio", flota_Venta.precio));
 
-                ;
+              
 
                 //abrir Conexion
                 abrirConexion();
