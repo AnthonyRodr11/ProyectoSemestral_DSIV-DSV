@@ -7,7 +7,7 @@ namespace MotorsApi.BD.CRUD.Update
     public class Editar_Usuario : Conexiondb
     {
 
-        public int UsuarioEditar (int id, Usuario usuario, Login login)
+        public int UsuarioEditar ( Usuario usuario, Login login)
         {
             try
             {
@@ -18,17 +18,19 @@ namespace MotorsApi.BD.CRUD.Update
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos el cod
-                cmd.CommandText = "UPDATE Usuario SET telefono = @telefono  WHERE id =" + id;
+                cmd.CommandText = "UPDATE Usuario SET telefono = @telefono  WHERE id = @id";
 
                 //asignamos parametros
+                cmd.Parameters.Add(new MySqlParameter("@id", usuario.id));
                 cmd.Parameters.Add(new MySqlParameter("@telefono", usuario.telefono));
                 cmd.Parameters.Add(new MySqlParameter("@f_actualizacion", usuario.f_actualizacion));
 
 
                 //Asignamos el cod
-                cmd.CommandText = "UPDATE Login SET contraseña = @contraseña, correo = @correo  WHERE id =" + id;
+                cmd.CommandText = "UPDATE Login SET contraseña = @contraseña, correo = @correo  WHERE id_usuario = @id_usuario";
 
                 //asignamos parametros
+                cmd.Parameters.Add(new MySqlParameter("@id_usuario", login.id_usuario));
                 cmd.Parameters.Add(new MySqlParameter("@contraseña", login.contraseña));
                 cmd.Parameters.Add(new MySqlParameter("@correo", login.correo));
                 
