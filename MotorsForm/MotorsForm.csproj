@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Flota.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Flota.Designer.cs">
+      <DependentUpon>Flota.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,6 +66,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Registro.Designer.cs">
+      <DependentUpon>Registro.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Flota.resx">
+      <DependentUpon>Flota.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -76,6 +91,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Registro.resx">
+      <DependentUpon>Registro.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -92,6 +110,7 @@
   <ItemGroup>
     <Content Include="Resource\alquiler.png" />
     <Content Include="Resource\car.png" />
+    <Content Include="Resource\Fondo.png" />
     <Content Include="Resource\Home %282%29.png" />
     <Content Include="Resource\Home.png" />
     <Content Include="Resource\informe.png" />

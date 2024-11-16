@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.flotaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serviciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,21 +37,11 @@
             this.solicitudesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manejoDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.registrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.toolStripContainer1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(69, 185);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(1153, 435);
-            this.dataGridView1.TabIndex = 0;
             // 
             // menuStrip1
             // 
@@ -73,10 +62,13 @@
             // 
             // flotaToolStripMenuItem
             // 
+            this.flotaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.registrarToolStripMenuItem});
             this.flotaToolStripMenuItem.Image = global::MotorsForm.Properties.Resources.car;
             this.flotaToolStripMenuItem.Name = "flotaToolStripMenuItem";
             this.flotaToolStripMenuItem.Size = new System.Drawing.Size(74, 22);
             this.flotaToolStripMenuItem.Text = "Flota";
+            this.flotaToolStripMenuItem.Click += new System.EventHandler(this.flotaToolStripMenuItem_Click);
             // 
             // serviciosToolStripMenuItem
             // 
@@ -131,38 +123,30 @@
             this.manejoDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
             this.manejoDeUsuariosToolStripMenuItem.Text = "Manejo de Usuarios";
             // 
-            // button1
+            // toolStripContainer1
             // 
-            this.button1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(578, 640);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(130, 34);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Salir";
-            this.button1.UseVisualStyleBackColor = true;
+            this.toolStripContainer1.BottomToolStripPanelVisible = false;
             // 
-            // label1
+            // toolStripContainer1.ContentPanel
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Tahoma", 20.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(138, 141);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 33);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "FLOTA";
+            this.toolStripContainer1.ContentPanel.BackgroundImage = global::MotorsForm.Properties.Resources.Home;
+            this.toolStripContainer1.ContentPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1283, 656);
+            this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStripContainer1.LeftToolStripPanelVisible = false;
+            this.toolStripContainer1.Location = new System.Drawing.Point(0, 26);
+            this.toolStripContainer1.Name = "toolStripContainer1";
+            this.toolStripContainer1.RightToolStripPanelVisible = false;
+            this.toolStripContainer1.Size = new System.Drawing.Size(1283, 656);
+            this.toolStripContainer1.TabIndex = 3;
+            this.toolStripContainer1.Text = "toolStripContainer1";
+            this.toolStripContainer1.TopToolStripPanelVisible = false;
             // 
-            // pictureBox1
+            // registrarToolStripMenuItem
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImage = global::MotorsForm.Properties.Resources.wheel;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.pictureBox1.Location = new System.Drawing.Point(69, 133);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(63, 49);
-            this.pictureBox1.TabIndex = 4;
-            this.pictureBox1.TabStop = false;
+            this.registrarToolStripMenuItem.Name = "registrarToolStripMenuItem";
+            this.registrarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.registrarToolStripMenuItem.Text = "Registrar";
             // 
             // Home
             // 
@@ -171,27 +155,23 @@
             this.BackgroundImage = global::MotorsForm.Properties.Resources.Home__2_;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1283, 682);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
+            this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Home";
             this.Text = "Home";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.toolStripContainer1.ResumeLayout(false);
+            this.toolStripContainer1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem flotaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem serviciosToolStripMenuItem;
@@ -201,8 +181,7 @@
         private System.Windows.Forms.ToolStripMenuItem solicitudesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem informesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manejoDeUsuariosToolStripMenuItem;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripContainer toolStripContainer1;
+        private System.Windows.Forms.ToolStripMenuItem registrarToolStripMenuItem;
     }
 }
