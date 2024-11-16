@@ -17,7 +17,7 @@ namespace MotorsApi.BD.CRUD.Delete
                 cmd.Parameters.Clear();
 
                 //asignamos el tipo codigo 
-                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandType =CommandType.Text;
 
                 //asignamos el nombre del procedimiento de almacendo
                 cmd.CommandText = "DELETE FROM Usuario WHERE id=" + id;
@@ -31,7 +31,7 @@ namespace MotorsApi.BD.CRUD.Delete
                 if (insercion > 0)
                     return insercion;
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
 
                 Console.WriteLine("No se pudo registrar el Auto" + e);

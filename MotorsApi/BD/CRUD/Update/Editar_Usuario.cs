@@ -15,7 +15,7 @@ namespace MotorsApi.BD.CRUD.Update
                 cmd.Parameters.Clear();
 
                 //asignamos el tipo
-                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.Text;
 
                 //asignamos el cod
                 cmd.CommandText = "UPDATE Usuario SET telefono = @telefono  WHERE id =" + id;
