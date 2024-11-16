@@ -120,6 +120,7 @@
     <Content Include="Resource\solicitud.png" />
     <Content Include="Resource\subasta.png" />
     <Content Include="Resource\usuario.png" />
+    <Content Include="Resource\venta.gif" />
     <Content Include="Resource\venta.png" />
     <Content Include="Resource\wheel.png" />
   </ItemGroup>
