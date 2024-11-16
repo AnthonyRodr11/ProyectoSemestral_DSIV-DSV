@@ -46,8 +46,6 @@ namespace MotorsApi.BD.CRUD.Create
 
                 if (insercion > 0)
                 {
-                    Console.WriteLine("Se registro el Auto correctamente");
-
                     return insercion;
                 }
             }
@@ -59,8 +57,8 @@ namespace MotorsApi.BD.CRUD.Create
             {
                 cerrarConexion();
 
-                return insercion = 0;
             }
+            return insercion = 0;
         }
 
     }
