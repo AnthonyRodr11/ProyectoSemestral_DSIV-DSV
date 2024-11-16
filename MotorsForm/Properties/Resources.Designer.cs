@@ -73,9 +73,9 @@ namespace MotorsForm.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap car {
+        internal static System.Drawing.Bitmap Background1 {
             get {
-                object obj = ResourceManager.GetObject("car", resourceCulture);
+                object obj = ResourceManager.GetObject("Background1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace MotorsForm.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Fondo {
+        internal static System.Drawing.Bitmap car {
             get {
-                object obj = ResourceManager.GetObject("Fondo", resourceCulture);
+                object obj = ResourceManager.GetObject("car", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -136,6 +136,26 @@ namespace MotorsForm.Properties {
         internal static System.Drawing.Bitmap LoginZone {
             get {
                 object obj = ResourceManager.GetObject("LoginZone", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logo_MV {
+            get {
+                object obj = ResourceManager.GetObject("Logo_MV", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mustang {
+            get {
+                object obj = ResourceManager.GetObject("mustang", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

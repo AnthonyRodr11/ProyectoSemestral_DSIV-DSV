@@ -30,6 +30,8 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.flotaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.verFlotaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serviciosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ventaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alquilerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,7 +40,6 @@
             this.informesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manejoDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.registrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.SuspendLayout();
@@ -63,12 +64,26 @@
             // flotaToolStripMenuItem
             // 
             this.flotaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.registrarToolStripMenuItem});
+            this.registrarToolStripMenuItem,
+            this.verFlotaToolStripMenuItem});
             this.flotaToolStripMenuItem.Image = global::MotorsForm.Properties.Resources.car;
             this.flotaToolStripMenuItem.Name = "flotaToolStripMenuItem";
             this.flotaToolStripMenuItem.Size = new System.Drawing.Size(74, 22);
             this.flotaToolStripMenuItem.Text = "Flota";
-            this.flotaToolStripMenuItem.Click += new System.EventHandler(this.flotaToolStripMenuItem_Click);
+            // 
+            // registrarToolStripMenuItem
+            // 
+            this.registrarToolStripMenuItem.Name = "registrarToolStripMenuItem";
+            this.registrarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.registrarToolStripMenuItem.Text = "Registrar";
+            this.registrarToolStripMenuItem.Click += new System.EventHandler(this.registrarToolStripMenuItem_Click);
+            // 
+            // verFlotaToolStripMenuItem
+            // 
+            this.verFlotaToolStripMenuItem.Name = "verFlotaToolStripMenuItem";
+            this.verFlotaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.verFlotaToolStripMenuItem.Text = "Ver Flota";
+            this.verFlotaToolStripMenuItem.Click += new System.EventHandler(this.verFlotaToolStripMenuItem_Click);
             // 
             // serviciosToolStripMenuItem
             // 
@@ -85,21 +100,22 @@
             // 
             this.ventaToolStripMenuItem.Image = global::MotorsForm.Properties.Resources.venta;
             this.ventaToolStripMenuItem.Name = "ventaToolStripMenuItem";
-            this.ventaToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.ventaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ventaToolStripMenuItem.Text = "Venta";
             // 
             // alquilerToolStripMenuItem
             // 
             this.alquilerToolStripMenuItem.Image = global::MotorsForm.Properties.Resources.alquiler;
             this.alquilerToolStripMenuItem.Name = "alquilerToolStripMenuItem";
-            this.alquilerToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.alquilerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.alquilerToolStripMenuItem.Text = "Alquiler";
+            this.alquilerToolStripMenuItem.Click += new System.EventHandler(this.alquilerToolStripMenuItem_Click);
             // 
             // subastaToolStripMenuItem
             // 
             this.subastaToolStripMenuItem.Image = global::MotorsForm.Properties.Resources.subasta;
             this.subastaToolStripMenuItem.Name = "subastaToolStripMenuItem";
-            this.subastaToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.subastaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.subastaToolStripMenuItem.Text = "Subasta";
             // 
             // solicitudesToolStripMenuItem
@@ -142,12 +158,6 @@
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
             // 
-            // registrarToolStripMenuItem
-            // 
-            this.registrarToolStripMenuItem.Name = "registrarToolStripMenuItem";
-            this.registrarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.registrarToolStripMenuItem.Text = "Registrar";
-            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -161,6 +171,7 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Home";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Home";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -183,5 +194,6 @@
         private System.Windows.Forms.ToolStripMenuItem manejoDeUsuariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStripMenuItem registrarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem verFlotaToolStripMenuItem;
     }
 }
