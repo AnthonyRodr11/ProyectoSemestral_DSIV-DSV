@@ -45,7 +45,7 @@ namespace MotorsApi.BD.CRUD.Delete
             finally {
                 
                 //Cerramos conexion
-                cmd.Connection.Close(); 
+                cerrarConexion();
             }
             return 0;
         }

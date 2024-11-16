@@ -17,7 +17,7 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.Parameters.Clear();
 
                 //asignamos el tipo codigo 
-                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.Text;
 
                 //asignamos el nombre del procedimiento de almacendo
                 cmd.CommandText = "INSERT INTO Flota_Venta (placa, precio) VALUES(@placa,@precio)"; //poner nombre posteriormente
