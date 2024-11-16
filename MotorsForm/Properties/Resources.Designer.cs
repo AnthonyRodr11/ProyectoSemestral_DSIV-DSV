@@ -173,6 +173,16 @@ namespace MotorsForm.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Rectángulo_gris {
+            get {
+                object obj = ResourceManager.GetObject("Rectángulo gris", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap solicitud {
             get {
                 object obj = ResourceManager.GetObject("solicitud", resourceCulture);
@@ -186,6 +196,16 @@ namespace MotorsForm.Properties {
         internal static System.Drawing.Bitmap subasta {
             get {
                 object obj = ResourceManager.GetObject("subasta", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Toyota {
+            get {
+                object obj = ResourceManager.GetObject("Toyota", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

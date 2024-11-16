@@ -149,6 +149,7 @@
     <Content Include="Resource\Background1.jpg" />
     <Content Include="Resource\car.png" />
     <None Include="Resource\fondo.jpg" />
+    <None Include="Resource\giphy-ezgif.com-webp-to-gif-converter.gif" />
     <Content Include="Resource\Home %282%29.png" />
     <Content Include="Resource\Home.png" />
     <Content Include="Resource\informe.png" />
@@ -158,8 +159,10 @@
     <Content Include="Resource\Logo_MV.png" />
     <Content Include="Resource\mustang.gif" />
     <Content Include="Resource\MVLogin.png" />
+    <None Include="Resource\Rectángulo gris.png" />
     <Content Include="Resource\solicitud.png" />
     <Content Include="Resource\subasta.png" />
+    <None Include="Resource\Toyota.gif" />
     <Content Include="Resource\usuario.png" />
     <Content Include="Resource\venta.gif" />
     <Content Include="Resource\venta.png" />
