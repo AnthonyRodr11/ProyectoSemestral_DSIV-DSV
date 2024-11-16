@@ -18,9 +18,9 @@ namespace MotorsForm
             InitializeComponent();
         }
 
-        private void solicitudesToolStripMenuItem_Click(object sender, EventArgs e)
+        public void LimpiarForm()
         {
-
+            this.toolStripContainer1.ContentPanel.Controls.Clear();
         }
 
         private void registrarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -38,7 +38,7 @@ namespace MotorsForm
             {
                 MdiParent = this
             };
-            this.toolStripContainer1.ContentPanel.Controls.Clear();
+            LimpiarForm();
             this.toolStripContainer1.ContentPanel.Controls.Add(flota);
             flota.Show();
         }
@@ -70,22 +70,17 @@ namespace MotorsForm
             solicitud.Show();
         }
 
-        public void LimpiarForm()
-        {
-            this.toolStripContainer1.ContentPanel.Controls.Clear();
-        }
-
-       
-
         private void alquilerToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Alquiler alquiler = new Alquiler
             {
                 MdiParent = this
             };
-            this.toolStripContainer1.ContentPanel.Controls.Clear();
+            LimpiarForm();
             this.toolStripContainer1.ContentPanel.Controls.Add(alquiler);
             alquiler.Show();
         }
+
+        
     }
 }
