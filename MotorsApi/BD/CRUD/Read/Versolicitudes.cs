@@ -97,22 +97,50 @@ namespace MotorsApi.BD.CRUD.Read
         //Metodo para obtener foto y descripcion de la solicitud
         public List<string> obtenerDescripcion(string id_usuario)
         {
-            List<string> descripcion = new List<string>();
-            string data;
+            List<string> data = new List<string>();
+            string rutaFoto,descripcion;
 
             try
             {
+                //Limpiamos parametros
+                cmd.Parameters.Clear();
 
+                //asignamos el tipo de comando
+                cmd.CommandType = CommandType.Text;
+
+                //asignamos consulta a realizar
+                cmd.CommandText = "SELECT descripcion, foto FROM Solicitud WHERE id_usuario = @IdUsuario";
+
+                // Agregamos el parámetro
+                cmd.Parameters.AddWithValue("@id_usuario", id_usuario);
+
+                abrirConexion();
+
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //obtenemos la data y guardamos 
+                        descripcion = reader.GetString(0); //descripciion
+                        rutaFoto = reader.GetString(1); //ruta de la imagen
+
+                        data.Add(descripcion); // en la posicion 0 esta
+                        data.Add(rutaFoto); //en la posicion 1 esta
+
+                    }
+                }
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo obtener la descripcion y" + e);
+                Console.WriteLine("No se pudo obtener la descripcion y foto" + e);
             }
             finally {
 
                 cerrarConexion();
             }
 
+            return data;
         }
     }
 }
