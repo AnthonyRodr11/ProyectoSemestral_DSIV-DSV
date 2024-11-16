@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MotorsForm.Menu_Strip;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,11 @@ namespace MotorsForm
         public Home()
         {
             InitializeComponent();
+        }
+
+        private void solicitudesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void flotaToolStripMenuItem_Click(object sender, EventArgs e)
