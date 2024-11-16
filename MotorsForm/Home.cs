@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MotorsForm.Menu_Strip;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,16 +11,15 @@ using System.Windows.Forms;
 
 namespace MotorsForm
 {
-    public partial class Login : Form
+    public partial class Home : Form
     {
-        public Login()
+        public Home()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void solicitudesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Home home = new Home();
 
         }
     }

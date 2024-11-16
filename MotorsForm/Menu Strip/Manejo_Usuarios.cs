@@ -8,19 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MotorsForm
+namespace MotorsForm.Menu_Strip
 {
-    public partial class Login : Form
+    public partial class Manejo_Usuarios : Form
     {
-        public Login()
+        public Manejo_Usuarios()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Home home = new Home();
-
         }
     }
 }
