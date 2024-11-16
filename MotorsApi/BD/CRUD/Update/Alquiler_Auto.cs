@@ -18,10 +18,11 @@ namespace MotorsApi.BD.CRUD.Update
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 //asignamos el cod
-                cmd.CommandText = "UPDATE Tarifas_Alquiler SET  tarifaxauto = @tarifaxauto WHERE id_tipo = " + id;
+                cmd.CommandText = "UPDATE Tarifas_Alquiler SET  tarifaxauto = @tarifaxauto WHERE id_tipo = @id_tipo";
 
                 //asignamos parametros
                 cmd.Parameters.Add(new MySqlParameter("@tarifaxauto", tarifas_Alquiler.tarifaxauto));
+                cmd.Parameters.Add(new MySqlParameter("@is_tipo", tarifas_Alquiler.id_tipo));
 
 
                 //Abrimos conexion
@@ -63,10 +64,11 @@ namespace MotorsApi.BD.CRUD.Update
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 //asignamos el cod
-                cmd.CommandText = "UPDATE Flota_Carro SET estado = @estado WHERE placa = " + id;
+                cmd.CommandText = "UPDATE Flota_Carro SET estado = @estado WHERE placa = @placa";
 
                 //asignamos parametros
                 cmd.Parameters.Add(new MySqlParameter("@estado", flota_Carro.estado));
+                cmd.Parameters.Add(new MySqlParameter("@placa", flota_Carro.placa));
 
 
                 //Abrimos conexion
