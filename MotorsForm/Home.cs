@@ -18,11 +18,27 @@ namespace MotorsForm
             InitializeComponent();
         }
 
-        private void flotaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void solicitudesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            LimpiarForm();
-            Flota flota = new Flota();
-            flota.MdiParent = this;
+
+        }
+
+        private void registrarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Registro registro = new Registro();
+            registro.MdiParent = this;
+            this.toolStripContainer1.ContentPanel.Controls.Clear();
+            this.toolStripContainer1.ContentPanel.Controls.Add(registro);
+            registro.Show();
+        }
+
+        private void verFlotaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Flota flota = new Flota
+            {
+                MdiParent = this
+            };
+            this.toolStripContainer1.ContentPanel.Controls.Clear();
             this.toolStripContainer1.ContentPanel.Controls.Add(flota);
             flota.Show();
         }
@@ -60,5 +76,16 @@ namespace MotorsForm
         }
 
        
+
+        private void alquilerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Alquiler alquiler = new Alquiler
+            {
+                MdiParent = this
+            };
+            this.toolStripContainer1.ContentPanel.Controls.Clear();
+            this.toolStripContainer1.ContentPanel.Controls.Add(alquiler);
+            alquiler.Show();
+        }
     }
 }
