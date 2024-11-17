@@ -9,20 +9,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MotorsForm
+namespace MotorsForm.Menu_Strip
 {
-    public partial class Alquiler : Form
+    public partial class Venta : Form
     {
         Herramientas herra = new Herramientas();
-        public Alquiler()
+        public Venta()
         {
             InitializeComponent();
         }
 
-        private void cmbTipoAuto_Leave(object sender, EventArgs e)
+        private void numericUpDown1_Leave(object sender, EventArgs e)
         {
-            herra.ValidarComboBox(cmbTipoAuto);
+            herra.ValidarNumeric(txtPrecio);
         }
-
     }
 }

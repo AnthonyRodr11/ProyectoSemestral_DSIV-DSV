@@ -223,6 +223,16 @@ namespace MotorsForm.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Vehiculos_Slocitud {
+            get {
+                object obj = ResourceManager.GetObject("Vehiculos_Slocitud", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap venta {
             get {
                 object obj = ResourceManager.GetObject("venta", resourceCulture);

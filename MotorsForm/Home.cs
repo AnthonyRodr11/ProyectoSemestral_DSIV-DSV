@@ -46,7 +46,7 @@ namespace MotorsForm
         private void solicitudesToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             LimpiarForm();
-            Solicitudes solicitud = new Solicitudes();
+            Solicitudes_Primero solicitud = new Solicitudes_Primero();
             solicitud.MdiParent = this;
             this.toolStripContainer1.ContentPanel.Controls.Add(solicitud);
             solicitud.Show();
@@ -81,6 +81,26 @@ namespace MotorsForm
             alquiler.Show();
         }
 
-        
+        private void subastaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LimpiarForm();
+            Subasta subasta = new Subasta
+            {
+                MdiParent = this
+            };
+            this.toolStripContainer1.ContentPanel.Controls.Add(subasta);
+            subasta.Show();
+        }
+
+        private void ventaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LimpiarForm();
+            Venta venta = new Venta
+            {
+                MdiParent = this
+            };
+            this.toolStripContainer1.ContentPanel.Controls.Add(venta);
+            venta.Show();
+        }
     }
 }

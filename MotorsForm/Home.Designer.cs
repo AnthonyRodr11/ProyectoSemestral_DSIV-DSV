@@ -74,22 +74,16 @@
             // registrarToolStripMenuItem
             // 
             this.registrarToolStripMenuItem.Name = "registrarToolStripMenuItem";
-            this.registrarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.registrarToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.registrarToolStripMenuItem.Text = "Registrar";
             this.registrarToolStripMenuItem.Click += new System.EventHandler(this.registrarToolStripMenuItem_Click);
             // 
             // verFlotaToolStripMenuItem
             // 
             this.verFlotaToolStripMenuItem.Name = "verFlotaToolStripMenuItem";
-            this.verFlotaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.verFlotaToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.verFlotaToolStripMenuItem.Text = "Ver Flota";
             this.verFlotaToolStripMenuItem.Click += new System.EventHandler(this.verFlotaToolStripMenuItem_Click);
-            // 
-            // registrarToolStripMenuItem
-            // 
-            this.registrarToolStripMenuItem.Name = "registrarToolStripMenuItem";
-            this.registrarToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
-            this.registrarToolStripMenuItem.Text = "Registrar";
             // 
             // serviciosToolStripMenuItem
             // 
@@ -108,6 +102,7 @@
             this.ventaToolStripMenuItem.Name = "ventaToolStripMenuItem";
             this.ventaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ventaToolStripMenuItem.Text = "Venta";
+            this.ventaToolStripMenuItem.Click += new System.EventHandler(this.ventaToolStripMenuItem_Click);
             // 
             // alquilerToolStripMenuItem
             // 
@@ -123,6 +118,7 @@
             this.subastaToolStripMenuItem.Name = "subastaToolStripMenuItem";
             this.subastaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.subastaToolStripMenuItem.Text = "Subasta";
+            this.subastaToolStripMenuItem.Click += new System.EventHandler(this.subastaToolStripMenuItem_Click);
             // 
             // solicitudesToolStripMenuItem
             // 

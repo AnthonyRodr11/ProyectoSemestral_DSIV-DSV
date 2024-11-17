@@ -52,7 +52,10 @@
             // btnAceptar
             // 
             this.btnAceptar.BackColor = System.Drawing.Color.Transparent;
+            this.btnAceptar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnAceptar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
             this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAceptar.Font = new System.Drawing.Font("Tahoma", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAceptar.ForeColor = System.Drawing.Color.White;
             this.btnAceptar.Location = new System.Drawing.Point(120, 556);
             this.btnAceptar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -65,7 +68,10 @@
             // btnRechazar
             // 
             this.btnRechazar.BackColor = System.Drawing.Color.Transparent;
+            this.btnRechazar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnRechazar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
             this.btnRechazar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRechazar.Font = new System.Drawing.Font("Tahoma", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRechazar.ForeColor = System.Drawing.Color.White;
             this.btnRechazar.Location = new System.Drawing.Point(991, 556);
             this.btnRechazar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
