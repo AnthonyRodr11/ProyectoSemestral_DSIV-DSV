@@ -163,7 +163,7 @@
             // 
             this.txtPhone.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPhone.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
+            this.txtPhone.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.IncludePromptAndLiterals;
             this.txtPhone.Location = new System.Drawing.Point(138, 277);
             this.txtPhone.Mask = "0000-0000";
             this.txtPhone.Name = "txtPhone";

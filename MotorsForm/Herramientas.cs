@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace MotorsForm.Resource
 {
@@ -17,7 +18,7 @@ namespace MotorsForm.Resource
         public static bool continuar {  get; set; }
 
         //Herramientas de Validación
-        public static bool ValidarCorreo(string correo)
+        public static bool ValidarFormatoCorreo(string correo)
         {
             try
             {
@@ -36,7 +37,7 @@ namespace MotorsForm.Resource
 
             if (control.TextLength != 0)
             {
-                if (!ValidarCorreo(control.Text))
+                if (!ValidarFormatoCorreo(control.Text))
                 {
                     MensajeError(control, "Correo Incorrecto", false);
                     continuar = false;
