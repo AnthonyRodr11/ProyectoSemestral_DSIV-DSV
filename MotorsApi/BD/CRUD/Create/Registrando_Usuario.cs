@@ -6,7 +6,8 @@ namespace MotorsApi.BD.CRUD.Create
 {
     public class Registrando_Usuario : Conexiondb
     {
-        public int Usuario_Registro(Usuario usuario, Login login)
+        //Metodo para registrar loa atributos del Usuario
+        public int Usuario_Registro(Usuario usuario)
         {
             //declaracion de variable de trabajo 
             int insercion;
@@ -17,10 +18,10 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.Parameters.Clear();
 
                 //asignamos el tipo codigo 
-                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.Text;
 
                 //asignamos el nombre del procedimiento de almacendo
-                cmd.CommandText = "INSERT INTO Usuario (nombre,apellido,identificacion,telefono) VALUES (@nombre,@apellido,@identificacion,@telefono)"; //poner nombre posteriormente
+                cmd.CommandText = "INSERT INTO Usuario (nombre,apellido,identificacion,telefono) VALUES (@nombre,@apellido,@identificacion,@telefono)"; 
 
                 //asignamos parametros
                 cmd.Parameters.Add(new MySqlParameter("@nombre", usuario.nombre));
@@ -29,7 +30,53 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.Parameters.Add(new MySqlParameter("@telefono", usuario.telefono));
                 cmd.Parameters.Add(new MySqlParameter("@f_creacion", usuario.f_creacion));
 
-              
+
+
+                //abrir Conexion
+                abrirConexion();
+
+                //validamos si se inserto el auto
+                insercion = Convert.ToInt32(cmd.ExecuteNonQuery());
+
+                if (insercion > 0)
+                {
+
+                    return insercion;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("No se pudo registrar el Auto" + e);
+            }
+            finally
+            {
+                cerrarConexion();
+
+
+            }
+
+            return 0;
+
+
+
+        }
+
+        //Metodo para registrar los atributos del Login 
+        public int Login_Registro(Login login)
+        {
+
+            //declaracion de variable de trabajo 
+            int insercion;
+
+            try
+            {
+                //Limpiamos parametros
+                cmd.Parameters.Clear();
+
+                //asignamos el tipo codigo 
+                cmd.CommandType = CommandType.Text;
+
+                //asignamos parametros
 
                 cmd.CommandText = "INSERT INTO Login (contraseña,rol,correo) VALUES (@contraseña,@rol,@correo)";
                 cmd.Parameters.Add(new MySqlParameter("@contraseña", login.contraseña));
@@ -63,12 +110,9 @@ namespace MotorsApi.BD.CRUD.Create
             return 0;
 
 
-
         }
 
-        //Separ metodos de registrar Usuario y Login 
-
-
-    }
         
+    }
+
 }

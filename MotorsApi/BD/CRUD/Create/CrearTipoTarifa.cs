@@ -1,14 +1,18 @@
-﻿using MotorsApi.Models;
+﻿
+using MotorsApi.Models;
 using MySql.Data.MySqlClient;
+
 using System.Data;
+
 
 namespace MotorsApi.BD.CRUD.Create
 {
-    public class Venta_Flota : Conexiondb
+    public class CrearTipoTarifa : Conexiondb
     {
-        public int registrarVenta(Flota_Venta flota_Venta)
+       //Metodo para Crear un Nuevo tipo de auto con su respectiva tarifa 
+        public int crearnuevotipo( Tarifas_Alquiler tarifas_Alquiler)
         {
-            //declaracion de variable de trabajo 
+            //declaracion de variables de trabajo
             int insercion;
 
             try
@@ -20,15 +24,12 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos el nombre del procedimiento de almacendo
-                cmd.CommandText = "INSERT INTO Flota_Venta (placa, precio) VALUES(@placa,@precio)"; //poner nombre posteriormente
+                cmd.CommandText = "INSERT INTO Tarifas_Alquiler (tipo_auto,tarifaxauto) VALUES (@tipo_auto,@tarifaxauto)"; 
 
                 //asignamos parametros
-                cmd.Parameters.Add(new MySqlParameter("@placa", flota_Venta.placa));
-                cmd.Parameters.Add(new MySqlParameter("@precio", flota_Venta.precio));
-
-
-
-
+                cmd.Parameters.Add(new MySqlParameter("@tipo_auto", tarifas_Alquiler.tipo_auto));
+                cmd.Parameters.Add(new MySqlParameter("@tarifaxauto", tarifas_Alquiler.tarifaxauto));
+               
                 //abrir Conexion
                 abrirConexion();
 
@@ -37,7 +38,6 @@ namespace MotorsApi.BD.CRUD.Create
 
                 if (insercion > 0)
                 {
-
                     return insercion;
                 }
             }
@@ -49,12 +49,8 @@ namespace MotorsApi.BD.CRUD.Create
             {
                 cerrarConexion();
 
-
             }
-
-            return 0;
-
-
+            return insercion = 0;
         }
     }
 }
