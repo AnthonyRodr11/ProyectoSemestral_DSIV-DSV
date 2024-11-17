@@ -73,7 +73,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos el codigo
-                cmd.CommandText = "SELECT v.venta_id AS ID_Venta,  c.nombre AS Nombre_Cliente,    v.f_compra AS Fecha_Compra,   v.placa AS Placa,    v.total AS Total FROM     ventas v  INNER JOIN     clientes c; ";
+                cmd.CommandText = "SELECT    fv.cod_venta AS ID_Venta,    u.nombre AS Nombre_Cliente,    v.f_compra AS Fecha_Compra,    fv.placa AS Placa,    fv.precio AS Total   FROM     Flota_Venta fv  INNER JOIN     Flota_Carro c ON fv.placa = c.placa  INNER JOIN     ventas v ON c.placa = v.id_vehiculo  INNER JOIN   Usuario u ON v.id_cliente = u.id ";
 
                 // Abrimos la conexión
                 abrirConexion();
@@ -85,11 +85,11 @@ namespace MotorsApi.BD.CRUD.Read
                     {
                         // Construimos una cadena con los valores separados por ;
                         string row = string.Join(";",
-                            reader["venta_id"].ToString(),
-                            reader["id_cliente"].ToString(),
-                            reader["nombre"].ToString(),
-                            reader["placa"].ToString(),
-                            reader["total"].ToString()
+                            reader["cod_venta"].ToString(),     
+                            reader["nombre"].ToString(),        
+                            reader["f_compra"].ToString(),      
+                            reader["placa"].ToString(),        
+                            reader["precio"].ToString()
 
                         );
 
