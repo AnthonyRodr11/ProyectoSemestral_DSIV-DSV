@@ -7,24 +7,22 @@ namespace MotorsApi.BD.CRUD.Create
     public class Flota_Auto : Conexiondb
     {
 
-        //Metodo para registrar un nuevo auto a la tabla Flota_Carro
         public int registraAutoflota(Flota_Carro regAuto)
         {
             //declaracion de variables de trabajo
-            int insercion;
+            int insercion = 0;
 
             try
             {
-                //Limpiamos parametros
+                // Limpiamos parámetros
                 cmd.Parameters.Clear();
 
-                //asignamos el tipo codigo 
+                // Asignamos el tipo de comando
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                //asignamos el nombre del procedimiento de almacendo
-                cmd.CommandText = "sp_registrarAuto"; //poner nombre posteriormente
+                // Asignamos el nombre del procedimiento almacenado
+                cmd.CommandText = "sp_registrarAuto";
 
-                //asignamos parametros
                 // Asignamos los parámetros con nombres que coincidan con el procedimiento
                 cmd.Parameters.Add(new MySqlParameter("@p_placa", regAuto.placa));
                 cmd.Parameters.Add(new MySqlParameter("@p_marca", regAuto.marca));
@@ -40,26 +38,29 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.Parameters.Add(new MySqlParameter("@p_foto", regAuto.foto));
 
                 //abrir Conexion
-                conexion.Open();
+                abrirConexion();
+                cmd.ExecuteNonQuery();
                 //validamos si se inserto el auto
-                insercion = Convert.ToInt32(cmd.ExecuteNonQuery());
+                return insercion = cmd.ExecuteNonQuery();
 
                 if (insercion > 0)
                 {
                     return insercion;
                 }
+
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo registrar el Auto"+e);
+                Console.WriteLine("No se pudo registrar el Auto" + e.ToString());
             }
             finally
             {
-                conexion.Close();
+                cerrarConexion();
 
             }
-            return insercion = 0;
+            return insercion;
         }
+
 
     }
 }
