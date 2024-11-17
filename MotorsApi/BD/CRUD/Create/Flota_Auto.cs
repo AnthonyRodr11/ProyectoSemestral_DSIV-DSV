@@ -25,22 +25,23 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.CommandText = "sp_registrarAuto"; //poner nombre posteriormente
 
                 //asignamos parametros
-                cmd.Parameters.Add( new MySqlParameter("@placa",regAuto.placa));
-                cmd.Parameters.Add(new MySqlParameter("@marca", regAuto.marca));
-                cmd.Parameters.Add(new MySqlParameter("@modelo", regAuto.modelo));
-                cmd.Parameters.Add(new MySqlParameter("@color", regAuto.color));
-                cmd.Parameters.Add(new MySqlParameter("@km", regAuto.km));
-                cmd.Parameters.Add(new MySqlParameter("@transmision", regAuto.transmision));
-                cmd.Parameters.Add(new MySqlParameter("@tipo_gas", regAuto.tipo_gas));
-                cmd.Parameters.Add(new MySqlParameter("@carroceria", regAuto.carroceria));
-                cmd.Parameters.Add(new MySqlParameter("@estado", regAuto.estado));
-                cmd.Parameters.Add(new MySqlParameter("@descripcion", regAuto.descripcion));
-                cmd.Parameters.Add(new MySqlParameter("@disponibilidad", regAuto.disponibilidad));
-                cmd.Parameters.Add(new MySqlParameter("@foto", regAuto.foto));
+                // Asignamos los parámetros con nombres que coincidan con el procedimiento
+                cmd.Parameters.Add(new MySqlParameter("@p_placa", regAuto.placa));
+                cmd.Parameters.Add(new MySqlParameter("@p_marca", regAuto.marca));
+                cmd.Parameters.Add(new MySqlParameter("@p_modelo", regAuto.modelo));
+                cmd.Parameters.Add(new MySqlParameter("@p_color", regAuto.color));
+                cmd.Parameters.Add(new MySqlParameter("@p_km", regAuto.km));
+                cmd.Parameters.Add(new MySqlParameter("@p_transmision", regAuto.transmision));
+                cmd.Parameters.Add(new MySqlParameter("@p_tipo_gas", regAuto.tipo_gas));
+                cmd.Parameters.Add(new MySqlParameter("@p_carroceria", regAuto.carroceria));
+                cmd.Parameters.Add(new MySqlParameter("@p_estado", regAuto.estado));
+                cmd.Parameters.Add(new MySqlParameter("@p_descripcion", regAuto.descripcion));
+                cmd.Parameters.Add(new MySqlParameter("@p_disponibilidad", regAuto.disponibilidad));
+                cmd.Parameters.Add(new MySqlParameter("@p_foto", regAuto.foto));
 
                 //abrir Conexion
                 abrirConexion();
-
+                cmd.ExecuteNonQuery();
                 //validamos si se inserto el auto
                 insercion = Convert.ToInt32(cmd.ExecuteNonQuery());
 
