@@ -40,8 +40,7 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.Parameters.Add(new MySqlParameter("@p_foto", regAuto.foto));
 
                 //abrir Conexion
-                abrirConexion();
-                cmd.ExecuteNonQuery();
+                conexion.Open();
                 //validamos si se inserto el auto
                 insercion = Convert.ToInt32(cmd.ExecuteNonQuery());
 
@@ -56,7 +55,7 @@ namespace MotorsApi.BD.CRUD.Create
             }
             finally
             {
-                cerrarConexion();
+                conexion.Close();
 
             }
             return insercion = 0;

@@ -13,8 +13,5 @@ namespace MotorsApi.Models
         public string foto { get; set; }
         public double monto { get; set; }
 
-
-
-
     }
 }
