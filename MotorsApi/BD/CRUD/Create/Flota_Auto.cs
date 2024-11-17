@@ -44,16 +44,11 @@ namespace MotorsApi.BD.CRUD.Create
                 //validamos si se inserto el auto
                 return insercion = cmd.ExecuteNonQuery();
 
-                Console.WriteLine("holakease");
-
                 if (insercion > 0)
                 {
                     return insercion;
                 }
-                else
-                {
-                    insercion = -1;
-                }
+
             }
             catch (Exception e)
             {
