@@ -29,7 +29,8 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.Parameters.Add(new MySqlParameter("@telefono", usuario.telefono));
                 cmd.Parameters.Add(new MySqlParameter("@f_creacion", usuario.f_creacion));
 
-                
+              
+
                 cmd.CommandText = "INSERT INTO Login (contraseña,rol,correo) VALUES (@contraseña,@rol,@correo)";
                 cmd.Parameters.Add(new MySqlParameter("@contraseña", login.contraseña));
                 cmd.Parameters.Add(new MySqlParameter("@rol", login.rol));
@@ -65,6 +66,7 @@ namespace MotorsApi.BD.CRUD.Create
 
         }
 
+        //Separ metodos de registrar Usuario y Login 
 
 
     }
