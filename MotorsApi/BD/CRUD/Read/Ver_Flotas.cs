@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MotorsApi.Models;
+using MySql.Data.MySqlClient;
 using System.Data;
 
 namespace MotorsApi.BD.CRUD.Read
@@ -43,6 +44,65 @@ namespace MotorsApi.BD.CRUD.Read
             catch (Exception e)
             {
                 Console.WriteLine("No se pudo cargar la lista de autos"+e);
+            }
+            finally
+            {
+
+                cerrarConexion();
+            }
+            return autos;
+        }
+
+        //Metodo para cargar toda la flota
+        public List<Flota_Carro> obtenerFlota()
+        {
+            List<Flota_Carro> autos = new List<Flota_Carro>();
+            string data;
+
+            try
+            {
+                //Limpiamos parametros
+                cmd.Parameters.Clear();
+
+                //Especificamos el tipo de comando
+                cmd.CommandType = CommandType.Text;
+
+                //asignamos consulta a realizar
+                cmd.CommandText = "SELECT * from  flota_carro";
+                
+
+                abrirConexion();
+
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //creamos objeto
+                        Flota_Carro flota = new Flota_Carro()
+                        {
+                            placa = reader["placa"].ToString(),
+                            marca = reader["marca"].ToString(),
+                            modelo = reader["modelo"].ToString(),
+                            color = reader["color"].ToString(),
+                            km = Convert.ToDouble(reader["color"]),
+                            tipo_gas = reader["tipo_gas"].ToString(),
+                            carroceria = reader["carroceria"].ToString(),
+                            estado = reader["estado"].ToString(),
+                            descripcion = reader["descripcion"].ToString(),
+                            disponibilidad = Convert.ToBoolean(reader["disponibilidad"]),
+                            foto = reader.ToString()
+
+                        };
+                        
+                        autos.Add(flota);
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("No se pudo cargar la lista de autos" + e);
             }
             finally
             {
