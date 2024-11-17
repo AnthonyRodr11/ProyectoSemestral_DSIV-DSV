@@ -11,7 +11,7 @@ namespace MotorsApi.BD.CRUD.Create
         public int registraAutoflota(Flota_Carro regAuto)
         {
             //declaracion de variables de trabajo
-            int insercion;
+            int insercion = 0;
 
             try
             {
@@ -41,25 +41,30 @@ namespace MotorsApi.BD.CRUD.Create
 
                 //abrir Conexion
                 abrirConexion();
-                cmd.ExecuteNonQuery();
                 //validamos si se inserto el auto
-                insercion = Convert.ToInt32(cmd.ExecuteNonQuery());
+                return insercion = cmd.ExecuteNonQuery();
+
+                Console.WriteLine("holakease");
 
                 if (insercion > 0)
                 {
                     return insercion;
                 }
+                else
+                {
+                    insercion = -1;
+                }
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo registrar el Auto"+e);
+                Console.WriteLine("No se pudo registrar el Auto" + e.ToString());
             }
             finally
             {
                 cerrarConexion();
-
+                
             }
-            return insercion = 0;
+            return insercion;
         }
 
     }
