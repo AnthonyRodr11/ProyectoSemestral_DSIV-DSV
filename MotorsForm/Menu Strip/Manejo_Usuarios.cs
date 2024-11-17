@@ -28,5 +28,55 @@ namespace MotorsForm.Menu_Strip
         {
             herra.InicioDeCadena(txtTelefono);
         }
+
+        private void txtMail_Leave(object sender, EventArgs e)
+        {
+            herra.ValidarTxtMail(txtMail);
+        }
+
+        private void txtCorreo_Leave(object sender, EventArgs e)
+        {
+            herra.ValidarTxtMail(txtCorreo);
+        }
+
+        private void txtName_Leave(object sender, EventArgs e)
+        {
+            herra.ValidarTextBox(txtName);
+        }
+
+        private void txtApel_Leave(object sender, EventArgs e)
+        {
+            herra.ValidarTextBox(txtApel);
+        }
+
+        private void txtIID_Leave(object sender, EventArgs e)
+        {
+            herra.ValidarTextBox(txtIID);
+        }
+
+        private void txtPhone_Leave(object sender, EventArgs e)
+        {
+            herra.ValidarMasked(txtPhone);
+        }
+
+        private void txtPass_Leave(object sender, EventArgs e)
+        {
+            herra.ValidarTextBox(txtPass);
+        }
+
+        private void txtTelefono_Leave(object sender, EventArgs e)
+        {
+            herra.ValidarMasked(txtTelefono);
+        }
+
+        private void txtContra_Leave(object sender, EventArgs e)
+        {
+            herra.ValidarTextBox(txtContra);
+        }
+
+        private void cmbRol_Leave_1(object sender, EventArgs e)
+        {
+            herra.ValidarComboBox(cmbRol);
+        }
     }
 }

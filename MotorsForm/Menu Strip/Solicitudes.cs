@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MotorsForm.Resource;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,15 @@ namespace MotorsForm.Menu_Strip
 {
     public partial class Solicitudes : Form
     {
+        Herramientas herra = new Herramientas();
         public Solicitudes()
         {
             InitializeComponent();
+        }
+
+        private void comboBox1_Leave(object sender, EventArgs e)
+        {
+            herra.ValidarComboBox(cmbUsuario);
         }
     }
 }

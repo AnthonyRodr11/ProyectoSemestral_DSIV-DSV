@@ -33,7 +33,7 @@
             this.btnRechazar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbUsuario = new System.Windows.Forms.ComboBox();
             this.lblMonto = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -99,13 +99,14 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Monto";
             // 
-            // comboBox1
+            // cmbUsuario
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(120, 87);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(240, 27);
-            this.comboBox1.TabIndex = 6;
+            this.cmbUsuario.FormattingEnabled = true;
+            this.cmbUsuario.Location = new System.Drawing.Point(120, 87);
+            this.cmbUsuario.Name = "cmbUsuario";
+            this.cmbUsuario.Size = new System.Drawing.Size(240, 27);
+            this.cmbUsuario.TabIndex = 6;
+            this.cmbUsuario.Leave += new System.EventHandler(this.comboBox1_Leave);
             // 
             // lblMonto
             // 
@@ -135,7 +136,7 @@
             this.ClientSize = new System.Drawing.Size(1333, 657);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.lblMonto);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbUsuario);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnRechazar);
@@ -158,7 +159,7 @@
         private System.Windows.Forms.Button btnRechazar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbUsuario;
         private System.Windows.Forms.Label lblMonto;
         private System.Windows.Forms.Label label3;
     }

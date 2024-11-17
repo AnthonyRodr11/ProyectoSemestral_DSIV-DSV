@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MotorsForm.Resource;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,20 @@ namespace MotorsForm
 {
     public partial class Alquiler : Form
     {
+        Herramientas herra = new Herramientas();
         public Alquiler()
         {
             InitializeComponent();
+        }
+
+        private void cmbTipoAuto_Leave(object sender, EventArgs e)
+        {
+            herra.ValidarComboBox(cmbTipoAuto);
+        }
+
+        private void txtTarifa_Leave(object sender, EventArgs e)
+        {
+            herra.ValidarTextBox(txtTarifa);
         }
     }
 }
