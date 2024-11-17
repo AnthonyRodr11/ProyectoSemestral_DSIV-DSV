@@ -9,7 +9,8 @@ namespace MotorsApi.BD.CRUD.Create
 
         public int registraAutoflota(Flota_Carro regAuto)
         {
-            int insercion = 0; // Inicializar la variable
+            //declaracion de variables de trabajo
+            int insercion = 0;
 
             try
             {
@@ -36,26 +37,26 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.Parameters.Add(new MySqlParameter("@p_disponibilidad", regAuto.disponibilidad));
                 cmd.Parameters.Add(new MySqlParameter("@p_foto", regAuto.foto));
 
-                // Abrir conexión
-                conexion.Open();
-
-                // Ejecutar el procedimiento almacenado
-                insercion = cmd.ExecuteNonQuery();
+                //abrir Conexion
+                abrirConexion();
+                //validamos si se inserto el auto
+                return insercion = cmd.ExecuteNonQuery();
 
                 if (insercion > 0)
                 {
                     return insercion;
                 }
+
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Error al registrar el Auto: {e.Message}");
+                Console.WriteLine("No se pudo registrar el Auto" + e.ToString());
             }
             finally
             {
-                conexion.Close();
+                cerrarConexion();
+                
             }
-
             return insercion;
         }
 
