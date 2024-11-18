@@ -22,7 +22,7 @@ namespace MotorsApi.BD.CRUD.Update
 
                 //asignamos parametros
                 cmd.Parameters.Add(new MySqlParameter("@tarifaxauto", tarifas_Alquiler.tarifaxauto));
-                cmd.Parameters.Add(new MySqlParameter("@is_tipo", tarifas_Alquiler.id_tipo));
+                cmd.Parameters.Add(new MySqlParameter("@id_tipo", id));
 
 
                 //Abrimos conexion

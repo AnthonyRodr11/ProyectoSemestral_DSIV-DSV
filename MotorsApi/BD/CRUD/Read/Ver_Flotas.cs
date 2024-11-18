@@ -111,5 +111,53 @@ namespace MotorsApi.BD.CRUD.Read
             }
             return autos;
         }
+
+        public List<Tarifas_Alquiler> ObtenerTarifas()
+        {
+            List<Tarifas_Alquiler> alquileres = new List<Tarifas_Alquiler>();
+
+            try
+            {
+                //Limpiamos parametros
+                cmd.Parameters.Clear();
+
+                //Especificamos el tipo de comando
+                cmd.CommandType = CommandType.Text;
+
+                //asignamos consulta a realizar
+                cmd.CommandText = "SELECT * from tarifas_alquiler";
+
+
+                abrirConexion();
+
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //creamos objeto
+                        Tarifas_Alquiler alquiler = new Tarifas_Alquiler()
+                        {
+                            id_tipo = Convert.ToInt32(reader["id_tipo"]),
+                            tipo_auto = reader["tipo_auto"].ToString(),
+                            tarifaxauto = Convert.ToDouble(reader["tarifaxauto"])
+                        };
+
+                        alquileres.Add(alquiler);
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("No se pudo cargar la lista de autos" + e);
+            }
+            finally
+            {
+
+                cerrarConexion();
+            }
+            return alquileres;
+        }
     }
 }
