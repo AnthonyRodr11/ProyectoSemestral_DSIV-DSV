@@ -10,7 +10,7 @@ namespace MotorsApi.Controllers
     {
         [HttpPost]
         [Route("save")]
-        public object GuardarCafe(Flota_Carro autos)
+        public object registrarAuto(Flota_Carro autos)
         {
             
             Flota_Auto regAuto = new Flota_Auto();
