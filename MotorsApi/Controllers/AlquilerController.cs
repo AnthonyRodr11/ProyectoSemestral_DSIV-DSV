@@ -59,7 +59,7 @@ namespace MotorsApi.Controllers
 
         [HttpPatch]
         [Route("editar/Tarifa/{id}")]
-        public IActionResult actualizarTarifa(int id, [FromBody] Tarifas_Alquiler tarifas)
+        public IActionResult actualizarTarifa(int id, [FromBody] TarifaRequest tarifas)
         {
             if(tarifas == null)
             {

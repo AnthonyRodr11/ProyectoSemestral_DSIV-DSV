@@ -7,7 +7,7 @@ namespace MotorsApi.BD.CRUD.Update
     public class Alquiler_Auto : Conexiondb
     {
         //Editamos la tarifa respecto al tipo de auto
-        public int EditarTarifa(Tarifas_Alquiler tarifas_Alquiler)
+        public int EditarTarifa(int id, TarifaRequest tarifas_Alquiler)
         {
             try
             {
