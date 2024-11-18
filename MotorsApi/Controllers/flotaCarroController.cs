@@ -57,7 +57,28 @@ namespace MotorsApi.Controllers
 
         }
 
+        [HttpPost]
+        [Route("create/subasta")]
+        public object registrarSubastaCarro(AgregarSubasta carrito)//Este sirve para crear un carro en subasta.
+        {
+            Subasta_Flota subastita = new Subasta_Flota();
 
+            var guardado = subastita.registrarSubastaCarro(carrito);
+
+            if (guardado > 0)
+                return new
+                {
+                    titulo = "Exito al Guardar",
+                    mensaje = "Los datos se han guardado Correctamente",
+                    code = 200
+                };
+            return new
+            {
+                titulo = "Error al Guardar",
+                mensaje = "No se encontraron tus datos :c",
+                code = 400
+            };
+        }
 
     }
 }

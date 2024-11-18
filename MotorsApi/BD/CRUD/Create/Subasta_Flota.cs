@@ -55,5 +55,34 @@ namespace MotorsApi.BD.CRUD.Create
 
         }
 
+        public int registrarSubastaCarro(AgregarSubasta carrito)
+        {
+            try
+            {
+                cmd.Parameters.Clear();
+
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "INSERT INTO flota_subasta (id_placa, valor_inicial, t_inicio, t_final) " +
+                    "VALUES (@id, @precio, @inicio, @final)";
+
+                cmd.Parameters.Add(new MySqlParameter("@id", carrito.id_placa));
+                cmd.Parameters.Add(new MySqlParameter("@precio", carrito.valor_inicial));
+                cmd.Parameters.Add(new MySqlParameter("@inicio", carrito.t_inicio));
+                cmd.Parameters.Add(new MySqlParameter("@final", carrito.t_final));
+
+                abrirConexion();
+                return cmd.ExecuteNonQuery();
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine("error en puerto perico " + e.ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("errorsito "+e.ToString());
+            }
+            finally { cerrarConexion(); }
+            return 0;
+        }
     }
 }
