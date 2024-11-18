@@ -39,6 +39,7 @@ namespace MotorsApi.BD.CRUD.Create
 
                 //abrir Conexion
                 abrirConexion();
+
                 //validamos si se inserto el auto
                 insercion = cmd.ExecuteNonQuery();  
 
