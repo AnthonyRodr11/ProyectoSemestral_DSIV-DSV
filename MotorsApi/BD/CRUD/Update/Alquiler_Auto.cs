@@ -7,7 +7,7 @@ namespace MotorsApi.BD.CRUD.Update
     public class Alquiler_Auto : Conexiondb
     {
         //Editamos la tarifa respecto al tipo de auto
-        public int EditarTarifa(int id, Tarifas_Alquiler tarifas_Alquiler)
+        public int EditarTarifa(Tarifas_Alquiler tarifas_Alquiler)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace MotorsApi.BD.CRUD.Update
         }
 
         //Actualiza el estado en el que se encuentra el veehiculo(Vender, alquilar, subastar)
-        public int ActualizarEstado(int id, Flota_Carro flota_Carro)
+        public int ActualizarEstado(Update_State flota_Carro)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace MotorsApi.BD.CRUD.Update
                 cmd.Parameters.Clear();
 
                 //asignamos el tipo
-                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.Text;
 
                 //asignamos el cod
                 cmd.CommandText = "UPDATE Flota_Carro SET estado = @estado WHERE placa = @placa";
