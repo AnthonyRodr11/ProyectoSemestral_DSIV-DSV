@@ -55,7 +55,7 @@ namespace MotorsApi.BD.CRUD.Read
         }
 
         //Metodo para obtener el valor que pide compra el usuario
-        public double obtenerMonto(string id_usuario)
+        public double obtenerMonto(int id_usuario)
         {
             double monto = 0;
 
@@ -100,7 +100,7 @@ namespace MotorsApi.BD.CRUD.Read
         }
 
         //Metodo para obtener foto y descripcion de la solicitud
-        public List<string> obtenerDescripcion(string id_usuario)
+        public List<string> obtenerDescripcion(int id_usuario)
         {
             List<string> data = new List<string>();
             string rutaFoto, descripcion;

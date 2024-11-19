@@ -39,7 +39,7 @@ namespace MotorsApi.Controllers
         //Metodo para obtener la descripcion y foto dado el id_usuario 
         [HttpGet]
         [Route("descripcionFoto")]
-        public List<string> obtenerInfo(string id_usuario)
+        public List<string> obtenerInfo(int id_usuario)
         {
 
             //declaracion de objeto que retorna la foto y descripcion
@@ -53,7 +53,7 @@ namespace MotorsApi.Controllers
         //Metodo para obtener el monto de la solicitud del cliente  dado el id_usuario
         [HttpGet]
         [Route("monto")]
-        public double obtenerMonto(string id_usuario)
+        public double obtenerMonto(int id_usuario)
         {
 
             //declaracion de objeto que retorna la foto y descripcion
