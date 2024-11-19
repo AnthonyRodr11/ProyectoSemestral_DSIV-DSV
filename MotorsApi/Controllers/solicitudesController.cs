@@ -52,7 +52,7 @@ namespace MotorsApi.Controllers
 
         //Metodo para obtener el monto de la solicitud del cliente  dado el id_usuario
         [HttpGet]
-        [Route("monto")]
+        [Route("monto/{id_usuario}")]
         public double obtenerMonto(int id_usuario)
         {
 
@@ -66,7 +66,7 @@ namespace MotorsApi.Controllers
 
         //Metodo para obtener el nombre del usuario dado un id_solicitud
         [HttpGet]
-        [Route("nombreSolicitante")]
+        [Route("nombreSolicitante/{id_solicitud}")]
         public string obtenerId(int id_solicitud)
         {
 

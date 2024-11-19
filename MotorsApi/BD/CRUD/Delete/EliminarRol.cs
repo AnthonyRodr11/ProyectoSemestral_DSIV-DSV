@@ -22,7 +22,7 @@ namespace MotorsApi.BD.CRUD.Delete
                 cmd.CommandType =CommandType.Text;
 
                 //asignamos el nombre del procedimiento de almacendo
-                cmd.CommandText = "DELETE FROM Usuario WHERE id = @id";
+                cmd.CommandText = "DELETE FROM login WHERE id = @id";
 
                 //Agregar parametros 
                 cmd.Parameters.Add(new MySqlParameter("@id", id));

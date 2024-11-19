@@ -173,45 +173,39 @@ namespace MotorsApi.BD.CRUD.Read
 
             try
             {
-                //limpiamos los parametros
                 cmd.Parameters.Clear();
 
-                //asignamos el tipo de comando
-                cmd.CommandType = CommandType.Text;
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                //asignamos el codigo
-                cmd.CommandText = "SELECT cod_subasta, valor_inicial, id_placa, valor_puja,  id_usuario,  estado,    t_inicio,  t_final  FROM     Flota_Subasta  WHERE   estado = 'finalizada'";
+                cmd.CommandText = "sp_obtenerSubastas";
 
-                // Abrimos la conexión
                 abrirConexion();
 
-                // Ejecutamos la consulta
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        // Construimos una cadena con los valores separados por ;
+                      
                         string row = string.Join(";",
                            reader["cod_subasta"].ToString(),
                            reader["valor_inicial"].ToString(),
                            reader["id_placa"].ToString(),
                            reader["valor_puja"].ToString(),
                            reader["id_usuario"].ToString(),
+                           reader["nombre"].ToString(),
+                           reader["apellido"].ToString(),
                            reader["estado"].ToString(),
                            reader["t_inicio"].ToString(),
                            reader["t_final"].ToString()
-
                         );
 
-                        // Añadimos la fila a la lista
                         data.Add(row);
                     }
                 }
-
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo realizar la consulta" + e);
+                Console.WriteLine("No se pudo realizar la consulta: " + e.Message);
             }
             finally
             {
@@ -219,11 +213,11 @@ namespace MotorsApi.BD.CRUD.Read
             }
 
             return data.ToArray();
-
         }
 
 
-        
+
+
         //Este metodo Guarda todos los registros de la tabla solicitud 
         public string[] infoSolicitudes()
         {
@@ -235,10 +229,10 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.Parameters.Clear();
 
                 //asignamos el tipo de comando
-                cmd.CommandType = CommandType.Text;
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 //asignamos el codigo
-                cmd.CommandText = "SELECT s.id_solicitud,  u.nombre AS nombre_cliente,  s.estado,  s.f_solicitud,  s.monto   FROM    Solicitud s   INNER JOIN     Usuario u ON s.id_usuario = u.id";
+                cmd.CommandText = "sp_obtener_solicitudes";
 
                 // Abrimos la conexión
                 abrirConexion();

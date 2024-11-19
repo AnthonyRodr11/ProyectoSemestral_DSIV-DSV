@@ -14,7 +14,7 @@ namespace MotorsApi.Controllers
     {
 
         [HttpPost]
-        [Route("venta")]
+        [Route("venta")] 
         public object VenderAuto(Flota_Venta venta)
         {
             Venta_Flota ventaAuto = new Venta_Flota();
