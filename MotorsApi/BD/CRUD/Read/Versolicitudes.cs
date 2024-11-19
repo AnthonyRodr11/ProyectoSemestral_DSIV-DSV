@@ -25,7 +25,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT Usuario.nombre, Usuario.apellido  FROM  Solicitud JOIN  Usuario  ON Solicitud.id_usuario = Usuario.id  WHERE  Solicitud.id_solicitud = @id_solicitud";
+                cmd.CommandText = "SELECT Usuario.nombre, Usuario.apellido FROM Solicitud JOIN Usuario ON Solicitud.id_usuario = Usuario.id WHERE Solicitud.id_solicitud = @id_solicitud";
 
                 // Agregamos el parámetro
                 cmd.Parameters.AddWithValue("@id_solicitud", id_solicitud);
