@@ -6,7 +6,7 @@ namespace MotorsApi.BD.CRUD.Delete
 {
     public class EliminarRol : Conexiondb
     {
-         public int RolEliminar(Usuario usuario)
+         public int RolEliminar(int id)
         {
 
             //declaracion de variable de trabajo 
@@ -25,8 +25,7 @@ namespace MotorsApi.BD.CRUD.Delete
                 cmd.CommandText = "DELETE FROM Usuario WHERE id = @id";
 
                 //Agregar parametros 
-                cmd.Parameters.Add(new MySqlParameter("@id", usuario.id));
-
+                cmd.Parameters.Add(new MySqlParameter("@id", id));
 
                 //abrir Conexion
                 abrirConexion();
@@ -39,8 +38,7 @@ namespace MotorsApi.BD.CRUD.Delete
             }
             catch (Exception e)
             {
-
-                Console.WriteLine("No se pudo registrar el Auto" + e);
+                Console.WriteLine("No se pudo Eliminar el usuario" + e.ToString());
             }
             finally {
                 
