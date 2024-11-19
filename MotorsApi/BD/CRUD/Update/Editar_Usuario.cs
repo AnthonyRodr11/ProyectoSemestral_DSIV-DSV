@@ -7,52 +7,52 @@ namespace MotorsApi.BD.CRUD.Update
     public class Editar_Usuario : Conexiondb
     {
         //Editasmos Telefono de Usuario
-        public int UsuarioEditar ( Usuario usuario, Login login)
-        {
-            try
-            {
-                //Limpiamos parametros
-                cmd.Parameters.Clear();
+        //public int UsuarioEditar ( Usuario usuario, Login login)
+        //{
+        //    try
+        //    {
+        //        //Limpiamos parametros
+        //        cmd.Parameters.Clear();
 
-                //asignamos el tipo
-                cmd.CommandType = CommandType.Text;
+        //        //asignamos el tipo
+        //        cmd.CommandType = CommandType.Text;
 
-                //asignamos el cod
-                cmd.CommandText = "UPDATE Usuario SET telefono = @telefono  WHERE id = @id";
+        //        //asignamos el cod
+        //        cmd.CommandText = "UPDATE Usuario SET telefono = @telefono  WHERE id = @id";
 
-                //asignamos parametros
-                cmd.Parameters.Add(new MySqlParameter("@id", usuario.id));
-                cmd.Parameters.Add(new MySqlParameter("@telefono", usuario.telefono));
-                cmd.Parameters.Add(new MySqlParameter("@f_actualizacion", usuario.f_actualizacion));
-
-
-                //Abrimos conexion
-                abrirConexion();
-
-                //Validacion de Actualizacion
-                int insertedId = Convert.ToInt32(cmd.ExecuteNonQuery());
-                if (insertedId > 0)
-                {
-                    return insertedId;
-                }
+        //        //asignamos parametros
+        //        cmd.Parameters.Add(new MySqlParameter("@id", usuario.id));
+        //        cmd.Parameters.Add(new MySqlParameter("@telefono", usuario.telefono));
+        //        cmd.Parameters.Add(new MySqlParameter("@f_actualizacion", usuario.f_actualizacion));
 
 
-            }
+        //        //Abrimos conexion
+        //        abrirConexion();
 
-            catch (Exception e)
-            {
+        //        //Validacion de Actualizacion
+        //        int insertedId = Convert.ToInt32(cmd.ExecuteNonQuery());
+        //        if (insertedId > 0)
+        //        {
+        //            return insertedId;
+        //        }
 
-                Console.WriteLine("No pudo actualizarce" + e);
-            }
-            finally
-            {
-                //Cerramos conexion
-                cerrarConexion();
-            }
-            return 0;
-        }
 
-        public int LoginEditar (Login login)
+        //    }
+
+        //    catch (Exception e)
+        //    {
+
+        //        Console.WriteLine("No pudo actualizarse" + e);
+        //    }
+        //    finally
+        //    {
+        //        //Cerramos conexion
+        //        cerrarConexion();
+        //    }
+        //    return 0;
+        //}
+
+        public int EditarUsuario(int id, ActualizarUsuario usuario)
         {
 
             //declaracion de variable de trabajo 
@@ -64,15 +64,16 @@ namespace MotorsApi.BD.CRUD.Update
                 cmd.Parameters.Clear();
 
                 //asignamos el tipo codigo 
-                cmd.CommandType = CommandType.Text;
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 //Asignamos el cod
-                cmd.CommandText = "UPDATE Login SET contraseña = @contraseña, correo = @correo  WHERE id_usuario = @id_usuario";
+                cmd.CommandText = "EditarUsuarioLogin";
 
                 //asignamos parametros
-                cmd.Parameters.Add(new MySqlParameter("@id_usuario", login.id_usuario));
-                cmd.Parameters.Add(new MySqlParameter("@contraseña", login.contraseña));
-                cmd.Parameters.Add(new MySqlParameter("@correo", login.correo));
+                cmd.Parameters.Add(new MySqlParameter("@p_id_usuario", id));
+                cmd.Parameters.Add(new MySqlParameter("@p_telefono", usuario.telefono));
+                cmd.Parameters.Add(new MySqlParameter("@p_contraseña", usuario.contraseña));
+                cmd.Parameters.Add(new MySqlParameter("@p_correo", usuario.correo));
 
 
                 //abrir Conexion
@@ -83,7 +84,6 @@ namespace MotorsApi.BD.CRUD.Update
 
                 if (insercion > 0)
                 {
-
                     return insercion;
                 }
             }
@@ -94,16 +94,9 @@ namespace MotorsApi.BD.CRUD.Update
             finally
             {
                 cerrarConexion();
-
-
             }
 
             return 0;
-
-
-
-
-
         }
 
 

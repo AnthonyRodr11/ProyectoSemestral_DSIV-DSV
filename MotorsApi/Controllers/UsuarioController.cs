@@ -86,8 +86,8 @@ namespace MotorsApi.Controllers
         }
 
         [HttpPatch]
-        [Route ("user/update")]
-        public IActionResult ActualizarUsuario([FromBody] Usuario usuario)
+        [Route ("user/update/{id}")]
+        public IActionResult ActualizarUsuario(int id, [FromBody] ActualizarUsuario usuario)
         {
             if (usuario == null)
             {
@@ -100,8 +100,9 @@ namespace MotorsApi.Controllers
             }
 
             Editar_Usuario itadori = new Editar_Usuario();
+            var guarda = itadori.EditarUsuario(id, usuario);
 
-            if (itadori.UsuarioEditar(usuario) > 0)
+            if (guarda > 0)
             {
                 return Ok(new
                 {
@@ -115,7 +116,7 @@ namespace MotorsApi.Controllers
                 return StatusCode(500, new
                 {
                     titulo = "Error al Editar",
-                    Mensaje = "El tipo de tarifa no pudo guardarse.",
+                    Mensaje = "no se pudo guardar.",
                     Code = 500
                 });
             }

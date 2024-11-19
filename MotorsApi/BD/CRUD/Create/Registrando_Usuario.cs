@@ -26,7 +26,7 @@ namespace MotorsApi.BD.CRUD.Create
                 //asignamos parametros
                 cmd.Parameters.Add(new MySqlParameter("@nombre", usuario.nombre));
                 cmd.Parameters.Add(new MySqlParameter("@apellido", usuario.apellido));
-                cmd.Parameters.Add(new MySqlParameter("@identificacion", usuario.indentificacion));
+                cmd.Parameters.Add(new MySqlParameter("@identificacion", usuario.identificacion));
                 cmd.Parameters.Add(new MySqlParameter("@telefono", usuario.telefono));
 
 
