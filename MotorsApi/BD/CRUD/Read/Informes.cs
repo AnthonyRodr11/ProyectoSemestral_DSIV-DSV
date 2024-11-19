@@ -1,4 +1,6 @@
 ﻿using System.Data;
+using MotorsApi.Models;
+using System.Numerics;
 using MySql.Data.MySqlClient;
 namespace MotorsApi.BD.CRUD.Read
 {
@@ -60,7 +62,7 @@ namespace MotorsApi.BD.CRUD.Read
         }
         
         //Metodo que guarda registros de la tabla ventas
-        public string[] infoVentas()
+        public async Task<string[]> InfoVentas()
         {
             List<string> data = new List<string>();
 
@@ -70,26 +72,26 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.Parameters.Clear();
 
                 //asignamos el tipo de comando
-                cmd.CommandType = CommandType.Text;
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 //asignamos el codigo
-                cmd.CommandText = "SELECT fv.cod_venta AS ID_Venta, u.nombre AS Nombre_Cliente, v.f_compra AS Fecha_Compra, fv.placa AS Placa, fv.precio AS Total FROM Flota_Venta fv INNER JOIN Flota_Carro c ON fv.placa = c.placa  INNER JOIN ventas v ON c.placa = v.id_vehiculo INNER JOIN Usuario u ON v.id_cliente = u.id";
+                cmd.CommandText = "ObtenerInfoVentas";
 
                 // Abrimos la conexión
                 abrirConexion();
 
                 // Ejecutamos la consulta
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using (MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync())
                 {
-                    while (!reader.Read())
+                    while (reader.Read())
                     {
                         // Comprobamos si algún valor es nulo antes de procesarlo
                         string row = string.Join(";",
-                            reader["cod_venta"].ToString(),    
-                            reader["nombre"].ToString(),
-                            reader["f_compra"].ToString(),
-                            reader["placa"].ToString(),
-                            reader["precio"].ToString()
+                            reader["ID_Venta"]?.ToString() ?? "N/A",    // Usamos "N/A" o un valor por defecto en caso de nulos
+                            reader["Nombre_Cliente"]?.ToString() ?? "Desconocido",
+                            reader["Fecha_Compra"]?.ToString() ?? "Sin Fecha",
+                            reader["Placa"]?.ToString() ?? "Desconocida",
+                            reader["Total"]?.ToString() ?? "0.00"
                         );
 
                         // Añadimos la fila a la lista

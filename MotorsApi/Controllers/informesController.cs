@@ -29,10 +29,10 @@ namespace MotorsApi.Controllers
             // Método para obtener la información de ventas
             [HttpGet]
             [Route("infoVentas")]
-            public IActionResult ObtenerInfoVentas()
+            public async Task<IActionResult> ObtenerInfoVentas()
             {
                 var db = new Informes();
-                var data = db.infoVentas();
+                var data = await db.InfoVentas();
                 return Ok(data);
             }
 
