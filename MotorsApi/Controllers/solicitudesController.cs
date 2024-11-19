@@ -66,7 +66,7 @@ namespace MotorsApi.Controllers
 
         //Metodo para obtener el nombre del usuario dado un id_solicitud
         [HttpGet]
-        [Route("nombreSolicitante")]
+        [Route("nombreSolicitante/{id_solicitud}")]
         public string obtenerId(int id_solicitud)
         {
 
