@@ -73,7 +73,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos el codigo
-                cmd.CommandText = "SELECT    fv.cod_venta AS ID_Venta,    u.nombre AS Nombre_Cliente,    v.f_compra AS Fecha_Compra,    fv.placa AS Placa,    fv.precio AS Total   FROM     Flota_Venta fv  INNER JOIN     Flota_Carro c ON fv.placa = c.placa  INNER JOIN     ventas v ON c.placa = v.id_vehiculo  INNER JOIN   Usuario u ON v.id_cliente = u.id ";
+                cmd.CommandText = "SELECT fv.cod_venta AS ID_Venta, u.nombre AS Nombre_Cliente, " +                      "v.f_compra AS Fecha_Compra, fv.placa AS Placa, fv.precio AS Total " +                          "FROM Flota_Venta fv " +                          "INNER JOIN Flota_Carro c ON fv.placa = c.placa " +                          "INNER JOIN ventas v ON c.placa = v.id_vehiculo " +                         "INNER JOIN Usuario u ON v.id_cliente = u.id;";
 
                 // Abrimos la conexión
                 abrirConexion();
@@ -81,16 +81,15 @@ namespace MotorsApi.BD.CRUD.Read
                 // Ejecutamos la consulta
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
-                    while (reader.Read())
+                    while (!reader.Read())
                     {
-                        // Construimos una cadena con los valores separados por ;
+                        // Comprobamos si algún valor es nulo antes de procesarlo
                         string row = string.Join(";",
-                            reader["cod_venta"].ToString(),     
-                            reader["nombre"].ToString(),        
-                            reader["f_compra"].ToString(),      
-                            reader["placa"].ToString(),        
-                            reader["precio"].ToString()
-
+                            reader["cod_venta"]?.ToString() ?? "N/A",    // Usamos "N/A" o un valor por defecto en caso de nulos
+                            reader["nombre"]?.ToString() ?? "Desconocido",
+                            reader["f_compra"]?.ToString() ?? "Sin Fecha",
+                            reader["placa"]?.ToString() ?? "Desconocida",
+                            reader["precio"]?.ToString() ?? "0.00"
                         );
 
                         // Añadimos la fila a la lista
