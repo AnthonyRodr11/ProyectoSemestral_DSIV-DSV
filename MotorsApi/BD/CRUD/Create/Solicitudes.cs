@@ -12,7 +12,7 @@ namespace MotorsApi.BD.CRUD.Create
         {
 
             //declaracion de variables de trabajo
-            int insercion;
+            int insercion = 0;
 
             try
             {
@@ -26,18 +26,18 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.CommandText = "sp_solicitudAuto"; //poner nombre posteriormente
 
                 //asignamos parametros
-                cmd.Parameters.Add(new MySqlParameter("@id_usuario",solicito.id_usuario));
-                cmd.Parameters.Add(new MySqlParameter("@descripcion",solicito.descripcion));
-                cmd.Parameters.Add(new MySqlParameter("@estado",solicito.estado));
-                cmd.Parameters.Add(new MySqlParameter("@f_solicitud",solicito.f_solicitud));
-                cmd.Parameters.Add(new MySqlParameter("@foto",solicito.foto));
-                cmd.Parameters.Add(new MySqlParameter("@monto",solicito.monto));
+                cmd.Parameters.Add(new MySqlParameter("@p_id_usuario", solicito.id_usuario));
+                cmd.Parameters.Add(new MySqlParameter("@p_descripcion", solicito.descripcion));
+                cmd.Parameters.Add(new MySqlParameter("@p_estado", solicito.estado));
+                cmd.Parameters.Add(new MySqlParameter("@p_f_solicitud", solicito.f_solicitud));
+                cmd.Parameters.Add(new MySqlParameter("@p_foto", solicito.foto));
+                cmd.Parameters.Add(new MySqlParameter("@p_monto", solicito.monto));
 
                 //abrir Conexion
                 abrirConexion();
 
                 //validamos si se inserto el auto
-                insercion = Convert.ToInt32(cmd.ExecuteNonQuery());
+                insercion = cmd.ExecuteNonQuery();
 
                 if (insercion > 0)
                 {
@@ -52,7 +52,7 @@ namespace MotorsApi.BD.CRUD.Create
             {
                 cerrarConexion();
             }
-            return 0;
+            return insercion;
         }
     }
 }
