@@ -27,7 +27,7 @@ namespace MotorsApi.Controllers
             }
 
             // Método para obtener la información de ventas
-            [HttpPut]
+            [HttpGet]
             [Route("infoVentas")]
             public IActionResult ObtenerInfoVentas()
             {
