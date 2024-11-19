@@ -1,16 +1,15 @@
-﻿using Org.BouncyCastle.Bcpg.OpenPgp;
-
-namespace MotorsApi.Models
+﻿namespace MotorsApi.Models
 {
-    public class Solicitud
+    public class solicitudRequest
     {
-        //Atributos de la entidad
+        //Atributos 
+ 
         public int id_solicitud { get; set; }
         public int id_usuario { get; set; }
-        public string descripcion { get; set; }
+        public string nombre { get; set; }
+        public string apellido { get; set; }
         public string estado { get; set; }
         public DateTime f_solicitud { get; set; }
-        public string foto { get; set; }
         public double monto { get; set; }
 
 

@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Data;
+using MotorsApi.Models;
 
 namespace MotorsApi.BD.CRUD.Read
 {
@@ -8,11 +9,12 @@ namespace MotorsApi.BD.CRUD.Read
     {
         //estos metodos cargaran la informacion en la pantalla de solicitudes
 
-        //Obtendremos el nombre del Cliente que mando Solicitud
-        public List<string> obtenerNombresolicitante()
+        //Obtendremos el nombre  y apellido del usuario dado el id_solicitud
+        public string obtenernombresolicitante(int id_solicitud)
         {
-            string usuario_id;
-            List<string> listaSolicitantes = new List<string>();
+            string nombre = string.Empty;
+            string apellido = string.Empty;
+            string nombreCompleto = string.Empty;
 
             try
             {
@@ -23,7 +25,10 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT id_usuario FROM Solicitud";
+                cmd.CommandText = "SELECT Usuario.nombre, Usuario.apellido  FROM  Solicitud JOIN  Usuario  ON Solicitud.id_usuario = Usuario.id  WHERE  Solicitud.id_solicitud = @id_solicitud";
+
+                // Agregamos el parámetro
+                cmd.Parameters.AddWithValue("@id_solicitud", id_solicitud);
 
                 abrirConexion();
 
@@ -32,21 +37,21 @@ namespace MotorsApi.BD.CRUD.Read
                 {
                     while (reader.Read())
                     {
-                        // Agregamos cada id a la lista
-                        usuario_id = reader.GetString(0);
-                        listaSolicitantes.Add(usuario_id);
+                        nombre = reader.GetString(0);
+                        apellido = reader.GetString(1);
+                        nombreCompleto = $"{nombre} {apellido}";
                     }
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo obtener la lista de solicitantes"+e);
+                Console.WriteLine("No se pudo obtener el nombre del usuario" + e);
             }
             finally
             {
                 cerrarConexion();
             }
-            return listaSolicitantes;
+            return nombreCompleto;
         }
 
         //Metodo para obtener el valor que pide compra el usuario
@@ -64,7 +69,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT monto FROM Solicitud WHERE id_usuario = @id_usuariosuario";
+                cmd.CommandText = "SELECT monto FROM Solicitud WHERE id_usuario = @id_usuario";
 
                 // Agregamos el parámetro
                 cmd.Parameters.AddWithValue("@id_usuario", id_usuario);
@@ -85,11 +90,11 @@ namespace MotorsApi.BD.CRUD.Read
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo obtener el monto"+e);
+                Console.WriteLine("No se pudo obtener el monto" + e);
             }
-            finally { 
+            finally {
 
-                cerrarConexion(); 
+                cerrarConexion();
             }
             return monto;
         }
@@ -98,7 +103,7 @@ namespace MotorsApi.BD.CRUD.Read
         public List<string> obtenerDescripcion(string id_usuario)
         {
             List<string> data = new List<string>();
-            string rutaFoto,descripcion;
+            string rutaFoto, descripcion;
 
             try
             {
@@ -109,7 +114,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT descripcion, foto FROM Solicitud WHERE id_usuario = @IdUsuario";
+                cmd.CommandText = "SELECT descripcion, foto FROM Solicitud WHERE id_usuario = @id_usuario";
 
                 // Agregamos el parámetro
                 cmd.Parameters.AddWithValue("@id_usuario", id_usuario);
@@ -141,6 +146,57 @@ namespace MotorsApi.BD.CRUD.Read
             }
 
             return data;
+        } 
+
+        //Metodo para mostrar todas las solicitudes
+        public List<solicitudRequest> obtenerSolicitudes()
+        {
+            List<solicitudRequest> solicitudes = new List<solicitudRequest>();
+
+            try
+            {
+                //Limpiamos parametros
+                cmd.Parameters.Clear();
+
+                //asignamos el tipo de comando
+                cmd.CommandType = CommandType.Text;
+
+                //asignamos consulta a realizar
+                cmd.CommandText = "SELECT Solicitud.id_solicitud,Usuario.nombre,Usuario.apellido,Solicitud.estado,Solicitud.f_solicitud,Solicitud.monto FROM  Solicitud JOIN Usuario ON Solicitud.id_usuario = Usuario.id";
+
+                abrirConexion();
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        solicitudRequest solicitud = new solicitudRequest()
+                        {
+                            id_solicitud = reader.GetInt32(0),
+                            nombre = reader.GetString(1),
+                            apellido = reader.GetString(2),
+                            estado = reader.GetString(3),
+                            f_solicitud = reader.GetDateTime(4),
+                            monto = reader.GetDouble(5),
+                        };
+
+                        //agregamos cada lista de objeto a la lista 
+                        solicitudes.Add(solicitud);
+                    }
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+
+            return solicitudes;
         }
     }
 }
