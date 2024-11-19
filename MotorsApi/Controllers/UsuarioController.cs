@@ -121,5 +121,45 @@ namespace MotorsApi.Controllers
                 });
             }
         }
+
+        [HttpGet]
+        [Route ("user/login/{correo}/{contraseña}")]
+        public IActionResult LogearUsuario(string correo, string contraseña)
+        {
+            if (string.IsNullOrWhiteSpace(correo) && string.IsNullOrWhiteSpace(contraseña))
+            {
+                return BadRequest(new
+                {
+                    titulo = "Datos inválidos",
+                    Mensaje = "La tarifa enviada es nula.",
+                    Code = 400
+                });
+            }
+
+            Loggearse lojin = new Loggearse();
+            var cuera = lojin.VerificarLogin(correo, contraseña);
+
+            if (cuera)
+            {
+                return Ok(new
+                {
+                    titulo = "Datos Verificados :3",
+                    Mensaje = "Todo bien banda",
+                    Code = 200
+                });
+            }
+            else
+            {
+                return StatusCode(500, new
+                {
+                    titulo = "Error al Editar",
+                    Mensaje = "no se pudo guardar.",
+                    Code = 500
+                });
+            }
+        }
+
+
+
     }
 }
