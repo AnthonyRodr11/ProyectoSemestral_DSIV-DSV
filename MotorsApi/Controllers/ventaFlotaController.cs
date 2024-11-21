@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MotorsApi.Models;
 using MotorsApi.BD.CRUD.Update;
+using MotorsApi.BD.CRUD.Read;
 
 namespace MotorsApi.Controllers
 {
@@ -14,7 +15,7 @@ namespace MotorsApi.Controllers
     {
 
         [HttpPost]
-        [Route("venta")] 
+        [Route("venta")]
         public object VenderAuto(Flota_Venta venta)
         {
             Venta_Flota ventaAuto = new Venta_Flota();
@@ -35,10 +36,17 @@ namespace MotorsApi.Controllers
                 Code = 400
             };
 
-
         }
 
-    
+
+        [HttpGet]
+        [Route("venta/lista_de_ventas")]
+        public List<Flota_Carro> listaVentas()
+        {
+            return new Ver_Flotas().ObtenerFlotaVenta();
+        }
+
+
 
 
     }
