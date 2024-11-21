@@ -113,9 +113,9 @@ namespace MotorsApi.BD.CRUD.Read
         }
 
         //Metodo para cargar toda la flota en venta
-        public List<Flota_Carro> ObtenerFlotaVenta()
+        public List<Flota_CarroRequest> ObtenerAutos(string estado)
         {
-            List<Flota_Carro> autos = new List<Flota_Carro>();
+            List<Flota_CarroRequest> autos = new List<Flota_CarroRequest>();
             string data;
 
             try
@@ -127,7 +127,10 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT * from  Flota_carro WHERE estado = 'venta'";
+                cmd.CommandText = "SELECT  placa,  marca,  modelo,  color,  km,   transmision,   tipo_gas,   carroceria,   estado,    descripcion,    foto   FROM Flota_Carro  WHERE estado = @estado";
+
+                // Agregamos el parámetro estado
+                cmd.Parameters.AddWithValue("@estado", estado);
 
 
                 abrirConexion();
@@ -138,17 +141,19 @@ namespace MotorsApi.BD.CRUD.Read
                     while (reader.Read())
                     {
                         //creamos objeto
-                        Flota_Carro flota = new Flota_Carro()
+                        Flota_CarroRequest flota = new Flota_CarroRequest()
                         {
                             placa = reader["placa"].ToString(),
                             marca = reader["marca"].ToString(),
                             modelo = reader["modelo"].ToString(),
                             color = reader["color"].ToString(),
-                            km = Convert.ToDouble(reader["color"]),
+                            km = Convert.ToDouble(reader["km"]),
+                            transmision= reader["transmision"].ToString(),
                             tipo_gas = reader["tipo_gas"].ToString(),
                             carroceria = reader["carroceria"].ToString(),
+                            estado = reader["estado"].ToString(),
                             descripcion = reader["descripcion"].ToString(),
-                            foto = reader.ToString()
+                            foto = reader["foto"].ToString()
 
                         };
 
@@ -159,7 +164,7 @@ namespace MotorsApi.BD.CRUD.Read
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo cargar la lista de autos en venta" + e);
+                throw;
             }
             finally
             {

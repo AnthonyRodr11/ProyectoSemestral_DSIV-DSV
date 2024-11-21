@@ -40,10 +40,23 @@ namespace MotorsApi.Controllers
 
 
         [HttpGet]
-        [Route("venta/lista_de_ventas")]
-        public List<Flota_Carro> listaVentas()
+        [Route("listaFlota/{estado}")]
+        public IActionResult listaAutos(string estado)
         {
-            return new Ver_Flotas().ObtenerFlotaVenta();
+            Ver_Flotas autos = new Ver_Flotas();
+            var listaautos = autos.ObtenerAutos(estado);
+
+            if ( listaautos == null || listaautos.Count == 0)
+            {
+                return NotFound(new
+                {
+                    titulo = "Sin resultados",
+                    mensaje = "No se encontraron carrocerías para el estado especificado.",
+                    code = 404
+                });
+            }
+
+            return Ok(listaautos);
         }
 
 
