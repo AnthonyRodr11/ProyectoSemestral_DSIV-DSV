@@ -14,7 +14,7 @@ namespace MotorsApi.Controllers
     {
         [HttpPost]
         [Route ("user/new")]
-        public IActionResult RegistrarUsuario([FromBody] Usuario personita)
+        public IActionResult RegistrarUsuario([FromBody] RegistroUsuario personita)
         {
             if(personita == null)
             {
@@ -27,7 +27,8 @@ namespace MotorsApi.Controllers
             }
 
             Registrando_Usuario registro = new Registrando_Usuario();
-            var guardar = registro.Usuario_Registro(personita);
+            var guardar = registro.CreandoRegistro(personita);
+            
 
             if (guardar > 0)
             {
@@ -99,7 +100,7 @@ namespace MotorsApi.Controllers
                 });
             }
 
-            Editar_Usuario itadori = new Editar_Usuario();
+            Editar_Usuario itadori = new Editar_Usuario(); //JJK Referencia
             var guarda = itadori.EditarUsuario(id, usuario);
 
             if (guarda > 0)

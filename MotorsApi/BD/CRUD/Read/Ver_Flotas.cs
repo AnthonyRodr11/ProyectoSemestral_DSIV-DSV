@@ -112,6 +112,63 @@ namespace MotorsApi.BD.CRUD.Read
             return autos;
         }
 
+        //Metodo para cargar toda la flota en venta
+        public List<Flota_Carro> ObtenerFlotaVenta()
+        {
+            List<Flota_Carro> autos = new List<Flota_Carro>();
+            string data;
+
+            try
+            {
+                //Limpiamos parametros
+                cmd.Parameters.Clear();
+
+                //Especificamos el tipo de comando
+                cmd.CommandType = CommandType.Text;
+
+                //asignamos consulta a realizar
+                cmd.CommandText = "SELECT * from  flota_carro WHERE estado = 'venta'";
+
+
+                abrirConexion();
+
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        //creamos objeto
+                        Flota_Carro flota = new Flota_Carro()
+                        {
+                            placa = reader["placa"].ToString(),
+                            marca = reader["marca"].ToString(),
+                            modelo = reader["modelo"].ToString(),
+                            color = reader["color"].ToString(),
+                            km = Convert.ToDouble(reader["color"]),
+                            tipo_gas = reader["tipo_gas"].ToString(),
+                            carroceria = reader["carroceria"].ToString(),
+                            descripcion = reader["descripcion"].ToString(),
+                            foto = reader.ToString()
+
+                        };
+
+                        autos.Add(flota);
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("No se pudo cargar la lista de autos en venta" + e);
+            }
+            finally
+            {
+
+                cerrarConexion();
+            }
+            return autos;
+        }
+
         public List<Tarifas_Alquiler> ObtenerTarifas()
         {
             List<Tarifas_Alquiler> alquileres = new List<Tarifas_Alquiler>();
