@@ -1,6 +1,7 @@
 ﻿    using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MotorsApi.BD.CRUD.Create;
+using MotorsApi.BD.CRUD.Read;
 using MotorsApi.BD.CRUD.Update;
 using MotorsApi.Models;
 namespace MotorsApi.Controllers
@@ -78,6 +79,28 @@ namespace MotorsApi.Controllers
                 mensaje = "No se encontraron tus datos :c",
                 code = 400
             };
+        }
+
+
+        //Metodo para obtener la lista de carroceria para venta, alquiler, subasta {mandas el estado}
+        [HttpGet]
+        [Route("verCarroceria/{estado}")]
+        public IActionResult obtenerCarrocerias(string estado)
+        {
+            Ver_Flotas flotas = new Ver_Flotas();
+            var carrocerias = flotas.listaCarroceria(estado);
+
+            if (carrocerias == null || carrocerias.Count == 0)
+            {
+                return NotFound(new
+                {
+                    titulo = "Sin resultados",
+                    mensaje = "No se encontraron carrocerías para el estado especificado.",
+                    code = 404
+                });
+            }
+
+            return Ok(carrocerias);
         }
 
     }
