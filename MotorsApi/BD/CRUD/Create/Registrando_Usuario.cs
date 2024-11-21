@@ -6,58 +6,77 @@ namespace MotorsApi.BD.CRUD.Create
 {
     public class Registrando_Usuario : Conexiondb
     {
+
+        //Método para registrar el Login
+        public int CreandoRegistro(RegistroUsuario persona)
+        {
+            Usuario usuario = new Usuario
+            {
+                nombre = persona.nombre,
+                apellido = persona.apellido,
+                identificacion = persona.identificacion,
+                telefono = persona.telefono
+            };
+
+            int usuarioId = Usuario_Registro(usuario);
+
+            if (usuarioId > 0)
+            {
+                // Registramos el login usando el ID del usuario generado
+                Login login = new Login
+                {
+                    correo = persona.correo,
+                    contraseña = persona.contraseña,
+                    rol = persona.rol,
+                    id_usuario = usuarioId 
+                };
+
+                return Login_Registro(login);
+            }
+            else
+            {
+                Console.WriteLine("No se pudo registrar el usuario.");
+            }
+            return 0;
+        }
+
+
+
         //Metodo para registrar loa atributos del Usuario
         public int Usuario_Registro(Usuario usuario)
         {
-            //declaracion de variable de trabajo 
-            int insercion;
+            int usuarioId = 0;
 
             try
             {
-                //Limpiamos parametros
                 cmd.Parameters.Clear();
-
-                //asignamos el tipo codigo 
                 cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "INSERT INTO Usuario (nombre, apellido, identificacion, telefono)" +
+                    "VALUES (@nombre, @apellido, @identificacion, @telefono);" +
+                    "SELECT LAST_INSERT_ID();";
 
-                //asignamos el nombre del procedimiento de almacendo
-                cmd.CommandText = "INSERT INTO Usuario (nombre,apellido,identificacion,telefono) VALUES (@nombre,@apellido,@identificacion,@telefono)"; 
-
-                //asignamos parametros
                 cmd.Parameters.Add(new MySqlParameter("@nombre", usuario.nombre));
                 cmd.Parameters.Add(new MySqlParameter("@apellido", usuario.apellido));
                 cmd.Parameters.Add(new MySqlParameter("@identificacion", usuario.identificacion));
                 cmd.Parameters.Add(new MySqlParameter("@telefono", usuario.telefono));
 
-
-                //abrir Conexion
                 abrirConexion();
 
-                //validamos si se inserto el auto
-                insercion = Convert.ToInt32(cmd.ExecuteNonQuery());
-
-                if (insercion > 0)
-                {
-
-                    return insercion;
-                }
+                // Ejecutamos el comando y obtenemos el ID generado
+                usuarioId = Convert.ToInt32(cmd.ExecuteScalar());
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo registrar el Auto" + e);
+                Console.WriteLine("Error al registrar el usuario: " + e.Message);
             }
             finally
             {
                 cerrarConexion();
-
-
             }
 
-            return 0;
-
-
-
+            return usuarioId;
         }
+
 
         //Metodo para registrar los atributos del Login 
         public int Login_Registro(Login login)
@@ -76,17 +95,18 @@ namespace MotorsApi.BD.CRUD.Create
 
                 //asignamos parametros
 
-                cmd.CommandText = "INSERT INTO Login (contraseña,rol,correo) VALUES (@contraseña,@rol,@correo)";
+                cmd.CommandText = "INSERT INTO Login (id_usuario, contraseña, rol, correo) VALUES (@id_usuario, @contraseña,@rol,@correo)";
                 cmd.Parameters.Add(new MySqlParameter("@contraseña", login.contraseña));
                 cmd.Parameters.Add(new MySqlParameter("@rol", login.rol));
                 cmd.Parameters.Add(new MySqlParameter("@correo", login.correo));
+                cmd.Parameters.Add(new MySqlParameter("@id_usuario", login.id_usuario));
 
 
                 //abrir Conexion
                 abrirConexion();
 
                 //validamos si se inserto el auto
-                insercion = Convert.ToInt32(cmd.ExecuteNonQuery());
+                insercion = cmd.ExecuteNonQuery();
 
                 if (insercion > 0)
                 {

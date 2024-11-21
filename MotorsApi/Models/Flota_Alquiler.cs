@@ -11,6 +11,7 @@
         public DateTime f_retiro { get; set; }
         public DateTime f_entrega  { get; set; }
         public double total { get; set; }
+        public string nombreSeguro {  get; set; }
         
     }
 }
