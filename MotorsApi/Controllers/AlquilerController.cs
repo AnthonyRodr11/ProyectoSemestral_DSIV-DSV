@@ -122,5 +122,12 @@ namespace MotorsApi.Controllers
             //}
         }
 
+        [HttpGet]
+        [Route ("seguros")]
+        public List<SeguroRequest> GetSeguros()
+        {
+            return new SeguroRead().ObtenerListaSeguros();
+        }
+
     }
 }

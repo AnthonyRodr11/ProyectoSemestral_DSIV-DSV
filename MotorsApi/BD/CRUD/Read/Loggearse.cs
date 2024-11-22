@@ -7,49 +7,6 @@ namespace MotorsApi.BD.CRUD.Read
     public class Loggearse : Conexiondb
     {
 
-        //public List<Login> logearse()
-        //{
-        //    // Variables de proceso
-        //    List<Login> dataUsuario = new List<Login>();
-        //    Login login = new Login();
-        //    try
-        //    {
-        //        // Limpiamos
-        //        cmd.Parameters.Clear();
-
-        //        // Asignamos el tipo
-        //        cmd.CommandType = CommandType.Text;
-
-        //        cmd.CommandText = "SELECT * FROM login";
-
-        //        abrirConexion();
-
-        //        using (MySqlDataReader reader = cmd.ExecuteReader())
-        //        {
-        //            if (reader.Read()) // Verifica si hay registros
-        //            {
-        //                login.id_usuario = reader.GetInt32(0);
-        //                login.contraseña = reader.GetString(1);
-        //                login.rol = reader.GetInt32(2);
-        //                login.correo = reader.GetString(3);
-        //            }
-
-        //            dataUsuario.Add(login);
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //       Console.WriteLine("Problemas al iniciar sesión " + e);
-        //    }
-        //    finally
-        //    {
-        //        cerrarConexion();
-        //    }
-
-        //    return dataUsuario;
-        //}
-
-
         public bool VerificarLogin(string correo, string contraseña)
         {
             bool esValido = false;
@@ -86,6 +43,54 @@ namespace MotorsApi.BD.CRUD.Read
 
             return esValido;
 
+        }
+
+        //metodo para obtener informacion del usuario {nombre, correo y telefono}
+        public List<UsuarioRequest> obtenerUsuario(int id) {
+        
+            List<UsuarioRequest> cliente = new List<UsuarioRequest>();
+            UsuarioRequest usuario = new UsuarioRequest();
+            try
+            {
+                // Limpiamos los parámetros
+                cmd.Parameters.Clear();
+
+                // Asignamos el tipo de comando
+                cmd.CommandType = CommandType.Text;
+
+                // Consulta SQL con parámetros para evitar inyecciones SQL
+                cmd.CommandText = "SELECT Usuario.nombre, Usuario.apellido, Usuario.telefono, Login.correo FROM  Usuario JOIN Login ON Usuario.id = Login.id_usuario WHERE Usuario.id = @id";
+
+                // Agregamos los parámetros
+                cmd.Parameters.AddWithValue("@id", id);
+  
+
+                // Abrimos la conexión
+                abrirConexion();
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read()) // Verifica si hay registros
+                    {
+                        usuario.nombre = reader.GetString(0);
+                        usuario.apellido = reader.GetString(1);
+                        usuario.telefono = reader.GetString(2);
+                        usuario.correo = reader.GetString(3);
+                    }
+
+                    cliente.Add(usuario);
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally {
+
+                cerrarConexion();
+            }
+            
+            return cliente;
         }
 
     }
