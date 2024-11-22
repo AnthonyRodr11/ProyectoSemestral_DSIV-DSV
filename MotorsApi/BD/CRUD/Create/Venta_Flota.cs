@@ -143,7 +143,7 @@ namespace MotorsApi.BD.CRUD.Create
             catch (Exception e)
             {
 
-                Console.WriteLine("No pudo actualizarce" + e);
+                Console.WriteLine("No pudo actualizarse" + e);
             }
             finally
             {
