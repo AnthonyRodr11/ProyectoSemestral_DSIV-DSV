@@ -43,7 +43,7 @@ namespace MotorsApi.BD.CRUD.Read
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo cargar la lista de autos"+e);
+                Console.WriteLine("No se pudo cargar la lista de autos" + e);
             }
             finally
             {
@@ -69,7 +69,7 @@ namespace MotorsApi.BD.CRUD.Read
 
                 //asignamos consulta a realizar
                 cmd.CommandText = "SELECT * from  flota_carro";
-                
+
 
                 abrirConexion();
 
@@ -94,7 +94,7 @@ namespace MotorsApi.BD.CRUD.Read
                             foto = reader.ToString()
 
                         };
-                        
+
                         autos.Add(flota);
                     }
                 }
@@ -148,7 +148,7 @@ namespace MotorsApi.BD.CRUD.Read
                             modelo = reader["modelo"].ToString(),
                             color = reader["color"].ToString(),
                             km = Convert.ToDouble(reader["km"]),
-                            transmision= reader["transmision"].ToString(),
+                            transmision = reader["transmision"].ToString(),
                             tipo_gas = reader["tipo_gas"].ToString(),
                             carroceria = reader["carroceria"].ToString(),
                             estado = reader["estado"].ToString(),
@@ -227,7 +227,7 @@ namespace MotorsApi.BD.CRUD.Read
         {
             List<string> carroceria = new List<string>();
             string tipo = string.Empty;
-            
+
             try
             {
                 //Limpiamos parametros
@@ -262,11 +262,69 @@ namespace MotorsApi.BD.CRUD.Read
                 throw;
 
             }
-            finally {
+            finally
+            {
 
                 cerrarConexion();
             }
             return carroceria;
         }
+
+
+        //Metodo oferta actual
+        public double obtenerOfertaActual(int cod_subasta)
+        {
+
+            double valor = 0;
+            try
+            {
+                //Limpiamos parametros
+                cmd.Parameters.Clear();
+
+                //Especificamos el tipo de comando
+                cmd.CommandType = CommandType.Text;
+
+                //asignamos consulta a realizar
+                cmd.CommandText = "SELECT   valor_inicial   FROM Flota_Subasta WHERE cod_subasta = @cod_subasta ";
+
+                //Agregar parametro cos_subasta
+                cmd.Parameters.AddWithValue("@cod_subasta", cod_subasta);
+
+
+                abrirConexion();
+
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                         valor = reader.GetDouble(0);
+                    };
+
+                    return valor;
+
+                }
+            }
+            catch (Exception e) { 
+                
+                
+                throw; }
+
+            finally { cerrarConexion(); }
+            return valor;
+            
+        }
+
     }
 }
+
+            
+
+
+
+
+
+        
+
+    
+
