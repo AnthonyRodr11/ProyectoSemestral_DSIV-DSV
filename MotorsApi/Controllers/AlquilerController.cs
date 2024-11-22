@@ -97,29 +97,25 @@ namespace MotorsApi.Controllers
         public IActionResult AlquilerNuevo([FromBody] AlquilerRequest alquiler)
         {
 
-            //Agregar metodo
+     
+            var guardado = new FlotaAlquilerInsert().InsertarAlquilado(alquiler);
 
-            //CrearTipoTarifa alquiler = new CrearTipoTarifa();
-            //var guardado = alquiler.crearnuevotipo(tarifa);
-
-            //if (guardado > 0)
-            //{
-            //    return Ok(new
-            //    {
-            //        titulo = "Éxito al guardar",
-            //        Mensaje = "Los datos se han guardado correctamente.",
-            //        Code = 200
-            //    });
-            //}
-            //else
-            //{
-            //    return StatusCode(500, new
-            //    {
-            //        titulo = "Error al guardar",
-            //        Mensaje = "El tipo de tarifa no pudo guardarse.",
-            //        Code = 500
-            //    });
-            //}
+            if (guardado > 0)
+            {
+                return Ok(new
+                {
+                    titulo = "Éxito al guardar",
+                    Mensaje = "Los datos se han guardado correctamente.",
+                });
+            }
+            else
+            {
+                return StatusCode(500, new
+                {
+                    titulo = "Error al guardar",
+                    Mensaje = "El tipo de tarifa no pudo guardarse.",
+                });
+            }
         }
 
         [HttpGet]

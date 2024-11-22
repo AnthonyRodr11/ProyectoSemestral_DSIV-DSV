@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MotorsApi.Models;
+using MySql.Data.MySqlClient;
 using System.Data;
 
 namespace MotorsApi.BD.CRUD.Create
@@ -6,7 +7,7 @@ namespace MotorsApi.BD.CRUD.Create
     public class FlotaAlquilerInsert : Conexiondb
     {
 
-        public int InsertarAlquilado()
+        public int InsertarAlquilado(AlquilerRequest alquiler)
         {
             try
             {
@@ -14,16 +15,16 @@ namespace MotorsApi.BD.CRUD.Create
 
                 cmd.CommandType = System.Data.CommandType.Text;
 
-                cmd.CommandText = @"INSERT INTO (id_vehiculo, id_usuario, tarifa, f_retiro, f_entrega, id_seguro) VALUES 
-                                  (@id_vehiculo, @id_usuario, @tarifa, @f_retiro, @f_entrega, @id_seguro)";
+                cmd.CommandText = "INSERT INTO flota_alquiler (id_vehiculo, id_usuario, tipo_tarifa, f_retiro, f_entrega, id_seguro) VALUES (@id_vehiculo, @id_usuario, @tarifa, @f_retiro, @f_entrega, @id_seguro)";
 
-                cmd.Parameters.Add(new MySqlParameter("@id_vehiculo", id_vehiculo));
-                cmd.Parameters.Add(new MySqlParameter("@id_usuario", id_usuario));
-                cmd.Parameters.Add(new MySqlParameter("@tarifa", tarifa));
-                cmd.Parameters.Add(new MySqlParameter("@f_retiro", f_retiro));
-                cmd.Parameters.Add(new MySqlParameter("@f_entrega", f_entrega));
-                cmd.Parameters.Add(new MySqlParameter("@id_seguro", id_seguro));
+                cmd.Parameters.Add(new MySqlParameter("@id_vehiculo", alquiler.placa));
+                cmd.Parameters.Add(new MySqlParameter("@id_usuario", alquiler.idUsuario));
+                cmd.Parameters.Add(new MySqlParameter("@tarifa", alquiler.tipoTarifa));
+                cmd.Parameters.Add(new MySqlParameter("@f_retiro", alquiler.fechaRetiro));
+                cmd.Parameters.Add(new MySqlParameter("@f_entrega", alquiler.fechaEntrega));
+                cmd.Parameters.Add(new MySqlParameter("@id_seguro", alquiler.idSeguro));
 
+                abrirConexion();
                 var guardar = cmd.ExecuteNonQuery();
                 if (guardar > 0)
                     return guardar;
