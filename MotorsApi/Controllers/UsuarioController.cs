@@ -160,7 +160,26 @@ namespace MotorsApi.Controllers
             }
         }
 
+        //Metodo para obtener el nombre, apellido,correo, telefono 
+        [HttpGet]
+        [Route("userInfo/{id}")]
+        public IActionResult mostrarInfo(int id)
+        {
+            Loggearse cliente = new Loggearse();
+            var usuario = cliente.obtenerUsuario(id);
 
+            if (usuario == null || usuario.Count == -1)
+            {
+                return NotFound(new
+                {
+                    titulo = "Sin resultados",
+                    mensaje = "No se encontraron los datos del usuario",
+                    code = 404
+                });
+            }
+            return Ok(usuario);
+
+        }
 
     }
 }

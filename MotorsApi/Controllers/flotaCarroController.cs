@@ -1,4 +1,4 @@
-﻿    using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MotorsApi.BD.CRUD.Create;
 using MotorsApi.BD.CRUD.Read;
@@ -99,7 +99,6 @@ namespace MotorsApi.Controllers
                     code = 404
                 });
             }
-
             return Ok(carrocerias);
         }
 
