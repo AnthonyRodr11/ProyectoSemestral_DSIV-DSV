@@ -12,9 +12,9 @@ namespace MotorsApi.Controllers
     {
         [HttpPost]
         [Route("save")]
-        public object registrarAuto(Flota_Carro autos) 
+        public object registrarAuto(Flota_Carro autos)
         {
-            
+
             Flota_Auto regAuto = new Flota_Auto();
 
             var guardado = regAuto.registraAutoflota(autos);
@@ -102,6 +102,30 @@ namespace MotorsApi.Controllers
             return Ok(carrocerias);
         }
 
+
+
+
+
+        [HttpGet]
+        [Route("ofertaActual/{cod_subasta}")]
+        public IActionResult obtenerActualOferta(int cod_subasta)
+        {
+            Ver_Flotas ver_Flotas = new Ver_Flotas();
+            var oferta = ver_Flotas.obtenerOfertaActual(cod_subasta);
+
+
+            if (oferta == null )
+            {
+                return NotFound(new
+                {
+                    titulo = "Sin resultados",
+                    mensaje = "No se encontraron el valor de la oferta.",
+                    code = 404
+                });
+            }
+
+            return Ok(oferta);
+        }
     }
 
 
