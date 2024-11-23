@@ -12,65 +12,27 @@ namespace MotorsApi.Controllers
         //Metodo para registrar una Solicitud de venta en la BD
         [HttpPost]
         [Route("save")]                 //Objeto de clase que representa la entidad Solicitud 
-        public async Task<IActionResult> registrarSolicitud([FromForm] IFormFile foto, [FromForm] string id_usuario, [FromForm] string descripcion, [FromForm] string estado, [FromForm] string monto)
+                                        //Metodo para registrar una Solicitud de venta en la BD
+        public object registrarSolicitud(Solicitud peticion)
         {
-            // Ruta para guardar las imágenes
-            string carpetaImagenes = Path.Combine(Directory.GetCurrentDirectory(), "MotorsValueWeb\\Img\\galeriaAutos");
-
-            // Crear la carpeta si no existe
-            if (!Directory.Exists(carpetaImagenes))
-            {
-                Directory.CreateDirectory(carpetaImagenes);
-            }
-
-            string nombreArchivo = null;
-
-            if (foto != null && foto.Length > 0)
-            {
-                // Generar un nombre único para la imagen
-                string extension = Path.GetExtension(foto.FileName);
-                nombreArchivo = $"{Path.GetFileNameWithoutExtension(foto.FileName)}_{Guid.NewGuid()}{extension}";
-
-                // Ruta completa para guardar la imagen
-                string rutaArchivo = Path.Combine(carpetaImagenes, nombreArchivo);
-
-                // Guardar la imagen en el servidor
-                using (var stream = new FileStream(rutaArchivo, FileMode.Create))
-                {
-                    await foto.CopyToAsync(stream);
-                }
-            }
-
-            // Crear la solicitud y guardar en la BD
+            //Clase que realiza el create
             Solicitudes pide = new Solicitudes();
 
-            var solicitud = new Solicitud
-            {
-                id_usuario = int.Parse(id_usuario),
-                descripcion = descripcion,
-                estado = estado,
-                f_solicitud = DateTime.Now,
-                foto = nombreArchivo, // Guardar solo el nombre del archivo en la base de datos
-                monto = double.Parse(monto)
-            };
-
-            var guardado = pide.registrarSolicitud(solicitud);
+            var guardado = pide.registrarSolicitud(peticion);
 
             if (guardado > 0)
-            {
-                return Ok(new
+                return new
                 {
-                    titulo = "Éxito al guardar",
-                    Mensaje = "La solicitud se ha registrado correctamente.",
+                    titulo = "Exito al guardar",
+                    Mensaje = "Los datos se han guardado correctamente",
                     Code = 200
-                });
-            }
-            return BadRequest(new
+                };
+            return new
             {
                 titulo = "Error al guardar",
-                Mensaje = "Hubo un error al registrar la solicitud.",
+                Mensaje = "Los datos explotaron",
                 Code = 400
-            });
+            };
         }
 
 
