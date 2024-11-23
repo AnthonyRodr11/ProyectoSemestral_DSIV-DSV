@@ -67,7 +67,6 @@ namespace MotorsApi.Controllers
                 {
                     titulo = "Datos inválidos",
                     Mensaje = "El precio no puede ser nulo.",
-                    Code = 400
                 });
             }
             Alquiler_Auto nuevoAlquiler = new Alquiler_Auto();
@@ -80,7 +79,6 @@ namespace MotorsApi.Controllers
                     {
                         titulo = "tarifa actualizada",
                         Mensaje = "El precio se ha actualizado correctamente",
-                        Code = "200"
                     }
                 );
             }
@@ -90,7 +88,32 @@ namespace MotorsApi.Controllers
                 {
                     titulo = "Error al guardar",
                     Mensaje = "La tarifa no se pudo actualizar",
-                    Code = 500
+                });
+            }
+        }
+
+        [HttpPost]
+        [Route("registar")]
+        public IActionResult AlquilerNuevo([FromBody] AlquilerRequest alquiler)
+        {
+
+     
+            var guardado = new FlotaAlquilerInsert().InsertarAlquilado(alquiler);
+
+            if (guardado > 0)
+            {
+                return Ok(new
+                {
+                    titulo = "Éxito al guardar",
+                    Mensaje = "Los datos se han guardado correctamente.",
+                });
+            }
+            else
+            {
+                return StatusCode(500, new
+                {
+                    titulo = "Error al guardar",
+                    Mensaje = "El tipo de tarifa no pudo guardarse.",
                 });
             }
         }
