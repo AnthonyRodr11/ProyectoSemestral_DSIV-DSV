@@ -138,5 +138,23 @@ namespace MotorsApi.Controllers
             return Ok(auto);
         }
 
+        [HttpGet]
+        [Route("alquiler")]
+        public IActionResult ObtenerAlquiler()
+        {
+
+            List<AlquilerCarrosRequest> guardar = new Ver_Flotas().AlquileresAutos();
+
+            if (guardar == null)
+                return NotFound(new
+                {
+                    titulo = "Sin resultados",
+                    mensaje = "No se encontraron autos para el estado especificado.",
+                    code = 404
+                });
+            return Ok(guardar);
+
+        }
+
     }
 }

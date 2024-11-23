@@ -59,6 +59,26 @@ namespace MotorsApi.Controllers
             return Ok(listaautos);
         }
 
+        [HttpGet]
+        [Route("flotaDetalle/{id}")]
+        public IActionResult ListaAutosPerfil(string id)
+        {
+            Ver_Flotas autos = new Ver_Flotas();
+            var listaautos = autos.flota_Venta(id);
+
+            if (listaautos == null || listaautos.Count == 0)
+            {
+                return NotFound(new
+                {
+                    titulo = "Sin resultados",
+                    mensaje = "No se encontraron carrocerías para el estado especificado.",
+                    code = 404
+                });
+            }
+
+            return Ok(listaautos);
+        }
+
         [HttpPost]
         [Route ("vendido/{id}")]
         public IActionResult CarroVendido(int id, Ventas vendido)
@@ -98,6 +118,7 @@ namespace MotorsApi.Controllers
                 });
             }
         }
+
 
     }
 }
