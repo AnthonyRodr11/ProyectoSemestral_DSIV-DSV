@@ -44,7 +44,7 @@ namespace MotorsApi.Controllers
                 return StatusCode(500, new
                 {
                     titulo = "Error al guardar",
-                    Mensaje = "El tipo de tarifa no pudo guardarse.",
+                    Mensaje = "Error al crear el usuario.",
                     Code = 500
                 });
             }
@@ -124,38 +124,38 @@ namespace MotorsApi.Controllers
         }
 
         [HttpGet]
-        [Route ("user/login/{correo}/{contraseña}")]
+        [Route("user/login/{correo}/{contraseña}")]
         public IActionResult LogearUsuario(string correo, string contraseña)
         {
-            if (string.IsNullOrWhiteSpace(correo) && string.IsNullOrWhiteSpace(contraseña))
+            if (string.IsNullOrWhiteSpace(correo) || string.IsNullOrWhiteSpace(contraseña))
             {
                 return BadRequest(new
                 {
                     titulo = "Datos inválidos",
-                    Mensaje = "La tarifa enviada es nula.",
+                    Mensaje = "Debe proporcionar correo y contraseña.",
                     Code = 400
                 });
             }
 
             Loggearse lojin = new Loggearse();
-            var cuera = lojin.VerificarLogin(correo, contraseña);
+            bool cuera = lojin.VerificarLogin(correo, contraseña);
 
             if (cuera)
             {
                 return Ok(new
                 {
-                    titulo = "Datos Verificados :3",
-                    Mensaje = "Todo bien banda",
+                    titulo = "Acceso exitoso",
+                    Mensaje = "Credenciales válidas, bienvenido.",
                     Code = 200
                 });
             }
             else
             {
-                return StatusCode(500, new
+                return Unauthorized(new
                 {
-                    titulo = "Error al Editar",
-                    Mensaje = "no se pudo guardar.",
-                    Code = 500
+                    titulo = "Error de autenticación",
+                    Mensaje = "El correo o la contraseña son incorrectos.",
+                    Code = 401
                 });
             }
         }
