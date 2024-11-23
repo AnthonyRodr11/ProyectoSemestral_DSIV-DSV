@@ -17,7 +17,7 @@ namespace MotorsApi.BD
             try
             {
                 //cadena de conexion por arreglar
-                string cadenaConexion = "server=localhost;Port=3306;user id=Patrichenko;password=**Coco2004**;database=motorsvalue;persistsecurityinfo=True";
+                string cadenaConexion = "server=localhost;Port=3306;user id=root;password=12345678;database=MotorsValue;persistsecurityinfo=True";
                 conexion = new MySqlConnection(cadenaConexion);
                 cmd = new MySqlCommand();
                 cmd.Connection = conexion;
