@@ -140,14 +140,9 @@ namespace MotorsApi.Controllers
             Loggearse lojin = new Loggearse();
             var cuera = lojin.VerificarLogin(correo, contraseña);
 
-            if (cuera)
+            if (cuera>0)
             {
-                return Ok(new
-                {
-                    titulo = "Datos Verificados :3",
-                    Mensaje = "Todo bien banda",
-                    Code = 200
-                });
+                return Ok(cuera);
             }
             else
             {
