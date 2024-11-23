@@ -5,6 +5,7 @@ using MotorsApi.BD.CRUD.Create;
 using MotorsApi.BD.CRUD.Read;
 using MotorsApi.BD.CRUD.Update;
 using MotorsApi.Models;
+using Newtonsoft.Json;
 using System.Runtime.Serialization;
 
 namespace MotorsApi.Controllers
@@ -98,7 +99,8 @@ namespace MotorsApi.Controllers
         public IActionResult AlquilerNuevo([FromBody] AlquilerRequest alquiler)
         {
 
-     
+            Console.WriteLine("Datos Recibidos: " + JsonConvert.SerializeObject(alquiler));
+
             var guardado = new FlotaAlquilerInsert().InsertarAlquilado(alquiler);
 
             if (guardado > 0)

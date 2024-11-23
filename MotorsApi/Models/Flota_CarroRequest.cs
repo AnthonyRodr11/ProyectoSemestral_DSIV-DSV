@@ -14,5 +14,6 @@
         public string estado { get; set; }
         public string descripcion { get; set; }
         public string foto { get; set; }
+        public double precio { get; set; }
     }
 }
