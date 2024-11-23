@@ -5,6 +5,7 @@ using MotorsApi.BD.CRUD.Create;
 using MotorsApi.BD.CRUD.Read;
 using MotorsApi.BD.CRUD.Update;
 using MotorsApi.Models;
+using System.Runtime.Serialization;
 
 namespace MotorsApi.Controllers
 {
@@ -123,6 +124,13 @@ namespace MotorsApi.Controllers
         public List<SeguroRequest> GetSeguros()
         {
             return new SeguroRead().ObtenerListaSeguros();
+        }
+    
+        [HttpGet]
+        [Route("auto/{placa}")]
+        public IActionResult GetAuto(string placa)
+        {
+            return Content( new AutoRequest().AutoInfo(placa) );
         }
 
     }
