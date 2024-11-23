@@ -1,13 +1,14 @@
-﻿using MySql.Data.MySqlClient;
+﻿using MotorsApi.Models;
+using MySql.Data.MySqlClient;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MotorsApi.BD.CRUD.Read
 {
     public class AutoRequest : Conexiondb
     {
-        public string AutoInfo(string placa)
+        public AutoDetallesRequest AutoInfo(string placa)
         {
-            string lista = null;
+            AutoDetallesRequest auto = new AutoDetallesRequest();
 
             try
             {
@@ -25,21 +26,22 @@ namespace MotorsApi.BD.CRUD.Read
                 {
                     while (reader.Read())
                     {
-                        // Construimos una cadena con los valores separados por ;
-                        lista = string.Join(";",
-                            reader["marca"].ToString(),
-                            reader["modelo"].ToString(),
-                            reader["foto"].ToString(),
-                            reader["tarifaxauto"].ToString()
-                        );
-
+                        
+                        {
+                            // Construimos una cadena con los valores separados por ;
+                            auto.marca = reader["marca"].ToString();
+                            auto.modelo = reader["modelo"].ToString();
+                            auto.foto = reader["foto"].ToString();
+                            auto.tarifa = Convert.ToDouble(reader["tarifaxauto"]);
+                        }
                         // Añadimos la fila a la lista
+                        
                     }
                 }
             }
             catch (Exception ex) { Console.WriteLine(ex.Message); }
             finally { cerrarConexion(); }
-            return lista;
+            return auto;
         }
     }
 }

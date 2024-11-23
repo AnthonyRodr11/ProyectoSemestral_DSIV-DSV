@@ -130,7 +130,10 @@ namespace MotorsApi.Controllers
         [Route("auto/{placa}")]
         public IActionResult GetAuto(string placa)
         {
-            return Content( new AutoRequest().AutoInfo(placa) );
+            var auto = new AutoRequest().AutoInfo(placa);
+            if (auto == null)
+                return NotFound("Carro no encontrado");
+            return Ok(auto);
         }
 
     }
