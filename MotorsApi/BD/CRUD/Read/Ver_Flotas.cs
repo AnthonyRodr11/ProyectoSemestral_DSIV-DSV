@@ -70,6 +70,71 @@ namespace MotorsApi.BD.CRUD.Read
             return autos;
         }
 
+        public List<Flota_CarroRequest> flota_Venta(string id)
+        {
+            List<Flota_CarroRequest> autos = new List<Flota_CarroRequest>();
+
+            try
+            {
+                // Limpiamos parámetros
+                cmd.Parameters.Clear();
+
+                // Especificamos el tipo de comando
+                cmd.CommandType = CommandType.Text;
+
+                // Realizamos un JOIN entre Flota_Carro y Flota_Venta para obtener solo los campos necesarios
+                cmd.CommandText = @"
+                    SELECT 
+                        c.placa, c.marca, c.modelo, c.foto, c.km, c.transmision, c.tipo_gas, c.carroceria,
+                        v.precio
+                    FROM 
+                        Flota_Carro c
+                    JOIN 
+                        Flota_Venta v ON c.placa = v.placa
+                    WHERE 
+                        c.placa = @placa";
+
+                // Agregamos el parámetro estado
+                cmd.Parameters.AddWithValue("@placa", id);
+
+                // Abrimos la conexión
+                abrirConexion();
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        // Creamos un objeto Flota_CarroRequest para almacenar los datos
+                        Flota_CarroRequest flota = new Flota_CarroRequest()
+                        {
+                            placa = reader["placa"].ToString(),
+                            marca = reader["marca"].ToString(),
+                            modelo = reader["modelo"].ToString(),
+                            foto = reader["foto"].ToString(),
+                            precio = Convert.ToDouble(reader["precio"]),
+                            km = Convert.ToDouble(reader["km"]),
+                            transmision = reader["transmision"].ToString(),
+                            tipo_gas = reader["tipo_gas"].ToString(),
+                            carroceria = reader["carroceria"].ToString()
+                        };
+
+                        // Agregamos el objeto a la lista
+                        autos.Add(flota);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("No se pudo cargar la lista de autos" + e);
+            }
+            finally
+            {
+
+                cerrarConexion();
+            }
+            return autos;
+        }
+
         //Metodo para cargar toda la flota
         public List<Flota_Carro> obtenerFlota()
         {
@@ -330,6 +395,60 @@ namespace MotorsApi.BD.CRUD.Read
             finally { cerrarConexion(); }
             return valor;
             
+        }
+
+        //Metodo autos alquiler
+        public List<AlquilerCarrosRequest> AlquileresAutos()
+        {
+            List<AlquilerCarrosRequest> carrosEnAlquiler = new List<AlquilerCarrosRequest>();
+            try
+            {
+
+                cmd.Parameters.Clear();
+
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = @"
+                    SELECT 
+                        fc.placa,
+                        fc.marca,
+                        fc.modelo,
+                        fc.foto,
+                        ta.id_tipo,
+                        ta.tarifaxauto
+                    FROM 
+                        Flota_Carro fc
+                    INNER JOIN 
+                        Tarifas_Alquiler ta
+                    ON 
+                        fc.carroceria = ta.tipo_auto
+                    WHERE 
+                        fc.estado = 'alquiler'";
+                abrirConexion();
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        AlquilerCarrosRequest alquilercito = new AlquilerCarrosRequest()
+                        {
+                            marca = reader["marca"].ToString(),
+                            placa = reader["placa"].ToString(),
+                            modelo = reader["modelo"].ToString(),
+                            foto = reader["foto"].ToString(),
+                            tipoTarifa = Convert.ToInt32(reader["id_tipo"]),
+                            tarifa = Convert.ToDouble(reader["tarifaxauto"]),
+                        };
+                        carrosEnAlquiler.Add(alquilercito);
+                    }
+                }
+            }
+            catch (Exception e) { Console.WriteLine(e); }
+            finally { cerrarConexion(); }
+            return carrosEnAlquiler;
+
+
+
         }
 
     }
