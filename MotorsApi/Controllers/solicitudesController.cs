@@ -12,11 +12,11 @@ namespace MotorsApi.Controllers
         //Metodo para registrar una Solicitud de venta en la BD
         [HttpPost]
         [Route("save")]                 //Objeto de clase que representa la entidad Solicitud 
+                                        //Metodo para registrar una Solicitud de venta en la BD
         public object registrarSolicitud(Solicitud peticion)
         {
             //Clase que realiza el create
             Solicitudes pide = new Solicitudes();
-
 
             var guardado = pide.registrarSolicitud(peticion);
 
