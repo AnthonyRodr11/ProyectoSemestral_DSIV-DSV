@@ -8,38 +8,55 @@ namespace MotorsApi.BD.CRUD.Read
     {
 
         //Metodo para devolver una lista segun su estado <Alquiler,venta,Subasta>
-        public List<string> tipos_Flota(string estado)
+        //Metodo para devolver una lista segun su estado <Alquiler,venta,Subasta>
+        public List<Flota_CarroRequest> tipos_Flota(string estado)
         {
-            List<string> autos = new List<string>();
-            string data;
+            List<Flota_CarroRequest> autos = new List<Flota_CarroRequest>();
 
             try
             {
-                //Limpiamos parametros
+                // Limpiamos parámetros
                 cmd.Parameters.Clear();
 
-                //Especificamos el tipo de comando
+                // Especificamos el tipo de comando
                 cmd.CommandType = CommandType.Text;
 
-                //asignamos consulta a realizar
-                cmd.CommandText = "SELECT placa, marca, modelo FROM Flota_Carro WHERE estado = @estado";
+                // Realizamos un JOIN entre Flota_Carro y Flota_Venta para obtener solo los campos necesarios
+                cmd.CommandText = @"
+                    SELECT 
+                        c.placa, c.marca, c.modelo, c.foto, 
+                        v.precio
+                    FROM 
+                        Flota_Carro c
+                    JOIN 
+                        Flota_Venta v ON c.placa = v.placa
+                    WHERE 
+                        c.estado = @estado";
 
                 // Agregamos el parámetro estado
                 cmd.Parameters.AddWithValue("@estado", estado);
 
+                // Abrimos la conexión
                 abrirConexion();
-
 
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        // Agregamos cada vehiculo a la lista
-                        data = $"Placa: {reader["placa"]}, Marca: {reader["marca"]}, Modelo: {reader["modelo"]}";
-                        autos.Add(data);
+                        // Creamos un objeto Flota_CarroRequest para almacenar los datos
+                        Flota_CarroRequest flota = new Flota_CarroRequest()
+                        {
+                            placa = reader["placa"].ToString(),
+                            marca = reader["marca"].ToString(),
+                            modelo = reader["modelo"].ToString(),
+                            foto = reader["foto"].ToString(),
+                            precio = Convert.ToDouble(reader["precio"])
+                        };
+
+                        // Agregamos el objeto a la lista
+                        autos.Add(flota);
                     }
                 }
-
             }
             catch (Exception e)
             {
