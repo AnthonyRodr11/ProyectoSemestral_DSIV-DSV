@@ -5,35 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles de Subasta</title>
     <link rel="stylesheet" href="../css/subastaDetalles.css">
-    <div id="navbar"></div>
-    <script>
-        fetch('navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('navbar').innerHTML = data;
-            })
-            .catch(error => console.error('Error cargando el navbar:', error));
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // Obtener la URL de la página actual
-            const currentPath = window.location.pathname;
-
-            // Seleccionar todos los enlaces del navbar
-            const navLinks = document.querySelectorAll("nav a");
-
-            // Comparar la URL de cada enlace con la URL actual
-            navLinks.forEach(link => {
-                if (link.getAttribute("href") === currentPath) {
-                    link.classList.add("active");
-                }
-            });
-        });
-    </script>
 
 </head>
 <body>
+    <header>
+        <div id="navbar"></div>
+    </header>
     <div class="contenedor">
         <div class="imagen">
             <img id="imgAuto" src="../Img/FordRanger.png" alt="imagen del auto">
@@ -43,10 +20,10 @@
         <div class="informacion">
             <div class="Detalles">
                 <div class="poligono">
-                    <p><img src="../Img/kilometraje.png"> </p>
-                    <p><img src="../Img/transmision.png"> </p>
-                    <p><img src="../Img/gas.png"> </p>
-                    <p><img src="../Img/carroceria.png"> </p>
+                    <p><img src="../Img/kilometraje.png" class="icono"> </p>
+                    <p><img src="../Img/transmision.png" class="icono"> </p>
+                    <p><img src="../Img/gas.png" class="icono"> </p>
+                    <p><img src="../Img/carroceria.png" class="icono"> </p>
                 </div>
 
             </div>
@@ -69,3 +46,29 @@
     
 </body>
 </html>
+
+<script>
+    fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('navbar').innerHTML = data;
+        })
+        .catch(error => console.error('Error cargando el navbar:', error));
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Obtener la URL de la página actual
+        const currentPath = window.location.pathname;
+
+        // Seleccionar todos los enlaces del navbar
+        const navLinks = document.querySelectorAll("nav a");
+
+        // Comparar la URL de cada enlace con la URL actual
+        navLinks.forEach(link => {
+            if (link.getAttribute("href") === currentPath) {
+                link.classList.add("active");
+            }
+        });
+    });
+</script>
