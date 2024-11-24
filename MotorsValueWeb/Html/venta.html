@@ -4,69 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Motors Value Venta</title>
-    <link rel="stylesheet" href="../css/nav.css">
-    <style>
-        #contenedor-caja {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            padding: 20px;
-        }
-        .caja {
-            background-color: #f0f8ff;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            width: 200px;
-            transition: transform 0.2s;
-        }
+    <link rel="stylesheet" href="../css/venta.css">
+    <div id="navbar"></div>
+    <script>
+        // Cargar el navbar dinámicamente
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                // Insertar el contenido del navbar en el elemento con id "navbar"
+                document.getElementById('navbar').innerHTML = data;
 
-        .caja:hover {
-            transform: scale(1.05);
+                // Una vez que el contenido esté cargado, modificar el navbar según la página actual
+                marcarEnlaceActivo();
+            })
+            .catch(error => console.error('Error cargando el navbar:', error));
+
+        // Función para marcar el enlace activo
+        function marcarEnlaceActivo() {
+            // Obtener solo el nombre del archivo de la página actual (sin directorios)
+            const currentFile = window.location.pathname.split('/').pop();
+
+            // Seleccionar todos los enlaces dentro del elemento <nav>
+            const navLinks = document.querySelectorAll("#navbar nav ul li a");
+
+            // Comparar el nombre del archivo con el atributo href de los enlaces
+            navLinks.forEach(link => {
+                if (link.getAttribute("href") === currentFile) {
+                    link.classList.add("active");
+                }
+            });
         }
-        .caja h3 {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-        }
-        .caja img {
-            width: 200px;
-            height: auto;
-        }
-        .precio {
-            font-size: 16px;
-            font-weight: bold;
-            color: green;
-            margin-top: 10px;
-        }
-    </style>
+    </script>
 </head>
-<header>
-    <a href="inicio.html" class="retorno">
-        <div class="logo">
-            <img src="../Img/Logo_MV.png" alt="Motors Value Logo">
-            <h1>MOTORS VALUE</h1>
-        </div>
-    </a>
-    <div class="navbar">
-        <nav>
-            <ul>
-                <li><a href="venta.html" class="active">Venta</a></li>
-                <li><a href="alquiler.html">Alquiler</a></li>
-                <li><a href="subasta.html">Subasta</a></li>
-                <li><a href="solicitud.html">Solicitud</a></li>
-            </ul>
-        </nav>
-        <div class="registrar-btn">
-            <a href="registro.html">Registrarse</a>
-        </div>
-    </div>
-</header>
 <body>
     <div id="contenedor-caja"></div>
-
     <script>
         async function obtenerDatos(estado) {
             try {
@@ -122,6 +93,5 @@
         actualizarCaja(); // Carga inicial
         setInterval(actualizarCaja, 10000); // Actualiza cada 10 segundos
     </script>
-    
 </body>
 </html>
