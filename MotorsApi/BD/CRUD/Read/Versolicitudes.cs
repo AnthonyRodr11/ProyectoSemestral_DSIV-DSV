@@ -2,7 +2,6 @@
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Data;
 using MotorsApi.Models;
-using MotorsApi.Models.MotorsApi.Models;
 
 namespace MotorsApi.BD.CRUD.Read
 {
