@@ -7,12 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MotorsApi", "MotorsApi\Moto
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MotorsForm", "MotorsForm\MotorsForm.csproj", "{025AA391-37C2-4834-8819-37943318F100}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MotorsValueWeb", "MotorsValueWeb", "{BC249CAA-8C51-4990-9513-6F5BB231B66E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Img", "Img", "{A45D4B25-2547-4F8A-A3CF-82E6EFF21E03}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "galeriaAutos", "galeriaAutos", "{0C04AF0F-BA5C-4714-B60D-A7F8E0225B0D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,10 +24,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{A45D4B25-2547-4F8A-A3CF-82E6EFF21E03} = {BC249CAA-8C51-4990-9513-6F5BB231B66E}
-		{0C04AF0F-BA5C-4714-B60D-A7F8E0225B0D} = {A45D4B25-2547-4F8A-A3CF-82E6EFF21E03}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A168A96B-96EC-4AFE-83E6-E78D8105DA50}
