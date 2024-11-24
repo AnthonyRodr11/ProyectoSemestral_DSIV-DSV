@@ -85,13 +85,13 @@ namespace MotorsApi.BD.CRUD.Read
                             marca = reader["marca"].ToString(),
                             modelo = reader["modelo"].ToString(),
                             color = reader["color"].ToString(),
-                            km = Convert.ToDouble(reader["color"]),
+                            km = Convert.ToDouble(reader["km"]),
                             tipo_gas = reader["tipo_gas"].ToString(),
                             carroceria = reader["carroceria"].ToString(),
                             estado = reader["estado"].ToString(),
                             descripcion = reader["descripcion"].ToString(),
                             disponibilidad = Convert.ToBoolean(reader["disponibilidad"]),
-                            foto = reader.ToString()
+                            foto = reader["foto"].ToString()
 
                         };
 

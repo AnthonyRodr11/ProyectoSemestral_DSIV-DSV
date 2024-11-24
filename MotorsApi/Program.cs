@@ -1,17 +1,27 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Agrega servicios al contenedor
+builder.Services.AddControllers(); // <- Asegúrate de que esto esté presente
 
-builder.Services.AddControllers();
+// Agrega CORS u otros servicios necesarios
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost", policy =>
+    {
+        policy.WithOrigins("http://127.0.0.1:5500/")
+              .AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-
-app.UseHttpsRedirection();
-
+// Configura la aplicación
+app.UseCors("AllowLocalhost");
 app.UseAuthorization();
 
-app.MapControllers();
+// Mapear controladores
+app.MapControllers(); // <- Asegúrate de que esto esté presente
 
 app.Run();

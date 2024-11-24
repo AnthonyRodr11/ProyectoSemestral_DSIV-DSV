@@ -148,6 +148,9 @@ namespace MotorsApi.BD.CRUD.Read
             return data;
         } 
 
+
+        /*
+
         //Metodo para mostrar todas las solicitudes
         public List<solicitudRequest> obtenerSolicitudes()
         {
@@ -198,5 +201,6 @@ namespace MotorsApi.BD.CRUD.Read
 
             return solicitudes;
         }
+        */
     }
 }
