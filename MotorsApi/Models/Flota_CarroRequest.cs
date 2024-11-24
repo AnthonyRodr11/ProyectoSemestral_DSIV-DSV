@@ -3,7 +3,7 @@
     public class Flota_CarroRequest
     {
         //Atributos de la entidad
-        public string placa { get; set; }
+        public string? placa { get; set; }
         public string marca { get; set; }
         public string modelo { get; set; }
         public string color { get; set; }
@@ -14,5 +14,6 @@
         public string estado { get; set; }
         public string descripcion { get; set; }
         public string foto { get; set; }
+        public double precio { get; set; }
     }
 }

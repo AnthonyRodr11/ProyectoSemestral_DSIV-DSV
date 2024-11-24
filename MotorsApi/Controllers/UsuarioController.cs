@@ -44,7 +44,7 @@ namespace MotorsApi.Controllers
                 return StatusCode(500, new
                 {
                     titulo = "Error al guardar",
-                    Mensaje = "El tipo de tarifa no pudo guardarse.",
+                    Mensaje = "Error al crear el usuario.",
                     Code = 500
                 });
             }
@@ -87,8 +87,8 @@ namespace MotorsApi.Controllers
         }
 
         [HttpPatch]
-        [Route ("user/update/{id}")]
-        public IActionResult ActualizarUsuario(int id, [FromBody] ActualizarUsuario usuario)
+        [Route ("user/update/{correo}")]
+        public IActionResult ActualizarUsuario(string correo, [FromBody] ActualizarUsuario usuario)
         {
             if (usuario == null)
             {
@@ -101,7 +101,7 @@ namespace MotorsApi.Controllers
             }
 
             Editar_Usuario itadori = new Editar_Usuario(); //JJK Referencia
-            var guarda = itadori.EditarUsuario(id, usuario);
+            var guarda = itadori.EditarUsuario(correo, usuario);
 
             if (guarda > 0)
             {
@@ -115,7 +115,7 @@ namespace MotorsApi.Controllers
             else
             {
                 return StatusCode(500, new
-                {
+                {   
                     titulo = "Error al Editar",
                     Mensaje = "no se pudo guardar.",
                     Code = 500
@@ -124,15 +124,15 @@ namespace MotorsApi.Controllers
         }
 
         [HttpGet]
-        [Route ("user/login/{correo}/{contraseña}")]
+        [Route("user/login/{correo}/{contraseña}")]
         public IActionResult LogearUsuario(string correo, string contraseña)
         {
-            if (string.IsNullOrWhiteSpace(correo) && string.IsNullOrWhiteSpace(contraseña))
+            if (string.IsNullOrWhiteSpace(correo) || string.IsNullOrWhiteSpace(contraseña))
             {
                 return BadRequest(new
                 {
                     titulo = "Datos inválidos",
-                    Mensaje = "La tarifa enviada es nula.",
+                    Mensaje = "Debe proporcionar correo y contraseña.",
                     Code = 400
                 });
             }
@@ -140,22 +140,47 @@ namespace MotorsApi.Controllers
             Loggearse lojin = new Loggearse();
             var cuera = lojin.VerificarLogin(correo, contraseña);
 
-            if (cuera)
+            if (cuera>0)
             {
-                return Ok(new
-                {
-                    titulo = "Datos Verificados :3",
-                    Mensaje = "Todo bien banda",
-                    Code = 200
-                });
+                return Ok(cuera);
             }
             else
             {
-                return StatusCode(500, new
+                return Unauthorized(new
                 {
-                    titulo = "Error al Editar",
-                    Mensaje = "no se pudo guardar.",
-                    Code = 500
+                    titulo = "Error de autenticación",
+                    Mensaje = "El correo o la contraseña son incorrectos.",
+                    Code = 401
+                });
+            }
+        }
+
+        [HttpGet]
+        [Route("user/email/{correo}")]
+        public IActionResult VerificarCorreo(string correo)
+        {
+            if (string.IsNullOrWhiteSpace(correo))
+            {
+                return BadRequest(new
+                {
+                    titulo = "Datos inválidos",
+                    Mensaje = "Debe proporcionar correo valido",
+                });
+            }
+
+            Loggearse lojin = new Loggearse();
+            var cuera = lojin.VerificarCorreo(correo);
+
+            if (cuera)
+            {
+                return Ok(cuera);
+            }
+            else
+            {
+                return Unauthorized(new
+                {
+                    titulo = "Error de autenticación",
+                    Mensaje = "El correo no se encuentra registrado",
                 });
             }
         }

@@ -5,6 +5,8 @@ using MotorsApi.BD.CRUD.Create;
 using MotorsApi.BD.CRUD.Read;
 using MotorsApi.BD.CRUD.Update;
 using MotorsApi.Models;
+using Newtonsoft.Json;
+using System.Runtime.Serialization;
 
 namespace MotorsApi.Controllers
 {
@@ -97,7 +99,8 @@ namespace MotorsApi.Controllers
         public IActionResult AlquilerNuevo([FromBody] AlquilerRequest alquiler)
         {
 
-     
+            Console.WriteLine("Datos Recibidos: " + JsonConvert.SerializeObject(alquiler));
+
             var guardado = new FlotaAlquilerInsert().InsertarAlquilado(alquiler);
 
             if (guardado > 0)
@@ -123,6 +126,34 @@ namespace MotorsApi.Controllers
         public List<SeguroRequest> GetSeguros()
         {
             return new SeguroRead().ObtenerListaSeguros();
+        }
+    
+        [HttpGet]
+        [Route("auto/{placa}")]
+        public IActionResult GetAuto(string placa)
+        {
+            var auto = new AutoRequest().AutoInfo(placa);
+            if (auto == null)
+                return NotFound("Carro no encontrado");
+            return Ok(auto);
+        }
+
+        [HttpGet]
+        [Route("alquiler")]
+        public IActionResult ObtenerAlquiler()
+        {
+
+            List<AlquilerCarrosRequest> guardar = new Ver_Flotas().AlquileresAutos();
+
+            if (guardar == null)
+                return NotFound(new
+                {
+                    titulo = "Sin resultados",
+                    mensaje = "No se encontraron autos para el estado especificado.",
+                    code = 404
+                });
+            return Ok(guardar);
+
         }
 
     }

@@ -7,9 +7,9 @@ namespace MotorsApi.BD.CRUD.Read
     public class Loggearse : Conexiondb
     {
 
-        public bool VerificarLogin(string correo, string contraseña)
+        public int VerificarLogin(string correo, string contraseña)
         {
-            bool esValido = false;
+            
 
             try
             {
@@ -20,7 +20,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 // Consulta SQL con parámetros para evitar inyecciones SQL
-                cmd.CommandText = "SELECT COUNT(*) FROM login WHERE correo = @correo AND contraseña = @contraseña";
+                cmd.CommandText = "SELECT * FROM login WHERE correo = @correo AND contraseña = @contraseña";
 
                 // Agregamos los parámetros
                 cmd.Parameters.AddWithValue("@correo", correo);
@@ -30,7 +30,7 @@ namespace MotorsApi.BD.CRUD.Read
                 abrirConexion();
 
                 // Ejecutamos la consulta y verificamos el resultado
-                esValido = Convert.ToInt32(cmd.ExecuteScalar()) > 0;
+               return Convert.ToInt32(cmd.ExecuteScalar());
             }
             catch (Exception e)
             {
@@ -41,7 +41,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cerrarConexion();
             }
 
-            return esValido;
+            return 0;
 
         }
 
@@ -92,6 +92,46 @@ namespace MotorsApi.BD.CRUD.Read
             
             return cliente;
         }
+
+        public bool VerificarCorreo(string correo)
+        {
+            try
+            {
+                // Limpiamos los parámetros
+                cmd.Parameters.Clear();
+
+                // Asignamos el tipo de comando
+                cmd.CommandType = CommandType.Text;
+
+                // Consulta SQL con COUNT para verificar la existencia del correo
+                cmd.CommandText = "SELECT COUNT(*) FROM login WHERE correo = @correo";
+
+                // Agregamos el parámetro
+                cmd.Parameters.AddWithValue("@correo", correo);
+
+                // Abrimos la conexión
+                abrirConexion();
+
+                // Ejecutamos la consulta y verificamos el resultado
+                int count = Convert.ToInt32(cmd.ExecuteScalar());
+
+                // Si el resultado es mayor que 0, el correo existe
+                return count > 0;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error al verificar el correo: " + e.Message);
+            }
+            finally
+            {
+                // Cerramos la conexión, pase lo que pase
+                cerrarConexion();
+            }
+
+            // En caso de error, asumimos que el correo no existe
+            return false;
+        }
+
 
     }
 }

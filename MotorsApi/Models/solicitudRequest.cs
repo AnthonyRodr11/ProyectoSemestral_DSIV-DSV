@@ -1,6 +1,6 @@
 ﻿namespace MotorsApi.Models
 {
-    public class solicitudRequest
+    namespace MotorsApi.Models
     {
         //Atributos 
  
@@ -10,5 +10,7 @@
         public double monto { get; set; }
 
 
+        
     }
 }
+

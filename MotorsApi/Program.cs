@@ -1,7 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Agrega servicios al contenedor
-builder.Services.AddControllers(); // <- Asegúrate de que esto esté presente
+builder.Services.AddControllers(); // <- AsegÃºrate de que esto estÃ© presente
 
 // Agrega CORS u otros servicios necesarios
 builder.Services.AddCors(options =>
@@ -17,11 +17,11 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Configura la aplicación
+// Configura la aplicaciï¿½n
 app.UseCors("AllowLocalhost");
 app.UseAuthorization();
 
 // Mapear controladores
-app.MapControllers(); // <- Asegúrate de que esto esté presente
+app.MapControllers(); // <- Asegï¿½rate de que esto estï¿½ presente
 
 app.Run();

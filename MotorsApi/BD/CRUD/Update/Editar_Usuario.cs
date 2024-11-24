@@ -7,7 +7,7 @@ namespace MotorsApi.BD.CRUD.Update
     public class Editar_Usuario : Conexiondb
     {
 
-        public int EditarUsuario(int id, ActualizarUsuario usuario)
+        public int EditarUsuario(string correo, ActualizarUsuario usuario)
         {
 
             //declaracion de variable de trabajo 
@@ -25,10 +25,9 @@ namespace MotorsApi.BD.CRUD.Update
                 cmd.CommandText = "EditarUsuarioLogin";
 
                 //asignamos parametros
-                cmd.Parameters.Add(new MySqlParameter("@p_id_usuario", id));
                 cmd.Parameters.Add(new MySqlParameter("@p_telefono", usuario.telefono));
                 cmd.Parameters.Add(new MySqlParameter("@p_contraseña", usuario.contraseña));
-                cmd.Parameters.Add(new MySqlParameter("@p_correo", usuario.correo));
+                cmd.Parameters.Add(new MySqlParameter("@p_correo", correo));
 
 
                 //abrir Conexion
