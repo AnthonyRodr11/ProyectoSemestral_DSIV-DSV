@@ -2,6 +2,7 @@
 using MotorsApi.BD.CRUD.Create;
 using MotorsApi.BD.CRUD.Read;
 using MotorsApi.Models;
+using MotorsApi.Models.MotorsApi.Models;
 
 namespace MotorsApi.Controllers
 {
@@ -9,32 +10,59 @@ namespace MotorsApi.Controllers
     [ApiController]
     public class solicitudesController : ControllerBase
     {
-        //Metodo para registrar una Solicitud de venta en la BD
+
         [HttpPost]
-        [Route("save")]                 //Objeto de clase que representa la entidad Solicitud 
-                                        //Metodo para registrar una Solicitud de venta en la BD
-        public object registrarSolicitud(Solicitud peticion)
+        [Route("save")]
+        public IActionResult registrarSolicitud([FromBody] solicitudRequest peticion)
         {
-            //Clase que realiza el create
-            Solicitudes pide = new Solicitudes();
-
-            var guardado = pide.registrarSolicitud(peticion);
-
-            if (guardado > 0)
-                return new
-                {
-                    titulo = "Exito al guardar",
-                    Mensaje = "Los datos se han guardado correctamente",
-                    Code = 200
-                };
-            return new
+            try
             {
-                titulo = "Error al guardar",
-                Mensaje = "Los datos explotaron",
-                Code = 400
-            };
-        }
+                // Validar que el monto sea válido
+                if (peticion.monto <= 0)
+                {
+                    return BadRequest(new
+                    {
+                        titulo = "Error de validación",
+                        mensaje = "El monto debe ser mayor que 0.",
+                        codigo = 400
+                    });
+                }
 
+                // Crear instancia de la clase que interactúa con la base de datos
+                Solicitudes solicita = new Solicitudes();
+
+                // Llamar al método de registro
+                int resultado = solicita.registrarSolicitud(peticion);
+
+                if (resultado > 0)
+                {
+                    return Ok(new
+                    {
+                        titulo = "Éxito al guardar",
+                        mensaje = "La solicitud se registró correctamente.",
+                        codigo = 200
+                    });
+                }
+                else
+                {
+                    return BadRequest(new
+                    {
+                        titulo = "Error al guardar",
+                        mensaje = "No se pudo registrar la solicitud.",
+                        codigo = 400
+                    });
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
+                {
+                    titulo = "Error del servidor",
+                    mensaje = ex.Message,
+                    codigo = 500
+                });
+            }
+        }
 
         //Metodo para obtener la descripcion y foto dado el id_usuario 
         [HttpGet]
@@ -77,6 +105,10 @@ namespace MotorsApi.Controllers
             return verNombre.obtenernombresolicitante(id_solicitud);
         }
 
+
+
+
+        /*
         //Metodo para retornar la lista de usuarios que han enviado solicitud 
         [HttpGet]
         [Route("listaSolicitantes")]
@@ -87,5 +119,9 @@ namespace MotorsApi.Controllers
 
             return listaSolis.obtenerSolicitudes();
         }
+
+
+
+        */
     }
 }

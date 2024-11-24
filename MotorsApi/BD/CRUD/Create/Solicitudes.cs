@@ -1,4 +1,5 @@
 ﻿using MotorsApi.Models;
+using MotorsApi.Models.MotorsApi.Models;
 using MySql.Data.MySqlClient;
 using System.Data;
 
@@ -7,8 +8,8 @@ namespace MotorsApi.BD.CRUD.Create
     public class Solicitudes : Conexiondb
     {
 
-        //Metodo para cargar tabla Solicitud
-        public int registrarSolicitud(Solicitud solicito)
+        //Metodo para cargar tabla Solicitud 
+        public int registrarSolicitud( solicitudRequest solicito)
         {
 
             //declaracion de variables de trabajo
@@ -29,8 +30,6 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.Parameters.Add(new MySqlParameter("@p_id_usuario", solicito.id_usuario));
                 cmd.Parameters.Add(new MySqlParameter("@p_descripcion", solicito.descripcion));
                 cmd.Parameters.Add(new MySqlParameter("@p_estado", solicito.estado));
-                cmd.Parameters.Add(new MySqlParameter("@p_f_solicitud", solicito.f_solicitud));
-                cmd.Parameters.Add(new MySqlParameter("@p_foto", solicito.foto));
                 cmd.Parameters.Add(new MySqlParameter("@p_monto", solicito.monto));
 
                 //abrir Conexion
@@ -46,7 +45,7 @@ namespace MotorsApi.BD.CRUD.Create
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo guardar la solicitud"+e);
+                throw;
             }
             finally
             {
