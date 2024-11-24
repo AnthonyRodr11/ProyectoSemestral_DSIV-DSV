@@ -1,5 +1,4 @@
 using MotorsApi.Models;
-using MotorsApi.Models.MotorsApi.Models;
 using MySql.Data.MySqlClient;
 using System.Data;
 

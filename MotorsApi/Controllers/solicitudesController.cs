@@ -2,7 +2,6 @@
 using MotorsApi.BD.CRUD.Create;
 using MotorsApi.BD.CRUD.Read;
 using MotorsApi.Models;
-using MotorsApi.Models.MotorsApi.Models;
 
 namespace MotorsApi.Controllers
 {

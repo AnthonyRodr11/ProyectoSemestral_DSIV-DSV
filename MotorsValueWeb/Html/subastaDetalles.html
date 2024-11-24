@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de Subasta</title>
+    <link rel="stylesheet" href="../css/subastaDetalles.css">
+    <div id="navbar"></div>
+    <script>
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar').innerHTML = data;
+            })
+            .catch(error => console.error('Error cargando el navbar:', error));
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Obtener la URL de la página actual
+            const currentPath = window.location.pathname;
+
+            // Seleccionar todos los enlaces del navbar
+            const navLinks = document.querySelectorAll("nav a");
+
+            // Comparar la URL de cada enlace con la URL actual
+            navLinks.forEach(link => {
+                if (link.getAttribute("href") === currentPath) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div class="contenedor">
+        <div class="imagen">
+            <img id="imgAuto" src="../Img/FordRanger.png" alt="imagen del auto">
+            <div id="modelo"></div>
+        </div>
+
+        <div class="informacion">
+            <div class="Detalles">
+                <div class="poligono">
+                    <p><img src="../Img/kilometraje.png"> </p>
+                    <p><img src="../Img/transmision.png"> </p>
+                    <p><img src="../Img/gas.png"> </p>
+                    <p><img src="../Img/carroceria.png"> </p>
+                </div>
+
+            </div>
+            <div class="pujar">
+                <button>Pujar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup" class="popup-overlay" style="display: none;">
+        <div class="popup-content">
+            <h2>Alquiler</h2>
+            <p>¿Seguro que desea realizar la compra?</p>
+            <div class="popup-buttons">
+                <button id="popupAceptar">Aceptar</button>
+                <button id="popupCancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
