@@ -22,12 +22,14 @@ namespace MotorsApi.BD.CRUD.Update
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 //Asignamos el cod
-                cmd.CommandText = "EditarUsuarioLogin";
+                cmd.CommandText = "EditarInfoUsuario";
 
                 //asignamos parametros
                 cmd.Parameters.Add(new MySqlParameter("@p_telefono", usuario.telefono));
                 cmd.Parameters.Add(new MySqlParameter("@p_contraseña", usuario.contraseña));
                 cmd.Parameters.Add(new MySqlParameter("@p_correo", correo));
+
+
 
 
                 //abrir Conexion

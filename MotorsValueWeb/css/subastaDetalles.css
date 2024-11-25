@@ -8,7 +8,7 @@ html body{
     display: flex;
     height: 100%;
     width: 100%;
-    margin: 3% 0 0 0;
+    margin: 3% 0;
 }
 
 .informacion{
@@ -30,12 +30,14 @@ html body{
 
 .icono{
     max-width: 95px;
+    width: 100%;
     margin: 0 0 0 5%;
 }
 
 /*Boton de Pujar*/
 .pujar{
     height: 50%;
+    padding: 0 5%;
 }
 
 .imagen{
@@ -48,4 +50,57 @@ html body{
     width: 100%;
     max-width: 90%;
     text-align: center;
+}
+
+/*Parte inferior de Detalles*/
+.info{
+    display: flex;
+    justify-content: space-between;
+}
+
+#inputPuja{
+    height: 25px;
+    align-self: center;
+    border-radius: 15px;
+}
+
+#info{
+    display: flex;
+    justify-content: center;
+}
+
+#btnPujar{
+    justify-content: center;
+    width: 150px;
+    height: 30px;
+    background-color: #1E75BB;
+    color: white;
+    border-radius: 15px;
+    text-decoration: none;
+}
+
+@media(max-width: 768px){
+    .contenedor{
+        flex-direction: column;
+    }
+
+    .informacion{
+        max-width: 100%;
+    }
+
+    .info{
+        justify-content: center;
+        gap: 20%;
+    }
+    
+    .pujar{
+        text-align: center;
+    }
+}
+
+@media (max-width: 587px) {
+    .icono{
+        max-width: 16%;
+        width: 100%;
+    }
 }

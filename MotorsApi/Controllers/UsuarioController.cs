@@ -85,7 +85,7 @@ namespace MotorsApi.Controllers
                 });
             }
         }
-
+        
         [HttpPatch]
         [Route ("user/update/{correo}")]
         public IActionResult ActualizarUsuario(string correo, [FromBody] ActualizarUsuario usuario)
@@ -100,7 +100,7 @@ namespace MotorsApi.Controllers
                 });
             }
 
-            Editar_Usuario itadori = new Editar_Usuario(); //JJK Referencia
+            Editar_Usuario itadori = new Editar_Usuario(); 
             var guarda = itadori.EditarUsuario(correo, usuario);
 
             if (guarda > 0)
@@ -122,6 +122,9 @@ namespace MotorsApi.Controllers
                 });
             }
         }
+
+        
+
 
         [HttpGet]
         [Route("user/login/{correo}/{contraseña}")]

@@ -137,22 +137,25 @@
             <button onclick="mostrarFormularioEdicion()">Editar datos</button>
         </div>
 
-
+        <!--Pequeña ventana que abre formulario para editar informacion-->
         <div id="modal-editar" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="cerrarFormularioEdicion()">&times;</span>
                 <h2>Editar Perfil</h2>
                 <form id="form-editar" onsubmit="actualizarDatos(event)">
-                    <label for="nuevoNombre">Nombre:</label>
-                    <input type="text" id="nuevoNombre" required>
-    
-                    <label for="nuevoCorreo">Correo:</label>
-                    <input type="email" id="nuevoCorreo" required>
-    
-                    <label for="nuevoTelefono">Teléfono:</label>
-                    <input type="tel" id="nuevoTelefono" required>
-    
-                    <button type="submit">Guardar cambios</button>
+
+                    
+                    <label for="nuevaContraseña">Contraseña:</label>
+                    <input type="text" id="nuevaContraseña" >
+                    
+                    <label for="nuevaContraseña">Confirmar Contraseña:</label>
+                    <input type="text" id="confirmarContraseña">
+
+                    
+                    <label for="nuevoTelefono">Número Celular o Telefono</label>
+                    <input type="text" id="nuevoTelefono" pattern="\d*" inputmode="numeric" onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="3336666 o 68343876">
+                
+                    <button type="submit" onclick="actualizarDatos()">Guardar cambios</button>
                 </form>
             </div>
         </div>
@@ -286,7 +289,7 @@
 
         // Rellenar el formulario con los datos actuales
         document.getElementById("nuevoNombre").value = document.getElementById("nombre").textContent;
-        document.getElementById("nuevoCorreo").value = document.getElementById("correo").textContent;
+        document.getElementById("nuevaContraseña").value = document.getElementById("correo").textContent;
         document.getElementById("nuevoTelefono").value = document.getElementById("telefono").textContent;
     }
 
@@ -295,17 +298,29 @@
         document.getElementById("modal-editar").style.display = "none";
     }
 
-    // Enviar los datos actualizados al servidor
-    async function actualizarDatos(event) {
-        event.preventDefault();
+    // Enviar los datos actualizados a la BD
+    async function actualizarDatos() {
+
+        //Obtenemos la data ingresada en el formulario
 
         const idUsuario = 1; // Cambia esto al ID real del usuario que se está editando
         const nuevoNombre = document.getElementById("nuevoNombre").value;
-        const nuevoCorreo = document.getElementById("nuevoCorreo").value;
+        const nuevaContraseña = document.getElementById("nuevaContraseña").value;
+        const confirmarContraseña = document.getElementById("confirmarContraseña").value;
         const nuevoTelefono = document.getElementById("nuevoTelefono").value;
 
         try {
+
+            // validar que los campos contraseña sean iguales 
+            if (!nuevaContraseña || !confirmarContraseña || nuevaContraseña !== confirmarContraseña) {
+
+                alert("Por favor, las contraseñas deben ser iguales en los dos campos.");
+                return;
+            }
+
+
             const response = await fetch("http://localhost/api/editarUsuario", {
+                
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -313,8 +328,7 @@
                 body: JSON.stringify({
                     id_usuario: idUsuario,
                     telefono: nuevoTelefono,
-                    correo: nuevoCorreo,
-                    nombre: nuevoNombre
+                    contraseña: confirmarContraseña
                 })
             });
 
@@ -324,12 +338,14 @@
 
             // Actualizar la información en la página
             document.getElementById("nombre").textContent = nuevoNombre;
-            document.getElementById("correo").textContent = nuevoCorreo;
+            document.getElementById("correo").textContent = nuevaContraseña;
             document.getElementById("telefono").textContent = nuevoTelefono;
 
             cerrarFormularioEdicion();
             alert("Perfil actualizado exitosamente");
+
         } catch (error) {
+
             console.error("Error al actualizar el perfil", error);
             alert("Hubo un problema al actualizar el perfil");
         }
