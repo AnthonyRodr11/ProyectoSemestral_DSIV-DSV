@@ -30,7 +30,7 @@ namespace MotorsApi.BD.CRUD.Read
                     JOIN 
                         Flota_Venta v ON c.placa = v.placa
                     WHERE 
-                        c.estado = @estado";
+                        c.estado = @estado AND disponibilidad = 1";
 
                 // Agregamos el parámetro estado
                 cmd.Parameters.AddWithValue("@estado", estado);
@@ -110,7 +110,6 @@ namespace MotorsApi.BD.CRUD.Read
                             marca = reader["marca"].ToString(),
                             modelo = reader["modelo"].ToString(),
                             foto = reader["foto"].ToString(),
-                            precio = Convert.ToDouble(reader["precio"]),
                             km = Convert.ToDouble(reader["km"]),
                             transmision = reader["transmision"].ToString(),
                             tipo_gas = reader["tipo_gas"].ToString(),
