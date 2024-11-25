@@ -21,13 +21,13 @@ body::before {
     z-index: -1; /* Coloca el fondo detrás de todo el contenido */
 }
 
-/* Navbar */
+/* Navbar 
 #navbar{
     width: 100% !important;
     max-height: 87.5px;
     height: 100% !important;
     margin: 0 0 2% 0;
-}
+}*/
 
 /*Contenedor intermedio*/
 .contenedor{
@@ -127,13 +127,21 @@ h1{
 /* Imagen del auto */
 .imagen{
     max-width: 60%;
+    height: 100%;
     width: 100%;
     display: grid;
+
+}
+
+.imagen,#nombreAuto{
     text-align: center;
 }
 
 .imagen,img{
     max-width: 100%;
+    justify-self: center;
+    max-height: 631px;
+    height: 100%;
 }
 
 /* Botón pagar */

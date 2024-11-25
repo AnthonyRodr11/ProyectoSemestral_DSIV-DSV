@@ -4,128 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Venta Perfil</title>
-    <link rel="stylesheet" href="../css/nav.css">
-    <style>
-        body{
-            max-height: 1200px;
-            align-items: center;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        }
-        .especificaciones-container {
-            display: flex;
-            margin-top: 100px;
-            width: 800px;
-            background-color: #88898d;
-            clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%)
-        }
+    <link rel="stylesheet" href="../css/ventaPerfil.css">
+    <div id="navbar"></div>
+    <script>
+        // Cargar el navbar dinámicamente
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                // Insertar el contenido del navbar en el elemento con id "navbar"
+                document.getElementById('navbar').innerHTML = data;
 
-        .fotoAuto {
-            display: flex;
-        }
-        
-        .fotoAuto img {
-            max-width: 100%;
-            width: 350px;
-            height: auto;
-        }
+                // Una vez que el contenido esté cargado, modificar el navbar según la página actual
+                marcarEnlaceActivo();
+            })
+            .catch(error => console.error('Error cargando el navbar:', error));
 
-        .especificaciones {
-            flex-direction: column;
-            gap: 20px;
-            padding: 20px;
-            width: 300px;
-        }
-        .especificacion-item {
-            display: flex; /* Alinear elementos en una fila */
-            align-items: center; /* Centrar verticalmente */
-            gap: 10px; /* Espacio entre la imagen y el texto */
-        }
+        // Función para marcar el enlace activo
+        function marcarEnlaceActivo() {
+            // Obtener solo el nombre del archivo de la página actual (sin directorios)
+            const currentFile = window.location.pathname.split('/').pop();
 
-        .especificacion-img {
-            width: 45px;
-            height: auto;
-        }
+            // Seleccionar todos los enlaces dentro del elemento <nav>
+            const navLinks = document.querySelectorAll("#navbar nav ul li a");
 
-        .especificacion-texto {
-            font-size: 18px;
-            color: #fff;
+            // Comparar el nombre del archivo con el atributo href de los enlaces
+            navLinks.forEach(link => {
+                if (link.getAttribute("href") === currentFile) {
+                    link.classList.add("active");
+                }
+            });
         }
-        
-        /* Ajustar el contenedor que contiene el título y el texto */
-        .especificacion-contenido {
-            display: flex;
-            flex-direction: column; /* Alinear el título y texto en columna */
-        }
-
-        
-
-        .especificacion-titulo {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 0; /* Quita margen por defecto */
-            color: black; /* Color del título */
-            font-style: oblique;
-        }
-
-
-        .detalleAuto {
-            margin-top: 30px;
-            text-align: center;
-        }
-
-        .detalleAuto h2 {
-            font-size: 24px;
-            color: #333;
-        }
-
-        .detalleAuto p {
-            font-size: 18px;
-            color: #555;
-        }
-
-        .precio {
-            font-size: 20px;
-            font-weight: bold;
-            color: green;
-            margin-top: 20px;
-        }
-        button{
-            background-color: #004a8f;
-            max-width: 40%;
-            align-items: center;
-            color: white;
-            padding: 10px 20px;
-            border:none;
-            border-radius: 100px;
-            cursor:pointer;
-            transition: backgroun-color 0.3s ease;
-            margin:0 30%;
-            min-width: 40%;
-            font-size: large;
-        }
-    </style>
+    </script>
 </head>
-<header>
-    <a href="inicio.html" class="retorno">
-        <div class="logo">
-            <img src="../Img/Logo_MV.png" alt="Motors Value Logo">
-            <h1>MOTORS VALUE</h1>
-        </div>
-    </a>
-    <div class="navbar">
-        <nav>
-            <ul>
-                <li><a href="venta.html" class="active">Venta</a></li>
-                <li><a href="alquiler.html">Alquiler</a></li>
-                <li><a href="subasta.html">Subasta</a></li>
-                <li><a href="solicitud.html">Solicitud</a></li>
-            </ul>
-        </nav>
-        <div class="registrar-btn">
-            <a href="registro.html">Registrarse</a>
-        </div>
-    </div>
-</header>
 <body>
     <div class="especificaciones-container">
 
@@ -156,10 +66,18 @@
     <div class="fotoAuto" id="fotoAuto"></div>
 
     <div id="detalleAuto" class="detalleAuto"></div>
-    <button>Comprar</button>
 
-    
-    
+    <div class="compra">
+        <div class="precio-compra"></div>
+        <button>Comprar</button>
+    </div>
+    <div id="customModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="cerrarModal()">&times;</span>
+            <p id="modalMessage"></p>
+            <button onclick="redirigirRegistro()">Registrarse</button>
+        </div>
+    </div>
 </body>
 
 <script>
@@ -188,6 +106,7 @@
     function mostrarAuto(auto) {
         const fotoAuto = document.getElementById('fotoAuto');
         const detalleAuto = document.getElementById('detalleAuto');
+        const precioCompra = document.querySelector('.precio-compra'); // Nuevo selector para el precio en la sección de compra
 
         if (Array.isArray(auto) && auto.length > 0) {
             const datosAuto = auto[0]; // Accedemos al primer elemento del array
@@ -210,16 +129,14 @@
             document.getElementById('gas').innerText = datosAuto.tipo_gas || 'N/A';
             document.getElementById('carroceria').innerText = datosAuto.carroceria || 'N/A';
 
-            // Agregar el precio en un nuevo elemento debajo del nombre y marca del auto
-            const precioElemento = document.createElement('p');
-            precioElemento.className = 'precio';
-            precioElemento.innerHTML = `<strong>Precio:</strong> $${datosAuto.precio || 'N/A'}`;
-            detalleAuto.appendChild(precioElemento);
+            // Agregar el precio en el div de compra
+            precioCompra.innerHTML = `<strong>Precio:</strong> $${datosAuto.precio || 'N/A'}`;
         } else {
             // Mostramos un mensaje de error si no hay datos
             detalleAuto.innerHTML = '<p>No se pudo cargar la información del auto.</p>';
         }
     }
+
 
     // Función principal que carga los datos al iniciar la página
     async function cargarAuto() {
@@ -238,7 +155,47 @@
 
     // Ejecutamos la carga de datos al cargar la página
     cargarAuto();
+    document.querySelector('.compra button').addEventListener('click', async () => {
+    const userId = localStorage.getItem('userId');
+    
+    if (!userId) {
+        mostrarModal("No tienes una cuenta. Regístrate para poder realizar una compra.");
+    } else {
+        // Lógica para enviar la compra a la base de datos
+        try {
+            const idAuto = obtenerIdAuto();
+            const response = await fetch(`https://localhost:7129/MotorsApi/Compra`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ userId, idAuto })
+            });
+
+            if (response.ok) {
+                mostrarModal("Compra realizada con éxito.");
+            } else {
+                mostrarModal("Hubo un problema al procesar la compra.");
+            }
+        } catch (error) {
+            console.error('Error en la solicitud:', error);
+            mostrarModal("Ocurrió un error al intentar procesar la compra.");
+        }
+    }
+});
+
+function mostrarModal(message) {
+    document.getElementById('modalMessage').innerText = message;
+    document.getElementById('customModal').style.display = 'block';
+}
+
+function cerrarModal() {
+    document.getElementById('customModal').style.display = 'none';
+}
+
+function redirigirRegistro() {
+    window.location.href = 'register.html';
+}
+    
 </script>
-
-
 </html>
