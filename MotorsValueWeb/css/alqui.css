@@ -5,6 +5,7 @@
     gap: 15px;
     padding: 20px;
 }
+
 .caja {
     background-color: #f0f8ff;
     border: 1px solid #ccc;
@@ -35,6 +36,6 @@
     margin-top: 10px;
 }
 
-.active {
-    text-decoration: none;
+#contenedor-caja{
+    justify-content: center;
 }

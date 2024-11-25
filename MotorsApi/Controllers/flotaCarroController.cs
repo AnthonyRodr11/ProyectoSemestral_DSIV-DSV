@@ -126,6 +126,30 @@ namespace MotorsApi.Controllers
 
             return Ok(oferta);
         }
+
+
+        //Controlador para obtener la lista de autos que estan en subasta
+        [HttpGet]
+        [Route("listaSubasta")]
+        public IActionResult obtenerAutosSubasta()
+        {
+
+            Ver_Flotas enSubasta = new Ver_Flotas();
+
+            var autos = enSubasta.listaSubasta();
+
+            if (autos == null)
+            {
+                return NotFound(new
+                {
+                    titulo = "Sin resultados",
+                    mensaje = "No se encontraron el valor de la oferta.",
+                    code = 404
+                });
+            }
+
+            return Ok(autos);
+        }
     }
 
 

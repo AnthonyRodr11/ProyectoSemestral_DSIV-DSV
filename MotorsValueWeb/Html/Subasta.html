@@ -4,7 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subasta</title>
-    <link rel="stylesheet" href="../css/nav.css">
+    <div id="navbar"></div>
+    <script>
+        // Cargar el navbar dinámicamente
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('navbar').innerHTML = data;
+                marcarEnlaceActivo();
+            })
+            .catch(error => console.error('Error cargando el navbar:', error));
+
+        function marcarEnlaceActivo() {
+            const currentFile = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll("#navbar nav ul li a");
+            navLinks.forEach(link => {
+                if (link.getAttribute("href") === currentFile) {
+                    link.classList.add("active");
+                }
+            });
+        }
+    </script>
+
     <style>
         #contenedor-caja {
             display: flex;
@@ -13,15 +34,16 @@
             padding: 20px;
         }
         .caja {
-            background-color: #f0f8ff;
-            border: 1px solid #ccc;
+            background-color: #ffffff;
+            border: 5px solid #04407b;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 15px;
-            width: 200px;
+            width: 250px;
             transition: transform 0.2s;
+            cursor: pointer;
+            text-align: center;
         }
-
         .caja:hover {
             transform: scale(1.05);
         }
@@ -30,47 +52,43 @@
             font-weight: bold;
             color: #333;
             margin-bottom: 10px;
+            text-align: center;
         }
         .caja img {
-            width: 200px;
+            width: 100%;
             height: auto;
+            border-radius: 8px;
         }
         .precio {
             font-size: 16px;
             font-weight: bold;
+            color: black;
+            margin: 10px 0;
+        }
+
+        .precio-actual{
+
+            font-size: 16px;
+            font-weight: bold;
+            color: red;
+        }
+        .tiempo-restante {
+            font-size: 16px;
             color: green;
-            margin-top: 10px;
         }
     </style>
 </head>
-<header>
-    <a href="inicio.html" class="retorno">
-        <div class="logo">
-            <img src="../Img/Logo_MV.png" alt="Motors Value Logo">
-            <h1>Subasta de Autos</h1>
-        </div>
-    </a>
-    <div class="navbar">
-        <nav>
-            <ul>
-                <li><a href="venta.html" class="active">Venta</a></li>
-                <li><a href="alquiler.html">Alquiler</a></li>
-                <li><a href="subasta.html">Subasta</a></li>
-                <li><a href="solicitud.html">Solicitud</a></li>
-            </ul>
-        </nav>
-        <div class="registrar-btn">
-            <a href="registro.html">Registrarse</a>
-        </div>
-    </div>
-</header>
+
 <body>
+        <!-- Línea azul -->
+    <div class="linea-azul"></div>
     <div id="contenedor-caja"></div>
 
     <script>
-        async function obtenerDatos(estado) {
+        // Función para obtener datos del API
+        async function obtenerDatos() {
             try {
-                const respuesta = await fetch(`https://localhost:7129/MotorsApi/ventaFlota/listaFlota/${subasta}`);
+                const respuesta = await fetch('https://localhost:7129/MotorsApi/flotaCarro/listaSubasta');
                 const datos = await respuesta.json();
                 console.log('Datos recibidos:', datos);
                 return datos;
@@ -80,48 +98,62 @@
             }
         }
 
+        // Función para calcular el tiempo restante
+        function calcularTiempoRestante(tFinal) {
+            const ahora = new Date();
+            const final = new Date(tFinal);
+            const diferencia = final - ahora;
+
+            if (diferencia <= 0) {
+                return "Finalizado";
+            }
+
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            return `${dias} días, ${horas} horas, ${minutos} minutos`;
+        }
+
+        // Función para crear las cajas con la información
         function crearCaja(datos) {
             const contenedor = document.getElementById('contenedor-caja');
-            contenedor.innerHTML = ''; // Limpia el contenedor
-    
+            contenedor.innerHTML = '';
+
             datos.forEach(item => {
                 const caja = document.createElement('div');
                 caja.classList.add('caja');
-                
-                // Agregar atributos data-id y data-placa para usar en eventos
-                caja.setAttribute('data-placa', item.placa);
-    
+                caja.setAttribute('data-cod-subasta', item.cod_subasta);
+
+                const tiempoRestante = calcularTiempoRestante(item.t_final);
+
                 caja.innerHTML = `
-                    <h3>${item.marca} ${item.modelo}</h3>
-                    <p class="precio">Precio: $${item.precio}</p>
                     <img src="${item.foto}" alt="Foto de ${item.marca} ${item.modelo}">
+                    <h3>${item.marca} ${item.modelo}</h3>
+                    <br>
+                    <p class="precio">Oferta Inicial: $${item.valor_inicial.toFixed(2)}</p>
+                    <p class="precio">Oferta Actual: $${item.valor_puja.toFixed(2)}</p>
+                    <p class="tiempo-restante">Finaliza en: ${tiempoRestante}</p>
                 `;
-                
-            
-                // Redirige al hacer clic, usando el ID del auto
+
                 caja.onclick = () => {
-                    const id = caja.getAttribute('data-placa');
-                    if (id && id !== 'undefined' && id !== '') {
-                        window.location.href = `ventaPerfil.html?id=${id}`;
-                    } else {
-                        console.error('No se puede redirigir: el ID es inválido');
-                        alert('No se encontró la información del auto.');
+                    const codSubasta = caja.getAttribute('data-cod-subasta');
+                    if (codSubasta) {
+                        window.location.href = `detalleSubasta.html?cod_subasta=${codSubasta}`;
                     }
                 };
-    
+
                 contenedor.appendChild(caja);
             });
         }
-    
-        async function actualizarCaja() {
-            const estado = 'subasta'; // Puedes cambiar esto según sea necesario
-            const datos = await obtenerDatos(estado);
+
+        // Función para actualizar las cajas periódicamente
+        async function actualizarCajas() {
+            const datos = await obtenerDatos();
             crearCaja(datos);
         }
-    
-        actualizarCaja(); // Carga inicial
-        setInterval(actualizarCaja, 10000); // Actualiza cada 10 segundos
+
+        actualizarCajas(); // Carga inicial
+        setInterval(actualizarCajas, 10000); // Actualizar cada 10 segundos
     </script>
-    
 </body>
 </html>

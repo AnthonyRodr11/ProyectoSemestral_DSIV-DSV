@@ -7,8 +7,7 @@ namespace MotorsApi.BD.CRUD.Read
     public class Ver_Flotas : Conexiondb
     {
 
-        //Metodo para devolver una lista segun su estado <Alquiler,venta,Subasta>
-        //Metodo para devolver una lista segun su estado <Alquiler,venta,Subasta>
+        //Metodo para devolver una lista segun su estado <Alquiler,venta>
         public List<Flota_CarroRequest> tipos_Flota(string estado)
         {
             List<Flota_CarroRequest> autos = new List<Flota_CarroRequest>();
@@ -31,7 +30,7 @@ namespace MotorsApi.BD.CRUD.Read
                     JOIN 
                         Flota_Venta v ON c.placa = v.placa
                     WHERE 
-                        c.estado = @estado";
+                        c.estado = @estado AND disponibilidad = 1";
 
                 // Agregamos el parámetro estado
                 cmd.Parameters.AddWithValue("@estado", estado);
@@ -367,7 +366,8 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT   valor_inicial   FROM Flota_Subasta WHERE cod_subasta = @cod_subasta ";
+                //se modifica de valor_inicial A valor_puja
+                cmd.CommandText = "SELECT   valor_puja   FROM Flota_Subasta WHERE cod_subasta = @cod_subasta ";
 
                 //Agregar parametro cos_subasta
                 cmd.Parameters.AddWithValue("@cod_subasta", cod_subasta);
@@ -392,7 +392,8 @@ namespace MotorsApi.BD.CRUD.Read
                 
                 throw; }
 
-            finally { cerrarConexion(); }
+            finally { cerrarConexion(); 
+            }
             return valor;
             
         }
@@ -449,6 +450,63 @@ namespace MotorsApi.BD.CRUD.Read
 
 
 
+        }
+
+        //Metodo para obtener la lista de autos en subasta
+        public List<FlotaSubastaRequest> listaSubasta()
+        {
+            //Lista de objetos
+            List<FlotaSubastaRequest> lista = new List<FlotaSubastaRequest>();
+            
+            try
+            {
+                //Limpiamos parametros
+                cmd.Parameters.Clear();
+
+                //Especificamos el tipo de comando
+                cmd.CommandType = CommandType.Text;
+
+                //asignamos consulta a realizar
+                cmd.CommandText = "SELECT  FS.cod_subasta,FS.valor_inicial,FS.valor_puja,FS.t_final,FC.marca, FC.modelo, FC.km, FC.transmision,FC.tipo_gas,FC.carroceria, FC.foto FROM Flota_Subasta FS INNER JOIN Flota_Carro FC ON FS.id_placa = FC.placa WHERE FS.estado = 'activa' AND FC.estado = 'subasta';";
+
+                abrirConexion();
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        FlotaSubastaRequest autoSubastar = new FlotaSubastaRequest()
+                        {
+                            cod_subasta = reader.GetInt32(0),
+                            valor_inicial = reader.GetDouble(1),
+                            valor_puja = reader.GetDouble(2),
+                            t_final = reader.GetDateTime(3),
+                            marca = reader.GetString(4),
+                            modelo = reader.GetString(5),
+                            km = reader.GetDouble(6),
+                            transmision = reader.GetString(7),
+                            tipo_gas = reader.GetString(8),
+                            carroceria = reader.GetString(9),
+                            foto = reader.GetString(10),
+                        };
+
+                        lista.Add(autoSubastar);
+                    };
+
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally { 
+            
+                cerrarConexion();
+            
+            } 
+            return lista;
         }
 
     }
