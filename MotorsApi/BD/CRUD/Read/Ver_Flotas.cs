@@ -30,7 +30,7 @@ namespace MotorsApi.BD.CRUD.Read
                     JOIN 
                         Flota_Venta v ON c.placa = v.placa
                     WHERE 
-                        c.estado = @estado";
+                        c.estado = @estado AND disponibilidad = 1";
 
                 // Agregamos el parámetro estado
                 cmd.Parameters.AddWithValue("@estado", estado);
