@@ -13,38 +13,12 @@
 </body>
 </html>
 
-<script>
-    // Cargar el navbar dinámicamente
-    fetch('navbar.html')
-        .then(response => response.text())
-        .then(data => {
-            // Insertar el contenido del navbar en el elemento con id "navbar"
-            document.getElementById('navbar').innerHTML = data;
-
-            // Una vez que el contenido esté cargado, modificar el navbar según la página actual
-            marcarEnlaceActivo();
-        })
-        .catch(error => console.error('Error cargando el navbar:', error));
-
-    // Función para marcar el enlace activo
-    function marcarEnlaceActivo() {
-        // Obtener solo el nombre del archivo de la página actual (sin directorios)
-        const currentFile = window.location.pathname.split('/').pop();
-
-        // Seleccionar todos los enlaces dentro del elemento <nav>
-        const navLinks = document.querySelectorAll("#navbar nav ul li a");
-
-        // Comparar el nombre del archivo con el atributo href de los enlaces
-        navLinks.forEach(link => {
-            if (link.getAttribute("href") === currentFile) {
-                link.classList.add("active");
-            }
-        });
-    }
-
-</script>
+<script src="../JavaScript/funciones.js"></script>
 
 <script>
+
+    cargarNavbar('navbar','navbar.html');
+
     async function obtenerDatos() {
         try {
             const respuesta = await fetch(`https://localhost:7129/MotorsApi/Alquiler/alquiler`);

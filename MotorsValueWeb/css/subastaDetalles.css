@@ -8,6 +8,7 @@ html body{
     display: flex;
     height: 100%;
     width: 100%;
+    margin: 3% 0 0 0;
 }
 
 .informacion{
@@ -22,7 +23,7 @@ html body{
 }
 
 .poligono{
-    clip-path: polygon(0 100%, 80% 100%, 100% 50%, 80% 0%, 0 0); /*No se preocupen, por fin aprendí a hacerlo :3*/
+    clip-path: polygon(0 100%, 80% 100%, 100% 50%, 80% 0%, 0 0); /*Ya no se preocupen, por fin aprendí a hacerlo :3*/
     background-color: #88898d;
     margin-right: 6%;
 }
@@ -39,8 +40,12 @@ html body{
 
 .imagen{
     width: 100%;
+    padding: 3%;
 }
 
 #imgAuto{
+    display: flex;
     width: 100%;
+    max-width: 90%;
+    text-align: center;
 }

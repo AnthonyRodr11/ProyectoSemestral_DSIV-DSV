@@ -5,12 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles de Subasta</title>
     <link rel="stylesheet" href="../css/subastaDetalles.css">
-
+    <div id="navbar"></div>
 </head>
 <body>
-    <header>
-        <div id="navbar"></div>
-    </header>
     <div class="contenedor">
         <div class="imagen">
             <img id="imgAuto" src="../Img/FordRanger.png" alt="imagen del auto">
@@ -44,19 +41,20 @@
         </div>
     </div>
     
+    <footer>
+        <div id="footer"></div>
+    </footer>
+
+
 </body>
-</html>
+
+<script src="../JavaScript/funciones.js"></script>    
 
 <script>
-    fetch('navbar.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('navbar').innerHTML = data;
-        })
-        .catch(error => console.error('Error cargando el navbar:', error));
-</script>
 
-<script>
+    cargarHTML('navbar','navbar.html');
+    cargarHTML('footer','footer.html');
+
     document.addEventListener("DOMContentLoaded", () => {
         // Obtener la URL de la página actual
         const currentPath = window.location.pathname;
@@ -71,4 +69,17 @@
             }
         });
     });
+
+    document.addEventListener("click", (event) => {
+        if (event.target.classList.contains("menu-toggle")) {
+            const menu = document.querySelector(".menu");
+            if (menu) {
+                menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+            }
+        }
+    });
+
 </script>
+
+</html>
+
