@@ -85,7 +85,7 @@ namespace MotorsApi.Controllers
                 });
             }
         }
-
+        
         [HttpPatch]
         [Route ("user/update/{correo}")]
         public IActionResult ActualizarUsuario(string correo, [FromBody] ActualizarUsuario usuario)
@@ -122,6 +122,9 @@ namespace MotorsApi.Controllers
                 });
             }
         }
+
+        
+
 
         [HttpGet]
         [Route("user/login/{correo}/{contraseña}")]

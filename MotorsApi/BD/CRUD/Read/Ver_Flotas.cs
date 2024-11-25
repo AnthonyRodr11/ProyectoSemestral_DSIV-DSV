@@ -110,7 +110,6 @@ namespace MotorsApi.BD.CRUD.Read
                             marca = reader["marca"].ToString(),
                             modelo = reader["modelo"].ToString(),
                             foto = reader["foto"].ToString(),
-                            precio = Convert.ToDouble(reader["precio"]),
                             km = Convert.ToDouble(reader["km"]),
                             transmision = reader["transmision"].ToString(),
                             tipo_gas = reader["tipo_gas"].ToString(),
