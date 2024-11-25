@@ -379,22 +379,26 @@ namespace MotorsApi.BD.CRUD.Read
                 {
                     while (reader.Read())
                     {
-                         valor = reader.GetDouble(0);
+                        valor = reader.GetDouble(0);
                     };
 
                     return valor;
 
                 }
             }
-            catch (Exception e) { 
-                
-                
-                throw; }
+            catch (Exception e)
+            {
 
-            finally { cerrarConexion(); 
+
+                throw;
+            }
+
+            finally
+            {
+                cerrarConexion();
             }
             return valor;
-            
+
         }
 
         //Metodo autos alquiler
@@ -456,7 +460,7 @@ namespace MotorsApi.BD.CRUD.Read
         {
             //Lista de objetos
             List<FlotaSubastaRequest> lista = new List<FlotaSubastaRequest>();
-            
+
             try
             {
                 //Limpiamos parametros
@@ -498,24 +502,30 @@ namespace MotorsApi.BD.CRUD.Read
             {
                 throw;
             }
-            finally { 
-            
+            finally
+            {
+
                 cerrarConexion();
-            
-            } 
+
+            }
             return lista;
+
+
+
+
         }
+
 
     }
 }
 
-            
 
 
 
 
 
-        
 
-    
+
+
+
 
