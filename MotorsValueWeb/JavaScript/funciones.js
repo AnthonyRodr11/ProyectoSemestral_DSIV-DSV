@@ -46,39 +46,6 @@ function cargarHTML(idElemento, archivo) {
         .catch((error) => console.error(`Error cargando el archivo:`, error));
 }
 
-function cargarNavbar(idElemento, archivo) {
-    fetch(archivo)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error(`Error al cargar ${archivo}: ${response.statusText}`);
-            }
-            return response.text();
-        })
-        .then((data) => {
-            // Insertar el contenido HTML en el elemento especificado
-            const elemento = document.getElementById(idElemento);
-            elemento.innerHTML = data;
-
-            // Buscar y ejecutar los scripts en el contenido cargado
-            const scripts = elemento.querySelectorAll('script');
-            scripts.forEach((script) => {
-                const nuevoScript = document.createElement('script');
-                if (script.src) {
-                    nuevoScript.src = script.src;
-                    nuevoScript.async = true;
-                } else {
-                    nuevoScript.textContent = script.textContent;
-                }
-                document.body.appendChild(nuevoScript);
-                script.remove();
-            });
-
-            // Re-asignar eventos dinámicos aquí
-            inicializarMenuAcordeon();
-        })
-        .catch((error) => console.error(`Error cargando el archivo:`, error));
-}
-
 function inicializarMenuAcordeon() {
     const toggleButton = document.querySelector(".menu-toggle");
     const menu = document.querySelector(".menu");
