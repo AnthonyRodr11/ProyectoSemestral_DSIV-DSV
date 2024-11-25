@@ -3,6 +3,8 @@ using MotorsApi.BD.CRUD.Read;
 
 namespace MotorsApi.Controllers
 {
+    [Route("MotorsApi/[controller]")]
+    [ApiController]
     public class SubastaController : ControllerBase
     {
 

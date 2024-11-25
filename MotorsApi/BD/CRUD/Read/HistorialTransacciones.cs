@@ -7,10 +7,10 @@ namespace MotorsApi.BD.CRUD.Read
         //Esta clase contendra los historial de transacciones para el usuario mandando el id_usuario
 
         //Transacciones de Alquileres
-        public List<Flota_AlquilerRequest> obtenerMisAlquileres(int id_usario)
+        /*public List<Flota_AlquilerRequest> obtenerMisAlquileres(int id_usario)
         {
 
-        }
+        }*/
         //Transacciones de Venta
 
 

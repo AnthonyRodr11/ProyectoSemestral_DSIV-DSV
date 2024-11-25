@@ -591,13 +591,16 @@ namespace MotorsApi.BD.CRUD.Read
                 //Especificamos el tipo de comando
                 cmd.CommandType = CommandType.Text;
 
+                cmd.Parameters.Add(new MySqlParameter("@placa", placa));
+
                 //asignamos consulta a realizar
                 cmd.CommandText = @"    
                                     SELECT 
-                                        fc.km, fc.transmision, fc.tipo_gas, fc.carroceria, fs.t_final, fs.valor_inicial, fs.valor_puja 
+                                        fc.km, fc.transmision, fc.tipo_gas, fc.carroceria, fc.marca, fc.modelo, fc.foto, fs.t_final, fs.valor_inicial, fs.valor_puja 
                                     FROM 
                                         flota_carro fc 
-                                    INNER JOIN flota_subasta fs 
+                                    INNER 
+                                        JOIN flota_subasta fs 
                                     WHERE fs.id_placa = @placa";
 
                 abrirConexion();
@@ -608,16 +611,16 @@ namespace MotorsApi.BD.CRUD.Read
                     {
                         lista = new FlotaSubastaRequest()
                         {
-                            valor_inicial = reader.GetDouble(8),
-                            valor_puja = reader.GetDouble(9),
-                            t_final = reader.GetDateTime(7),
-                            marca = reader.GetString(4),
-                            modelo = reader.GetString(5),
                             km = reader.GetDouble(0),
                             transmision = reader.GetString(1),
                             tipo_gas = reader.GetString(2),
                             carroceria = reader.GetString(3),
+                            marca = reader.GetString(4),
+                            modelo = reader.GetString(5),
                             foto = reader.GetString(6),
+                            t_final = reader.GetDateTime(7),
+                            valor_inicial = reader.GetDouble(8),
+                            valor_puja = reader.GetDouble(9),
                         };
                     };
 
@@ -627,7 +630,7 @@ namespace MotorsApi.BD.CRUD.Read
             }
             catch (Exception e)
             {
-                throw;
+                Console.WriteLine("Error: " + e);
             }
             finally
             {
