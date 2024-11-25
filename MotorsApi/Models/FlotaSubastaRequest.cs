@@ -1,4 +1,5 @@
-﻿namespace MotorsApi.Models
+﻿
+namespace MotorsApi.Models
 {
     public class FlotaSubastaRequest
     {
