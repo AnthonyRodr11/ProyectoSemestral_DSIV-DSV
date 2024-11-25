@@ -8,12 +8,12 @@ body {
 }
 
 
-header {
+/*header {
     background-color: #425359;
     display: flex;
     align-items: center;
     padding: 0;
-}
+}*/
 
 .registrar-btn a {
     background-color: #a5a5a8;
@@ -112,6 +112,7 @@ footer {
     #contenedor-caja {
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Reducir el tamaño mínimo en tablets */
     }
+
 }
 
 @media (max-width: 768px) {
