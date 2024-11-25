@@ -156,20 +156,38 @@
     // Ejecutamos la carga de datos al cargar la página
     cargarAuto();
     document.querySelector('.compra button').addEventListener('click', async () => {
-    const userId = localStorage.getItem('userId');
-    
+    const userId = localStorage.getItem('userId'); // Verifica si el usuario está logueado
+
     if (!userId) {
         mostrarModal("No tienes una cuenta. Regístrate para poder realizar una compra.");
     } else {
         // Lógica para enviar la compra a la base de datos
         try {
-            const idAuto = obtenerIdAuto();
-            const response = await fetch(`https://localhost:7129/MotorsApi/Compra`, {
+            const id = obtenerIdAuto(); // Obtener el ID del auto desde la URL (con el nombre 'id' en vez de 'idAuto')
+
+            // Aquí usas 'id' en lugar de 'idAuto'
+            const responseFlota = await fetch(`https://localhost:7129/MotorsApi/ventaFlota/flotaDetalle/${id}`);
+            
+            if (!responseFlota.ok) {
+                throw new Error("Error al obtener los datos del auto");
+            }
+            
+            const autoData = await responseFlota.json();
+            
+            if (!autoData || autoData.length === 0) {
+                mostrarModal("No se encontraron datos del auto.");
+                return;
+            }
+            
+            // Supongamos que el primer elemento tiene los datos correctos
+            const { placa, precio } = autoData[0];
+            
+            const response = await fetch(`https://localhost:7129/MotorsApi/ventaFlota/venta`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ userId, idAuto })
+                body: JSON.stringify({ placa, precio })
             });
 
             if (response.ok) {
@@ -182,7 +200,8 @@
             mostrarModal("Ocurrió un error al intentar procesar la compra.");
         }
     }
-});
+    });
+
 
 function mostrarModal(message) {
     document.getElementById('modalMessage').innerText = message;
