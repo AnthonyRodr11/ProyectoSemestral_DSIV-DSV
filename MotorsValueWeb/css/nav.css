@@ -13,6 +13,18 @@ header {
     z-index: auto;
 }
 
+.profile-button {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espacio entre el ícono y el texto */
+    color: #333;
+    font-weight: bold;
+}
+
+.profile-button i {
+    color: #007BFF; /* Color del ícono */
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;

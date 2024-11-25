@@ -16,59 +16,6 @@ header {
     padding: 0;
 }
 
-.logo {
-    display: flex;
-    align-items: center;
-    margin-left: 10px;
-    gap: 10px;
-    background-color: #ffffff;
-    width: 450px;
-    height: 67px;
-    padding: 10px 20px;
-    margin-left: -10px;
-    margin-right: 40px;
-    clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
-}
-
-.logo img {
-
-    width: 80px;
-    margin-right: 10px;
-}
-
-.logo h1 {
-
-    font-size: 25px;
-    font-weight: bold;
-    color: #04407b; 
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 1100px;
-    margin-left: 40px ;
-    padding: 15px 0px 15px 25px;
-    height: 52px;
-}
-
-nav ul {
-    display: flex;
-    gap: 40px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 20px;
-}
-
-
 main {
     flex-grow: 1;
     display: flex;

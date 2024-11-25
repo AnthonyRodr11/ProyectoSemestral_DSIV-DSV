@@ -100,7 +100,7 @@ namespace MotorsApi.Controllers
                 });
             }
 
-            Editar_Usuario itadori = new Editar_Usuario(); //JJK Referencia
+            Editar_Usuario itadori = new Editar_Usuario(); 
             var guarda = itadori.EditarUsuario(correo, usuario);
 
             if (guarda > 0)

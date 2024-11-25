@@ -6,7 +6,6 @@
     <title>Usuario - Motors Value</title>
     <link rel="stylesheet" href="../css/nav.css">
     <style>
-       
         html, body{
             height: 100%;
             margin: 0;
@@ -20,7 +19,6 @@
             padding: 0;
             height: 100%;
         }
-
         
         .informacion-usuario {
             background-color: #004a8f;
@@ -70,7 +68,6 @@
             background-color: #0056b3;
         }
 
- 
         .historial-transacciones {
             flex-grow: 1;
             padding: 20px;
@@ -101,6 +98,70 @@
             background-color: #004a8f;
             color: white;
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            border-radius: 10px;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-content form label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        .modal-content form input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .modal-content form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        .modal-content form button:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -120,9 +181,7 @@
                     <li><a href="solicitud.html">Solicitud</a></li>
                 </ul>
             </nav>
-            
         </div> 
-        
     </header>
 
     <div class="contenedor">
@@ -130,34 +189,37 @@
         <div class="informacion-usuario">
             <img src="../Img/userLogin.png" class="foto-usuario" alt="Foto de usuario">
             <div class="info">
-                <h2 id="nombre">Nombre X</h2>
-                <p>Correo: <span id="correo">correo@x</span></p>
-                <p>Teléfono: <span id="telefono">telefono X</span></p>
+                <h2><span id="nombre">Nombre</span> <span id="apellido">Apellido</span></h2>
+                <p>Correo: <span id="correo">correo@ejemplo.com</span></p>
+                <p>Teléfono: <span id="telefono">0000-0000</span></p>
             </div>
             <button onclick="mostrarFormularioEdicion()">Editar datos</button>
         </div>
 
-
+        <!-- Modal de edición -->
         <div id="modal-editar" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="cerrarFormularioEdicion()">&times;</span>
                 <h2>Editar Perfil</h2>
                 <form id="form-editar" onsubmit="actualizarDatos(event)">
-                    <label for="nuevoNombre">Nombre:</label>
-                    <input type="text" id="nuevoNombre" required>
-    
-                    <label for="nuevoCorreo">Correo:</label>
-                    <input type="email" id="nuevoCorreo" required>
-    
-                    <label for="nuevoTelefono">Teléfono:</label>
-                    <input type="tel" id="nuevoTelefono" required>
-    
+                    <label for="nuevaContraseña">Contraseña:</label>
+                    <input type="password" id="nuevaContraseña" >
+                    
+                    <label for="confirmarContraseña">Confirmar Contraseña:</label>
+                    <input type="password" id="confirmarContraseña" >
+                    
+                    <label for="nuevoTelefono">Número Celular o Teléfono</label>
+                    <input type="text" id="nuevoTelefono" 
+                           pattern="\d*" 
+                           inputmode="numeric" 
+                           onkeypress="return event.charCode >= 48 && event.charCode <= 57" 
+                           placeholder="3336666 o 68343876" 
+                           required>
+
                     <button type="submit">Guardar cambios</button>
                 </form>
             </div>
         </div>
-
-        
 
         <!-- Sección del historial de transacciones -->
         <div class="historial-transacciones">
@@ -172,149 +234,87 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Las filas se agregarán aquí dinámicamente -->
+                    <!-- Las filas se agregarán dinámicamente -->
                 </tbody>
             </table>
         </div>
-        
     </div>
 
-   
+    <script>
+        // Cargar información del usuario al iniciar
+        document.addEventListener("DOMContentLoaded", () => {
+            obtenerElmalditoperfil();
+        });
 
+        function obtenerElmalditoperfil() {
+            
+            const id = 1; // Este ID debería venir de tu sistema de autenticación
 
-</body>
-<script>
-
-            document.addEventListener("DOMContentLoaded", () => {
-                const id = 1; 
-
-                function obtenerElmalditoperfil() {
-                    fetch(`https://localhost:7129/MotorsApi/Usuario/userinfo/${id}`) 
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error(`Error al obtener perfil: ${response.statusText}`);
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            
-                            document.getElementById('nombre').textContent = data.nombre ;
-                            document.getElementById('telefono').textContent = data.telefono ;
-                            document.getElementById('correo').textContent = data.correo;
-                        })
-                        .catch(error => console.error('Error al obtener los datos:', error));
+            fetch(`https://localhost:7129/MotorsApi/Usuario/userInfo/${id}`)
+            
+            .then(response => {
+                
+                if (!response.ok) {
+                    throw new Error(`Error al obtener perfil: ${response.statusText}`);
                 }
+                return response.json();
+            })
 
-                obtenerElmalditoperfil();
+            .then(data => {
+
+                const dataUsuario = data[0];
+                // Actualizar los elementos del perfil con la información obtenida
+                document.getElementById('nombre').innerText = `${dataUsuario.nombre || 'No disponible'}`;
+                document.getElementById('apellido').innerText = `${dataUsuario.apellido || ''}`;
+                document.getElementById('correo').innerText = `${dataUsuario.correo || 'No disponible'}`;
+                document.getElementById('telefono').innerText = `${dataUsuario.telefono || 'No disponible'}`;
+            })
+            .catch(error => {
+
+                console.error('Error al obtener los datos:', error);
+                alert('Error al cargar los datos del usuario. Por favor, intente más tarde.');
             });
-
-
-
-
-            /*function obtenerElmalditoperfil(){
-                fetch(`https://localhost:7129/MotorsApi/Usuario/userinfo/${id}`) 
-                .then(response => response.json()) 
-                .then(data => {
-                    document.getElementById('nombre').textContent = data.nombre;
-                    document.getElementById('telefono').textContent = data.telefono;
-                    document.getElementById('correo').textContent = data.correo;
-                })
-                .catch(error => console.error('Error al obtener los datos:', error));
-        
-            }   */
-
-
-</script>
-
-<script>
-
-    async function listarTransacciones() {
-        const url = "https://localhost:7129/MotorsApi/"; //Cambia esta URL por el endpoint real de tu API
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Error en la red ' + response.status);
-            }
-            
-            const data = await response.json();
-            console.log(data); // Para verificar los datos recibidos
-            
-            const tabla = document.getElementById("tabla-transacciones").getElementsByTagName("tbody")[0];
-            tabla.innerHTML = ''; // Limpiar el contenido previo
-            
-            data.forEach(transaccion => {
-                const fila = document.createElement('tr');
-                
-                // Celda para la placa
-                let celdaPlaca = document.createElement('td');
-                celdaPlaca.textContent = transaccion.placa;
-                fila.appendChild(celdaPlaca);
-                
-                // Celda para la marca
-                let celdaMarca = document.createElement('td');
-                celdaMarca.textContent = transaccion.marca;
-                fila.appendChild(celdaMarca);
-
-                // Celda para el modelo
-                let celdaModelo = document.createElement('td');
-                celdaModelo.textContent = transaccion.modelo;
-                fila.appendChild(celdaModelo);
-                
-                // Celda para el precio
-                let celdaPrecio = document.createElement('td');
-                celdaPrecio.textContent = `$${transaccion.precio}`;
-                fila.appendChild(celdaPrecio);
-                
-                // Agregar la fila a la tabla
-                tabla.appendChild(fila);
-            });
-        } catch (err) {
-            console.error("Error en la comunicación con el API", err);
         }
-    }
+        
+        function mostrarFormularioEdicion() {
 
-    // Llama a la función cuando la página se haya cargado
-    document.addEventListener("DOMContentLoaded", listarTransacciones);
+            document.getElementById("modal-editar").style.display = "block";
+            document.getElementById("nuevoTelefono").value = document.getElementById("telefono").textContent;
+        }
 
+        function cerrarFormularioEdicion() {
+    document.getElementById("modal-editar").style.display = "none";
+    
+    // Vaciar todos los campos del formulario
+    document.getElementById("nuevaContraseña").value = "";
+    document.getElementById("confirmarContraseña").value = "";
+    document.getElementById("nuevoTelefono").value = "";
+}
+        
+        async function actualizarDatos(event) {
+    event.preventDefault();
 
-</script>
-<script>
+    const nuevaContraseña = document.getElementById("nuevaContraseña").value;
+    const confirmarContraseña = document.getElementById("confirmarContraseña").value;
+    const nuevoTelefono = document.getElementById("nuevoTelefono").value;
+    const correoUsuario = document.getElementById("correo").textContent;
 
-        // Mostrar el formulario de edición
-    function mostrarFormularioEdicion() {
-        document.getElementById("modal-editar").style.display = "block";
+    try {
+        // Caso 1: Solo se están cambiando contraseñas
+        if (nuevaContraseña && confirmarContraseña && !nuevoTelefono) {
+            // Validar que las contraseñas sean iguales
+            if (nuevaContraseña !== confirmarContraseña) {
+                alert("Las contraseñas no coinciden. Por favor, verifique.");
+                return;
+            }
 
-        // Rellenar el formulario con los datos actuales
-        document.getElementById("nuevoNombre").value = document.getElementById("nombre").textContent;
-        document.getElementById("nuevoCorreo").value = document.getElementById("correo").textContent;
-        document.getElementById("nuevoTelefono").value = document.getElementById("telefono").textContent;
-    }
-
-    // Cerrar el formulario de edición
-    function cerrarFormularioEdicion() {
-        document.getElementById("modal-editar").style.display = "none";
-    }
-
-    // Enviar los datos actualizados al servidor
-    async function actualizarDatos(event) {
-        event.preventDefault();
-
-        const idUsuario = 1; // Cambia esto al ID real del usuario que se está editando
-        const nuevoNombre = document.getElementById("nuevoNombre").value;
-        const nuevoCorreo = document.getElementById("nuevoCorreo").value;
-        const nuevoTelefono = document.getElementById("nuevoTelefono").value;
-
-        try {
-            const response = await fetch("http://localhost/api/editarUsuario", {
-                method: "POST",
+            const response = await fetch(`https://localhost:7129/MotorsApi/Usuario/user/update/${correoUsuario}`, {
+                method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    id_usuario: idUsuario,
-                    telefono: nuevoTelefono,
-                    correo: nuevoCorreo,
-                    nombre: nuevoNombre
+                    contraseña: confirmarContraseña
                 })
             });
 
@@ -322,94 +322,121 @@
                 throw new Error('Error en la red: ' + response.status);
             }
 
-            // Actualizar la información en la página
-            document.getElementById("nombre").textContent = nuevoNombre;
-            document.getElementById("correo").textContent = nuevoCorreo;
-            document.getElementById("telefono").textContent = nuevoTelefono;
+            cerrarFormularioEdicion();
+            alert("Contraseña actualizada exitosamente");
 
+        }
+        
+        // Caso 2: Se están cambiando teléfono y contraseña
+        else if (nuevaContraseña && confirmarContraseña && nuevoTelefono) {
+            // Validar que las contraseñas sean iguales
+            if (nuevaContraseña !== confirmarContraseña) {
+                alert("Las contraseñas no coinciden. Por favor, verifique.");
+                return;
+            }
+
+            const response = await fetch(`https://localhost:7129/MotorsApi/Usuario/user/update/${correoUsuario}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    telefono: nuevoTelefono,
+                    contraseña: confirmarContraseña
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Error en la red: ' + response.status);
+            }
+
+            document.getElementById("telefono").textContent = nuevoTelefono;
             cerrarFormularioEdicion();
             alert("Perfil actualizado exitosamente");
-        } catch (error) {
-            console.error("Error al actualizar el perfil", error);
-            alert("Hubo un problema al actualizar el perfil");
         }
-    }
+        
+        // Caso 3: Solo se está cambiando teléfono
+        else if (!nuevaContraseña && !confirmarContraseña && nuevoTelefono) {
+            const response = await fetch(`https://localhost:7129/MotorsApi/Usuario/user/update/${correoUsuario}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    telefono: nuevoTelefono,
+                })
+            });
 
-    // Cerrar el modal si se hace clic fuera de él
-    window.onclick = function(event) {
-        const modal = document.getElementById("modal-editar");
-        if (event.target === modal) {
-            modal.style.display = "none";
+            if (!response.ok) {
+                throw new Error('Error en la red: ' + response.status);
+            }
+
+            document.getElementById("telefono").textContent = nuevoTelefono;
+            cerrarFormularioEdicion();
+            alert("Teléfono actualizado exitosamente");
         }
+        // Caso 4: Ningún campo llenado
+        else {
+            alert("Por favor, ingrese algún dato para actualizar.");
+            return;
+        }
+        
+        
+        // Recargar la información del perfil
+        obtenerElmalditoperfil();
+
+    } catch (error) {
+        console.error("Error al actualizar el perfil:", error);
+        alert("Hubo un problema al actualizar el perfil");
     }
-
-</script>
-
-<style>
-
-
-/* Estilos del modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 300px;
-    border-radius: 10px;
-}
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById("modal-editar");
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-}
+        // Función para listar transacciones
+        async function listarTransacciones() {
+            const url = "https://localhost:7129/MotorsApi/"; //Cambia esta URL por el endpoint real
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error('Error en la red ' + response.status);
+                }
+                
+                const data = await response.json();
+                const tabla = document.getElementById("tabla-transacciones").getElementsByTagName("tbody")[0];
+                tabla.innerHTML = '';
+                
+                data.forEach(transaccion => {
+                    const fila = document.createElement('tr');
+                    
+                    const celdaPlaca = document.createElement('td');
+                    celdaPlaca.textContent = transaccion.placa;
+                    fila.appendChild(celdaPlaca);
+                    
+                    const celdaMarca = document.createElement('td');
+                    celdaMarca.textContent = transaccion.marca;
+                    fila.appendChild(celdaMarca);
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.modal-content form label {
-    display: block;
-    margin-top: 10px;
-}
-
-.modal-content form input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.modal-content form button {
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.modal-content form button:hover {
-    background-color: #45a049;
-}
-
-</style>
+                    const celdaModelo = document.createElement('td');
+                    celdaModelo.textContent = transaccion.modelo;
+                    fila.appendChild(celdaModelo);
+                    
+                    const celdaPrecio = document.createElement('td');
+                    celdaPrecio.textContent = `$${transaccion.precio}`;
+                    fila.appendChild(celdaPrecio);
+                    
+                    tabla.appendChild(fila);
+                });
+            } catch (err) {
+                console.error("Error en la comunicación con el API", err);
+            }
+        }
+    </script>
+</body>
 </html>

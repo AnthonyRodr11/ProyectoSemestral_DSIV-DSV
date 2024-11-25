@@ -21,7 +21,7 @@
                 <li><a href="subasta.html">Subasta</a></li>
                 <li><a href="solicitud.html">Solicitud</a></li>
             </ul>
-            <a href="register.html" class="action_btn pulse">Registrarse</a>
+            <a href="register.html" class="action_btn pulse" id="actionButton">Registrarse</a>
             <div class="hamburger">
                 <i class="fa-solid fa-bars"></i>
             </div>
@@ -31,7 +31,7 @@
             <li><a href="alquiler.html">Alquiler</a></li>
             <li><a href="subasta.html">Subasta</a></li>
             <li><a href="solicitud.html">Solicitud</a></li>
-            <li><a href="register.html" class="action_btn">Registrarse</a></li>
+            <li><a href="register.html" class="action_btn" id="dropdownActionButton">Registrarse</a></li>
         </div>
     </header>
 
@@ -92,6 +92,34 @@
                     link.classList.toggle('active');
                 }
             });
+        });
+
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const actionButton = document.getElementById("actionButton");
+            const dropdownActionButton = document.getElementById("dropdownActionButton");
+
+            // Verificar si el usuario está registrado
+            const userId = localStorage.getItem("userId");
+            console.log(userId);
+
+            if (userId) {
+                // Cambiar ambos botones a un ícono de perfil
+                actionButton.href = "perfil.html";
+                actionButton.innerHTML = `<i class="fa-solid fa-user"></i> Perfil`;
+
+                dropdownActionButton.href = "perfil.html";
+                dropdownActionButton.innerHTML = `<i class="fa-solid fa-user"></i> Perfil`;
+            } else {
+                // Mantener los botones en estado "Registrarse"
+                actionButton.href = "register.html";
+                actionButton.innerText = "Registrarse";
+
+                dropdownActionButton.href = "register.html";
+                dropdownActionButton.innerText = "Registrarse";
+            }
         });
     </script>
     
