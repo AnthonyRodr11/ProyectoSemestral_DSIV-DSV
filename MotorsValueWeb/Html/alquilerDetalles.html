@@ -98,19 +98,19 @@
             </div>
         </div>
     </div>
+    <footer>
+        <div id="footer"></div>
+    </footer>
 </body>
 </html>
 
-<script>
-    fetch('navbar.html')
-        .then(response => response.text())
-        .then(data => {
-            document.getElementById('navbar').innerHTML = data;
-        })
-        .catch(error => console.error('Error cargando el navbar:', error));
-</script>
+<script src="../JavaScript/funciones.js"></script>
 
 <script>
+
+    cargarHTML('navbar','navbar.html');
+    cargarHTML('footer','footer.html');
+
     document.addEventListener("DOMContentLoaded", () => {
         // Obtener la URL de la página actual
         const currentPath = window.location.pathname;
@@ -299,7 +299,7 @@
             const fechaEntrega = document.getElementById('fechaEntrega').value;
             const placa = 'AAA-111'; // Esto debería actualizarse dinámicamente según tu lógica
             const idUsuario = 1; // Este valor debe obtenerse de la sesión o como corresponda
-            const tipoTarifa = '1'; // Actualiza según tus requerimientos
+            const tipoTarifa = seguroIdNumero; // Actualiza según tus requerimientos
             const tarifaTotal = parseFloat(document.getElementById('dineroTotal').textContent.replace('$', ''));
 
             if (!seguroSeleccionado || !fechaRetiro || !fechaEntrega) {

@@ -17,21 +17,13 @@ body::before {
     width: 100%;
     height: 100%;
     background-color:#004a8f;
-    clip-path: polygon(64% 100%, 78% 0, 100% 0, 100% 100%, 77% 100%, 91% 0, 88% 0, 74% 100%); /*No me vuelvan a ponerme a hacer esto por favor, hacer un polígono así sin guía es una tortura por favor ayudenme me están explotando!*/
+    clip-path: polygon(57% 100%, 72% 0, 100% 0, 100% 100%, 70% 100%, 85% 0, 83% 0, 68% 100%); /*No me vuelvan a ponerme a hacer esto por favor, hacer un polígono así sin guía es una tortura por favor ayudenme me están explotando!*/
     z-index: -1; /* Coloca el fondo detrás de todo el contenido */
 }
 
-/* Navbar 
-#navbar{
-    width: 100% !important;
-    max-height: 87.5px;
-    height: 100% !important;
-    margin: 0 0 2% 0;
-}*/
-
 /*Contenedor intermedio*/
 .contenedor{
-    margin: 0% 2%;
+    padding: 2% 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -40,19 +32,22 @@ body::before {
 
 /* Información del panel */
 .informacion{
-    display:grid;
+    display: flex;
+    flex-direction: column;
     background-color: white;
     border: 2px solid black;
     border-radius: 2%;
     padding: 1%;
     max-width: 30%;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    margin: 0 2% 0 0;
     
 }
 
 /* Detalles del panel */
 .Detalles{
-    display: grid;
+    display: flex;
+    flex-direction: column;
     height: auto;
     margin: 0 0 1em 0;
 }
@@ -115,7 +110,8 @@ body::before {
 
 #flecha{
     margin:40%;
-    max-width: 20%;
+    max-width: 40%;
+    min-width: 20px;
     width: 100%;
     display: flex;
 }
@@ -210,4 +206,50 @@ button:hover{
     background-color: #f44336;
     color: white;
     margin: 5%;
+}
+
+@media (max-width: 1267px) {
+    .contenedor {
+        flex-direction: column;
+        max-width: 100%;
+        width: 100%;
+        position: relative; /* Añadido para ver si mejora el flujo */
+    }
+
+    .informacion {
+        margin: 0; 
+        max-width: 70%;
+        width: 100%; 
+        position: relative;
+    }
+
+    .imagen{
+        width: 50%;
+    }
+    
+    #flecha{
+        max-width: 30%;
+        min-width: 20px;
+    }
+}
+
+@media (max-width: 425px){
+    .detalles{
+        flex-direction: column;
+    }
+
+    .informacion{
+        max-width: 100%;
+    }
+
+    #fechaEntrega,#fechaRetiro{
+        width: 60%;
+    }
+
+}
+
+@media (max-width: 536px) {
+    #flecha{
+        display: none;
+    }
 }
