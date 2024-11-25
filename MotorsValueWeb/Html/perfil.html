@@ -203,10 +203,10 @@
                 <h2>Editar Perfil</h2>
                 <form id="form-editar" onsubmit="actualizarDatos(event)">
                     <label for="nuevaContraseña">Contraseña:</label>
-                    <input type="password" id="nuevaContraseña" required>
+                    <input type="password" id="nuevaContraseña" >
                     
                     <label for="confirmarContraseña">Confirmar Contraseña:</label>
-                    <input type="password" id="confirmarContraseña" required>
+                    <input type="password" id="confirmarContraseña" >
                     
                     <label for="nuevoTelefono">Número Celular o Teléfono</label>
                     <input type="text" id="nuevoTelefono" 
@@ -247,89 +247,149 @@
         });
 
         function obtenerElmalditoperfil() {
+            
             const id = 1; // Este ID debería venir de tu sistema de autenticación
 
             fetch(`https://localhost:7129/MotorsApi/Usuario/userInfo/${id}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Error al obtener perfil: ${response.statusText}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Actualizar todos los campos con la información del usuario
-                    document.getElementById('nombre').textContent = data.nombre || 'No disponible';
-                    document.getElementById('apellido').textContent = data.apellido || '';
-                    document.getElementById('correo').textContent = data.correo || 'No disponible';
-                    document.getElementById('telefono').textContent = data.telefono || 'No disponible';
-                })
-                .catch(error => {
-                    console.error('Error al obtener los datos:', error);
-                    alert('Error al cargar los datos del usuario. Por favor, intente más tarde.');
-                });
-        }
+            
+            .then(response => {
+                
+                if (!response.ok) {
+                    throw new Error(`Error al obtener perfil: ${response.statusText}`);
+                }
+                return response.json();
+            })
 
+            .then(data => {
+
+                const dataUsuario = data[0];
+                // Actualizar los elementos del perfil con la información obtenida
+                document.getElementById('nombre').innerText = `${dataUsuario.nombre || 'No disponible'}`;
+                document.getElementById('apellido').innerText = `${dataUsuario.apellido || ''}`;
+                document.getElementById('correo').innerText = `${dataUsuario.correo || 'No disponible'}`;
+                document.getElementById('telefono').innerText = `${dataUsuario.telefono || 'No disponible'}`;
+            })
+            .catch(error => {
+
+                console.error('Error al obtener los datos:', error);
+                alert('Error al cargar los datos del usuario. Por favor, intente más tarde.');
+            });
+        }
+        
         function mostrarFormularioEdicion() {
+
             document.getElementById("modal-editar").style.display = "block";
             document.getElementById("nuevoTelefono").value = document.getElementById("telefono").textContent;
         }
 
         function cerrarFormularioEdicion() {
-            document.getElementById("modal-editar").style.display = "none";
-        }
-
+    document.getElementById("modal-editar").style.display = "none";
+    
+    // Vaciar todos los campos del formulario
+    document.getElementById("nuevaContraseña").value = "";
+    document.getElementById("confirmarContraseña").value = "";
+    document.getElementById("nuevoTelefono").value = "";
+}
+        
         async function actualizarDatos(event) {
-            event.preventDefault();
+    event.preventDefault();
 
-            const nuevaContraseña = document.getElementById("nuevaContraseña").value;
-            const confirmarContraseña = document.getElementById("confirmarContraseña").value;
-            const nuevoTelefono = document.getElementById("nuevoTelefono").value;
-            const correoUsuario = document.getElementById("correo").textContent;
+    const nuevaContraseña = document.getElementById("nuevaContraseña").value;
+    const confirmarContraseña = document.getElementById("confirmarContraseña").value;
+    const nuevoTelefono = document.getElementById("nuevoTelefono").value;
+    const correoUsuario = document.getElementById("correo").textContent;
 
-            try {
-                // Validar contraseñas
-                if (!nuevaContraseña || !confirmarContraseña || nuevaContraseña !== confirmarContraseña) {
-                    alert("Por favor, las contraseñas deben ser iguales en los dos campos.");
-                    return;
-                }
-
-                // Validar teléfono
-                if (!nuevoTelefono) {
-                    alert("Por favor, ingrese un número de teléfono.");
-                    return;
-                }
-
-                const response = await fetch(`https://localhost:7129/MotorsApi/Usuario/user/update/${correoUsuario}`, {
-                    method: "PATCH",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        telefono: nuevoTelefono,
-                        contraseña: confirmarContraseña
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error('Error en la red: ' + response.status);
-                }
-
-                const data = await response.json();
-
-                // Actualizar la información en la página
-                document.getElementById("telefono").textContent = nuevoTelefono;
-
-                cerrarFormularioEdicion();
-                alert("Perfil actualizado exitosamente");
-                
-                // Recargar la información del perfil
-                obtenerElmalditoperfil();
-
-            } catch (error) {
-                console.error("Error al actualizar el perfil:", error);
-                alert("Hubo un problema al actualizar el perfil");
+    try {
+        // Caso 1: Solo se están cambiando contraseñas
+        if (nuevaContraseña && confirmarContraseña && !nuevoTelefono) {
+            // Validar que las contraseñas sean iguales
+            if (nuevaContraseña !== confirmarContraseña) {
+                alert("Las contraseñas no coinciden. Por favor, verifique.");
+                return;
             }
+
+            const response = await fetch(`https://localhost:7129/MotorsApi/Usuario/user/update/${correoUsuario}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    contraseña: confirmarContraseña
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Error en la red: ' + response.status);
+            }
+
+            cerrarFormularioEdicion();
+            alert("Contraseña actualizada exitosamente");
+
         }
+        
+        // Caso 2: Se están cambiando teléfono y contraseña
+        else if (nuevaContraseña && confirmarContraseña && nuevoTelefono) {
+            // Validar que las contraseñas sean iguales
+            if (nuevaContraseña !== confirmarContraseña) {
+                alert("Las contraseñas no coinciden. Por favor, verifique.");
+                return;
+            }
+
+            const response = await fetch(`https://localhost:7129/MotorsApi/Usuario/user/update/${correoUsuario}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    telefono: nuevoTelefono,
+                    contraseña: confirmarContraseña
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Error en la red: ' + response.status);
+            }
+
+            document.getElementById("telefono").textContent = nuevoTelefono;
+            cerrarFormularioEdicion();
+            alert("Perfil actualizado exitosamente");
+        }
+        
+        // Caso 3: Solo se está cambiando teléfono
+        else if (!nuevaContraseña && !confirmarContraseña && nuevoTelefono) {
+            const response = await fetch(`https://localhost:7129/MotorsApi/Usuario/user/update/${correoUsuario}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    telefono: nuevoTelefono,
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Error en la red: ' + response.status);
+            }
+
+            document.getElementById("telefono").textContent = nuevoTelefono;
+            cerrarFormularioEdicion();
+            alert("Teléfono actualizado exitosamente");
+        }
+        // Caso 4: Ningún campo llenado
+        else {
+            alert("Por favor, ingrese algún dato para actualizar.");
+            return;
+        }
+        
+        
+        // Recargar la información del perfil
+        obtenerElmalditoperfil();
+
+    } catch (error) {
+        console.error("Error al actualizar el perfil:", error);
+        alert("Hubo un problema al actualizar el perfil");
+    }
+}
 
         // Cerrar modal al hacer clic fuera
         window.onclick = function(event) {
