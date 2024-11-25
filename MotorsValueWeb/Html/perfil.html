@@ -283,113 +283,131 @@
         }
 
         function cerrarFormularioEdicion() {
-    document.getElementById("modal-editar").style.display = "none";
+
+            document.getElementById("modal-editar").style.display = "none";
     
-    // Vaciar todos los campos del formulario
-    document.getElementById("nuevaContraseña").value = "";
-    document.getElementById("confirmarContraseña").value = "";
-    document.getElementById("nuevoTelefono").value = "";
-}
+            // Vaciar todos los campos del formulario
+            document.getElementById("nuevaContraseña").value = "";
+            document.getElementById("confirmarContraseña").value = "";
+            document.getElementById("nuevoTelefono").value = "";
+        }
         
         async function actualizarDatos(event) {
-    event.preventDefault();
 
-    const nuevaContraseña = document.getElementById("nuevaContraseña").value;
-    const confirmarContraseña = document.getElementById("confirmarContraseña").value;
-    const nuevoTelefono = document.getElementById("nuevoTelefono").value;
-    const correoUsuario = document.getElementById("correo").textContent;
+            event.preventDefault();
 
-    try {
-        // Caso 1: Solo se están cambiando contraseñas
-        if (nuevaContraseña && confirmarContraseña && !nuevoTelefono) {
-            // Validar que las contraseñas sean iguales
-            if (nuevaContraseña !== confirmarContraseña) {
-                alert("Las contraseñas no coinciden. Por favor, verifique.");
-                return;
-            }
+            const nuevaContraseña = document.getElementById("nuevaContraseña").value;
+            const confirmarContraseña = document.getElementById("confirmarContraseña").value;
+            const nuevoTelefono = document.getElementById("nuevoTelefono").value;
+            const correoUsuario = document.getElementById("correo").textContent;
 
-            const response = await fetch(`https://localhost:7129/MotorsApi/Usuario/user/update/${correoUsuario}`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    contraseña: confirmarContraseña
-                })
-            });
+            try {
+                // Caso 1: Solo se están cambiando contraseñas
+                if (nuevaContraseña && confirmarContraseña && !nuevoTelefono) {
 
-            if (!response.ok) {
-                throw new Error('Error en la red: ' + response.status);
-            }
+                    // Validar que las contraseñas sean iguales
+                    if (nuevaContraseña !== confirmarContraseña) {
 
-            cerrarFormularioEdicion();
-            alert("Contraseña actualizada exitosamente");
+                        alert("Las contraseñas no coinciden. Por favor, verifique.");
+                        return;
+                     }
 
-        }
+                    const response = await fetch(`https://localhost:7129/MotorsApi/Usuario/user/update/${correoUsuario}`, {
+                
+                        method: "PATCH",
+                        headers: {
+
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+
+                            contraseña: confirmarContraseña
+                        })
+                    });
+
+                    if (!response.ok) {
+                        
+                        throw new Error('Error en la red: ' + response.status);
+                    }
+
+                    cerrarFormularioEdicion();
+                    alert("Contraseña actualizada exitosamente");
+
+                }
         
-        // Caso 2: Se están cambiando teléfono y contraseña
-        else if (nuevaContraseña && confirmarContraseña && nuevoTelefono) {
-            // Validar que las contraseñas sean iguales
-            if (nuevaContraseña !== confirmarContraseña) {
-                alert("Las contraseñas no coinciden. Por favor, verifique.");
-                return;
-            }
+                // Caso 2: Se están cambiando teléfono y contraseña
+                else if (nuevaContraseña && confirmarContraseña && nuevoTelefono) {
 
-            const response = await fetch(`https://localhost:7129/MotorsApi/Usuario/user/update/${correoUsuario}`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    telefono: nuevoTelefono,
-                    contraseña: confirmarContraseña
-                })
-            });
+                    // Validar que las contraseñas sean iguales
+                    if (nuevaContraseña !== confirmarContraseña) {
+                        
+                        alert("Las contraseñas no coinciden. Por favor, verifique.");
+                        return;
+                    }
 
-            if (!response.ok) {
-                throw new Error('Error en la red: ' + response.status);
-            }
+                    const response = await fetch(`https://localhost:7129/MotorsApi/Usuario/user/update/${correoUsuario}`, {
 
-            document.getElementById("telefono").textContent = nuevoTelefono;
-            cerrarFormularioEdicion();
-            alert("Perfil actualizado exitosamente");
-        }
+                        method: "PATCH",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
+                         telefono: nuevoTelefono,
+                         contraseña: confirmarContraseña
+                        })
+                    });
+
+                    if (!response.ok) {
+                        
+                        throw new Error('Error en la red: ' + response.status);
+                    }
+
+                    document.getElementById("telefono").textContent = nuevoTelefono;
+                    cerrarFormularioEdicion();
+                    alert("Perfil actualizado exitosamente");
+                }
         
-        // Caso 3: Solo se está cambiando teléfono
-        else if (!nuevaContraseña && !confirmarContraseña && nuevoTelefono) {
-            const response = await fetch(`https://localhost:7129/MotorsApi/Usuario/user/update/${correoUsuario}`, {
-                method: "PATCH",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    telefono: nuevoTelefono,
-                })
-            });
+                // Caso 3: Solo se está cambiando teléfono
+                else if (!nuevaContraseña && !confirmarContraseña && nuevoTelefono) {
+                    
+                    const response = await fetch(`https://localhost:7129/MotorsApi/Usuario/user/update/${correoUsuario}`, {
+                        method: "PATCH",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
 
-            if (!response.ok) {
-                throw new Error('Error en la red: ' + response.status);
+                            telefono: nuevoTelefono,
+                        })
+                    });
+
+                    if (!response.ok) {
+                
+                        throw new Error('Error en la red: ' + response.status);
+                    }
+
+                    document.getElementById("telefono").textContent = nuevoTelefono;
+                    cerrarFormularioEdicion();
+                    alert("Teléfono actualizado exitosamente");
+                }
+
+                // Caso 4: Ningún campo llenado
+                else {
+            
+                    alert("Por favor, ingrese algún dato para actualizar.");
+                    return;
+                }
+        
+        
+                // Recargar la información del perfil
+                obtenerElmalditoperfil();
+
+            } catch (error) {
+                
+                console.error("Error al actualizar el perfil:", error);
+                alert("Hubo un problema al actualizar el perfil");
             }
-
-            document.getElementById("telefono").textContent = nuevoTelefono;
-            cerrarFormularioEdicion();
-            alert("Teléfono actualizado exitosamente");
         }
-        // Caso 4: Ningún campo llenado
-        else {
-            alert("Por favor, ingrese algún dato para actualizar.");
-            return;
-        }
-        
-        
-        // Recargar la información del perfil
-        obtenerElmalditoperfil();
-
-    } catch (error) {
-        console.error("Error al actualizar el perfil:", error);
-        alert("Hubo un problema al actualizar el perfil");
-    }
-}
 
         // Cerrar modal al hacer clic fuera
         window.onclick = function(event) {
@@ -401,6 +419,7 @@
 
         // Función para listar transacciones
         async function listarTransacciones() {
+            
             const url = "https://localhost:7129/MotorsApi/"; //Cambia esta URL por el endpoint real
             try {
                 const response = await fetch(url);

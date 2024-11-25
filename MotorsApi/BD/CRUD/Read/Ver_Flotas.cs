@@ -493,8 +493,6 @@ namespace MotorsApi.BD.CRUD.Read
                     };
 
                 }
-
-
             }
             catch (Exception e)
             {
