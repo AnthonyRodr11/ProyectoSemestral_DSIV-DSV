@@ -71,6 +71,13 @@
         <div class="precio-compra"></div>
         <button>Comprar</button>
     </div>
+    <div id="customModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="cerrarModal()">&times;</span>
+            <p id="modalMessage"></p>
+            <button onclick="redirigirRegistro()">Registrarse</button>
+        </div>
+    </div>
 </body>
 
 <script>
@@ -148,7 +155,47 @@
 
     // Ejecutamos la carga de datos al cargar la página
     cargarAuto();
+    document.querySelector('.compra button').addEventListener('click', async () => {
+    const userId = localStorage.getItem('userId');
+    
+    if (!userId) {
+        mostrarModal("No tienes una cuenta. Regístrate para poder realizar una compra.");
+    } else {
+        // Lógica para enviar la compra a la base de datos
+        try {
+            const idAuto = obtenerIdAuto();
+            const response = await fetch(`https://localhost:7129/MotorsApi/Compra`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ userId, idAuto })
+            });
+
+            if (response.ok) {
+                mostrarModal("Compra realizada con éxito.");
+            } else {
+                mostrarModal("Hubo un problema al procesar la compra.");
+            }
+        } catch (error) {
+            console.error('Error en la solicitud:', error);
+            mostrarModal("Ocurrió un error al intentar procesar la compra.");
+        }
+    }
+});
+
+function mostrarModal(message) {
+    document.getElementById('modalMessage').innerText = message;
+    document.getElementById('customModal').style.display = 'block';
+}
+
+function cerrarModal() {
+    document.getElementById('customModal').style.display = 'none';
+}
+
+function redirigirRegistro() {
+    window.location.href = 'register.html';
+}
+    
 </script>
-
-
 </html>
