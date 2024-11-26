@@ -56,11 +56,11 @@
         <div class="modal-content">
             <span class="close-button" onclick="cerrarModal()">&times;</span>
             <p id="modalMessage"></p>
-            <button onclick="redirigirRegistro()">Registrarse</button>
+            <button onclick="redirigirRegistro()" id="btnModal">Registrarse</button>
+        
         </div>
     </div>
 </body>
-
 <script>
     // Obtiene el parámetro 'id' de la URL
     function obtenerIdAuto() {
@@ -149,6 +149,7 @@
             // Aquí usas 'id' en lugar de 'idAuto'
             const responseFlota = await fetch(`https://localhost:7129/MotorsApi/ventaFlota/flotaDetalle/${id}`);
             
+            
             if (!responseFlota.ok) {
                 throw new Error("Error al obtener los datos del auto");
             }
@@ -162,18 +163,31 @@
             
             // Supongamos que el primer elemento tiene los datos correctos
             const { placa, precio } = autoData[0];
-        
-            const response = await fetch(`https://localhost:7129/MotorsApi/ventaFlota/vendido`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ id_cliente, precio, placa})
+            
+            const responseVenta = await fetch(`https://localhost:7129/MotorsApi/ventaFlota/ventaId/${placa}`);
 
-            });
+            if (!responseVenta.ok) {
+                throw new Error("Error al enviar la venta al API");
+                return;
+            }
+
+            const ventaData = await responseVenta.json();
+            const id_venta = ventaData;
+        
+            let response = null;
+            if(id_venta != null){
+                response = await fetch(`https://localhost:7129/MotorsApi/ventaFlota/vendido`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id_venta, id_cliente, precio, placa})
+
+                });
+            }
 
             if (response.ok) {
-                mostrarModal("Compra realizada con éxito.");
+                mostrarModalExito("Compra realizada con éxito.");
             } else {
                 mostrarModal("Hubo un problema al procesar la compra.");
             }
@@ -190,12 +204,32 @@ function mostrarModal(message) {
     document.getElementById('customModal').style.display = 'block';
 }
 
+function mostrarModalExito(message) {
+    document.getElementById('modalMessage').innerText = message;
+    document.getElementById('customModal').style.display = 'block';
+    document.getElementById('cerrarModal').style.display = 'none';
+    const boton = document.getElementById("btnModal");
+
+    // Cambiamos el texto del botón
+    boton.textContent = "Entendido";
+
+    // Cambiamos la función asociada al evento 'onclick'
+    boton.onclick = function () {
+        console.log("Redirigiendo a la página de venta");
+        window.location.href = "venta.html";
+    };
+}
+
 function cerrarModal() {
     document.getElementById('customModal').style.display = 'none';
 }
 
 function redirigirRegistro() {
     window.location.href = 'register.html';
+}
+
+function redirigirVenta() {
+    window.location.href = 'venta.html';
 }
     
 </script>
