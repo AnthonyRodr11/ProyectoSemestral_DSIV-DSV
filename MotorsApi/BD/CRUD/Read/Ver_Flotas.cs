@@ -510,17 +510,7 @@ namespace MotorsApi.BD.CRUD.Read
 
             }
             return lista;
-
-
-
-
         }
-
-
-
-
-        
-
 
         public FlotaSubastaRequest listaSubasta(int codigo)
         {

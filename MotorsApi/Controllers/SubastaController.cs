@@ -23,21 +23,21 @@ namespace MotorsApi.Controllers
             return Ok(tsubaru);
         }
 
-        //[HttpPatch]
-        //[Route("pujar")]
-        //public IActionResult HacerPuja(int id, [FromBody] SubastaRequest ludopatia)
-        //{
-        //    if(ludopatia == null)
-        //    {
-        //        return NotFound("Error al Pujar a la subasta");
-        //    }
+        [HttpPatch]
+        [Route("pujar")]
+        public IActionResult HacerPuja(int id, [FromBody] SubastaRequest ludopatia)
+        {
+            if (ludopatia == null)
+            {
+                return NotFound("Error al Pujar a la subasta");
+            }
 
-        //    var apuesta = new Pujar().InsertarPuja(id, ludopatia);
-        //    if (apuesta > 0)
-        //        return Ok();
+            var apuesta = new Pujar().InsertarPuja(id, ludopatia);
+            if (apuesta > 0)
+                return Ok();
 
-        //    return StatusCode();
+            return StatusCode(418);
 
-        //}
+        }
     }
 }
