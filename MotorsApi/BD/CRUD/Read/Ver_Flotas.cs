@@ -1,4 +1,5 @@
-﻿using MotorsApi.Models;
+﻿using Microsoft.Extensions.Primitives;
+using MotorsApi.Models;
 using MySql.Data.MySqlClient;
 using System.Data;
 
@@ -28,7 +29,7 @@ namespace MotorsApi.BD.CRUD.Read
                     FROM 
                         Flota_Carro c
                     JOIN 
-                        Flota_Venta v ON c.placa = v.placa
+                        Flota_Venta v ON v.placa = c.placa
                     WHERE 
                         c.estado = @estado AND disponibilidad = 1";
 
@@ -379,22 +380,26 @@ namespace MotorsApi.BD.CRUD.Read
                 {
                     while (reader.Read())
                     {
-                         valor = reader.GetDouble(0);
+                        valor = reader.GetDouble(0);
                     };
 
                     return valor;
 
                 }
             }
-            catch (Exception e) { 
-                
-                
-                throw; }
+            catch (Exception e)
+            {
 
-            finally { cerrarConexion(); 
+
+                throw;
+            }
+
+            finally
+            {
+                cerrarConexion();
             }
             return valor;
-            
+
         }
 
         //Metodo autos alquiler
@@ -423,7 +428,7 @@ namespace MotorsApi.BD.CRUD.Read
                     ON 
                         fc.carroceria = ta.tipo_auto
                     WHERE 
-                        fc.estado = 'alquiler'";
+                        fc.estado = 'alquiler' AND disponibilidad = 1";
                 abrirConexion();
 
                 using (MySqlDataReader reader = cmd.ExecuteReader())
@@ -456,7 +461,7 @@ namespace MotorsApi.BD.CRUD.Read
         {
             //Lista de objetos
             List<FlotaSubastaRequest> lista = new List<FlotaSubastaRequest>();
-            
+
             try
             {
                 //Limpiamos parametros
@@ -493,31 +498,105 @@ namespace MotorsApi.BD.CRUD.Read
                     };
 
                 }
-
-
             }
             catch (Exception e)
             {
                 throw;
             }
-            finally { 
-            
+            finally
+            {
+
                 cerrarConexion();
-            
-            } 
+
+            }
             return lista;
+
+
+
+
         }
-
-    }
-}
-
-            
-
 
 
 
 
         
 
-    
+
+        public FlotaSubastaRequest listaSubasta(int codigo)
+        {
+
+            FlotaSubastaRequest lista = null;
+
+            try
+            {
+                //Limpiamos parametros
+                cmd.Parameters.Clear();
+
+                //Especificamos el tipo de comando
+                cmd.CommandType = CommandType.Text;
+
+                cmd.Parameters.Add(new MySqlParameter("@placa", codigo));
+
+                //asignamos consulta a realizar
+                cmd.CommandText = @"    
+                                    SELECT 
+                                        fc.km, fc.transmision, fc.tipo_gas, fc.carroceria, fc.marca, fc.modelo, fc.foto, fs.t_final, fs.valor_inicial, fs.valor_puja 
+                                    FROM 
+                                        flota_carro fc
+                                    INNER JOIN
+                                        flota_subasta fs
+                                    ON 
+                                        fc.placa = fs.id_placa
+                                    WHERE fs.cod_subasta = @placa AND fc.disponibilidad = 1";//placa en realidad es el código de subasta pero era más fácil solo dejarlo en placa. QUe si haciendo el comentario me tomó más tiempo que cambiarlo?
+                                                                   //si, pero estoy aburrido
+
+                abrirConexion();
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lista = new FlotaSubastaRequest()
+                        {
+                            km = reader.GetDouble(0),
+                            transmision = reader.GetString(1),
+                            tipo_gas = reader.GetString(2),
+                            carroceria = reader.GetString(3),
+                            marca = reader.GetString(4),
+                            modelo = reader.GetString(5),
+                            foto = reader.GetString(6),
+                            t_final = reader.GetDateTime(7),
+                            valor_inicial = reader.GetDouble(8),
+                            valor_puja = reader.GetDouble(9),
+                        };
+                    };
+
+                }
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e);
+            }
+            finally
+            {
+
+                cerrarConexion();
+
+            }
+            return lista;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
 

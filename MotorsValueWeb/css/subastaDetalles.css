@@ -26,7 +26,17 @@ html body{
     clip-path: polygon(0 100%, 80% 100%, 100% 50%, 80% 0%, 0 0); /*Ya no se preocupen, por fin aprendí a hacerlo :3*/
     background-color: #88898d;
     margin-right: 6%;
+    display: flex;
+    flex-direction: column;
 }
+
+.poligono div{
+    display: flex;
+    align-items: center;
+    gap: 10%;
+}
+
+
 
 .icono{
     max-width: 95px;
@@ -62,7 +72,19 @@ html body{
     height: 25px;
     align-self: center;
     border-radius: 15px;
+    padding: 0 15px ;
 }
+
+/* Borrar las flechas de los números en el input (Chrome, opera, edge) */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button { 
+  -webkit-appearance: none;
+}
+
+/* Borrar las flechas de los números en el input (FireFox) */
+input[type=number] {
+    -moz-appearance: textfield;
+  }
 
 #info{
     display: flex;
@@ -77,6 +99,7 @@ html body{
     color: white;
     border-radius: 15px;
     text-decoration: none;
+    font-size: 18px;
 }
 
 @media(max-width: 768px){
