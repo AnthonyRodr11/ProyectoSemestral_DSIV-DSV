@@ -138,7 +138,7 @@
     cargarAuto();
     document.querySelector('.compra button').addEventListener('click', async () => {
     const userId = localStorage.getItem('userId'); // Verifica si el usuario está logueado
-    const id_cliente = 1;
+    console.log("Este es el id del usuario",userId)
     if (!id_cliente) {
         mostrarModal("No tienes una cuenta. Regístrate para poder realizar una compra.");
     } else {

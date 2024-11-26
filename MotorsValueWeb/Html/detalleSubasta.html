@@ -128,7 +128,7 @@
 
     async function Pujar() {
         const inputPuja = parseFloat(document.getElementById("inputPuja").value);
-        const usuarioId = localStorage.getItem(usuarioId);
+        const usuarioId = localStorage.getItem("userId");
         const estado = await obtenerPlaca();
 
         if (!estado) {

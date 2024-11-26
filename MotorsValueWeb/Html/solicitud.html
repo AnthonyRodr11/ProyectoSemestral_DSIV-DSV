@@ -53,7 +53,7 @@
                                 // Crear el objeto para enviar datos
                                 const data = {
 
-                                    id_usuario: 3, // Cambiar por el ID del usuario actual
+                                    id_usuario: localStorage.getItem("userId"),
                                     descripcion: descripcion,
                                     estado: "pendiente",
                                     monto: parseFloat(monto)
