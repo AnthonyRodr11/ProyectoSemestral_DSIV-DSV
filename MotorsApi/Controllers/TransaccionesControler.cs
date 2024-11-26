@@ -7,13 +7,13 @@ namespace MotorsApi.Controllers
 
     [Route("MotorsApi/[controller]")]
     [ApiController]
-    public class TransaccionesControler : ControllerBase
+    public class TransaccionesController : ControllerBase
     {
 
         //Controller para alquiler lista
 
         [HttpGet]
-        [Route("perfil/Alquiler/{id}")]
+        [Route("perfil/Alquiler/{id_usuario}")]
         public IActionResult obtenerTransaccionAlquiler(int id_usuario)
         {
             HistorialTransacciones historial = new HistorialTransacciones();
@@ -37,7 +37,7 @@ namespace MotorsApi.Controllers
         //Controller para Venta lista
 
         [HttpGet]
-        [Route("perfil/Venta/{id}")]
+        [Route("perfil/Venta/{id_usuario}")]
         public IActionResult obtenerTransaccionVenta(int id_usuario)
         {
             HistorialTransacciones hitorialin = new HistorialTransacciones();
@@ -63,14 +63,14 @@ namespace MotorsApi.Controllers
         //Controller para Subasta lista
 
         [HttpGet]
-        [Route("perfil/subasta/{id}")]
+        [Route("perfil/subasta/{id_usuario}")]
         public IActionResult obtenerTransaccionSubasta(int id_usuario)
         {
             HistorialTransacciones historial = new HistorialTransacciones();
             var misSubastas = historial.obtenerMisSubastas(id_usuario);
 
 
-            if (misSubastas == null)
+            if (misSubastas == null || misSubastas.Count == 0)
             {
                 return NotFound(new
                 {
