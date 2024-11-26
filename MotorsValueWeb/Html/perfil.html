@@ -240,24 +240,7 @@
     </style>
   </head>
   <body>
-    <header>
-      <a href="login.html" class="retorno">
-        <div class="logo">
-          <img src="../Img/Logo_MV.png" alt="Motors Value Logo" />
-          <h1>MOTORS VALUE</h1>
-        </div>
-      </a>
-      <div class="navbar">
-        <nav>
-          <ul>
-            <li><a href="venta.html">Venta</a></li>
-            <li><a href="alquiler.html">Alquiler</a></li>
-            <li><a href="subasta.html">Subasta</a></li>
-            <li><a href="solicitud.html">Solicitud</a></li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+    
 
     <div class="contenedor">
       <!-- Sección de información de usuario -->
@@ -359,17 +342,18 @@
     <script>
       // Cargar información del usuario al iniciar
       document.addEventListener("DOMContentLoaded", () => {
-        obtenerElmalditoperfil();
+        obtenerElmalditoperfil("userId");
+       
 
-        const id = 1; // Este ID debería venir de tu sistema de autenticación
-        obtenerElmalditoperfil();
-        cargarTransaccionesAlquiler(id);
-        cargarTransaccionesVenta(id);
-        cargarTransaccionesSubasta(id);
+        // Este ID debería venir de tu sistema de autenticación
+        obtenerElmalditoperfil("userId");
+        cargarTransaccionesAlquiler("userId");
+        cargarTransaccionesVenta("userId")
+        cargarTransaccionesSubasta("userId");
       });
 
       function obtenerElmalditoperfil() {
-        const id = 1; // Este ID debería venir de tu sistema de autenticación
+        const id = localStorage.getItem("userId"); // Este ID debería venir de tu sistema de autenticación
 
         fetch(`https://localhost:7129/MotorsApi/Usuario/userInfo/${id}`)
           .then((response) => {
@@ -642,6 +626,25 @@
       }
     </script>
   </body>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Obtener la URL de la página actual
+        const currentPath = window.location.pathname;
+        console.log(currentPath);
+
+        // Seleccionar todos los enlaces del navbar
+        const navLinks = document.querySelectorAll("nav a");
+
+        // Comparar la URL de cada enlace con la URL actual
+        navLinks.forEach(link => {
+            if (link.getAttribute("href") === currentPath) {
+                link.classList.add("active");
+            }
+        });
+    });
+
+  </script>
 
   <footer id="footer">
   </footer>

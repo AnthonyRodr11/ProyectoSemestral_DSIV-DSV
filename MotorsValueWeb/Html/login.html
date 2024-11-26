@@ -83,7 +83,7 @@
                 console.log(JSON.stringify(result));;
                 localStorage.setItem('userId', result);
                 console.log(localStorage.getItem('userId'));;
-                document.location.href = '../Html/inicio.html'; // Redirige a la página de inicio
+                document.location.href = '../Html/perfil.html'; // Redirige a la página de inicio
                 alert('Bienvenido');
             } else {
                 const error = await response.json();
@@ -95,5 +95,9 @@
         }
     });
 </script>
+
+
+
+
 
 </html>

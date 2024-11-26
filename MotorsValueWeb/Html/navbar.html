@@ -21,7 +21,8 @@
                 <li><a href="subasta.html">Subasta</a></li>
                 <li><a href="solicitud.html">Solicitud</a></li>
             </ul>
-            <a href="register.html" class="action_btn pulse" id="actionButton">Registrarse</a>
+            
+            <div id="userAction"></div>
             <div class="hamburger">
                 <i class="fa-solid fa-bars"></i>
             </div>
@@ -31,7 +32,8 @@
             <li><a href="alquiler.html">Alquiler</a></li>
             <li><a href="subasta.html">Subasta</a></li>
             <li><a href="solicitud.html">Solicitud</a></li>
-            <li><a href="register.html" class="action_btn" id="dropdownActionButton">Registrarse</a></li>
+            <li><a id="dropdownActionButton" href="perfil.html" class="btnperfil"></a></li>
+            
         </div>
     </header>
 
@@ -121,6 +123,32 @@
                 dropdownActionButton.innerText = "Registrarse";
             }
         });
+    </script>
+
+    <script>
+                // Referencia al contenedor dinámico
+        const userActionDiv = document.getElementById('userAction');
+
+        // Verificar si el usuario está logueado y obtener información del usuario
+        const usuarioLogueado = sessionStorage.getItem('usuarioLogueado') === 'true';
+        const username = sessionStorage.getItem('username') || '';
+
+        // Actualizar dinámicamente el contenido del navbar
+        if (usuarioLogueado) {
+            // Usuario autenticado
+            userActionDiv.innerHTML = `
+                <a href="perfil.html" class="action_btn pulse">
+                    <img src="../Img/userLogin.png" alt="navbarlogperfil" title="Perfil de ${username}">
+                </a>
+            `;
+        } else {
+            // Usuario no autenticado
+            userActionDiv.innerHTML = `
+                <a href="register.html" class="action_btn pulse">Registrar</a>
+            `;
+        }
+
+
     </script>
     
 </body>
