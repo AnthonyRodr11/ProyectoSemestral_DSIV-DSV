@@ -40,7 +40,7 @@ namespace MotorsApi.BD.CRUD.Read
                             cod_alquiler = reader.GetInt32(0),
                             id_vehiculo = reader.GetString(1),
                             f_retiro = reader.GetDateTime(2),
-                           f_entrega = reader.GetDateTime(3)
+                            f_entrega = reader.GetDateTime(3)
 
                         };
 
