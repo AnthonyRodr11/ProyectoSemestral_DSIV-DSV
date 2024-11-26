@@ -24,7 +24,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT cod_alquiler, id_vehiculo, f_retiro, f_entrega FROM Flota_Alquiler WHERE  id_usuario = @id_usuario";
+                cmd.CommandText = "SELECT cod_alquiler, id_vehiculo, total, f_retiro, f_entrega FROM Flota_Alquiler WHERE  id_usuario = @id_usuario";
 
                 cmd.Parameters.AddWithValue("@id_usuario", id_usuario);
 
@@ -37,10 +37,14 @@ namespace MotorsApi.BD.CRUD.Read
                         Flota_AlquilerRequest facturita = new Flota_AlquilerRequest()
                         {
 
-                            cod_alquiler = reader.GetInt32(0),
-                            id_vehiculo = reader.GetString(1),
-                            f_retiro = reader.GetDateTime(2),
-                            f_entrega = reader.GetDateTime(3)
+                            
+                              cod_alquiler = reader.GetInt32(0),
+                              id_vehiculo = reader.GetString(1),
+                              total = reader.GetDouble(2),
+                              f_retiro = reader.GetDateTime(3),
+                              f_entrega = reader.GetDateTime(4)
+
+                           
 
                         };
 
