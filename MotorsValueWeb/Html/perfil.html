@@ -162,6 +162,12 @@
         .modal-content form button:hover {
             background-color: #45a049;
         }
+
+        table, th, td{
+
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
     </style>
 </head>
 <body>
@@ -222,14 +228,31 @@
         </div>
 
         <!-- Sección del historial de transacciones -->
-        <div class="historial-transacciones">
+        <div class="historialTransacciones">
             <h2>HISTORIAL DE TRANSACCIONES</h2>
-            <table class="table-transacciones" id="tabla-transacciones">
+            <br>
+            <h3>Transacciones de Alquiler de Autos</h3>
+            <table class="tablaAlquiler" id="alquiler">
                 <thead>
                     <tr>
+                        <th>Cod_Alquiler</th>
                         <th>Placa</th>
-                        <th>Marca</th>
-                        <th>Modelo</th>
+                        <th>Total</th>
+                        <th>Fecha de Retiro</th>
+                        <th>Fecha de Entrega</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se agregarán dinámicamente -->
+                </tbody>
+            </table>
+            <br>
+            <h3>Transacciones de Compra de Autos</h3>
+            <table class="tablaVenta" id="venta">
+                <thead>
+                    <tr>
+                        <th>Cod_Venta</th>
+                        <th>Placa</th>
                         <th>Precio</th>
                     </tr>
                 </thead>
@@ -237,6 +260,22 @@
                     <!-- Las filas se agregarán dinámicamente -->
                 </tbody>
             </table>
+
+            <br>
+            <h3>Transacciones de Subasta de Autos</h3>
+            <table class="tablaSubasta" id="subasta">
+                <thead>
+                    <tr>
+                        <th>Cod_Subasta</th>
+                        <th>Placa</th>
+                        <th>Valor Puja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se agregarán dinámicamente -->
+                </tbody>
+            </table>
+
         </div>
     </div>
 
@@ -244,6 +283,12 @@
         // Cargar información del usuario al iniciar
         document.addEventListener("DOMContentLoaded", () => {
             obtenerElmalditoperfil();
+
+            const id = 1; // Este ID debería venir de tu sistema de autenticación
+            obtenerElmalditoperfil();
+            cargarTransaccionesAlquiler(id);
+            cargarTransaccionesVenta(id);
+            cargarTransaccionesSubasta(id);
         });
 
         function obtenerElmalditoperfil() {
@@ -416,46 +461,98 @@
                 modal.style.display = "none";
             }
         }
-
-        // Función para listar transacciones
-        async function listarTransacciones() {
-            
-            const url = "https://localhost:7129/MotorsApi/"; //Cambia esta URL por el endpoint real
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error('Error en la red ' + response.status);
-                }
-                
-                const data = await response.json();
-                const tabla = document.getElementById("tabla-transacciones").getElementsByTagName("tbody")[0];
-                tabla.innerHTML = '';
-                
-                data.forEach(transaccion => {
-                    const fila = document.createElement('tr');
-                    
-                    const celdaPlaca = document.createElement('td');
-                    celdaPlaca.textContent = transaccion.placa;
-                    fila.appendChild(celdaPlaca);
-                    
-                    const celdaMarca = document.createElement('td');
-                    celdaMarca.textContent = transaccion.marca;
-                    fila.appendChild(celdaMarca);
-
-                    const celdaModelo = document.createElement('td');
-                    celdaModelo.textContent = transaccion.modelo;
-                    fila.appendChild(celdaModelo);
-                    
-                    const celdaPrecio = document.createElement('td');
-                    celdaPrecio.textContent = `$${transaccion.precio}`;
-                    fila.appendChild(celdaPrecio);
-                    
-                    tabla.appendChild(fila);
-                });
-            } catch (err) {
-                console.error("Error en la comunicación con el API", err);
-            }
+                                                                // Función para cargar transacciones de Alquiler
+function cargarTransaccionesAlquiler(id) {
+    fetch(`https://localhost:7129/MotorsApi/Transacciones/perfil/Alquiler/${id}`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error al obtener alquileres: ${response.statusText}`);
         }
+        return response.json();
+    })
+    .then(data => {
+        const tablaAlquiler = document.querySelector('#alquiler tbody');
+        tablaAlquiler.innerHTML = ''; // Limpiar tabla existente
+
+        data.forEach(alquiler => {
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td>${alquiler.cod_alquiler}</td>
+                <td>${alquiler.id_vehiculo}</td>
+                <td>$${alquiler.total.toFixed(2)}</td>
+                <td>${new Date(alquiler.f_retiro).toLocaleDateString()}</td>
+                <td>${new Date(alquiler.f_entrega).toLocaleDateString()}</td>
+            `;
+            tablaAlquiler.appendChild(fila);
+        });
+    })
+    .catch(error => {
+        console.error('Error al cargar alquileres:', error);
+        const tablaAlquiler = document.querySelector('#alquiler tbody');
+        tablaAlquiler.innerHTML = `<tr><td colspan="5">No hay transacciones de alquiler</td></tr>`;
+    });
+}
+
+// Función para cargar transacciones de Venta
+function cargarTransaccionesVenta(id) {
+    fetch(`https://localhost:7129/MotorsApi/Transacciones/perfil/Venta/${id}`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error al obtener ventas: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        const tablaVenta = document.querySelector('#venta tbody');
+        tablaVenta.innerHTML = ''; // Limpiar tabla existente
+
+        data.forEach(venta => {
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td>${venta.cod_venta}</td>
+                <td>${venta.placa}</td>
+                <td>$${venta.precio.toFixed(2)}</td>
+            `;
+            tablaVenta.appendChild(fila);
+        });
+    })
+    .catch(error => {
+        console.error('Error al cargar ventas:', error);
+        const tablaVenta = document.querySelector('#venta tbody');
+        tablaVenta.innerHTML = `<tr><td colspan="3">No hay transacciones de venta</td></tr>`;
+    });
+}
+
+// Función para cargar transacciones de Subasta
+function cargarTransaccionesSubasta(id) {
+    fetch(`https://localhost:7129/MotorsApi/Transacciones/perfil/Subasta/${id}`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error al obtener subastas: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        const tablaSubasta = document.querySelector('#subasta tbody');
+        tablaSubasta.innerHTML = ''; // Limpiar tabla existente
+
+        data.forEach(subasta => {
+            const fila = document.createElement('tr');
+            fila.innerHTML = `
+                <td>${subasta.cod_subasta}</td>
+                <td>${subasta.id_placa}</td>
+                <td>$${subasta.valor_puja.toFixed(2)}</td>
+            `;
+            tablaSubasta.appendChild(fila);
+        });
+    })
+    .catch(error => {
+        console.error('Error al cargar subastas:', error);
+        const tablaSubasta = document.querySelector('#subasta tbody');
+        tablaSubasta.innerHTML = `<tr><td colspan="3">No hay transacciones de subasta</td></tr>`;
+    });
+}
+
     </script>
 </body>
 </html>
