@@ -297,7 +297,7 @@
             const seguroIdNumero = parseInt(seguroIdString.split('_')[1], 10) + 1; // Convierte a número y ajusta
             const fechaRetiro = document.getElementById('fechaRetiro').value;
             const fechaEntrega = document.getElementById('fechaEntrega').value;
-            const placa = 'AAA-111'; // Esto debería actualizarse dinámicamente según tu lógica
+            const placa = obtenerIdAuto(); // Esto debería actualizarse dinámicamente según tu lógica
             const idUsuario = 1; // Este valor debe obtenerse de la sesión o como corresponda
             const tipoTarifa = seguroIdNumero; // Actualiza según tus requerimientos
             const tarifaTotal = parseFloat(document.getElementById('dineroTotal').textContent.replace('$', ''));

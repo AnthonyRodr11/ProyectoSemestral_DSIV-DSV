@@ -102,6 +102,7 @@ namespace MotorsApi.Controllers
             Console.WriteLine("Datos Recibidos: " + JsonConvert.SerializeObject(alquiler));
 
             var guardado = new FlotaAlquilerInsert().InsertarAlquilado(alquiler);
+            var cambiado = new Venta_Flota().CambiarDisponibilidad(alquiler.placa, false);
 
             if (guardado > 0)
             {
