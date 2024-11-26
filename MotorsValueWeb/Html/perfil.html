@@ -65,6 +65,21 @@
         cursor: pointer;
       }
 
+      .informacion-usuario a {
+        background-color: #ff0000;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 10px;
+        margin: 30px;
+      }
+
+
+      
+      
+
       .informacion-usuario button:hover {
         background-color: #0056b3;
       }
@@ -258,6 +273,12 @@
           <p>Teléfono: <span id="telefono">0000-0000</span></p>
         </div>
         <button onclick="mostrarFormularioEdicion()">Editar datos</button>
+
+
+
+
+        <a  onclick="cerrarSesion()">Cerrar Sesión</a>
+        
       </div>
 
       <!-- Modal de edición -->
@@ -340,16 +361,30 @@
     </div>
 
     <script>
+        function cerrarSesion(){
+
+          localStorage.removeItem("userId");
+
+          window.location.href = "inicio.html";
+
+        }
+
+
+
+    </script>
+    <script>
       // Cargar información del usuario al iniciar
       document.addEventListener("DOMContentLoaded", () => {
-        obtenerElmalditoperfil("userId");
+
+        const id = localStorage.getItem("userId")
+        obtenerElmalditoperfil(id);
        
 
         // Este ID debería venir de tu sistema de autenticación
-        obtenerElmalditoperfil("userId");
-        cargarTransaccionesAlquiler("userId");
-        cargarTransaccionesVenta("userId")
-        cargarTransaccionesSubasta("userId");
+        obtenerElmalditoperfil(id);
+        cargarTransaccionesAlquiler(id);
+        cargarTransaccionesVenta(id)
+        cargarTransaccionesSubasta(id);
       });
 
       function obtenerElmalditoperfil() {

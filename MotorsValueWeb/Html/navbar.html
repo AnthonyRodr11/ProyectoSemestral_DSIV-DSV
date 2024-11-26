@@ -21,8 +21,7 @@
                 <li><a href="subasta.html">Subasta</a></li>
                 <li><a href="solicitud.html">Solicitud</a></li>
             </ul>
-            
-            <div id="userAction"></div>
+            <a href="register.html" class="action_btn pulse" id="actionButton">Registrarse</a>
             <div class="hamburger">
                 <i class="fa-solid fa-bars"></i>
             </div>
@@ -32,8 +31,7 @@
             <li><a href="alquiler.html">Alquiler</a></li>
             <li><a href="subasta.html">Subasta</a></li>
             <li><a href="solicitud.html">Solicitud</a></li>
-            <li><a id="dropdownActionButton" href="perfil.html" class="btnperfil"></a></li>
-            
+            <li><a href="register.html" class="action_btn" id="dropdownActionButton">Registrarse</a></li>
         </div>
     </header>
 
@@ -98,58 +96,28 @@
 
     </script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const actionButton = document.getElementById("actionButton");
-            const dropdownActionButton = document.getElementById("dropdownActionButton");
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const actionButton = document.getElementById("actionButton");
+        const dropdownActionButton = document.getElementById("dropdownActionButton");
 
-            // Verificar si el usuario está registrado
-            const userId = localStorage.getItem("userId");
-            console.log(userId);
+        const userId = localStorage.getItem("userId");
 
-            if (userId) {
-                // Cambiar ambos botones a un ícono de perfil
-                actionButton.href = "perfil.html";
-                actionButton.innerHTML = `<i class="fa-solid fa-user"></i> Perfil`;
+        if (userId) {
+            actionButton.href = "perfil.html";
+            actionButton.innerHTML = `<i class="fa-solid fa-user"></i> Perfil`;
 
-                dropdownActionButton.href = "perfil.html";
-                dropdownActionButton.innerHTML = `<i class="fa-solid fa-user"></i> Perfil`;
-            } else {
-                // Mantener los botones en estado "Registrarse"
-                actionButton.href = "register.html";
-                actionButton.innerText = "Registrarse";
-
-                dropdownActionButton.href = "register.html";
-                dropdownActionButton.innerText = "Registrarse";
-            }
-        });
-    </script>
-
-    <script>
-                // Referencia al contenedor dinámico
-        const userActionDiv = document.getElementById('userAction');
-
-        // Verificar si el usuario está logueado y obtener información del usuario
-        const usuarioLogueado = sessionStorage.getItem('usuarioLogueado') === 'true';
-        const username = sessionStorage.getItem('username') || '';
-
-        // Actualizar dinámicamente el contenido del navbar
-        if (usuarioLogueado) {
-            // Usuario autenticado
-            userActionDiv.innerHTML = `
-                <a href="perfil.html" class="action_btn pulse">
-                    <img src="../Img/userLogin.png" alt="navbarlogperfil" title="Perfil de ${username}">
-                </a>
-            `;
+            dropdownActionButton.href = "perfil.html";
+            dropdownActionButton.innerHTML = `<i class="fa-solid fa-user"></i> Perfil`;
         } else {
-            // Usuario no autenticado
-            userActionDiv.innerHTML = `
-                <a href="register.html" class="action_btn pulse">Registrar</a>
-            `;
+            actionButton.href = "register.html";
+            actionButton.innerText = "Registrarse";
+
+            dropdownActionButton.href = "register.html";
+            dropdownActionButton.innerText = "Registrarse";
         }
-
-
-    </script>
+    });
+</script>
     
 </body>
 </html>
