@@ -21,7 +21,8 @@
                 <li><a href="subasta.html">Subasta</a></li>
                 <li><a href="solicitud.html">Solicitud</a></li>
             </ul>
-            <a href="register.html" class="action_btn pulse" id="actionButton">Registrarse</a>
+            
+            <div id="userAction"></div>
             <div class="hamburger">
                 <i class="fa-solid fa-bars"></i>
             </div>
@@ -31,97 +32,81 @@
             <li><a href="alquiler.html">Alquiler</a></li>
             <li><a href="subasta.html">Subasta</a></li>
             <li><a href="solicitud.html">Solicitud</a></li>
-            <li><a href="register.html" class="action_btn" id="dropdownActionButton">Registrarse</a></li>
+            <li><a id="dropdownActionButton" href="perfil.html" class="btnperfil"></a></li>
+            
         </div>
     </header>
 
 
-    <script>
-        const hamburger = document.querySelector('.hamburger');
-        const hamburgerBtnIcon = document.querySelector('.hamburger i');
-        const dropDown = document.querySelector('.dropdown');
-
-        // Función para alternar el menú dropdown
-        hamburger.onclick = function () {
-            dropDown.classList.toggle('open');
-            const isOpen = dropDown.classList.contains('open');
-
-            // Cambiar el icono del botón hamburguesa
-            hamburgerBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
-        };
-
-        // Función para ajustar el estado del menú en función del tamaño de la pantalla
-        function ajustarMenuDropdown() {
-            const screenWidth = window.innerWidth;
-
-            if (screenWidth >= 992) {
-                // Cerrar el menú si está abierto en pantallas grandes
-                if (dropDown.classList.contains('open')) {
-                    dropDown.classList.remove('open');
-                    hamburgerBtnIcon.classList = 'fa-solid fa-bars'; // Restablecer el icono
-                }
-            }
-        }
-
-        // Listener para el cambio de tamaño de la ventana
-        window.addEventListener('resize', ajustarMenuDropdown);
-
-        // Llamar la función al cargar la página para manejar el estado inicial
-        ajustarMenuDropdown();
-
-        document.addEventListener('click', function (event) {
-            const isClickInside = hamburger.contains(event.target) || dropDown.contains(event.target);
-
-            if (!isClickInside && dropDown.classList.contains('open')) {
-                dropDown.classList.remove('open');
-                hamburgerBtnIcon.classList = 'fa-solid fa-bars'; // Restablecer icono
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", () => {
-            // Obtener la URL de la página actual
-            const currentPath = window.location.pathname;
-            console.log(currentPath);
     
-            // Seleccionar todos los enlaces del navbar
-            const navLinks = document.querySelectorAll('.navbar .links a');
-    
-            // Comparar la URL de cada enlace con la URL actual
-            navLinks.forEach(link => {
-                if (link.getAttribute("href") === currentPath) {
-                    link.classList.toggle('active');
-                }
-            });
-        });
-
-    </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const actionButton = document.getElementById("actionButton");
-            const dropdownActionButton = document.getElementById("dropdownActionButton");
-
-            // Verificar si el usuario está registrado
-            const userId = localStorage.getItem("userId");
-            console.log(userId);
-
-            if (userId) {
-                // Cambiar ambos botones a un ícono de perfil
-                actionButton.href = "perfil.html";
-                actionButton.innerHTML = `<i class="fa-solid fa-user"></i> Perfil`;
-
-                dropdownActionButton.href = "perfil.html";
-                dropdownActionButton.innerHTML = `<i class="fa-solid fa-user"></i> Perfil`;
-            } else {
-                // Mantener los botones en estado "Registrarse"
-                actionButton.href = "register.html";
-                actionButton.innerText = "Registrarse";
-
-                dropdownActionButton.href = "register.html";
-                dropdownActionButton.innerText = "Registrarse";
-            }
-        });
-    </script>
     
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Código para resaltar el enlace activo en el navbar
+        const currentPath = window.location.pathname;
+        console.log(currentPath);
+        const navLinks = document.querySelectorAll('.navbar .links a');
+
+        navLinks.forEach(link => {
+            if (link.getAttribute("href") === currentPath) {
+                link.classList.toggle('active');
+            }
+        });
+
+        // Código para verificar si el usuario está registrado
+        const actionButton = document.getElementById("actionButton");
+        const dropdownActionButton = document.getElementById("dropdownActionButton");
+        const userId = localStorage.getItem("userId");
+        console.log(userId);
+
+        if (userId) {
+            actionButton.href = "perfil.html";
+            actionButton.innerHTML = `<i class="fa-solid fa-user"></i> Perfil`;
+
+            dropdownActionButton.href = "perfil.html";
+            dropdownActionButton.innerHTML = `<i class="fa-solid fa-user"></i> Perfil`;
+        } else {
+            actionButton.href = "register.html";
+            actionButton.innerText = "Registrarse";
+
+            dropdownActionButton.href = "register.html";
+            dropdownActionButton.innerText = "Registrarse";
+        }
+    });
+
+    // Código para el menú hamburguesa y dropdown
+    const hamburger = document.querySelector('.hamburger');
+    const hamburgerBtnIcon = document.querySelector('.hamburger i');
+    const dropDown = document.querySelector('.dropdown');
+
+    hamburger.onclick = function () {
+        dropDown.classList.toggle('open');
+        const isOpen = dropDown.classList.contains('open');
+        hamburgerBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    };
+
+    function ajustarMenuDropdown() {
+        const screenWidth = window.innerWidth;
+
+        if (screenWidth >= 992) {
+            if (dropDown.classList.contains('open')) {
+                dropDown.classList.remove('open');
+                hamburgerBtnIcon.classList = 'fa-solid fa-bars';
+            }
+        }
+    }
+
+    window.addEventListener('resize', ajustarMenuDropdown);
+    ajustarMenuDropdown();
+
+    document.addEventListener('click', function (event) {
+        const isClickInside = hamburger.contains(event.target) || dropDown.contains(event.target);
+
+        if (!isClickInside && dropDown.classList.contains('open')) {
+            dropDown.classList.remove('open');
+            hamburgerBtnIcon.classList = 'fa-solid fa-bars';
+        }
+    });
+</script>
 </html>

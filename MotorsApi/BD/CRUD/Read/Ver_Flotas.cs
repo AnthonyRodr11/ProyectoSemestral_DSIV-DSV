@@ -114,7 +114,8 @@ namespace MotorsApi.BD.CRUD.Read
                             km = Convert.ToDouble(reader["km"]),
                             transmision = reader["transmision"].ToString(),
                             tipo_gas = reader["tipo_gas"].ToString(),
-                            carroceria = reader["carroceria"].ToString()
+                            carroceria = reader["carroceria"].ToString(),
+                            precio = Convert.ToDouble(reader["precio"])
                         };
 
                         // Agregamos el objeto a la lista
