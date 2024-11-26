@@ -13,12 +13,13 @@ namespace MotorsApi.BD.CRUD.Update
 
                 cmd.CommandType = System.Data.CommandType.Text;
 
-                cmd.CommandText = @"INSERT INTO flota_subasta 
-                                        id_usuario, valor_puja
-                                    SET
-                                        id_usuario = @id_usuario, valor_puja = @valor_puja
-                                    WHERE
-                                        id_placa = @placa";
+                cmd.CommandText = @"UPDATE flota_subasta 
+                                    id_usuario, valor_puja
+                                SET
+                                    id_usuario = @id_usuario, valor_puja = @valor_puja
+                                WHERE
+                                    id_placa = @placa;
+";
                 cmd.Parameters.Add(new MySqlParameter("@id_usuario", usuario));
                 cmd.Parameters.Add(new MySqlParameter("@valor_puja", deuda.valor_puja));
                 cmd.Parameters.Add(new MySqlParameter("@placa", deuda.id_placa));

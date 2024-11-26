@@ -33,10 +33,11 @@ namespace MotorsApi.Controllers
             }
 
             var apuesta = new Pujar().InsertarPuja(id, ludopatia);
-            if (apuesta > 0)
-                return Ok();
+            if (apuesta == null || apuesta == 0)
+                return StatusCode(418);
+            return Ok();
 
-            return StatusCode(418);
+            
 
         }
     }
