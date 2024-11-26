@@ -8,7 +8,25 @@
 </head>
 <header>
     <div id="navbar"></div>
-</header>
+    <script>
+        // Cargar el navbar dinámicamente
+        // Función para marcar el enlace activo
+        function marcarEnlaceActivo() {
+            // Obtener solo el nombre del archivo de la página actual (sin directorios)
+            const currentFile = window.location.pathname.split('/').pop();
+
+            // Seleccionar todos los enlaces dentro del elemento <nav>
+            const navLinks = document.querySelectorAll("#navbar nav ul li a");
+
+            // Comparar el nombre del archivo con el atributo href de los enlaces
+            navLinks.forEach(link => {
+                if (link.getAttribute("href") === currentFile) {
+                    link.classList.add("active");
+                }
+            });
+        }
+    </script>
+</head>
 <body>
     <div id="contenedor-caja"></div>
     <script>
@@ -65,15 +83,31 @@
         actualizarCaja(); // Carga inicial
         setInterval(actualizarCaja, 10000); // Actualiza cada 10 segundos
     </script>
+
+    <script>
+        const userId = localStorage.getItem('userId');
+        console.log('ID recuperada:', userId);
+
+        if (userId) {
+            console.log(`Bienvenido usuario con ID: ${userId}`);
+        } else {
+            console.log('No hay usuario autenticado. Redirigiendo...');
+        }
+    </script>
+
 </body>
 <footer id="footer">
+
 </footer>
-<script src="../JavaScript/funciones.js"></script>
+
+<script src="../JavaScript/Funciones.js"></script>
+
 <script>
-    cargarHTML('navbar', 'navbar.html');
-    </script>
-    
-    <script>
-        cargarHTML('footer', 'footer.html');
-    </script>
+    cargarHTML('navbar', 'navbar.html')
+</script>
+
+<script>
+    cargarHTML('footer', 'footer.html');
+</script>
+
 </html>
