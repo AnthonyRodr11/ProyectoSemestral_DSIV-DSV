@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MotorsApi.BD.CRUD.Read;
-using System.Numerics;
 namespace MotorsApi.Controllers
 
 {
@@ -14,42 +13,31 @@ namespace MotorsApi.Controllers
         //Controller para alquiler lista
 
         [HttpGet]
-        [Route("perfil/alquiler/{id_usuario}")]
+        [Route("perfil/Alquiler/{id_usuario}")]
         public IActionResult obtenerTransaccionAlquiler(int id_usuario)
         {
-            var tsubaru = new HistorialTransacciones().obtenerMiAlquiler(id_usuario);
+            HistorialTransacciones historial = new HistorialTransacciones();
+            var misAlquileres = historial.obtenerMiAlquiler(id_usuario);
 
-            if (tsubaru == null)
+
+            if (misAlquileres == null)
             {
-                return NotFound("Error al cargar subasta");
+                return NotFound(new
+                {
+                    titulo = "Sin resultados",
+                    mensaje = "No se encontraron el valor de la oferta.",
+                    code = 202
+                });
+
+
             }
-            return Ok(tsubaru);
-
-
-
-
-            /* HistorialTransacciones historial = new HistorialTransacciones();
-             var misAlquileres = historial.obtenerMiAlquiler(id_usuario);
-
-
-             if (misAlquileres == null)
-             {
-                 return NotFound(new
-                 {
-                     titulo = "Sin resultados",
-                     mensaje = "No se encontraron el valor de la oferta.",
-                     code = 202
-                 });
-
-
-             }
-             return Ok(misAlquileres);*/
+            return Ok(misAlquileres);
         }
 
         //Controller para Venta lista
 
         [HttpGet]
-        [Route("perfil/Venta/{id}")]
+        [Route("perfil/Venta/{id_usuario}")]
         public IActionResult obtenerTransaccionVenta(int id_usuario)
         {
             HistorialTransacciones hitorialin = new HistorialTransacciones();
@@ -75,14 +63,14 @@ namespace MotorsApi.Controllers
         //Controller para Subasta lista
 
         [HttpGet]
-        [Route("perfil/subasta/{id}")]
+        [Route("perfil/subasta/{id_usuario}")]
         public IActionResult obtenerTransaccionSubasta(int id_usuario)
         {
             HistorialTransacciones historial = new HistorialTransacciones();
             var misSubastas = historial.obtenerMisSubastas(id_usuario);
 
 
-            if (misSubastas == null)
+            if (misSubastas == null || misSubastas.Count == 0)
             {
                 return NotFound(new
                 {

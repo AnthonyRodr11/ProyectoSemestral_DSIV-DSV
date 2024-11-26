@@ -143,7 +143,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos codigo
-                cmd.CommandText = "SELECT cod_subasta, id_placa, valor_puja FROM Flota_Subasta WHERE id_usuario = @id_usuarip";
+                cmd.CommandText = "SELECT cod_subasta, id_placa, valor_puja FROM Flota_Subasta WHERE id_usuario = @id_usuario";
 
                 cmd.Parameters.Add(new MySqlParameter("@id_usuario", id_usuario));
 
@@ -159,9 +159,9 @@ namespace MotorsApi.BD.CRUD.Read
                         SubastaRequest subasta = new SubastaRequest()
                         {
 
-                            cod_subasta = reader.GetInt32(0),
-                            id_placa = reader.GetString(1),
-                            valor_puja = reader.GetDouble(2)
+                            cod_subasta = Convert.ToInt32(reader["cod_subasta"]),
+                            id_placa = reader["id_placa"].ToString(),
+                            valor_puja = Convert.ToDouble(reader["valor_puja"])
                         };
 
                         misSubastas.Add(subasta);
