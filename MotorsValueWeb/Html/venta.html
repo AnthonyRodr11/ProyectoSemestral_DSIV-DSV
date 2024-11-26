@@ -26,7 +26,12 @@
     </script>
 </head>
 <body>
-    <div id="contenedor-caja"></div>
+    <div id="contenedor-caja">
+        <div>
+            <h1>¡Ups!</h1>
+            <H2>Parece que los vehículos fueron muy rápidos y no los alcanzaste :c</H2>
+        </div>
+    </div>
     <script>
         async function obtenerDatos(estado) {
             try {
@@ -75,11 +80,24 @@
         async function actualizarCaja() {
             const estado = 'venta'; // Puedes cambiar esto según sea necesario
             const datos = await obtenerDatos(estado);
-            crearCaja(datos);
+            if(datos.code != 404){crearCaja(datos);}
+            
         }
     
         actualizarCaja(); // Carga inicial
         setInterval(actualizarCaja, 10000); // Actualiza cada 10 segundos
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const userId = localStorage.getItem("userId");
+
+            if (!userId) {
+                // Mostrar un modal o redirigir a una página de registro
+                alert("Para acceder a esta función, debes estar registrado.");
+                window.location.href = "register.html";
+            }
+        });
     </script>
 
     <script>
@@ -92,7 +110,8 @@
             console.log('No hay usuario autenticado. Redirigiendo...');
         }
     </script>
-
+    
+    
 </body>
 <footer id="footer">
 

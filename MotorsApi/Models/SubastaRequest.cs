@@ -7,5 +7,6 @@
         public string? id_placa { get; set; }
         public double? valor_puja { get; set; }
         public int? usuario { set; get; }
+        public string estado { set; get; }
     }
 }
