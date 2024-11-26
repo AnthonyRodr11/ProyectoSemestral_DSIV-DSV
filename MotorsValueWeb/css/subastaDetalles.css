@@ -31,6 +31,7 @@ body {
     max-width: 1200px;
     margin-bottom: 20px;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 .venta-perfil-imagen img {
@@ -200,15 +201,18 @@ body {
 
     .venta-perfil-especificaciones {
         grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: center;
     }
 
     .pujar {
         padding: 15px;
+        justify-items: center;
     }
 
     .pujar .info {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
     }
 
     .pujar input[type="number"] {
@@ -225,9 +229,15 @@ body {
         gap: 10px;
     }
 
+    #imgAuto{
+        min-width: 100%;
+        width: 100%;
+        padding: 0;
+    }
+
     .especificacion-item {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
         text-align: left;
     }
 

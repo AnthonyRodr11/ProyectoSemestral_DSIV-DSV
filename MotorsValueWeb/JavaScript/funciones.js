@@ -26,6 +26,22 @@ function cargarHTML(idElemento, archivo) {
             const elemento = document.getElementById(idElemento);
             elemento.innerHTML = data;
 
+            // Buscar y ejecutar los scripts en el contenido cargado
+            const scripts = elemento.querySelectorAll('script');
+            scripts.forEach((script) => {
+                const nuevoScript = document.createElement('script');
+                if (script.src) {
+                    // Si el script tiene un src, se vuelve a cargar
+                    nuevoScript.src = script.src;
+                    nuevoScript.async = true; // Asegura ejecución independiente
+                } else {
+                    // Si el script es inline, copia su contenido
+                    nuevoScript.textContent = script.textContent;
+                }
+                document.body.appendChild(nuevoScript); // Añadir el script al DOM
+                script.remove(); // Opcional: eliminar el script original
+            });
+
             // Aquí notificamos que la carga ha finalizado para realizar inicializaciones
             if (idElemento === "navbar") {
                 inicializarNavbar();

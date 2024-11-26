@@ -56,7 +56,7 @@
                 <input type="number" name="puja" id="inputPuja">
             </div>
             <div id="info">
-                <button id="btnPujar"><b>Pujar</b></button>
+                <button id="btnPujar" onclick="Pujar()"><b>Pujar</b></button>
             </div>
         </div>
     </div>
@@ -109,7 +109,7 @@
                 document.querySelector("#imgAuto").src = `${data.foto}`; // Asegúrate de que la ruta sea válida.
 
                 // Actualizar los detalles del vehículo
-                const detalles = document.querySelectorAll(".Detalles .poligono div .especificacion-texto");
+                const detalles = document.querySelectorAll(".especificacion-texto");
                 detalles[0].textContent = `${data.km} km`;
                 detalles[1].textContent = data.transmision;
                 detalles[2].textContent = data.tipo_gas;
@@ -126,12 +126,12 @@
             });
     });
 
-    document.getElementById("btnPujar").addEventListener("click", async function () {
+    async function Pujar() {
         const inputPuja = parseFloat(document.getElementById("inputPuja").value);
-        const usuarioId = obtenerUsuarioId();
-        const placa = await obtenerPlaca();
+        const usuarioId = localStorage.getItem("userId");
+        const estado = await obtenerPlaca();
 
-        if (!placa) {
+        if (!estado) {
             console.warn("No se pudo obtener la placa del vehículo.");
             return;
         }
@@ -151,7 +151,7 @@
         }
 
         const bodyData = {
-            id_placa: placa,
+            id_placa: estado.id_placa,
             valor_puja: inputPuja,
             usuario: usuarioId
         };
@@ -174,7 +174,7 @@
         } catch (error) {
             console.error("Error al realizar la puja:", error);
         }
-    });
+    };
 
 
 
@@ -213,11 +213,7 @@
 
 
 
-    function obtenerUsuarioId() {
-        const usuarioId = 2; // Cambiar por tu lógica de obtención
-        console.log("ID del usuario obtenido en obtenerUsuarioId():", usuarioId);
-        return usuarioId;
-    }
+
     
     async function obtenerPlaca() {
         const codSubasta = obtenerCodSubasta(); // Obtiene el código de la subasta desde los parámetros de la URL.
@@ -233,14 +229,14 @@
             const response = await fetch(apiUrl);
 
             if (!response.ok) {
-                console.error("Error al obtener la placa:", response.status, await response.text());
+                console.error("Error al obtener la placa:", response.status, await response.json());
                 alert("No se pudo obtener la placa del vehículo.");
                 return null;
             }
 
-            const placa = await response.text();
-            console.log("Placa obtenida:", placa);
-            return placa;
+            const estado = await response.json();
+            console.log("Placa obtenida:", estado);
+            return estado;
         } catch (error) {
             console.error("Error al realizar la solicitud para obtener la placa:", error);
             alert("Error al obtener la placa.");
