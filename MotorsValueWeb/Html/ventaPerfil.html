@@ -11,10 +11,23 @@
     <div id="navbar"></div>
 </header>
 <body>
-    <div class="especificaciones-container">
+    <div class="venta-perfil-container">
+        <!-- Sección principal con imagen y detalles -->
+        <div class="venta-perfil-detalles">
+            <div class="venta-perfil-imagen">
+                <div class="fotoAuto" id="fotoAuto"></div>
+            </div>
+            <div class="venta-perfil-info">
+                <div id="detalleAuto" class="detalleAuto"></div>
+                <div class="compra">
+                    <div class="precio-compra"></div>
+                    <button>Comprar</button>
+                </div>
+            </div>
+        </div>
 
-        <!-- Especificaciones -->
-        <div class="especificaciones-img">
+        <!-- Especificaciones del auto -->
+        <div class="venta-perfil-especificaciones">
             <div class="especificacion-item">
                 <img src="../Img/kilometraje.png" class="especificacion-img" alt="Kilometraje">
                 <h2 class="especificacion-titulo">Kilometraje:</h2>
@@ -32,19 +45,13 @@
             </div>
             <div class="especificacion-item">
                 <img src="../Img/carroceria.png" class="especificacion-img" alt="Carrocería">
-                <h2 class="especificacion-titulo">Carroceria:</h2>
+                <h2 class="especificacion-titulo">Carrocería:</h2>
                 <div class="especificacion-texto" id="carroceria"></div>
             </div>
         </div>
     </div>
-    <div class="fotoAuto" id="fotoAuto"></div>
 
-    <div id="detalleAuto" class="detalleAuto"></div>
-
-    <div class="compra">
-        <div class="precio-compra"></div>
-        <button>Comprar</button>
-    </div>
+    <!-- Modal -->
     <div id="customModal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="cerrarModal()">&times;</span>
