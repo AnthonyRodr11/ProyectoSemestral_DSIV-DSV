@@ -5,37 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Venta Perfil</title>
     <link rel="stylesheet" href="../css/ventaPerfil.css">
-    <div id="navbar"></div>
-    <script>
-        // Cargar el navbar dinámicamente
-        fetch('navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                // Insertar el contenido del navbar en el elemento con id "navbar"
-                document.getElementById('navbar').innerHTML = data;
 
-                // Una vez que el contenido esté cargado, modificar el navbar según la página actual
-                marcarEnlaceActivo();
-            })
-            .catch(error => console.error('Error cargando el navbar:', error));
-
-        // Función para marcar el enlace activo
-        function marcarEnlaceActivo() {
-            // Obtener solo el nombre del archivo de la página actual (sin directorios)
-            const currentFile = window.location.pathname.split('/').pop();
-
-            // Seleccionar todos los enlaces dentro del elemento <nav>
-            const navLinks = document.querySelectorAll("#navbar nav ul li a");
-
-            // Comparar el nombre del archivo con el atributo href de los enlaces
-            navLinks.forEach(link => {
-                if (link.getAttribute("href") === currentFile) {
-                    link.classList.add("active");
-                }
-            });
-        }
-    </script>
 </head>
+<header>
+    <div id="navbar"></div>
+</header>
 <body>
     <div class="especificaciones-container">
 
@@ -187,7 +161,7 @@
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ placa, precio })
+                body: JSON.stringify({id_cliente, id_vehiculo, f_compra, total})
             });
 
             if (response.ok) {
@@ -217,4 +191,14 @@ function redirigirRegistro() {
 }
     
 </script>
+<footer id="footer">
+</footer>
+<script src="../JavaScript/funciones.js"></script>
+<script>
+    cargarHTML('navbar', 'navbar.html');
+    </script>
+    
+    <script>
+        cargarHTML('footer', 'footer.html');
+    </script>
 </html>
