@@ -141,8 +141,7 @@
     });
 
     document.getElementById("btnPujar").addEventListener("click", async function () {
-        const inputPuja = document.getElementById("inputPuja").value;
-        const codSubasta = obtenerCodSubasta();
+        const inputPuja = parseFloat(document.getElementById("inputPuja").value);
         const usuarioId = obtenerUsuarioId();
         const placa = await obtenerPlaca();
 
@@ -151,15 +150,23 @@
             return;
         }
 
-        if (inputPuja <= actualizarOfertaActual()|| !inputPuja) {
+        if (!inputPuja || inputPuja <= 0) {
             console.warn("El valor de la puja es inválido.");
             alert("Por favor, ingresa un valor válido para la puja.");
             return;
         }
 
+        const ofertaActual = await actualizarOfertaActual();
+
+        if (inputPuja <= ofertaActual || isNaN(inputPuja)) {
+            console.warn("El valor de la puja es inválido.");
+            alert("Por favor, ingresa un valor mayor a la oferta actual.");
+            return;
+        }
+
         const bodyData = {
             id_placa: placa,
-            valor_puja: parseFloat(inputPuja),
+            valor_puja: inputPuja,
             usuario: usuarioId
         };
 
@@ -174,8 +181,7 @@
 
             if (response.ok) {
                 alert("Puja realizada exitosamente.");
-                // Vuelve a cargar los datos de la subasta para actualizar la oferta actual.
-                await actualizarOfertaActual();
+                await actualizarOfertaEnDOM(); // Actualiza el DOM después de la puja
             } else {
                 console.error("Error recibido del servidor:", await response.text());
             }
@@ -183,6 +189,8 @@
             console.error("Error al realizar la puja:", error);
         }
     });
+
+
 
 
     async function actualizarOfertaActual() {
@@ -198,16 +206,26 @@
 
             const data = await response.json();
 
-            // Actualizar la Oferta Actual en el DOM
-            const ofertaActual = Math.max(data.valor_inicial, data.valor_puja);
-            document.querySelector("#Oferta").textContent = `$${ofertaActual.toFixed(2)}`;
-
-            console.log("Oferta actualizada:", ofertaActual);
+            // Devuelve el valor de la oferta actual para validaciones
+            return Math.max(data.valor_inicial, data.valor_puja);
         } catch (error) {
             console.error("Error al actualizar la oferta actual:", error);
             alert("No se pudo actualizar la oferta actual.");
+            return null; // Devuelve null en caso de error
         }
     }
+
+    async function actualizarOfertaEnDOM() {
+        const ofertaActual = await actualizarOfertaActual();
+
+        if (ofertaActual !== null) {
+            document.querySelector("#Oferta").textContent = `$${ofertaActual.toFixed(2)}`;
+            console.log("Oferta actualizada en el DOM:", ofertaActual);
+        }
+    }
+
+
+
 
     function obtenerUsuarioId() {
         const usuarioId = 2; // Cambiar por tu lógica de obtención
@@ -246,12 +264,59 @@
 
     setInterval(async () => {
         console.log("Actualizando oferta actual...");
-        await actualizarOfertaActual();
+        await actualizarOfertaEnDOM();
     }, 10000); // Cada 10 segundos
 
+    // Función para verificar el estado de la subasta
+    async function verificarEstadoSubasta() {
+        const codSubasta = obtenerCodSubasta();
+        const apiUrl = `https://localhost:7129/MotorsApi/Subasta/placa/${codSubasta}`;
 
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) {
+                throw new Error("Error al obtener el estado de la subasta.");
+            }
 
+            const data = await response.json();
+
+            // Verificar si el estado es "Finalizado"
+            if (data.estado === "finalizada") {
+                console.log("La subasta ha finalizado.", data.estado);
+                deshabilitarSubasta();
+            } else {
+                console.log("La subasta sigue activa.", data.estado);
+            }
+        } catch (error) {
+            console.error("Error al verificar el estado de la subasta:", error);
+            alert("No se pudo verificar el estado de la subasta.");
+        }
+    }
+
+    // Función para deshabilitar la funcionalidad de puja
+    function deshabilitarSubasta() {
+        const btnPujar = document.getElementById("btnPujar");
+        const inputPuja = document.getElementById("inputPuja");
+        const tiempoRestante = document.getElementById("tiempoRestante");
+
+        btnPujar.disabled = true;
+        inputPuja.disabled = true;
+        tiempoRestante.textContent = "Subasta Finalizada";
+        tiempoRestante.style.color = "red";
+    }
+
+    document.addEventListener("DOMContentLoaded", async function () {
+        // Verificar el estado de la subasta al cargar la página
+        await verificarEstadoSubasta();
+
+        // Continuar con las actualizaciones periódicas
+        setInterval(async () => {
+            console.log("Verificando estado de la subasta...");
+            await verificarEstadoSubasta();
+        }, 10000); // Cada 10 segundos
+    });
 </script>
+
 
 </html>
 
