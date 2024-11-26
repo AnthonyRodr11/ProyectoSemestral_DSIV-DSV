@@ -19,20 +19,28 @@
     </script>
 
     <style>
-        #contenedor-caja {
+        body {
+            margin: 0;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            min-height: 100vh;
             display: flex;
-            flex-wrap: wrap;
+            flex-direction: column;
+            background-color: #e6e6e6;
+        }
+        #contenedor-caja {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Cambiado a auto-fit y aumentado el min-width */
             gap: 15px;
             padding: 20px;
-            min-height: 200px;
+            max-width: 1200px; /* Establecemos un ancho máximo para evitar que crezca demasiado en pantallas grandes */
+            margin: 0 auto;
         }
         .caja {
             background-color: #ffffff;
-            border: 5px solid #04407b;
+            border: 1px solid #ccc;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 15px;
-            width: 250px;
             transition: transform 0.2s;
             cursor: pointer;
             text-align: center;
@@ -41,7 +49,8 @@
             transform: scale(1.05);
         }
         .caja h3 {
-            font-size: 18px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 25px!important;
             font-weight: bold;
             color: #333;
             margin-bottom: 10px;
@@ -50,25 +59,64 @@
         .caja img {
             width: 100%;
             height: auto;
-            border-radius: 8px;
+            max-height: 180px; /* Controlar el tamaño máximo de la imagen */
+            object-fit: cover;
         }
         .precio {
-            font-size: 16px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 20px!important;
             font-weight: bold;
             color: black;
-            margin: 10px 0;
+            margin: 10px;
         }
 
-        .precio-actual{
-
-            font-size: 16px;
-            font-weight: bold;
-            color: red;
-        }
         .tiempo-restante {
-            font-size: 16px;
-            color: green;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-size: 20px!important;
+            font-weight: bold;
+            color: rgb(2, 106, 33);
+            margin: 10px;
         }
+
+        @media (max-width: 1024px) {
+    /* Para tablets y dispositivos medianos */
+            #contenedor-caja {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Reducir el tamaño mínimo en tablets */
+            }
+
+        }
+
+        @media (max-width: 768px) {
+            
+            /* Para dispositivos más pequeños como tablets verticales */
+            .caja h3 {
+                font-size: 16px;
+            }
+
+            .precio {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Para teléfonos móviles */
+            #contenedor-caja {
+                grid-template-columns: 1fr; /* Forzar una sola columna en móviles */
+            }
+
+            .caja {
+                padding: 10px;
+            }
+
+            .caja h3 {
+                font-size: 14px;
+            }
+
+            .precio {
+                font-size: 12px;
+            }
+        }
+
     </style>
 </head>
 
@@ -81,6 +129,7 @@
         <div id="footer"></div>
     </footer>
 </body>
+
 </html>
 
 <script src="../JavaScript/funciones.js"></script>

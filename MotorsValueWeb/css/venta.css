@@ -42,6 +42,7 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     padding: 15px;
     transition: transform 0.2s;
+    cursor: pointer;
 }
 
 .caja:hover {
@@ -51,7 +52,7 @@ body {
 /* Títulos dentro de las cajas */
 .caja h3 {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 18px;
+    font-size: 25px!important;
     font-weight: bold;
     color: #333;
     margin-bottom: 10px;
@@ -69,34 +70,10 @@ body {
 /* Precio dentro de las cajas */
 .precio {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 16px;
+    font-size: 20px!important;
     font-weight: bold;
     color: green;
     margin-top: 10px;
-}
-
-main {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px;
-
-}
-
-main > h1 {
-    color: #04407b;
-    font-size: 32px;
-    margin-bottom: 30px;
-    text-transform: uppercase;
-}
-
-footer {
-    background-color: #425359;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    margin-top: auto;
 }
 
 @media (max-width: 1024px) {
@@ -108,16 +85,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        padding: 20px;
-    }
-    
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
     /* Para dispositivos más pequeños como tablets verticales */
     .caja h3 {
         font-size: 16px;
