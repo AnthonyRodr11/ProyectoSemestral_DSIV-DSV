@@ -30,7 +30,7 @@
                       Finaliza en:  
                     </p>
                     <p id="tiempoRestante">
-                        
+
                     </p>
                 </div>
                 <div class="info">
@@ -78,30 +78,6 @@
 
     cargarHTML('navbar','navbar.html');
     cargarHTML('footer','footer.html');
-
-    document.addEventListener("DOMContentLoaded", () => {
-        // Obtener la URL de la página actual
-        const currentPath = window.location.pathname;
-
-        // Seleccionar todos los enlaces del navbar
-        const navLinks = document.querySelectorAll("nav a");
-
-        // Comparar la URL de cada enlace con la URL actual
-        navLinks.forEach(link => {
-            if (link.getAttribute("href") === currentPath) {
-                link.classList.add("active");
-            }
-        });
-    });
-
-    document.addEventListener("click", (event) => {
-        if (event.target.classList.contains("menu-toggle")) {
-            const menu = document.querySelector(".menu");
-            if (menu) {
-                menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-            }
-        }
-    });
 
 </script>
 
