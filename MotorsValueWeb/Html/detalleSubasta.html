@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de Subasta</title>
+    <link rel="stylesheet" href="../css/subastaDetalles.css">
+    <div id="navbar"></div>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="imagen">
+            <img id="imgAuto" src="../Img/FordRanger.png" alt="imagen del auto">
+            <h1 id="modelo"></h1>
+        </div>
+
+        <div class="informacion">
+            <div class="Detalles">
+                <div class="poligono">
+                    <div>
+                        <img src="../Img/kilometraje.png" class="icono">
+                        <h2 class="especificacion-titulo">Kilometraje:</h2>
+                        <h2 class="especificacion-texto"></h2>
+                    </div>
+                    <div>
+                        <img src="../Img/transmision.png" class="icono">
+                        <h2 class="especificacion-titulo">Transmision:</h2>
+                        <h2 class="especificacion-texto"></h2>
+                    </div>
+                    <div>
+                        <img src="../Img/gas.png" class="icono">
+                        <h2 class="especificacion-titulo">Combustible:</h2>
+                        <h2 class="especificacion-texto"></h2>
+                    </div>
+                    <div>
+                        <img src="../Img/carroceria.png" class="icono">
+                        <h2 class="especificacion-titulo">Carroceria:</h2>
+                        <h2 class="especificacion-texto"></h2>
+                    </div>
+                </div>
+
+            </div>
+            <div class="pujar">
+                <div class="info">
+                    <h3>
+                        Finaliza en:  
+                    </h3>
+                      
+ 
+                    <h3 id="tiempoRestante">
+
+                    </h3>
+                </div>
+                <div class="info">
+                    <h3>
+                        Oferta Actual:
+                    </h3>
+                    <h3 id="Oferta">
+
+                    </h3>
+                </div>
+                <div class="info">
+                    <h3>
+                        Monto a Pujar:$
+                    </h3>
+                    <input type="number" name="puja" id="inputPuja">
+                </div>
+                <div id="info">
+                    <button id="btnPujar"> <b>Pujar</b></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup" class="popup-overlay" style="display: none;">
+        <div class="popup-content">
+            <h2>Subasta</h2>
+            <p>¿Seguro que desea realizar la subasta?</p>
+            <div class="popup-buttons">
+                <button id="popupAceptar">Aceptar</button>
+                <button id="popupCancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div id="footer"></div>
+    </footer>
+
+
+</body>
+
+<script src="../JavaScript/funciones.js"></script>    
+
+<script>
+
+    cargarHTML('navbar','navbar.html');
+    cargarHTML('footer','footer.html');
+
+    function obtenerCodSubasta() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('cod_subasta'); // Ejemplo: ?id=123
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const placa = obtenerCodSubasta(); // Reemplaza con la placa que desees consultar.
+        console.log(placa);
+        const apiUrl = `https://localhost:7129/MotorsApi/Subasta/subasta/${placa}`;
+
+        // Hacer la solicitud al API
+        fetch(apiUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error al cargar los datos de la subasta");
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Actualizar los elementos del DOM con los datos recibidos
+                console.log(JSON.stringify(data));
+                document.querySelector("#modelo").textContent = `${data.marca} ${data.modelo}`;
+                document.querySelector("#imgAuto").src = `${data.foto}`; // Asegúrate de que la ruta sea válida.
+
+                // Actualizar los detalles del vehículo
+                const detalles = document.querySelectorAll(".Detalles .poligono div .especificacion-texto");
+                detalles[0].textContent = `${data.km} km`;
+                detalles[1].textContent = data.transmision;
+                detalles[2].textContent = data.tipo_gas;
+                detalles[3].textContent = data.carroceria;
+
+                // Actualizar los párrafos de información
+                document.querySelector("#tiempoRestante").textContent = new Date(data.t_final).toLocaleString();
+                const ofertaActual = Math.max(data.valor_inicial, data.valor_puja);
+                document.querySelector("#Oferta").textContent = `$${ofertaActual.toFixed(2)}`;
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("No se pudieron cargar los datos de la subasta.");
+            });
+    });
+
+</script>
+
+</html>
+

@@ -522,7 +522,7 @@ namespace MotorsApi.BD.CRUD.Read
         
 
 
-        public FlotaSubastaRequest listaSubasta(string placa)
+        public FlotaSubastaRequest listaSubasta(int codigo)
         {
 
             FlotaSubastaRequest lista = null;
@@ -535,17 +535,20 @@ namespace MotorsApi.BD.CRUD.Read
                 //Especificamos el tipo de comando
                 cmd.CommandType = CommandType.Text;
 
-                cmd.Parameters.Add(new MySqlParameter("@placa", placa));
+                cmd.Parameters.Add(new MySqlParameter("@placa", codigo));
 
                 //asignamos consulta a realizar
                 cmd.CommandText = @"    
                                     SELECT 
                                         fc.km, fc.transmision, fc.tipo_gas, fc.carroceria, fc.marca, fc.modelo, fc.foto, fs.t_final, fs.valor_inicial, fs.valor_puja 
                                     FROM 
-                                        flota_carro fc 
-                                    INNER 
-                                        JOIN flota_subasta fs 
-                                    WHERE fs.id_placa = @placa";
+                                        flota_carro fc
+                                    INNER JOIN
+                                        flota_subasta fs
+                                    ON 
+                                        fc.placa = fs.id_placa
+                                    WHERE fs.cod_subasta = @placa AND fc.disponibilidad = 1";//placa en realidad es el código de subasta pero era más fácil solo dejarlo en placa. QUe si haciendo el comentario me tomó más tiempo que cambiarlo?
+                                                                   //si, pero estoy aburrido
 
                 abrirConexion();
 
