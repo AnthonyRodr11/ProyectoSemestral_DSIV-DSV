@@ -16,7 +16,7 @@ namespace MotorsApi.Controllers
 
         [HttpPost]
         [Route("venta")] 
-        public object VenderAuto(Flota_Venta venta) //Este método agrega a la tabla Flota_Venta, el carro pasa a venderse
+        public object VenderAuto(Ventas venta) //Este método agrega a la tabla Flota_Venta, el carro pasa a venderse
         {
             Venta_Flota ventaAuto = new Venta_Flota();
 
@@ -60,6 +60,25 @@ namespace MotorsApi.Controllers
         }
 
         [HttpGet]
+        [Route("ventaId/{placa}")]
+        public IActionResult listaVenta(string placa)
+        {
+            Venta_Flota ventaId = new Venta_Flota();
+            int? id = ventaId.ObtenerVentaIdPorPlaca(placa); 
+
+            if (id == null)
+            {
+                return BadRequest(new
+                {
+                    titulo = "Sin resultados",
+                    mensaje = "No se encontro ningun id",
+                });
+            }
+                
+            return Ok(id);
+        }
+
+        [HttpGet]
         [Route("flotaDetalle/{id}")]
         public IActionResult ListaAutosPerfil(string id)
         {
@@ -80,10 +99,10 @@ namespace MotorsApi.Controllers
         }
 
         [HttpPost]
-        [Route ("vendido/{id}")]
-        public IActionResult CarroVendido(int id, Ventas vendido)
+        [Route ("vendido")]
+        public IActionResult CarroVendido([FromBody] Flota_Venta vendido)
         {
-            if (vendido == null || id == null)
+            if (vendido == null)
             {
                 return BadRequest(new
                 {
@@ -96,11 +115,12 @@ namespace MotorsApi.Controllers
             Venta_Flota agregar = new Venta_Flota();
             bool dispo = false;
 
-            var guardado = agregar.VenderCarro(id, vendido); //Para saber si se ingresaron los datos
-            var cambiado = agregar.CambiarDisponibilidad(vendido.id_vehiculo, dispo); //para saber si se cambió la disponibilidad
+            var guardado = agregar.VenderCarro(vendido); //Para saber si se ingresaron los datos
+             //para saber si se cambió la disponibilidad
 
-            if (guardado > 0 || cambiado > 0)
+            if (guardado > 0)
             {
+                var cambiado = agregar.CambiarDisponibilidad(vendido.placa, dispo);
                 return Ok(new
                 {
                     titulo = "Éxito al guardar",

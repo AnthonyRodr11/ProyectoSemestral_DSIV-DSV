@@ -6,7 +6,7 @@ namespace MotorsApi.BD.CRUD.Create
 {
     public class Venta_Flota : Conexiondb
     {
-        public int registrarVenta(Flota_Venta flota_Venta)
+        public int registrarVenta(Ventas flota_Venta)
         {
             //declaracion de variable de trabajo 
             int insercion;
@@ -20,13 +20,12 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos el nombre del procedimiento de almacendo
-                cmd.CommandText = "INSERT INTO Flota_Venta (placa, precio) VALUES(@placa,@precio)"; //poner nombre posteriormente
+                cmd.CommandText = "INSERT INTO Flota_Venta (id, placa, precio) VALUES(@id,@placa,@precio)"; //poner nombre posteriormente
 
                 //asignamos parametros
-                cmd.Parameters.Add(new MySqlParameter("@placa", flota_Venta.placa));
-                cmd.Parameters.Add(new MySqlParameter("@precio", flota_Venta.precio));
-
-
+                cmd.Parameters.Add(new MySqlParameter("@placa", flota_Venta.id_vehiculo));
+                cmd.Parameters.Add(new MySqlParameter("@precio", flota_Venta.total));
+                cmd.Parameters.Add(new MySqlParameter("@precio", flota_Venta.id_cliente));
 
 
                 //abrir Conexion
@@ -59,7 +58,7 @@ namespace MotorsApi.BD.CRUD.Create
 
 
         //Metodo para agregar registro de venta
-        public int VenderCarro(int id, Ventas vendido) 
+        public int VenderCarro(Flota_Venta vendido)
         {
             int insercion;
 
@@ -72,14 +71,13 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos el nombre del procedimiento de almacendo
-                cmd.CommandText = "INSERT INTO ventas VALUES (@venta_id, @id_cliente, @id_vehiculo, @f_compra, @total)";
+                cmd.CommandText = "INSERT INTO ventas (venta_id, id_cliente, id_vehiculo, total) VALUES (@id_venta, @id_cliente, @id_vehiculo, @total)";
 
                 //asignamos parametros
-                cmd.Parameters.Add(new MySqlParameter("@venta_id", id));
                 cmd.Parameters.Add(new MySqlParameter("@id_cliente", vendido.id_cliente));
-                cmd.Parameters.Add(new MySqlParameter("@id_vehiculo", vendido.id_vehiculo));
-                cmd.Parameters.Add(new MySqlParameter("@f_compra", vendido.f_compra));
-                cmd.Parameters.Add(new MySqlParameter("@total", vendido.total));
+                cmd.Parameters.Add(new MySqlParameter("@id_vehiculo", vendido.placa));
+                cmd.Parameters.Add(new MySqlParameter("@total", vendido.precio));
+                cmd.Parameters.Add(new MySqlParameter("@id_venta", vendido.id_venta));
 
 
 
@@ -153,5 +151,49 @@ namespace MotorsApi.BD.CRUD.Create
             return 0;
         }
 
+        public int? ObtenerVentaIdPorPlaca(string placa)
+        {
+            int? codVenta = null;
+
+            try
+            {
+                // Limpiamos parámetros
+                cmd.Parameters.Clear();
+
+                // Especificamos el tipo de comando
+                cmd.CommandType = CommandType.Text;
+
+                // Asignamos consulta a realizar
+                cmd.CommandText = "SELECT cod_venta FROM flota_venta WHERE placa = @placa LIMIT 1";
+
+                // Agregamos el parámetro
+                cmd.Parameters.AddWithValue("@placa", placa);
+
+                // Abrimos la conexión
+                abrirConexion();
+
+                // Ejecutamos la consulta y leemos el resultado
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        codVenta = reader.GetInt32("cod_venta");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error al obtener el ID del auto", e);
+            }
+            finally
+            {
+                // Cerramos la conexión
+                cerrarConexion();
+            }
+
+            return codVenta;
+        }
+
     }
+
 }

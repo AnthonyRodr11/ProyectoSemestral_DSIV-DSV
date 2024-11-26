@@ -31,7 +31,7 @@ namespace MotorsApi.BD.CRUD.Read
                     JOIN 
                         Flota_Venta v ON c.placa = v.placa
                     WHERE 
-                        c.estado = @estado";
+                        c.estado = @estado AND disponibilidad = 1";
 
                 // Agregamos el parámetro estado
                 cmd.Parameters.AddWithValue("@estado", estado);
@@ -118,7 +118,7 @@ namespace MotorsApi.BD.CRUD.Read
                             carroceria = reader["carroceria"].ToString()
                         };
 
-                        // Agregamos el objeto a la lista
+                        // Agregamos el objeto a la lista   
                         autos.Add(flota);
                     }
                 }
@@ -426,7 +426,7 @@ namespace MotorsApi.BD.CRUD.Read
                         fc.estado = 'alquiler'";
                 abrirConexion();
 
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using ( MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
