@@ -89,6 +89,18 @@
     </script>
 
     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const userId = localStorage.getItem("userId");
+
+            if (!userId) {
+                // Mostrar un modal o redirigir a una página de registro
+                alert("Para acceder a esta función, debes estar registrado.");
+                window.location.href = "register.html";
+            }
+        });
+    </script>
+
+    <script>
         const userId = localStorage.getItem('userId');
         console.log('ID recuperada:', userId);
 
@@ -98,7 +110,8 @@
             console.log('No hay usuario autenticado. Redirigiendo...');
         }
     </script>
-
+    
+    
 </body>
 <footer id="footer">
 

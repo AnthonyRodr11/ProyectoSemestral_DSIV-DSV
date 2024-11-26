@@ -35,7 +35,24 @@
 <footer id="footer">
 
 </footer>
+<script>
 
+    document.addEventListener("DOMContentLoaded", () => {
+        const userId = localStorage.getItem('userId');
+        const registerButton = document.querySelector('#register-button'); // Asegúrate de que el botón tenga este id
+
+        if (userId) {
+            // Cambia el botón de "Registrarse" a un ícono de usuario
+            registerButton.innerHTML = '<img src="../img/icono-usuario.png" alt="Usuario" style="width: 20px; height: 20px;">';
+            registerButton.href = "perfil.html"; // Cambia el link a la página de perfil
+        } else {
+            // Si no está logueado, mantenemos el botón de "Registrarse"
+            registerButton.innerHTML = 'Registrarse';
+            registerButton.href = "register.html";
+        }
+    });
+
+</script>
 <script>
     const userId = localStorage.getItem('userId');
     console.log('ID recuperada:', userId);
