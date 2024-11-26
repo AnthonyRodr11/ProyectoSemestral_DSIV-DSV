@@ -8,7 +8,12 @@
     <div id="navbar"></div>
 </head>
 <body>
-    <div id="contenedor-caja"></div>
+    <div id="contenedor-caja">
+        <div>
+            <h1>Ups</h1>
+            <H2>Parece que los vehículos fueron muy rápidos y no los alcanzaste :c</H2>
+        </div>
+    </div>
 </body>
 </html>
 
@@ -61,7 +66,7 @@
 
     async function actualizarCaja() {
         const datos = await obtenerDatos();
-        crearCaja(datos);
+        if(datos[0] != null){crearCaja(datos);}
     }
 
     actualizarCaja();

@@ -123,7 +123,12 @@
 <body>
         <!-- Línea azul -->
     <div class="linea-azul"></div>
-    <div id="contenedor-caja"></div>
+    <div id="contenedor-caja">
+        <div>
+            <h1>Ups</h1>
+            <H2>Parece que los vehículos fueron muy rápidos y no los alcanzaste :c</H2>
+        </div>
+    </div>
 
     <footer>
         <div id="footer"></div>
@@ -203,7 +208,7 @@
     // Función para actualizar las cajas periódicamente
     async function actualizarCajas() {
         const datos = await obtenerDatos();
-        crearCaja(datos);
+        if(datos[0] != null){crearCaja(datos);}
     }
 
     actualizarCajas(); // Carga inicial
