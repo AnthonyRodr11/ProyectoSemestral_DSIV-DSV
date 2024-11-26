@@ -1,134 +1,125 @@
-body{
+/* Estilos generales */
+* {
     margin: 0;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     background-color: #e6e6e6;
 }
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color:#004a8f;
-    clip-path: polygon(64% 100%, 78% 0, 100% 0, 100% 100%, 77% 100%, 91% 0, 88% 0, 74% 100%);
-    z-index: -1;
-}
-
-.especificaciones-container {
+/* Contenedor principal */
+.venta-perfil-container {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    display: flex;
-    margin-top: 100px;
-    width: 500px;
-    height: 250px;
-    margin-left: 825px;
-    background-color: #88898d;
-    clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%)
+    padding: 20px;
 }
 
-.fotoAuto {
-    width: 550px;
+/* Sección de detalles */
+.venta-perfil-detalles {
     display: flex;
-    margin-top: -325px ;
-    margin-left: 30px;
-    margin-bottom: 10px;
+    text-align: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.venta-perfil-imagen {
+    width: 50%;
+    padding: 20px;
 }
 
 .fotoAuto img {
-    margin-left: 15%;
-    width: 700px;
-    height: 350px;
-}
-
-.especificaciones {
-    margin-right: 20px;
-    flex-direction: column;
-    padding: 20px;
-    width: 300px;
-}
-.especificacion-item {
-    margin-bottom: 10px;
-    margin-top: 15px;
-    display: flex; /* Alinear elementos en una fila */
-    align-items: center; /* Centrar verticalmente */
-    gap: 35px; /* Espacio entre la imagen y el texto */
-}
-
-.especificacion-img {
-    margin-left: 30px;
-    width: 45px;
+    width: 100%;
     height: auto;
+    border-radius: 8px;
 }
 
-.especificacion-texto {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 25px;
-    color: #ffffff;
+.venta-perfil-info {
+    width: 50%;
+    padding: 20px;
 }
 
-/* Ajustar el contenedor que contiene el título y el texto */
-.especificacion-contenido {
-    display: flex;
-    flex-direction: column; /* Alinear el título y texto en columna */
+.detalleAuto {
+    margin-bottom: 20px;
 }
-
-
-
-.especificacion-titulo {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 25px;
-    font-weight: bold;
-    margin: 0; /* Quita margen por defecto */
-    color: black; /* Color del título */
-    font-style: oblique;
-}
-
 
 .detalleAuto h2 {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    margin-top: -20px;
-    margin-left: 15%;
     font-size: 50px;
-    color: #333;
+    font-weight: bold;
 }
 
-/* Estilo para la sección de compra */
 .compra {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    background-color: #f8f9fa;
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-top: 20px;
-    max-width: 300px;
-    margin: 0 auto;
 }
 
 .precio-compra {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 25px;
+    font-size: 25px!important;
     font-weight: bold;
-    color: green;
-    margin-right: 10px;
+    margin-bottom: 15px;
+    color: #218838;
 }
 
 .compra button {
-    background-color: #007bff;
+    padding: 10px 20px;
+    background-color: #28a745;
     color: white;
     border: none;
-    padding: 10px 15px;
-    border-radius: 100px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.3s ease;
 }
+
 .compra button:hover {
-    color:  #007bff;
-    background-color: #b2b3b5;
+    background-color: #218838;
 }
+
+/* Especificaciones del auto */
+.venta-perfil-especificaciones {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.especificacion-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 22%;
+    margin-bottom: 20px;
+}
+
+.especificacion-img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.especificacion-titulo {
+    font-size: 20px!important;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.especificacion-texto {
+    font-size: 18px!important;
+    color: #555;
+}
+
 .modal {
     display: none;
     position: fixed;
@@ -175,3 +166,107 @@ body::before {
     color:  #007bff;
 }
 
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos Responsivos */
+@media (max-width: 1200px) {
+    .venta-perfil-detalles {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .venta-perfil-imagen,
+    .venta-perfil-info {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .fotoAuto img {
+        width: 80%;
+    }
+}
+
+@media (max-width: 800px) {
+    .venta-perfil-especificaciones {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .especificacion-item {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+
+    .compra button {
+        width: 100%;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+
+    .detalleAuto h2 {
+        font-size: 20px;
+    }
+
+    .precio-compra {
+        font-size: 16px;
+    }
+
+    .venta-perfil-info {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .compra button {
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    .especificacion-titulo {
+        font-size: 16px;
+    }
+
+    .especificacion-texto {
+        font-size: 14px;
+    }
+
+    .especificacion-item {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .fotoAuto img {
+        width: 100%;
+    }
+
+    .detalleAuto h2 {
+        font-size: 18px;
+    }
+
+    .precio-compra {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
