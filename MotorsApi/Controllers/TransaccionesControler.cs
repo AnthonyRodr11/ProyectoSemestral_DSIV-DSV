@@ -20,7 +20,7 @@ namespace MotorsApi.Controllers
             var misAlquileres = historial.obtenerMiAlquiler(id_usuario);
 
 
-            if (misAlquileres == null)
+            if (misAlquileres == null || misAlquileres.Count == 0)
             {
                 return NotFound(new
                 {
@@ -44,7 +44,7 @@ namespace MotorsApi.Controllers
             var misVentas = hitorialin.obtenerMisCompras(id_usuario);
 
 
-            if (misVentas == null)
+            if (misVentas == null || misVentas.Count == 0)
             {
                 return NotFound(new
                 {
@@ -63,7 +63,7 @@ namespace MotorsApi.Controllers
         //Controller para Subasta lista
 
         [HttpGet]
-        [Route("perfil/subasta/{id_usuario}")]
+        [Route("perfil/Subasta/{id_usuario}")]
         public IActionResult obtenerTransaccionSubasta(int id_usuario)
         {
             HistorialTransacciones historial = new HistorialTransacciones();

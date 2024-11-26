@@ -24,7 +24,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT cod_alquiler, id_vehiculo, f_retiro, f_entregas FROM Flota_Alquiler WHERE  id_usuario = @id_usuario";
+                cmd.CommandText = "SELECT cod_alquiler, id_vehiculo, f_retiro, f_entrega FROM Flota_Alquiler WHERE  id_usuario = @id_usuario";
 
                 cmd.Parameters.AddWithValue("@id_usuario", id_usuario);
 
