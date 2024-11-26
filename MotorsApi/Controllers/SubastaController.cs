@@ -10,7 +10,7 @@ namespace MotorsApi.Controllers
 
         [HttpGet]
         [Route("subasta/{placa}")]
-        public IActionResult GetSubasta(string placa)
+        public IActionResult GetSubasta(int placa)
         {
             var tsubaru = new Ver_Flotas().listaSubasta(placa);
 
