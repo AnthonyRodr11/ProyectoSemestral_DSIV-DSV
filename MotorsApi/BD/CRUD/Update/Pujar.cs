@@ -38,23 +38,30 @@ namespace MotorsApi.BD.CRUD.Update
             
         }
 
-        public string GetPlaca(int codigo)
+        public SubastaRequest GetPlaca(int codigo)
         {
+            
             try
             {
                 cmd.Parameters.Clear();
 
                 cmd.CommandType= System.Data.CommandType.Text;
 
-                cmd.CommandText = "SELECT id_placa FROM flota_subasta WHERE cod_subasta = @cod_subasta";
+                cmd.CommandText = "SELECT id_placa, estado FROM flota_subasta WHERE cod_subasta = @cod_subasta";
 
                 cmd.Parameters.Add(new MySqlParameter("@cod_subasta", codigo));
 
                 abrirConexion();
                 using(MySqlDataReader reader = cmd.ExecuteReader())
                     while (reader.Read())
+
                     {
-                        return reader["id_placa"].ToString();
+                        SubastaRequest subasta = new SubastaRequest()
+                        {
+                            id_placa = reader["id_placa"].ToString(),
+                            estado = reader["estado"].ToString()
+                        };
+                        return subasta;
                     }
              }
             catch (Exception ex) { Console.WriteLine(ex); }
