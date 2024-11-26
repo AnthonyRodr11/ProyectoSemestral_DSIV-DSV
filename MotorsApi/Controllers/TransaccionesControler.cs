@@ -13,14 +13,14 @@ namespace MotorsApi.Controllers
         //Controller para alquiler lista
 
         [HttpGet]
-        [Route("usuario/perfil/{id}")]
+        [Route("perfil/Alquiler/{id}")]
         public IActionResult obtenerTransaccionAlquiler(int id_usuario)
         {
-            HistorialTransacciones hitorialin = new HistorialTransacciones();
-            var parqueplacentero = hitorialin.obtenerMiAlquiler(id_usuario);
+            HistorialTransacciones historial = new HistorialTransacciones();
+            var misAlquileres = historial.obtenerMiAlquiler(id_usuario);
 
 
-            if (parqueplacentero == null)
+            if (misAlquileres == null)
             {
                 return NotFound(new
                 {
@@ -31,22 +31,20 @@ namespace MotorsApi.Controllers
 
 
             }
-
-
-            return Ok(hitorialin);
+            return Ok(misAlquileres);
         }
 
         //Controller para Venta lista
 
         [HttpGet]
-        [Route("usuario/perfil/{id}")]
+        [Route("perfil/Venta/{id}")]
         public IActionResult obtenerTransaccionVenta(int id_usuario)
         {
             HistorialTransacciones hitorialin = new HistorialTransacciones();
-            var parqueplacentero = hitorialin.obtenerMisCompras(id_usuario);
+            var misVentas = hitorialin.obtenerMisCompras(id_usuario);
 
 
-            if (parqueplacentero == null)
+            if (misVentas == null)
             {
                 return NotFound(new
                 {
@@ -59,20 +57,20 @@ namespace MotorsApi.Controllers
             }
 
 
-            return Ok(hitorialin);
+            return Ok(misVentas);
         }
 
         //Controller para Subasta lista
 
         [HttpGet]
-        [Route("usuario/perfil/{id}")]
+        [Route("perfil/subasta/{id}")]
         public IActionResult obtenerTransaccionSubasta(int id_usuario)
         {
-            HistorialTransacciones hitorialin = new HistorialTransacciones();
-            var parqueplacentero = hitorialin.obtenerMisSubastas(id_usuario);
+            HistorialTransacciones historial = new HistorialTransacciones();
+            var misSubastas = historial.obtenerMisSubastas(id_usuario);
 
 
-            if (parqueplacentero == null)
+            if (misSubastas == null)
             {
                 return NotFound(new
                 {
@@ -84,8 +82,7 @@ namespace MotorsApi.Controllers
 
             }
 
-
-            return Ok(hitorialin);
+            return Ok(misSubastas);
         }
     }
 }

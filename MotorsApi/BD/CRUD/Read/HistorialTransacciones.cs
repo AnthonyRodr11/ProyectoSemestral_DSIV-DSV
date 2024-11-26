@@ -68,7 +68,7 @@ namespace MotorsApi.BD.CRUD.Read
 
         }
         //Transacciones de Venta
-        public List<Flota_Venta> obtenerMisCompras(int id_usario)
+        public List<Flota_Venta> obtenerMisCompras(int id_usuario)
         {
             
             //lista de objetos
@@ -85,7 +85,7 @@ namespace MotorsApi.BD.CRUD.Read
                 //asignamos codigo
                 cmd.CommandText = "SELECT venta_id, id_vehiculo, f_compra, total FROM Ventas WHERE id_cliente = @id_usuario";
 
-                cmd.Parameters.Add(new MySqlParameter("@id_usario", id_usario));
+                cmd.Parameters.Add(new MySqlParameter("@id_usuario", id_usuario));
 
                 //abrimos conexion
                 abrirConexion();
@@ -125,7 +125,55 @@ namespace MotorsApi.BD.CRUD.Read
         //Transacciones de Subasta
         public List<SubastaRequest> obtenerMisSubastas(int id_usuario)
         {
+            //lista de objetos
+            List<SubastaRequest> misSubastas = new List<SubastaRequest>();
 
+            try
+            {
+                //limpiamos parametros
+                cmd.Parameters.Clear();
+
+                //asignamos el tipo consulta
+                cmd.CommandType = CommandType.Text;
+
+                //asignamos codigo
+                cmd.CommandText = "SELECT cod_subasta, id_placa, valor_puja FROM Flota_Subasta WHERE id_usuario = @id_usuarip";
+
+                cmd.Parameters.Add(new MySqlParameter("@id_usuario", id_usuario));
+
+                //abrimos conexion
+                abrirConexion();
+
+                // Ejecutamos la consulta
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        SubastaRequest subasta = new SubastaRequest()
+                        {
+
+                            cod_subasta = reader.GetInt32(0),
+                            id_placa = reader.GetString(1),
+                            valor_puja = reader.GetDouble(2)
+                        };
+
+                        misSubastas.Add(subasta);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+
+            }
+            finally
+            {
+
+                cerrarConexion();
+            }
+
+            return misSubastas;
         }
     }
 }
