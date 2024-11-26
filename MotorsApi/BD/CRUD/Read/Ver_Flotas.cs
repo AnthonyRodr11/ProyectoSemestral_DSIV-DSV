@@ -28,7 +28,7 @@ namespace MotorsApi.BD.CRUD.Read
                     FROM 
                         Flota_Carro c
                     JOIN 
-                        Flota_Venta v ON c.placa = v.placa
+                        Flota_Venta v ON v.placa = c.placa
                     WHERE 
                         c.estado = @estado AND disponibilidad = 1";
 
