@@ -8,17 +8,6 @@
     <div id="navbar"></div>
     <script>
         // Cargar el navbar dinámicamente
-        fetch('navbar.html')
-            .then(response => response.text())
-            .then(data => {
-                // Insertar el contenido del navbar en el elemento con id "navbar"
-                document.getElementById('navbar').innerHTML = data;
-
-                // Una vez que el contenido esté cargado, modificar el navbar según la página actual
-                marcarEnlaceActivo();
-            })
-            .catch(error => console.error('Error cargando el navbar:', error));
-
         // Función para marcar el enlace activo
         function marcarEnlaceActivo() {
             // Obtener solo el nombre del archivo de la página actual (sin directorios)
@@ -93,5 +82,31 @@
         actualizarCaja(); // Carga inicial
         setInterval(actualizarCaja, 10000); // Actualiza cada 10 segundos
     </script>
+
+    <script>
+        const userId = localStorage.getItem('userId');
+        console.log('ID recuperada:', userId);
+
+        if (userId) {
+            console.log(`Bienvenido usuario con ID: ${userId}`);
+        } else {
+            console.log('No hay usuario autenticado. Redirigiendo...');
+        }
+    </script>
+
 </body>
+<footer id="footer">
+
+</footer>
+
+<script src="../JavaScript/Funciones.js"></script>
+
+<script>
+    cargarHTML('navbar', 'navbar.html')
+</script>
+
+<script>
+    cargarHTML('footer', 'footer.html');
+</script>
+
 </html>
