@@ -1,37 +1,49 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MotorsApi.BD.CRUD.Read;
+using System.Numerics;
 namespace MotorsApi.Controllers
 
 {
 
     [Route("MotorsApi/[controller]")]
     [ApiController]
-    public class TransaccionesControler : ControllerBase
+    public class TransaccionesController : ControllerBase
     {
 
         //Controller para alquiler lista
 
         [HttpGet]
-        [Route("perfil/Alquiler/{id}")]
+        [Route("perfil/alquiler/{id_usuario}")]
         public IActionResult obtenerTransaccionAlquiler(int id_usuario)
         {
-            HistorialTransacciones historial = new HistorialTransacciones();
-            var misAlquileres = historial.obtenerMiAlquiler(id_usuario);
+            var tsubaru = new HistorialTransacciones().obtenerMiAlquiler(id_usuario);
 
-
-            if (misAlquileres == null)
+            if (tsubaru == null)
             {
-                return NotFound(new
-                {
-                    titulo = "Sin resultados",
-                    mensaje = "No se encontraron el valor de la oferta.",
-                    code = 202
-                });
-
-
+                return NotFound("Error al cargar subasta");
             }
-            return Ok(misAlquileres);
+            return Ok(tsubaru);
+
+
+
+
+            /* HistorialTransacciones historial = new HistorialTransacciones();
+             var misAlquileres = historial.obtenerMiAlquiler(id_usuario);
+
+
+             if (misAlquileres == null)
+             {
+                 return NotFound(new
+                 {
+                     titulo = "Sin resultados",
+                     mensaje = "No se encontraron el valor de la oferta.",
+                     code = 202
+                 });
+
+
+             }
+             return Ok(misAlquileres);*/
         }
 
         //Controller para Venta lista
