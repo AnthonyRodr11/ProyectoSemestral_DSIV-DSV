@@ -23,37 +23,38 @@ function cargarHTML(idElemento, archivo) {
             return response.text();
         })
         .then((data) => {
-            // Insertar el contenido HTML en el elemento especificado
             const elemento = document.getElementById(idElemento);
             elemento.innerHTML = data;
 
-            // Buscar y ejecutar los scripts en el contenido cargado
-            const scripts = elemento.querySelectorAll('script');
-            scripts.forEach((script) => {
-                const nuevoScript = document.createElement('script');
-                if (script.src) {
-                    // Si el script tiene un src, se vuelve a cargar
-                    nuevoScript.src = script.src;
-                    nuevoScript.async = true; // Asegura ejecución independiente
-                } else {
-                    // Si el script es inline, copia su contenido
-                    nuevoScript.textContent = script.textContent;
-                }
-                document.body.appendChild(nuevoScript); // Añadir el script al DOM
-                script.remove(); // Opcional: eliminar el script original
-            });
+            // Aquí notificamos que la carga ha finalizado para realizar inicializaciones
+            if (idElemento === "navbar") {
+                inicializarNavbar();
+            }
         })
         .catch((error) => console.error(`Error cargando el archivo:`, error));
 }
 
-function inicializarMenuAcordeon() {
-    const toggleButton = document.querySelector(".menu-toggle");
-    const menu = document.querySelector(".menu");
+function inicializarNavbar() {
+    // Selecciona los botones del navbar
+    const actionButton = document.getElementById("actionButton");
+    const dropdownActionButton = document.getElementById("dropdownActionButton");
 
-    if (toggleButton && menu) {
-        toggleButton.addEventListener("click", () => {
-            menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-        });
+    // Recupera el estado del usuario del almacenamiento local
+    const userId = localStorage.getItem("userId");
+
+    if (userId) {
+        // Usuario está registrado: cambia los botones a "Perfil"
+        actionButton.href = "perfil.html";
+        actionButton.innerHTML = `<i class="fa-solid fa-user"></i> Perfil`;
+
+        dropdownActionButton.href = "perfil.html";
+        dropdownActionButton.innerHTML = `<i class="fa-solid fa-user"></i> Perfil`;
+    } else {
+        // Usuario no registrado: botones a "Registrarse"
+        actionButton.href = "register.html";
+        actionButton.innerText = "Registrarse";
+
+        dropdownActionButton.href = "register.html";
+        dropdownActionButton.innerText = "Registrarse";
     }
 }
-
