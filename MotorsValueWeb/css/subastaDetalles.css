@@ -39,7 +39,7 @@ html body{
 
 
 .icono{
-    max-width: 95px;
+    max-width: 85px;
     width: 100%;
     margin: 0 0 0 5%;
 }
@@ -102,9 +102,27 @@ input[type=number] {
     font-size: 18px;
 }
 
+@media(max-width: 1024px){
+    .icono{
+        max-width: 25%;
+        width: 100%;
+    }
+    .poligono div{
+        flex-wrap: wrap;
+    }
+    
+    .poligono{
+        padding: 0 15% 0 0;
+    }
+}
+
 @media(max-width: 768px){
     .contenedor{
         flex-direction: column;
+    }
+
+    .imagen{
+        padding: 0;
     }
 
     .informacion{
@@ -119,11 +137,19 @@ input[type=number] {
     .pujar{
         text-align: center;
     }
+
+    .icono{
+        max-width: 10%;
+    }
 }
 
 @media (max-width: 587px) {
     .icono{
         max-width: 16%;
         width: 100%;
+    }
+
+    .poligono{
+        margin: 0;
     }
 }

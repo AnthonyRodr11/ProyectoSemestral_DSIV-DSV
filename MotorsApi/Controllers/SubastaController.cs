@@ -25,20 +25,33 @@ namespace MotorsApi.Controllers
 
         [HttpPatch]
         [Route("pujar")]
-        public IActionResult HacerPuja(int id, [FromBody] SubastaRequest ludopatia)
+        public IActionResult HacerPuja([FromBody] SubastaRequest request)
         {
-            if (ludopatia == null)
+            if (request == null || request.valor_puja == null || request.usuario == null)
             {
-                return NotFound("Error al Pujar a la subasta");
+                return BadRequest("Datos incompletos para realizar la puja.");
             }
 
-            var apuesta = new Pujar().InsertarPuja(id, ludopatia);
-            if (apuesta == null || apuesta == 0)
-                return StatusCode(418);
-            return Ok();
+            var resultado = new Pujar().InsertarPuja(request);
 
-            
+            if (resultado == null || resultado == 0)
+                return StatusCode(418, "Puja rechazada o no fue procesada.");
 
+            return Ok("Puja realizada correctamente.");
         }
+
+        [HttpGet]
+        [Route("placa/{cod_subasta}")]
+        public IActionResult GetPlaca(int cod_subasta)
+        {
+            var guardar = new Pujar().GetPlaca(cod_subasta);
+
+            if (guardar == null)
+            {
+                return NotFound();
+            }
+            return Ok(guardar);
+        }
+
     }
 }

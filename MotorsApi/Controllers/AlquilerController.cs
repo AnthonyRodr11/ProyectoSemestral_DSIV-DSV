@@ -104,7 +104,7 @@ namespace MotorsApi.Controllers
             var guardado = new FlotaAlquilerInsert().InsertarAlquilado(alquiler);
             var cambiado = new Venta_Flota().CambiarDisponibilidad(alquiler.placa, false);
 
-            if (guardado > 0)
+            if (guardado > 0 && cambiado > 0)
             {
                 return Ok(new
                 {
