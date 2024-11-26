@@ -128,7 +128,7 @@
 
     async function Pujar() {
         const inputPuja = parseFloat(document.getElementById("inputPuja").value);
-        const usuarioId = obtenerUsuarioId();
+        const usuarioId = localStorage.getItem("userId");
         const estado = await obtenerPlaca();
 
         if (!estado) {
@@ -213,11 +213,7 @@
 
 
 
-    function obtenerUsuarioId() {
-        const usuarioId = 2; // Cambiar por tu lógica de obtención
-        console.log("ID del usuario obtenido en obtenerUsuarioId():", usuarioId);
-        return usuarioId;
-    }
+
     
     async function obtenerPlaca() {
         const codSubasta = obtenerCodSubasta(); // Obtiene el código de la subasta desde los parámetros de la URL.
