@@ -15,13 +15,14 @@ namespace MotorsApi.BD.CRUD.Create
 
                 cmd.CommandType = System.Data.CommandType.Text;
 
-                cmd.CommandText = "INSERT INTO flota_alquiler (id_vehiculo, id_usuario, tipo_tarifa, f_retiro, f_entrega, id_seguro) VALUES (@id_vehiculo, @id_usuario, @tarifa, @f_retiro, @f_entrega, @id_seguro)";
+                cmd.CommandText = "INSERT INTO flota_alquiler (id_vehiculo, id_usuario, tipo_tarifa, f_retiro, f_entrega, total, id_seguro) VALUES (@id_vehiculo, @id_usuario, @tarifa, @f_retiro, @f_entrega, @total, @id_seguro)";
 
                 cmd.Parameters.Add(new MySqlParameter("@id_vehiculo", alquiler.placa));
                 cmd.Parameters.Add(new MySqlParameter("@id_usuario", alquiler.idUsuario));
                 cmd.Parameters.Add(new MySqlParameter("@tarifa", alquiler.tipoTarifa));
                 cmd.Parameters.Add(new MySqlParameter("@f_retiro", alquiler.fechaRetiro));
                 cmd.Parameters.Add(new MySqlParameter("@f_entrega", alquiler.fechaEntrega));
+                cmd.Parameters.Add(new MySqlParameter("@total", alquiler.precioTotal));
                 cmd.Parameters.Add(new MySqlParameter("@id_seguro", alquiler.idSeguro));
 
                 abrirConexion();

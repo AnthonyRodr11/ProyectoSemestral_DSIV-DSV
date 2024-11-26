@@ -43,13 +43,13 @@
                 <table>
                     <tr>
                         <th class="polygon"><div class="poligono"></div></th>
-                        <th><h1>Entrega y Retiro</h1></th>
                     </tr>
                 </table>
                 <div>
                     <table>
                         <tr>
                             <th>
+                                <label for="fechaRetiro">Retiro</label>
                                 <div>
                                     <img src="../Img/calendar.png" class="icono">
                                 </div>
@@ -59,6 +59,7 @@
                                 <img src="../Img/fast-forward.png" class="icono" id="flecha">
                             </th>
                             <th>
+                                <label for="fechaEntrega">Entrega</label>
                                 <div>
                                     <img src="../Img/calendar.png" class="icono">
                                 </div>                                
@@ -165,6 +166,58 @@
     });       
 
     document.addEventListener("DOMContentLoaded", () => {
+        
+        const fechaRetiroInput = document.getElementById("fechaRetiro");
+        const fechaEntregaInput = document.getElementById("fechaEntrega");
+
+        // Función para obtener la fecha actual en formato yyyy-MM-dd
+        function obtenerFechaActual() {
+            
+            const hoy = new Date();
+            const year = hoy.getFullYear();
+            const month = String(hoy.getMonth() + 1).padStart(2, '0'); // Meses de 0-11
+            const day = String(hoy.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        // Validar que la fecha de retiro no sea anterior a la fecha actual
+        fechaRetiroInput.addEventListener("change", () => {
+
+            const fechaActual = obtenerFechaActual();
+                if (fechaRetiroInput.value < fechaActual) {
+                alert("La fecha de retiro no puede ser anterior a la fecha actual.");
+                fechaRetiroInput.value = ""; // Limpiar el campo
+            }
+
+            // Si hay una fecha de entrega seleccionada, validarla también
+
+            if (fechaEntregaInput.value && fechaEntregaInput.value <= fechaRetiroInput.value) {
+                
+                alert("La fecha de entrega debe ser posterior a la fecha de retiro.");
+                fechaEntregaInput.value = ""; // Limpiar el campo
+            }
+        });
+
+        // Validar que la fecha de entrega sea posterior a la fecha de retiro
+        fechaEntregaInput.addEventListener("change", () => {
+            
+            if (!fechaRetiroInput.value) {
+                alert("Seleccione primero una fecha de retiro.");
+                fechaEntregaInput.value = ""; // Limpiar el campo
+                return;
+            }
+
+            if (fechaEntregaInput.value <= fechaRetiroInput.value) {
+                alert("La fecha de entrega debe ser posterior a la fecha de retiro.");
+                fechaEntregaInput.value = ""; // Limpiar el campo
+            }
+        });
+
+        // Configurar la fecha mínima para los inputs
+        const fechaActual = obtenerFechaActual();
+        fechaRetiroInput.min = fechaActual;
+        fechaEntregaInput.min = fechaActual;
+
         // Función para calcular el número de días entre dos fechas
         function calcularDias(fechaInicio, fechaFin) {
             const fecha1 = new Date(fechaInicio);
@@ -272,6 +325,7 @@
     });
 
     document.addEventListener('DOMContentLoaded', () => {
+
         const btnPagar = document.querySelector('button'); // El botón Pagar
         const popup = document.getElementById('popup');
         const btnAceptar = document.getElementById('popupAceptar');

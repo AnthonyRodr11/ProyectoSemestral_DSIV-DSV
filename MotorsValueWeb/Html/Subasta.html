@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Subasta</title>
     <div id="navbar"></div>
+    <script>
+        // Cargar el navbar dinámicamente
+        function marcarEnlaceActivo() {
+            const currentFile = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll("#navbar nav ul li a");
+            navLinks.forEach(link => {
+                if (link.getAttribute("href") === currentFile) {
+                    link.classList.add("active");
+                }
+            });
+        }
+    </script>
 
     <style>
         body {
@@ -197,3 +209,23 @@
     actualizarCajas(); // Carga inicial
     setInterval(actualizarCajas, 10000); // Actualizar cada 10 segundos
 </script>
+        actualizarCajas(); // Carga inicial
+        setInterval(actualizarCajas, 10000); // Actualizar cada 10 segundos
+    </script>
+</body>
+
+<footer id="footer">
+
+</footer>
+
+<script src="../JavaScript/Funciones.js"></script>
+
+<script>
+    cargarHTML('navbar', 'navbar.html')
+</script>
+
+<script>
+    cargarHTML('footer', 'footer.html');
+</script>
+
+</html>

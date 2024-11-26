@@ -15,6 +15,7 @@
 <script>
 
     async function obtenerDatos() {
+        
         try {
             const respuesta = await fetch(`https://localhost:7129/MotorsApi/Alquiler/alquiler`);
             const datos = await respuesta.json();

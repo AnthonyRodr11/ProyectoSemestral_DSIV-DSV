@@ -6,6 +6,24 @@ body {
     flex-direction: column;
     background-color: #e6e6e6;
 }
+
+.registrar-btn a {
+    background-color: #a5a5a8;
+    color: #04407b;
+    padding: 5px 15px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 20px;
+    transition: background-color 0.3s, color 0.3s;
+    margin-right: 50px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.registrar-btn a:hover {
+    background-color: #1E75BB;
+    color: #ffffff;
+}
+
 #contenedor-caja {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     display: grid;
