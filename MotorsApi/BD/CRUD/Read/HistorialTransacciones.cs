@@ -36,10 +36,11 @@ namespace MotorsApi.BD.CRUD.Read
                     {
                         Flota_AlquilerRequest facturita = new Flota_AlquilerRequest()
                         {
-                            id_vehiculo = reader["marca"].ToString(),
-                            cod_alquiler = Convert.ToInt32(reader["cod_alquiler"]),
-                            f_entrega = Convert.ToDateTime(reader["f_entrega"]),
-                            f_retiro = Convert.ToDateTime(reader["f_retiro"])
+
+                            cod_alquiler = reader.GetInt32(0),
+                            id_vehiculo = reader.GetString(1),
+                            f_retiro = reader.GetDateTime(2),
+                           f_entrega = reader.GetDateTime(3)
 
                         };
 
