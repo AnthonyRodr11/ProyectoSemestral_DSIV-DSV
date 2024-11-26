@@ -18,7 +18,7 @@ function cargarHTML(idElemento, archivo) {
     fetch(archivo)
         .then((response) => {
             if (!response.ok) {
-                throw new Error(`Error al cargar ${archivo}: ${response.statusText}` );
+                throw new Error(`Error al cargar ${archivo}: ${response.statusText}`);
             }
             return response.text();
         })
@@ -58,15 +58,3 @@ function inicializarNavbar() {
         dropdownActionButton.innerText = "Registrarse";
     }
 }
-
-function inicializarMenuAcordeon() {
-    const toggleButton = document.querySelector(".menu-toggle");
-    const menu = document.querySelector(".menu");
-
-    if (toggleButton && menu) {
-        toggleButton.addEventListener("click", () => {
-            menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-        });
-    }
-}
-

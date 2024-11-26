@@ -8,70 +8,60 @@
     <div id="navbar"></div>
 </head>
 <body>
-    <div class="contenedor">
-        <div class="imagen">
-            <img id="imgAuto" src="../Img/FordRanger.png" alt="imagen del auto">
-            <h1 id="modelo"></h1>
+    <div class="venta-perfil-container">
+        <!-- Sección principal con imagen y modelo -->
+        <div class="venta-perfil-detalles">
+            <div class="venta-perfil-imagen">
+                <img id="imgAuto" src="../Img/FordRanger.png" alt="imagen del auto">
+                <h1 id="modelo"></h1>
+            </div>
         </div>
 
-        <div class="informacion">
-            <div class="Detalles">
-                <div class="poligono">
-                    <div>
-                        <img src="../Img/kilometraje.png" class="icono">
-                        <h2 class="especificacion-titulo">Kilometraje:</h2>
-                        <h2 class="especificacion-texto"></h2>
-                    </div>
-                    <div>
-                        <img src="../Img/transmision.png" class="icono">
-                        <h2 class="especificacion-titulo">Transmision:</h2>
-                        <h2 class="especificacion-texto"></h2>
-                    </div>
-                    <div>
-                        <img src="../Img/gas.png" class="icono">
-                        <h2 class="especificacion-titulo">Combustible:</h2>
-                        <h2 class="especificacion-texto"></h2>
-                    </div>
-                    <div>
-                        <img src="../Img/carroceria.png" class="icono">
-                        <h2 class="especificacion-titulo">Carroceria:</h2>
-                        <h2 class="especificacion-texto"></h2>
-                    </div>
-                </div>
-
+        <!-- Detalles y especificaciones -->
+        <div class="venta-perfil-especificaciones">
+            <div class="especificacion-item">
+                <img src="../Img/kilometraje.png" class="especificacion-img" alt="Kilometraje">
+                <h2 class="especificacion-titulo">Kilometraje:</h2>
+                <h2 class="especificacion-texto"></h2>
             </div>
-            <div class="pujar">
-                <div class="info">
-                    <h3>
-                        Finaliza en:  
-                    </h3>
-                      
- 
-                    <h3 id="tiempoRestante">
+            <div class="especificacion-item">
+                <img src="../Img/transmision.png" class="especificacion-img" alt="Transmisión">
+                <h2 class="especificacion-titulo">Transmision:</h2>
+                <h2 class="especificacion-texto"></h2>
+            </div>
+            <div class="especificacion-item">
+                <img src="../Img/gas.png" class="especificacion-img" alt="Combustible">
+                <h2 class="especificacion-titulo">Combustible:</h2>
+                <h2 class="especificacion-texto"></h2>
+            </div>
+            <div class="especificacion-item">
+                <img src="../Img/carroceria.png" class="especificacion-img" alt="Carrocería">
+                <h2 class="especificacion-titulo">Carroceria:</h2>
+                <h2 class="especificacion-texto"></h2>
+            </div>
+        </div>
 
-                    </h3>
-                </div>
-                <div class="info">
-                    <h3>
-                        Oferta Actual:
-                    </h3>
-                    <h3 id="Oferta">
-
-                    </h3>
-                </div>
-                <div class="info">
-                    <h3>
-                        Monto a Pujar:$
-                    </h3>
-                    <input type="number" name="puja" id="inputPuja">
-                </div>
-                <div id="info">
-                    <button id="btnPujar"> <b>Pujar</b></button>
-                </div>
+        <!-- Sección de pujas -->
+        <div class="pujar">
+            <div class="info">
+                <h3>Finaliza en:</h3>
+                <h3 id="tiempoRestante"></h3>
+            </div>
+            <div class="info">
+                <h3>Oferta Actual:</h3>
+                <h3 id="Oferta"></h3>
+            </div>
+            <div class="info">
+                <h3>Monto a Pujar: $</h3>
+                <input type="number" name="puja" id="inputPuja">
+            </div>
+            <div id="info">
+                <button id="btnPujar"><b>Pujar</b></button>
             </div>
         </div>
     </div>
 
+    <!-- Popup de confirmación -->
     <div id="popup" class="popup-overlay" style="display: none;">
         <div class="popup-content">
             <h2>Subasta</h2>
@@ -82,14 +72,10 @@
             </div>
         </div>
     </div>
-    
-    <footer>
-        <div id="footer"></div>
-    </footer>
-
-
 </body>
-
+<footer>
+    <div id="footer"></div>
+</footer>
 <script src="../JavaScript/funciones.js"></script>    
 
 <script>
