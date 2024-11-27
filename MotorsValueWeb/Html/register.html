@@ -25,15 +25,8 @@
                     <input class="form-control" type="text" id="nombre" placeholder="Nombre" required minlength="3" maxlength="30">
                     <input class="form-control" type="text" id="apellido" placeholder="Apellido" required minlength="3" maxlength="30"> 
                     <input class="form-control" type="text" id="identificacion" placeholder="Identificacion" required minlength="3" maxlength="30"> 
-                    <input class="form-control" type="tel" id="telefono" placeholder="Numero de telefono" required minlength="3" maxlength="30" pattern="^\+507\s\d{4}-\d{4}$"> 
-                    <input type="tel" id="telefono" 
-  name="telefono" 
-  placeholder="+507 6767-7586" 
-   
-  title="Debe tener el formato +507 6767-7586" 
-  required
->
-                    <input class="form-control" type="email" id="email" placeholder="Correo electronico (@)" required>
+                    <input class="form-control" type="tel" id="telefono" placeholder="Numero de telefono" required minlength="3" maxlength="30" pattern="^\+507\s\d{4}-\d{4}$" placeholder="+507 6767-7586" title="">
+                    <input class="form-control" type="email" id="email" placeholder="Correo electronico (@)" required patern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}" title="Debe ingresar un correo válido, como ejemplo@dominio.com">
                     <input class="form-control" type="password" id="password" placeholder="Contraseña" required minlength="3" maxlength="6">
                     <button class="pulse" type="submit">Ingresar</button>
                 </div>
