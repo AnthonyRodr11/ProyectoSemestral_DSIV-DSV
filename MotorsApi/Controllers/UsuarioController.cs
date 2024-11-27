@@ -26,7 +26,7 @@ namespace MotorsApi.Controllers
                 });
             }
 
-            Registrando_Usuario registro = new Registrando_Usuario();
+            RegistrandoUsuario registro = new RegistrandoUsuario();
             var guardar = registro.CreandoRegistro(personita);
             
 

@@ -7,13 +7,14 @@ namespace MotorsApi.BD.CRUD.Create
     public class FlotaAlquilerInsert : Conexiondb
     {
 
+       
         public int InsertarAlquilado(AlquilerRequest alquiler)
         {
             try
             {
                 cmd.Parameters.Clear();
 
-                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandType = CommandType.Text;
 
                 cmd.CommandText = "INSERT INTO flota_alquiler (id_vehiculo, id_usuario, tipo_tarifa, f_retiro, f_entrega, total, id_seguro) VALUES (@id_vehiculo, @id_usuario, @tarifa, @f_retiro, @f_entrega, @total, @id_seguro)";
 
@@ -30,7 +31,10 @@ namespace MotorsApi.BD.CRUD.Create
                 if (guardar > 0)
                     return guardar;
             }
-            catch (Exception e){ Console.WriteLine("Error " + e); }
+            catch (Exception e){
+
+                throw;
+            }
             finally { cerrarConexion(); }
 
             return 0;
