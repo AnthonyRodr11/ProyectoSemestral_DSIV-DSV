@@ -26,10 +26,6 @@
           <p>Teléfono: <span id="telefono">0000-0000</span></p>
         </div>
         <button onclick="mostrarFormularioEdicion()">Editar datos</button>
-
-
-
-
         <a  onclick="cerrarSesion()">Cerrar Sesión</a>
         
       </div>
@@ -54,10 +50,9 @@
               inputmode="numeric"
               onkeypress="return event.charCode >= 48 && event.charCode <= 57"
               pattern="^\+507\s\d{4}-\d{4}$" placeholder="+507 6767-7586" 
-              title="Debe ingresar un numero valido, ejemplo +507 1234-5678
+              title="Debe ingresar un numero valido, ejemplo +507 1234-5678"
               required
             />
-
             <button type="submit">Guardar cambios</button>
           </form>
         </div>
