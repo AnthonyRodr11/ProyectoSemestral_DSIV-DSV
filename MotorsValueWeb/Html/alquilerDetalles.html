@@ -104,14 +104,6 @@
         <div id="footer"></div>
     </footer>
 
-    <!-- Modal -->
-    <div id="customModal" class="modal">
-        <div class="modal-content">
-            <span class="close-button" id="cerrarModal" onclick="cerrarModal()">&times;</span>
-            <p id="modalMessage"></p>
-            <button id="btnModal" onclick="redirigirRegistro()">Registrarse</button>
-        </div>
-    </div>
 
 </body>
 </html>
@@ -339,7 +331,7 @@
 
         
         btnPagar.addEventListener('click', () => {
-            if(!idUser == null){
+            if(idUser != null){
                 popup.style.display = 'flex';
             }
             else{
@@ -395,9 +387,9 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    mostrarModalExito("Compra realizada con éxito.");
+                    alert("Alquiler realizado con exito")
                     popup.style.display = 'none';
-                    window.location.href = "aquiler.html";
+                    document.location.href = "alquiler.html";
                 })
                 .catch(error => {
                     console.error('Error:', error);
