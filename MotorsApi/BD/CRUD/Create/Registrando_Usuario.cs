@@ -78,6 +78,8 @@ namespace MotorsApi.BD.CRUD.Create
         }
 
 
+
+        //SE INSERTA LA CONTRASEÑA CON SHA2
         //Metodo para registrar los atributos del Login 
         public int Login_Registro(Login login)
         {
@@ -95,7 +97,7 @@ namespace MotorsApi.BD.CRUD.Create
 
                 //asignamos parametros
 
-                cmd.CommandText = "INSERT INTO Login (id_usuario, contraseña, rol, correo) VALUES (@id_usuario, @contraseña,@rol,@correo)";
+                cmd.CommandText = "INSERT INTO Login (id_usuario, contraseña, rol, correo) VALUES (@id_usuario, SHA2(@contraseña, 256), @rol, @correo)";
                 cmd.Parameters.Add(new MySqlParameter("@contraseña", login.contraseña));
                 cmd.Parameters.Add(new MySqlParameter("@rol", login.rol));
                 cmd.Parameters.Add(new MySqlParameter("@correo", login.correo));
