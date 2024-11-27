@@ -6,24 +6,6 @@
     <title>Motors Value Venta</title>
     <link rel="stylesheet" href="../css/venta.css">
     <div id="navbar"></div>
-    <script>
-        // Cargar el navbar dinámicamente
-        // Función para marcar el enlace activo
-        function marcarEnlaceActivo() {
-            // Obtener solo el nombre del archivo de la página actual (sin directorios)
-            const currentFile = window.location.pathname.split('/').pop();
-
-            // Seleccionar todos los enlaces dentro del elemento <nav>
-            const navLinks = document.querySelectorAll("#navbar nav ul li a");
-
-            // Comparar el nombre del archivo con el atributo href de los enlaces
-            navLinks.forEach(link => {
-                if (link.getAttribute("href") === currentFile) {
-                    link.classList.add("active");
-                }
-            });
-        }
-    </script>
 </head>
 <body>
     <div id="contenedor-caja">
@@ -87,19 +69,6 @@
         actualizarCaja(); // Carga inicial
         setInterval(actualizarCaja, 10000); // Actualiza cada 10 segundos
     </script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const userId = localStorage.getItem("userId");
-
-            if (!userId) {
-                // Mostrar un modal o redirigir a una página de registro
-                alert("Para acceder a esta función, debes estar registrado.");
-                window.location.href = "register.html";
-            }
-        });
-    </script>
-
     <script>
         const userId = localStorage.getItem('userId');
         console.log('ID recuperada:', userId);

@@ -32,8 +32,9 @@
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Cambiado a auto-fit y aumentado el min-width */
             gap: 15px;
             padding: 20px;
-            max-width: 1200px; /* Establecemos un ancho máximo para evitar que crezca demasiado en pantallas grandes */
+            max-width: 100%; /* Establecemos un ancho máximo para evitar que crezca demasiado en pantallas grandes */
             margin: 0 auto;
+            overflow-x: hidden;
         }
         .caja {
             background-color: #ffffff;
@@ -79,9 +80,9 @@
         }
 
         @media (max-width: 1024px) {
-    /* Para tablets y dispositivos medianos */
             #contenedor-caja {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Reducir el tamaño mínimo en tablets */
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Ajusta el min-width en tablets */
+                max-width: 100%; /* Limita el ancho para evitar desbordamientos */
             }
 
         }
