@@ -71,9 +71,9 @@ namespace MotorsApi.Controllers
                     Mensaje = "El precio no puede ser nulo.",
                 });
             }
-            Alquiler_Auto nuevoAlquiler = new Alquiler_Auto();
+            AlquilerAuto nuevoAlquiler = new AlquilerAuto();
 
-            var actualizado = nuevoAlquiler.EditarTarifa(id, tarifas);
+            var actualizado = nuevoAlquiler.editarTarifa(id, tarifas);
             if (actualizado > 0)
             {
                 return Ok(
@@ -102,7 +102,7 @@ namespace MotorsApi.Controllers
             Console.WriteLine("Datos Recibidos: " + JsonConvert.SerializeObject(alquiler));
 
             var guardado = new FlotaAlquilerInsert().InsertarAlquilado(alquiler);
-            var cambiado = new Venta_Flota().CambiarDisponibilidad(alquiler.placa, false);
+            var cambiado = new VentaFlota().cambiarDisponibilidad(alquiler.placa, false);
 
             if (guardado > 0 && cambiado > 0)
             {

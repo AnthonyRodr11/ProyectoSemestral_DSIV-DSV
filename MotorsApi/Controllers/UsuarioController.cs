@@ -26,7 +26,7 @@ namespace MotorsApi.Controllers
                 });
             }
 
-            Registrando_Usuario registro = new Registrando_Usuario();
+            RegistrandoUsuario registro = new RegistrandoUsuario();
             var guardar = registro.CreandoRegistro(personita);
             
 
@@ -66,7 +66,7 @@ namespace MotorsApi.Controllers
 
             EliminarRol borradorcito = new EliminarRol();
 
-            if (borradorcito.RolEliminar(id)>0)
+            if (borradorcito.rolEliminar(id)>0)
             {
                 return Ok(new
                 {
@@ -100,8 +100,8 @@ namespace MotorsApi.Controllers
                 });
             }
 
-            Editar_Usuario itadori = new Editar_Usuario(); 
-            var guarda = itadori.EditarUsuario(correo, usuario);
+            EditarUsuario itadori = new EditarUsuario(); 
+            var guarda = itadori.editarUsuario(correo, usuario);
 
             if (guarda > 0)
             {

@@ -4,10 +4,10 @@ using System.Data;
 
 namespace MotorsApi.BD.CRUD.Update
 {
-    public class Alquiler_Auto : Conexiondb
+    public class AlquilerAuto : Conexiondb
     {
         //Editamos la tarifa respecto al tipo de auto
-        public int EditarTarifa(int id, TarifaRequest tarifas_Alquiler)
+        public int editarTarifa(int id, TarifaRequest tarifas_Alquiler)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace MotorsApi.BD.CRUD.Update
 
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo registrar el Auto" + e);
+                throw;
 
             }
             finally
@@ -87,7 +87,7 @@ namespace MotorsApi.BD.CRUD.Update
             catch (Exception e)
             {
                 
-                Console.WriteLine("No pudo actualizarce" + e);
+                throw;
             }
             finally
             {

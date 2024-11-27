@@ -4,10 +4,10 @@ using System.Data;
 
 namespace MotorsApi.BD.CRUD.Update
 {
-    public class Editar_Usuario : Conexiondb
+    public class EditarUsuario : Conexiondb
     {
 
-        public int EditarUsuario(string correo, ActualizarUsuario usuario)
+        public int editarUsuario(string correo, ActualizarUsuario usuario)
         {
 
             //declaracion de variable de trabajo 
@@ -22,7 +22,7 @@ namespace MotorsApi.BD.CRUD.Update
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 //Asignamos el cod
-                cmd.CommandText = "EditarInfoUsuario";
+                cmd.CommandText = "EditarUsuarioLogin";
 
                 //asignamos parametros
                 cmd.Parameters.Add(new MySqlParameter("@p_telefono", usuario.telefono));
@@ -36,7 +36,7 @@ namespace MotorsApi.BD.CRUD.Update
                 abrirConexion();
 
                 //validamos si se inserto el auto
-                insercion = Convert.ToInt32(cmd.ExecuteNonQuery());
+                insercion = cmd.ExecuteNonQuery();
 
                 if (insercion > 0)
                 {
@@ -45,7 +45,7 @@ namespace MotorsApi.BD.CRUD.Update
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo registrar el Auto" + e);
+                throw;
             }
             finally
             {

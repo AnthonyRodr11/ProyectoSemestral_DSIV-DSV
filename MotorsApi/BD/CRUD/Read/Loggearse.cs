@@ -7,6 +7,7 @@ namespace MotorsApi.BD.CRUD.Read
     public class Loggearse : Conexiondb
     {
 
+        //SE MODIFICO LA CONSULTA MYSQL
         public int VerificarLogin(string correo, string contraseña)
         {
             
@@ -20,7 +21,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 // Consulta SQL con parámetros para evitar inyecciones SQL
-                cmd.CommandText = "SELECT * FROM login WHERE correo = @correo AND contraseña = @contraseña";
+                cmd.CommandText = "SELECT * FROM login WHERE correo = @correo AND contraseña = SHA2(@contraseña, 256)";
 
                 // Agregamos los parámetros
                 cmd.Parameters.AddWithValue("@correo", correo);
