@@ -134,13 +134,13 @@
        
 
         // Este ID debería venir de tu sistema de autenticación
-        obtenerElmalditoperfil(id);
+        obtenerPerfil(id);
         cargarTransaccionesAlquiler(id);
         cargarTransaccionesVenta(id)
         cargarTransaccionesSubasta(id);
       });
 
-      function obtenerElmalditoperfil() {
+      function obtenerPerfil() {
         const id = localStorage.getItem("userId"); // Este ID debería venir de tu sistema de autenticación
 
         fetch(`https://localhost:7129/MotorsApi/Usuario/userInfo/${id}`)
@@ -295,7 +295,7 @@
           }
 
           // Recargar la información del perfil
-          obtenerElmalditoperfil();
+          obtenerPerfil();
         } catch (error) {
           console.error("Error al actualizar el perfil:", error);
           alert("Hubo un problema al actualizar el perfil");
