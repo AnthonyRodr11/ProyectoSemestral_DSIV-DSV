@@ -14,6 +14,7 @@ class Funciones {
     }
 }
 
+//Metodo para cargar los script propios de navbar en cada HTML
 function cargarHTML(idElemento, archivo) {
     fetch(archivo)
         .then((response) => {
@@ -42,7 +43,6 @@ function cargarHTML(idElemento, archivo) {
                 script.remove(); // Opcional: eliminar el script original
             });
 
-            // Aquí notificamos que la carga ha finalizado para realizar inicializaciones
             if (idElemento === "navbar") {
                 inicializarNavbar();
             }
@@ -50,6 +50,7 @@ function cargarHTML(idElemento, archivo) {
         .catch((error) => console.error(`Error cargando el archivo:`, error));
 }
 
+// Inicializar el icono de perfil y sus funciones para cada pagina
 function inicializarNavbar() {
     // Selecciona los botones del navbar
     const actionButton = document.getElementById("actionButton");
@@ -66,11 +67,11 @@ function inicializarNavbar() {
         dropdownActionButton.href = "perfil.html";
         dropdownActionButton.innerHTML = `<i class="fa-solid fa-user"></i> Perfil`;
     } else {
-        // Usuario no registrado: botones a "Registrarse"
-        actionButton.href = "register.html";
-        actionButton.innerText = "Registrarse";
+        // Usuario no registrado: botones a "Iniciar Sesion"
+        actionButton.href = "index.html";
+        actionButton.innerText = "Iniciar sesion";
 
-        dropdownActionButton.href = "register.html";
-        dropdownActionButton.innerText = "Registrarse";
+        dropdownActionButton.href = "index.html";
+        dropdownActionButton.innerText = "Iniciar sesion";
     }
 }

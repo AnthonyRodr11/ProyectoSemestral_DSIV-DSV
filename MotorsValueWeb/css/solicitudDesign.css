@@ -88,13 +88,6 @@ input[type="button"]:hover {
     background-color: #035aa8;
 }
 
-footer {
-    background-color: #425359;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    margin-top: auto;
-}
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
