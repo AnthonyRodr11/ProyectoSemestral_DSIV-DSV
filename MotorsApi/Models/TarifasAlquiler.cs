@@ -1,6 +1,6 @@
 ﻿namespace MotorsApi.Models
 {
-    public class Tarifas_Alquiler
+    public class TarifasAlquiler
     {
         //Atributos de la entidad
         public int id_tipo { get; set; }

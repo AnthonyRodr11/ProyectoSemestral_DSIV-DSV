@@ -10,7 +10,7 @@ namespace MotorsApi.BD.CRUD.Create
     public class CrearTipoTarifa : Conexiondb
     {
        //Metodo para Crear un Nuevo tipo de auto con su respectiva tarifa 
-        public int crearnuevotipo( Tarifas_Alquiler tarifas_Alquiler)
+        public int crearnuevotipo( TarifasAlquiler tarifas_Alquiler)
         {
             //declaracion de variables de trabajo
             int insercion;

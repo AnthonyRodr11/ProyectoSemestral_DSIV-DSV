@@ -10,10 +10,10 @@ namespace MotorsApi.BD.CRUD.Read
 
         //Transacciones de Alquileres
        
-        public List<Flota_AlquilerRequest> obtenerMiAlquiler(int id_usuario)
+        public List<FlotaAlquilerRequest> obtenerMiAlquiler(int id_usuario)
         {
             //Lista de objetos
-            List<Flota_AlquilerRequest> lista = new List<Flota_AlquilerRequest>();
+            List<FlotaAlquilerRequest> lista = new List<FlotaAlquilerRequest>();
 
             try
             {
@@ -34,7 +34,7 @@ namespace MotorsApi.BD.CRUD.Read
                 {
                     while (reader.Read())
                     {
-                        Flota_AlquilerRequest facturita = new Flota_AlquilerRequest()
+                        FlotaAlquilerRequest facturita = new FlotaAlquilerRequest()
                         {
 
                             
@@ -72,11 +72,11 @@ namespace MotorsApi.BD.CRUD.Read
 
         }
         //Transacciones de Venta
-        public List<Flota_Venta> obtenerMisCompras(int id_usuario)
+        public List<FlotaVenta> obtenerMisCompras(int id_usuario)
         {
             
             //lista de objetos
-            List<Flota_Venta> misCompras = new List<Flota_Venta>();
+            List<FlotaVenta> misCompras = new List<FlotaVenta>();
 
             try
             {   
@@ -100,7 +100,7 @@ namespace MotorsApi.BD.CRUD.Read
                     while (reader.Read())
                     {
                         
-                        Flota_Venta compre = new Flota_Venta()
+                        FlotaVenta compre = new FlotaVenta()
                         {
                             cod_venta = reader.GetInt32(0),
                             placa = reader.GetString(1),

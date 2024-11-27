@@ -1,6 +1,6 @@
 ﻿namespace MotorsApi.Models
 {
-    public class Flota_Subasta
+    public class FlotaSubasta
     {
 
         //atributos de entidad

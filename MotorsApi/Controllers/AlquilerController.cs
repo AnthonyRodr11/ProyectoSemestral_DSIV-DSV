@@ -17,14 +17,14 @@ namespace MotorsApi.Controllers
 
         [HttpGet]
         [Route("tarifas")]
-        public List<Tarifas_Alquiler> ObtenerTarifas()
+        public List<TarifasAlquiler> ObtenerTarifas()
         {
             return new Ver_Flotas().ObtenerTarifas();
         }
 
         [HttpPost]
         [Route("nueva/Tarifa")]
-        public IActionResult registrarTarifa([FromBody]Tarifas_Alquiler tarifa)
+        public IActionResult registrarTarifa([FromBody]TarifasAlquiler tarifa)
         {
             if (tarifa == null)
             {

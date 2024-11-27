@@ -12,7 +12,7 @@ namespace MotorsApi.Controllers
     {
         [HttpPost]
         [Route("save")]
-        public object registrarAuto(Flota_Carro autos)
+        public object registrarAuto(FlotaCarro autos)
         {
 
             FlotaAuto regAuto = new FlotaAuto();
@@ -36,7 +36,7 @@ namespace MotorsApi.Controllers
 
         [HttpPatch]
         [Route("update/state")]
-        public object actualizarEstado(Update_State carrito) //Este sirve para mover un auto de Subasta hacia Ventas o Alquiler
+        public object actualizarEstado(UpdateState carrito) //Este sirve para mover un auto de Subasta hacia Ventas o Alquiler
         {
             AlquilerAuto alquiler = new AlquilerAuto();
 

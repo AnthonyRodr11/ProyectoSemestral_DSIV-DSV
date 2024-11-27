@@ -2,7 +2,7 @@
 
 namespace MotorsApi.Models
 {
-    public class Flota_Carro
+    public class FlotaCarro
     {
         //Atributos de la entidad
         public string placa {  get; set; }

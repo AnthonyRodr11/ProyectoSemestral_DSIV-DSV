@@ -53,7 +53,7 @@ namespace MotorsApi.BD.CRUD.Update
         }
 
         //Actualiza el estado en el que se encuentra el veehiculo(Vender, alquilar, subastar)
-        public int ActualizarEstado(Update_State flota_Carro)
+        public int ActualizarEstado(UpdateState flota_Carro)
         {
             try
             {

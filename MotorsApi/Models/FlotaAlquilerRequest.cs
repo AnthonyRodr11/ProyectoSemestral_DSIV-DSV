@@ -1,6 +1,6 @@
 ﻿namespace MotorsApi.Models
 {
-    public class Flota_AlquilerRequest
+    public class FlotaAlquilerRequest
     {
 
         public int cod_alquiler { get; set; }

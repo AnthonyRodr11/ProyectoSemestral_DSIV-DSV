@@ -9,9 +9,9 @@ namespace MotorsApi.BD.CRUD.Read
     {
 
         //Metodo para devolver una lista segun su estado <Alquiler,venta>
-        public List<Flota_CarroRequest> tipos_Flota(string estado)
+        public List<FlotaCarroRequest> tipos_Flota(string estado)
         {
-            List<Flota_CarroRequest> autos = new List<Flota_CarroRequest>();
+            List<FlotaCarroRequest> autos = new List<FlotaCarroRequest>();
 
             try
             {
@@ -44,7 +44,7 @@ namespace MotorsApi.BD.CRUD.Read
                     while (reader.Read())
                     {
                         // Creamos un objeto Flota_CarroRequest para almacenar los datos
-                        Flota_CarroRequest flota = new Flota_CarroRequest()
+                        FlotaCarroRequest flota = new FlotaCarroRequest()
                         {
                             placa = reader["placa"].ToString(),
                             marca = reader["marca"].ToString(),
@@ -70,9 +70,9 @@ namespace MotorsApi.BD.CRUD.Read
             return autos;
         }
 
-        public List<Flota_CarroRequest> flota_Venta(string id)
+        public List<FlotaCarroRequest> flota_Venta(string id)
         {
-            List<Flota_CarroRequest> autos = new List<Flota_CarroRequest>();
+            List<FlotaCarroRequest> autos = new List<FlotaCarroRequest>();
 
             try
             {
@@ -105,7 +105,7 @@ namespace MotorsApi.BD.CRUD.Read
                     while (reader.Read())
                     {
                         // Creamos un objeto Flota_CarroRequest para almacenar los datos
-                        Flota_CarroRequest flota = new Flota_CarroRequest()
+                        FlotaCarroRequest flota = new FlotaCarroRequest()
                         {
                             placa = reader["placa"].ToString(),
                             marca = reader["marca"].ToString(),
@@ -136,9 +136,9 @@ namespace MotorsApi.BD.CRUD.Read
         }
 
         //Metodo para cargar toda la flota
-        public List<Flota_Carro> obtenerFlota()
+        public List<FlotaCarro> obtenerFlota()
         {
-            List<Flota_Carro> autos = new List<Flota_Carro>();
+            List<FlotaCarro> autos = new List<FlotaCarro>();
             string data;
 
             try
@@ -161,7 +161,7 @@ namespace MotorsApi.BD.CRUD.Read
                     while (reader.Read())
                     {
                         //creamos objeto
-                        Flota_Carro flota = new Flota_Carro()
+                        FlotaCarro flota = new FlotaCarro()
                         {
                             placa = reader["placa"].ToString(),
                             marca = reader["marca"].ToString(),
@@ -195,9 +195,9 @@ namespace MotorsApi.BD.CRUD.Read
         }
 
         //Metodo para cargar toda la flota en venta
-        public List<Flota_CarroRequest> ObtenerAutos(string estado)
+        public List<FlotaCarroRequest> ObtenerAutos(string estado)
         {
-            List<Flota_CarroRequest> autos = new List<Flota_CarroRequest>();
+            List<FlotaCarroRequest> autos = new List<FlotaCarroRequest>();
             string data;
 
             try
@@ -223,7 +223,7 @@ namespace MotorsApi.BD.CRUD.Read
                     while (reader.Read())
                     {
                         //creamos objeto
-                        Flota_CarroRequest flota = new Flota_CarroRequest()
+                        FlotaCarroRequest flota = new FlotaCarroRequest()
                         {
                             placa = reader["placa"].ToString(),
                             marca = reader["marca"].ToString(),
@@ -256,9 +256,9 @@ namespace MotorsApi.BD.CRUD.Read
             return autos;
         }
 
-        public List<Tarifas_Alquiler> ObtenerTarifas()
+        public List<TarifasAlquiler> ObtenerTarifas()
         {
-            List<Tarifas_Alquiler> alquileres = new List<Tarifas_Alquiler>();
+            List<TarifasAlquiler> alquileres = new List<TarifasAlquiler>();
 
             try
             {
@@ -280,7 +280,7 @@ namespace MotorsApi.BD.CRUD.Read
                     while (reader.Read())
                     {
                         //creamos objeto
-                        Tarifas_Alquiler alquiler = new Tarifas_Alquiler()
+                        TarifasAlquiler alquiler = new TarifasAlquiler()
                         {
                             id_tipo = Convert.ToInt32(reader["id_tipo"]),
                             tipo_auto = reader["tipo_auto"].ToString(),

@@ -100,7 +100,7 @@ namespace MotorsApi.Controllers
 
         [HttpPost]
         [Route ("vendido")]
-        public IActionResult carroVendido([FromBody] Flota_Venta vendido)
+        public IActionResult carroVendido([FromBody] FlotaVenta vendido)
         {
             if (vendido == null)
             {

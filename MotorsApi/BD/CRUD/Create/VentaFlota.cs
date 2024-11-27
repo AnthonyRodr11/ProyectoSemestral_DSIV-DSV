@@ -96,7 +96,7 @@ namespace MotorsApi.BD.CRUD.Create
 
 
         //Metodo para agregar registro de venta
-        public int venderCarro(Flota_Venta vendido) 
+        public int venderCarro(FlotaVenta vendido) 
         {
             int insercion;
 

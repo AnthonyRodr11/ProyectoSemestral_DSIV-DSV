@@ -8,7 +8,7 @@ namespace MotorsApi.BD.CRUD.Create
     {
 
         //Metodo para mandar un auto a Subastar
-        public int registrarAutosubasta(Flota_Subasta autoSubastar)
+        public int registrarAutosubasta(FlotaSubasta autoSubastar)
         {
            
             try

@@ -1,6 +1,6 @@
 ﻿namespace MotorsApi.Models
 {
-    public class Tarifa_Seguro
+    public class TarifaSeguro
     {
         public int id_seguro {  get; set; }
         public string tipoSeguro { get; set; }

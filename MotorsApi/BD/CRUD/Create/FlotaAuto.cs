@@ -7,7 +7,7 @@ namespace MotorsApi.BD.CRUD.Create
     public class FlotaAuto : Conexiondb
     {
 
-        public int registraAutoflota(Flota_Carro regAuto)
+        public int registraAutoflota(FlotaCarro regAuto)
         {
             //declaracion de variables de trabajo
             int insercion = 0;

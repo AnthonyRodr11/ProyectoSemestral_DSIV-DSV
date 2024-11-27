@@ -1,6 +1,6 @@
 ﻿namespace MotorsApi.Models
 {
-    public class Flota_Venta
+    public class FlotaVenta
     {
         //Atributos de la entidad
         public int cod_venta { get; set; }

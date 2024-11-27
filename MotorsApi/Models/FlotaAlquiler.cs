@@ -1,6 +1,6 @@
 ﻿namespace MotorsApi.Models
 {
-    public class Flota_Alquiler
+    public class FlotaAlquiler
     {
         //Atributos de la entidad
 
