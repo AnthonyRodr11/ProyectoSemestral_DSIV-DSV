@@ -188,11 +188,17 @@ body {
     border-collapse: collapse;
   }
   
-  @media screen and (max-width: 768px) {
+  @media(max-width: 768px) {
     .contenedor {
       flex-direction: column;
       align-items: center;
+      overflow-x: hidden;
     }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
   
     .informacion-usuario {
       max-width: 100%;
@@ -202,6 +208,12 @@ body {
     .historialTransacciones {
       margin-left: 0;
       width: 100%;
+      overflow-x: hidden;
+    }
+
+    .historialTransacciones{
+      padding: 0;
+      margin: 0 0 20px 0;
     }
   
     .tablaVenta th,
@@ -212,6 +224,19 @@ body {
     .tablaSubasta td {
       font-size: 12px;
       padding: 10px;
+      overflow-x: hidden;
     }
+    .footer-container{
+      overflow-x: hidden;
+    }
+  }
+
+  @media(max-width: 320){
+    body{
+      max-width: 100%;
+      width: 100%;
+      overflow-x: hidden;
+    }
+
   }
   
