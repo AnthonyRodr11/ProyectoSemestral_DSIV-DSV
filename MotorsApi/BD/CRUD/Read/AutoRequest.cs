@@ -6,7 +6,9 @@ namespace MotorsApi.BD.CRUD.Read
 {
     public class AutoRequest : Conexiondb
     {
-        public AutoDetallesRequest AutoInfo(string placa)
+
+        //Metodo para traer informacion del auto
+        public AutoDetallesRequest autoInfo(string placa)
         {
             AutoDetallesRequest auto = new AutoDetallesRequest();
 
@@ -26,20 +28,26 @@ namespace MotorsApi.BD.CRUD.Read
                 {
                     while (reader.Read())
                     {
-                        
+
                         {
-                            // Construimos una cadena con los valores separados por ;
+                            
                             auto.marca = reader["marca"].ToString();
                             auto.modelo = reader["modelo"].ToString();
                             auto.foto = reader["foto"].ToString();
                             auto.tarifa = Convert.ToDouble(reader["tarifaxauto"]);
                         }
-                        // Añadimos la fila a la lista
-                        
+
+
                     }
                 }
             }
-            catch (Exception ex) { Console.WriteLine(ex.Message); }
+            catch (Exception ex) { 
+                
+                
+                throw; 
+            }
+
+
             finally { cerrarConexion(); }
             return auto;
         }

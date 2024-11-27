@@ -6,31 +6,31 @@ namespace MotorsApi.BD.CRUD.Read
 {
     public class Informes : Conexiondb
     {
-        //Metodo para retornar la data para el  archivo .txt coon informe de flota
+        //Metodo para retornar la data para el  archivo .txt con informe de flota
         public string[] infoFlota()
         {
             List<string> data = new List<string>();
 
             try
             {
-                //limpiamos los parametros
+                
                 cmd.Parameters.Clear();
 
-                //asignamos el tipo de comando
+               
                 cmd.CommandType = CommandType.Text;
 
-                //asignamos el codigo
+                
                 cmd.CommandText = "SELECT placa,marca,modelo,color,km,transmision,tipo_gas,carroceria FROM Flota_Carro";
 
-                // Abrimos la conexión
+                
                 abrirConexion();
 
-                // Ejecutamos la consulta
+               
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        // Construimos una cadena con los valores separados por ;
+                       
                         string row = string.Join(";",
                             reader["placa"].ToString(),
                             reader["marca"].ToString(),
@@ -42,7 +42,7 @@ namespace MotorsApi.BD.CRUD.Read
                             reader["carroceria"].ToString()
                         );
 
-                        // Añadimos la fila a la lista
+                      
                         data.Add(row);
                     }
                 }
@@ -62,30 +62,29 @@ namespace MotorsApi.BD.CRUD.Read
         }
         
         //Metodo que guarda registros de la tabla ventas
-        public async Task<string[]> InfoVentas()
+        public async Task<string[]> infoVentas()
         {
             List<string> data = new List<string>();
 
             try
             {
-                //limpiamos los parametros
+                
                 cmd.Parameters.Clear();
 
-                //asignamos el tipo de comando
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                //asignamos el codigo
+                
                 cmd.CommandText = "ObtenerInfoVentas";
 
-                // Abrimos la conexión
+                
                 abrirConexion();
 
-                // Ejecutamos la consulta
+               
                 using (MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync())
                 {
                     while (reader.Read())
                     {
-                        // Comprobamos si algún valor es nulo antes de procesarlo
+                        
                         string row = string.Join(";",
                             reader["ID_Venta"]?.ToString() ?? "N/A",    // Usamos "N/A" o un valor por defecto en caso de nulos
                             reader["Nombre_Cliente"]?.ToString() ?? "Desconocido",
@@ -94,7 +93,7 @@ namespace MotorsApi.BD.CRUD.Read
                             reader["Total"]?.ToString() ?? "0.00"
                         );
 
-                        // Añadimos la fila a la lista
+                        
                         data.Add(row);
                     }
                 }
@@ -102,7 +101,7 @@ namespace MotorsApi.BD.CRUD.Read
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo realizar la consulta" + e);
+                throw;
             }
             finally
             {
@@ -120,19 +119,19 @@ namespace MotorsApi.BD.CRUD.Read
 
             try
             {
-                //limpiamos los parametros
+                
                 cmd.Parameters.Clear();
 
-                //asignamos el tipo de comando
+              
                 cmd.CommandType = CommandType.Text;
 
-                //asignamos el codigo
+                
                 cmd.CommandText = "SELECT    cod_alquiler,    id_vehiculo,   id_usuario,    tipo_tarifa,    f_retiro,   f_entrega,    total   FROM     Flota_Alquiler;";
 
-                // Abrimos la conexión
+               
                 abrirConexion();
 
-                // Ejecutamos la consulta
+               
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -149,7 +148,7 @@ namespace MotorsApi.BD.CRUD.Read
 
                         );
 
-                        // Añadimos la fila a la lista
+                        
                         data.Add(row);
                     }
                 }
@@ -157,7 +156,7 @@ namespace MotorsApi.BD.CRUD.Read
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo realizar la consulta" + e);
+                throw;
             }
             finally
             {
@@ -207,7 +206,7 @@ namespace MotorsApi.BD.CRUD.Read
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo realizar la consulta: " + e.Message);
+                throw;
             }
             finally
             {
@@ -227,19 +226,19 @@ namespace MotorsApi.BD.CRUD.Read
 
             try
             {
-                //limpiamos los parametros
+                
                 cmd.Parameters.Clear();
 
-                //asignamos el tipo de comando
+                
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                //asignamos el codigo
+               
                 cmd.CommandText = "sp_obtener_solicitudes";
 
-                // Abrimos la conexión
+                
                 abrirConexion();
 
-                // Ejecutamos la consulta
+                
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
@@ -254,7 +253,7 @@ namespace MotorsApi.BD.CRUD.Read
 
                         );
 
-                        // Añadimos la fila a la lista
+                        
                         data.Add(row);
                     }
                 }
@@ -262,7 +261,7 @@ namespace MotorsApi.BD.CRUD.Read
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo realizar la consulta" + e);
+                throw;
             }
             finally
             {
