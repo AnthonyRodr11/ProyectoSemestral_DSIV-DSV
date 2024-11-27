@@ -135,15 +135,43 @@ header {
         padding: 0px;
     }
 
-    .logo img{
+    .logo img {
         width: 80px !important;
     }
 
-    .navbar{
+    .navbar {
         padding: 10px !important;
     }
 }
-/* Responsivo */
+
+/* Para tablets y dispositivos medianos (1024x736) */
+@media (max-width: 1024px) {
+    .navbar .links {
+        display: none;
+    }
+
+    .navbar .hamburger {
+        display: block;
+    }
+
+    .logo {
+        width: 700px;
+    }
+
+    .action_btn {
+        display: none;
+    }
+
+    .navbar {
+        padding: 10px;
+    }
+
+    .navbar .links {
+        font-size: 1.5rem;
+    }
+}
+
+/* Para pantallas de tamaño más pequeño (768x552) */
 @media (max-width: 768px) {
     .navbar .links {
         display: none;
@@ -153,39 +181,20 @@ header {
         display: block;
     }
 
-    .logo{
-        width: 700px;
-    }
-
-    .action_btn{
-        display: none;
-    }
-}
-
-@media (max-width: 576px) {
-    .navbar {
-        padding: 0 1rem;
-    }
-
-    .navbar .logo img {
-        width: 40px;
-        height: auto;
+    .logo img {
+        width: 150px; /* Ajustar el tamaño del logo */
     }
 
     .navbar .titulo {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
-    .navbar .links {
+    .action_btn {
         display: none;
     }
 
-    .navbar .action_btn {
-        display: none;
-    }
-
-    .navbar .hamburger {
-        display: block;
+    .navbar {
+        padding: 15px;
     }
 
     .dropdown {
@@ -199,23 +208,26 @@ header {
     .dropdown li {
         padding: 10px;
     }
+}
 
-    .dropdown a .action_btn {
-        display: block;
+/* Para pantallas más grandes (2560x1840) */
+@media (min-width: 2560px) {
+    .navbar .dropdown {
+        display: none;
     }
 
-    .logo img{
-        width: 70px !important;
+    .logo {
+        width: 500px; /* Asegurarse de que el logo tenga un tamaño apropiado */
     }
 
-    .navbar{
-        padding: 0px;
+    .navbar .links a {
+        font-size: 1.5rem; /* Aumentar tamaño de los enlaces para pantallas grandes */
     }
 }
 
-
+/* Para pantallas de mayor resolución (992px) */
 @media (min-width: 992px) {
-    .navbar .dropdown  {
+    .navbar .dropdown {
         display: none;
     }
 
@@ -228,6 +240,7 @@ header {
     }
 }
 
+/* Efecto de pulso */
 .pulse {
     animation: pulse 3s infinite;
 }
