@@ -68,11 +68,15 @@
         <div class="modal-content">
             <span class="close-button" id="cerrarModal" onclick="cerrarModal()">&times;</span>
             <p id="modalMessage"></p>
+<<<<<<< HEAD
+            <button onclick="redirigirRegistro()" id="btnModal">Registrarse</button>
+        
+=======
             <button id="btnModal" onclick="redirigirRegistro()">Registrarse</button>
+>>>>>>> abe369b7e73e0d5ca285550f6ca1b5ed7b183c38
         </div>
     </div>
 </body>
-
 <script>
     // Obtiene el parámetro 'id' de la URL
     function obtenerIdAuto() {
@@ -154,6 +158,14 @@
     const btnAceptar = document.getElementById('popupAceptar'); // Botón Aceptar del popup
     const btnCancelar = document.getElementById('popupCancelar'); // Botón Cancelar del popup
 
+<<<<<<< HEAD
+            // Aquí usas 'id' en lugar de 'idAuto'
+            const responseFlota = await fetch(`https://localhost:7129/MotorsApi/ventaFlota/flotaDetalle/${id}`);
+            
+            
+            if (!responseFlota.ok) {
+                throw new Error("Error al obtener los datos del auto");
+=======
     // Mostrar el modal de registro si no está registrado
     btnPagar.addEventListener('click', () => {
         const userId = localStorage.getItem('userId'); // Obtener el ID del usuario desde localStorage
@@ -173,6 +185,7 @@
             if (!id_cliente) {
                 alert("Debes estar registrado para realizar una compra.");
                 return;
+>>>>>>> abe369b7e73e0d5ca285550f6ca1b5ed7b183c38
             }
 
             const id = obtenerIdAuto(); // Obtener el ID del auto desde la URL
@@ -186,6 +199,35 @@
             }
 
             const { placa, precio } = autoData[0];
+<<<<<<< HEAD
+            
+            const responseVenta = await fetch(`https://localhost:7129/MotorsApi/ventaFlota/ventaId/${placa}`);
+
+            if (!responseVenta.ok) {
+                throw new Error("Error al enviar la venta al API");
+                return;
+            }
+
+            const ventaData = await responseVenta.json();
+            const id_venta = ventaData;
+        
+            let response = null;
+            if(id_venta != null){
+                response = await fetch(`https://localhost:7129/MotorsApi/ventaFlota/vendido`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id_venta, id_cliente, precio, placa})
+
+                });
+            }
+
+            if (response.ok) {
+                mostrarModalExito("Compra realizada con éxito.");
+            } else {
+                mostrarModal("Hubo un problema al procesar la compra.");
+=======
             const responseVenta = await fetch(`https://localhost:7129/MotorsApi/ventaFlota/ventaId/${placa}`);
 
             if (!responseVenta.ok) throw new Error("Error al enviar la venta al API");
@@ -205,6 +247,7 @@
                 } else {
                     mostrarModal("Hubo un problema al procesar la compra.");
                 }
+>>>>>>> abe369b7e73e0d5ca285550f6ca1b5ed7b183c38
             }
         } catch (error) {
             console.error('Error en la solicitud:', error);
@@ -282,7 +325,10 @@ function redirigirRegistro() {
 function redirigirVenta() {
     window.location.href = 'venta.html';
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> abe369b7e73e0d5ca285550f6ca1b5ed7b183c38
     
 </script>
 <footer id="footer">

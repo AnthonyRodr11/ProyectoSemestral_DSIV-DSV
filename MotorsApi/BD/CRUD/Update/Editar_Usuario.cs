@@ -22,7 +22,7 @@ namespace MotorsApi.BD.CRUD.Update
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 //Asignamos el cod
-                cmd.CommandText = "EditarInfoUsuario";
+                cmd.CommandText = "EditarUsuarioLogin";
 
                 //asignamos parametros
                 cmd.Parameters.Add(new MySqlParameter("@p_telefono", usuario.telefono));
@@ -36,7 +36,7 @@ namespace MotorsApi.BD.CRUD.Update
                 abrirConexion();
 
                 //validamos si se inserto el auto
-                insercion = Convert.ToInt32(cmd.ExecuteNonQuery());
+                insercion = cmd.ExecuteNonQuery();
 
                 if (insercion > 0)
                 {
@@ -45,7 +45,7 @@ namespace MotorsApi.BD.CRUD.Update
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo registrar el Auto" + e);
+                Console.WriteLine("No se pudo registrar el usuario" + e);
             }
             finally
             {
