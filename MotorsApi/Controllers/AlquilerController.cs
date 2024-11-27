@@ -19,7 +19,7 @@ namespace MotorsApi.Controllers
         [Route("tarifas")]
         public List<TarifasAlquiler> ObtenerTarifas()
         {
-            return new Ver_Flotas().ObtenerTarifas();
+            return new Ver_Flotas().obtenerTarifas();
         }
 
         [HttpPost]
@@ -126,14 +126,14 @@ namespace MotorsApi.Controllers
         [Route ("seguros")]
         public List<SeguroRequest> getSeguros()
         {
-            return new SeguroRead().ObtenerListaSeguros();
+            return new SeguroRead().obtenerListaSeguros();
         }
     
         [HttpGet]
         [Route("auto/{placa}")]
         public IActionResult getAuto(string placa)
         {
-            var auto = new AutoRequest().AutoInfo(placa);
+            var auto = new AutoRequest().autoInfo(placa);
             if (auto == null)
                 return NotFound("Carro no encontrado");
             return Ok(auto);
@@ -144,7 +144,7 @@ namespace MotorsApi.Controllers
         public IActionResult obtenerAlquiler()
         {
 
-            List<AlquilerCarrosRequest> guardar = new Ver_Flotas().AlquileresAutos();
+            List<AlquilerCarrosRequest> guardar = new Ver_Flotas().alquileresAutos();
 
             if (guardar == null)
                 return NotFound(new

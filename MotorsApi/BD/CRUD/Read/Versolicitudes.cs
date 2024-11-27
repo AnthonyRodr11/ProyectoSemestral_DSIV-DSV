@@ -45,7 +45,7 @@ namespace MotorsApi.BD.CRUD.Read
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo obtener el nombre del usuario" + e);
+                throw;
             }
             finally
             {
@@ -90,7 +90,7 @@ namespace MotorsApi.BD.CRUD.Read
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo obtener el monto" + e);
+                throw;
             }
             finally {
 
@@ -138,7 +138,7 @@ namespace MotorsApi.BD.CRUD.Read
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo obtener la descripcion y foto" + e);
+                throw;
             }
             finally {
 

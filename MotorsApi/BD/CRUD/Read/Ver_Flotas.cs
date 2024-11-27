@@ -9,19 +9,19 @@ namespace MotorsApi.BD.CRUD.Read
     {
 
         //Metodo para devolver una lista segun su estado <Alquiler,venta>
-        public List<FlotaCarroRequest> tipos_Flota(string estado)
+        public List<Flota_CarroRequest> tipos_Flota(string estado)
         {
             List<FlotaCarroRequest> autos = new List<FlotaCarroRequest>();
 
             try
             {
-                // Limpiamos parámetros
+                
                 cmd.Parameters.Clear();
 
-                // Especificamos el tipo de comando
+                
                 cmd.CommandType = CommandType.Text;
 
-                // Realizamos un JOIN entre Flota_Carro y Flota_Venta para obtener solo los campos necesarios
+               
                 cmd.CommandText = @"
                     SELECT 
                         c.placa, c.marca, c.modelo, c.foto, 
@@ -33,18 +33,17 @@ namespace MotorsApi.BD.CRUD.Read
                     WHERE 
                         c.estado = @estado AND disponibilidad = 1";
 
-                // Agregamos el parámetro estado
                 cmd.Parameters.AddWithValue("@estado", estado);
 
-                // Abrimos la conexión
+               
                 abrirConexion();
 
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        // Creamos un objeto Flota_CarroRequest para almacenar los datos
-                        FlotaCarroRequest flota = new FlotaCarroRequest()
+                        
+                        Flota_CarroRequest flota = new Flota_CarroRequest()
                         {
                             placa = reader["placa"].ToString(),
                             marca = reader["marca"].ToString(),
@@ -53,14 +52,14 @@ namespace MotorsApi.BD.CRUD.Read
                             precio = Convert.ToDouble(reader["precio"])
                         };
 
-                        // Agregamos el objeto a la lista
+                        
                         autos.Add(flota);
                     }
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo cargar la lista de autos" + e);
+                throw;
             }
             finally
             {
@@ -70,16 +69,16 @@ namespace MotorsApi.BD.CRUD.Read
             return autos;
         }
 
-        public List<FlotaCarroRequest> flota_Venta(string id)
+        public List<Flota_CarroRequest> flotaVenta(string id)
         {
             List<FlotaCarroRequest> autos = new List<FlotaCarroRequest>();
 
             try
             {
-                // Limpiamos parámetros
+                
                 cmd.Parameters.Clear();
 
-                // Especificamos el tipo de comando
+               
                 cmd.CommandType = CommandType.Text;
 
                 // Realizamos un JOIN entre Flota_Carro y Flota_Venta para obtener solo los campos necesarios
@@ -94,10 +93,10 @@ namespace MotorsApi.BD.CRUD.Read
                     WHERE 
                         c.placa = @placa";
 
-                // Agregamos el parámetro estado
+                
                 cmd.Parameters.AddWithValue("@placa", id);
 
-                // Abrimos la conexión
+               
                 abrirConexion();
 
                 using (MySqlDataReader reader = cmd.ExecuteReader())
@@ -118,14 +117,14 @@ namespace MotorsApi.BD.CRUD.Read
                             precio = Convert.ToDouble(reader["precio"])
                         };
 
-                        // Agregamos el objeto a la lista
+                       
                         autos.Add(flota);
                     }
                 }
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo cargar la lista de autos" + e);
+                throw;
             }
             finally
             {
@@ -143,10 +142,10 @@ namespace MotorsApi.BD.CRUD.Read
 
             try
             {
-                //Limpiamos parametros
+                
                 cmd.Parameters.Clear();
 
-                //Especificamos el tipo de comando
+               
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
@@ -160,8 +159,8 @@ namespace MotorsApi.BD.CRUD.Read
                 {
                     while (reader.Read())
                     {
-                        //creamos objeto
-                        FlotaCarro flota = new FlotaCarro()
+                      
+                        Flota_Carro flota = new Flota_Carro()
                         {
                             placa = reader["placa"].ToString(),
                             marca = reader["marca"].ToString(),
@@ -184,7 +183,7 @@ namespace MotorsApi.BD.CRUD.Read
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo cargar la lista de autos" + e);
+                throw;
             }
             finally
             {
@@ -195,23 +194,23 @@ namespace MotorsApi.BD.CRUD.Read
         }
 
         //Metodo para cargar toda la flota en venta
-        public List<FlotaCarroRequest> ObtenerAutos(string estado)
+        public List<Flota_CarroRequest> obtenerAutos(string estado)
         {
             List<FlotaCarroRequest> autos = new List<FlotaCarroRequest>();
             string data;
 
             try
             {
-                //Limpiamos parametros
+                
                 cmd.Parameters.Clear();
 
-                //Especificamos el tipo de comando
+               
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
                 cmd.CommandText = "SELECT  placa,  marca,  modelo,  color,  km,   transmision,   tipo_gas,   carroceria,   estado,    descripcion,    foto   FROM Flota_Carro  WHERE estado = @estado";
 
-                // Agregamos el parámetro estado
+             
                 cmd.Parameters.AddWithValue("@estado", estado);
 
 
@@ -256,19 +255,19 @@ namespace MotorsApi.BD.CRUD.Read
             return autos;
         }
 
-        public List<TarifasAlquiler> ObtenerTarifas()
+        public List<Tarifas_Alquiler> obtenerTarifas()
         {
             List<TarifasAlquiler> alquileres = new List<TarifasAlquiler>();
 
             try
             {
-                //Limpiamos parametros
+               
                 cmd.Parameters.Clear();
 
-                //Especificamos el tipo de comando
+                
                 cmd.CommandType = CommandType.Text;
 
-                //asignamos consulta a realizar
+               
                 cmd.CommandText = "SELECT * from tarifas_alquiler";
 
 
@@ -279,8 +278,8 @@ namespace MotorsApi.BD.CRUD.Read
                 {
                     while (reader.Read())
                     {
-                        //creamos objeto
-                        TarifasAlquiler alquiler = new TarifasAlquiler()
+                      
+                        Tarifas_Alquiler alquiler = new Tarifas_Alquiler()
                         {
                             id_tipo = Convert.ToInt32(reader["id_tipo"]),
                             tipo_auto = reader["tipo_auto"].ToString(),
@@ -294,7 +293,7 @@ namespace MotorsApi.BD.CRUD.Read
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo cargar la lista de autos" + e);
+                throw;
             }
             finally
             {
@@ -312,16 +311,16 @@ namespace MotorsApi.BD.CRUD.Read
 
             try
             {
-                //Limpiamos parametros
+                
                 cmd.Parameters.Clear();
 
-                //Especificamos el tipo de comando
+              
                 cmd.CommandType = CommandType.Text;
 
-                //asignamos consulta a realizar
+               
                 cmd.CommandText = "SELECT DISTINCT carroceria FROM Flota_Carro WHERE estado = @estado";
 
-                // Agregamos el parámetro estado
+               
                 cmd.Parameters.AddWithValue("@estado", estado);
 
                 abrirConexion();
@@ -360,17 +359,16 @@ namespace MotorsApi.BD.CRUD.Read
             double valor = 0;
             try
             {
-                //Limpiamos parametros
+                
                 cmd.Parameters.Clear();
 
-                //Especificamos el tipo de comando
+                
                 cmd.CommandType = CommandType.Text;
 
-                //asignamos consulta a realizar
-                //se modifica de valor_inicial A valor_puja
+                
                 cmd.CommandText = "SELECT   valor_puja   FROM Flota_Subasta WHERE cod_subasta = @cod_subasta ";
 
-                //Agregar parametro cos_subasta
+              
                 cmd.Parameters.AddWithValue("@cod_subasta", cod_subasta);
 
 
@@ -404,7 +402,7 @@ namespace MotorsApi.BD.CRUD.Read
         }
 
         //Metodo autos alquiler
-        public List<AlquilerCarrosRequest> AlquileresAutos()
+        public List<AlquilerCarrosRequest> alquileresAutos()
         {
             List<AlquilerCarrosRequest> carrosEnAlquiler = new List<AlquilerCarrosRequest>();
             try
@@ -449,7 +447,7 @@ namespace MotorsApi.BD.CRUD.Read
                     }
                 }
             }
-            catch (Exception e) { Console.WriteLine(e); }
+            catch (Exception e) { throw; }
             finally { cerrarConexion(); }
             return carrosEnAlquiler;
 
@@ -513,6 +511,8 @@ namespace MotorsApi.BD.CRUD.Read
             return lista;
         }
 
+
+        //Lista la informacion de subasta
         public FlotaSubastaRequest listaSubasta(int codigo)
         {
 
@@ -568,7 +568,7 @@ namespace MotorsApi.BD.CRUD.Read
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error: " + e);
+                throw;
             }
             finally
             {

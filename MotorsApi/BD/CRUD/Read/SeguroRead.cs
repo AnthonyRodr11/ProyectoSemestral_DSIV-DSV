@@ -6,7 +6,9 @@ namespace MotorsApi.BD.CRUD.Read
 {
     public class SeguroRead : Conexiondb
     {
-        public List<SeguroRequest> ObtenerListaSeguros() //Retorna una lista de los seguros, no muestra id_seguro
+
+        //Muestra la lista de los Seguros de los Autos
+        public List<SeguroRequest> obtenerListaSeguros() 
         {
             List<SeguroRequest> lista = new List<SeguroRequest>();
 
@@ -14,13 +16,13 @@ namespace MotorsApi.BD.CRUD.Read
             {
                 
 
-                //Limpiamos los parámetros solo por si acaso
+                
                 cmd.Parameters.Clear();
 
-                //Definimos el tipo de comando que se mandará a la Base de Datos
+               
                 cmd.CommandType = System.Data.CommandType.Text;
 
-                cmd.CommandText = "SELECT tipo_seguro, precio, descripcion FROM seguros"; //Definimos el texto que se envía a la Base de Datos
+                cmd.CommandText = "SELECT tipo_seguro, precio, descripcion FROM seguros"; 
 
                 abrirConexion();
 
@@ -28,19 +30,19 @@ namespace MotorsApi.BD.CRUD.Read
                 {
                     while (reader.Read())
                     {
-                        //Hacemos un objeto de tipo SeguroRequest para 
+                        
                         SeguroRequest seguro = new SeguroRequest()
                         {
                             tipo_seguro = reader["tipo_seguro"].ToString(),
                             precio = Convert.ToDouble(reader["precio"]),
                             descripcion = reader["descripcion"].ToString()
                         };
-                        // Añadimos el Objeto a la lista
+                        
                         lista.Add(seguro);
                     }
                 }
             }
-            catch (Exception e) { Console.WriteLine("Error: " + e); }
+            catch (Exception e) { throw; }
             finally { cerrarConexion(); }
             return lista;
         }

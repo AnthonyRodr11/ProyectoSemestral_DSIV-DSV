@@ -141,7 +141,7 @@ namespace MotorsApi.Controllers
             }
 
             Loggearse lojin = new Loggearse();
-            var cuera = lojin.VerificarLogin(correo, contraseña);
+            var cuera = lojin.verificarLogin(correo, contraseña);
 
             if (cuera>0)
             {
@@ -172,7 +172,7 @@ namespace MotorsApi.Controllers
             }
 
             Loggearse lojin = new Loggearse();
-            var cuera = lojin.VerificarCorreo(correo);
+            var cuera = lojin.verificarCorreo(correo);
 
             if (cuera)
             {

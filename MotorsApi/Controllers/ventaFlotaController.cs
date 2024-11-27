@@ -45,7 +45,7 @@ namespace MotorsApi.Controllers
         public IActionResult listaAutos(string estado)
         {
             Ver_Flotas autos = new Ver_Flotas();
-            var listaautos = autos.tipos_Flota(estado);
+            var listaautos = autos.tipoFlota(estado);
 
             if ( listaautos == null || listaautos.Count == 0)
             {
@@ -83,7 +83,7 @@ namespace MotorsApi.Controllers
         public IActionResult listaAutosPerfil(string id)
         {
             Ver_Flotas autos = new Ver_Flotas();
-            var listaautos = autos.flota_Venta(id);
+            var listaautos = autos.flotaVenta(id);
 
             if (listaautos == null || listaautos.Count == 0)
             {

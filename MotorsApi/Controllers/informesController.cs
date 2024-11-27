@@ -32,7 +32,7 @@ namespace MotorsApi.Controllers
             public async Task<IActionResult> obtenerInfoVentas()
             {
                 var db = new Informes();
-                var data = await db.InfoVentas();
+                var data = await db.infoVentas();
                 return Ok(data);
             }
 
