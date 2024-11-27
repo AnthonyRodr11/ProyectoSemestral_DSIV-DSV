@@ -68,10 +68,10 @@ function inicializarNavbar() {
         dropdownActionButton.innerHTML = `<i class="fa-solid fa-user"></i> Perfil`;
     } else {
         // Usuario no registrado: botones a "Iniciar Sesion"
-        actionButton.href = "index.html";
+        actionButton.href = "login.html";
         actionButton.innerText = "Iniciar sesion";
 
-        dropdownActionButton.href = "index.html";
+        dropdownActionButton.href = "login.html";
         dropdownActionButton.innerText = "Iniciar sesion";
     }
 }
