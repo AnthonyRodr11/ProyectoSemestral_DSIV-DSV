@@ -56,7 +56,7 @@
                 <input type="number" name="puja" id="inputPuja">
             </div>
             <div id="info">
-                <button id="btnPujar" onclick="Pujar()"><b>Pujar</b></button>
+                <button id="btnPujar"><b>Pujar</b></button>
             </div>
         </div>
     </div>
@@ -72,6 +72,17 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div id="customModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="cerrarModal" onclick="cerrarModal()">&times;</span>
+            <p id="modalMessage"></p>
+            <button id="btnModal" onclick="redirigirRegistro()">Registrarse</button>
+        </div>
+    </div>
+
+
 </body>
 <footer>
     <div id="footer"></div>
@@ -85,7 +96,7 @@
 
     function obtenerCodSubasta() {
         const urlParams = new URLSearchParams(window.location.search);
-        return urlParams.get('cod_subasta'); // Ejemplo: ?id=123
+        return urlParams.get('cod_subasta');
     }
 
 
@@ -210,11 +221,35 @@
         }
     }
 
+    document.addEventListener('DOMContentLoaded', () => {
+    const btnPujar = document.querySelector('#btnPujar'); // Botón Pujar
+    const popup = document.getElementById('popup'); // Popup de confirmación
+    const btnAceptar = document.getElementById('popupAceptar'); // Botón Aceptar del popup
+    const btnCancelar = document.getElementById('popupCancelar'); // Botón Cancelar del popup
 
+    // Mostrar el popup al hacer clic en Pujar
+    btnPujar.addEventListener('click', () => {
+        const userId = localStorage.getItem('userId'); // Verificar si el usuario está registrado
+        if (!userId) {
+            mostrarModal("No tienes una cuenta. Regístrate para poder realizar una compra.");
+        } else {
+            popup.style.display = 'flex'; // Mostrar el popup de confirmación
+        }
+    });
 
+    // Aceptar puja
+    btnAceptar.addEventListener('click', async () => {
+        await Pujar(); // Llama a la función Pujar() para procesar la puja
+        popup.style.display = 'none'; // Cerrar el popup
+    });
 
+    // Cancelar puja
+    btnCancelar.addEventListener('click', () => {
+        popup.style.display = 'none'; // Cerrar el popup
+    });
+});
 
-    
+   
     async function obtenerPlaca() {
         const codSubasta = obtenerCodSubasta(); // Obtiene el código de la subasta desde los parámetros de la URL.
         if (!codSubasta) {
@@ -297,6 +332,58 @@
             await verificarEstadoSubasta();
         }, 10000); // Cada 10 segundos
     });
+
+    // Función para mostrar el modal de registro
+function mostrarModal(message) {
+    document.getElementById('modalMessage').innerText = message;
+    document.getElementById('customModal').style.display = 'block';
+}
+
+// Función para mostrar el modal de éxito
+function mostrarModalExito(message) {
+    document.getElementById('modalMessage').innerText = message;
+    document.getElementById('customModal').style.display = 'block';
+    document.getElementById('cerrarModal').style.display = 'none';
+    const boton = document.getElementById("btnModal");
+
+    boton.textContent = "Entendido";
+    boton.onclick = function () {
+        window.location.href = "venta.html"; // Redirigir a la página de ventas
+    };
+}
+
+// Función para cerrar el modal
+function cerrarModal() {
+    document.getElementById('customModal').style.display = 'none';
+}
+
+// Función para redirigir a la página de registro
+function redirigirRegistro() {
+    window.location.href = 'register.html';
+}
+
+
+
+function mostrarModal(message) {
+    document.getElementById('modalMessage').innerText = message;
+    document.getElementById('customModal').style.display = 'block';
+}
+
+function mostrarModalExito(message) {
+    document.getElementById('modalMessage').innerText = message;
+    document.getElementById('customModal').style.display = 'block';
+    document.getElementById('cerrarModal').style.display = 'none';
+    const boton = document.getElementById("btnModal");
+
+    // Cambiamos el texto del botón
+    boton.textContent = "Entendido";
+
+    // Cambiamos la función asociada al evento 'onclick'
+    boton.onclick = function () {
+        console.log("Redirigiendo a la página de venta");
+        window.location.href = "venta.html";
+    };
+}
 </script>
 
 
