@@ -19,7 +19,7 @@ namespace MotorsApi.Controllers
         
             [HttpGet]
             [Route("infoFlota")]
-            public IActionResult ObtenerInfoFlota()
+            public IActionResult obtenerInfoFlota()
             {
                 var db = new Informes(); // Inicializar clase donde tienes los métodos
                 var data = db.infoFlota();
@@ -29,7 +29,7 @@ namespace MotorsApi.Controllers
             // Método para obtener la información de ventas
             [HttpGet]
             [Route("infoVentas")]
-            public async Task<IActionResult> ObtenerInfoVentas()
+            public async Task<IActionResult> obtenerInfoVentas()
             {
                 var db = new Informes();
                 var data = await db.InfoVentas();
@@ -39,7 +39,7 @@ namespace MotorsApi.Controllers
             // Método para obtener la información de alquileres
             [HttpGet]
             [Route("infoAlquiler")]
-            public IActionResult ObtenerInfoAlquiler()
+            public IActionResult obtenerInfoAlquiler()
             {
                 var db = new Informes();
                 var data = db.infoAlquiler();
@@ -49,7 +49,7 @@ namespace MotorsApi.Controllers
             // Método para obtener la información de subastas
             [HttpGet]
             [Route("infoSubastas")]
-            public IActionResult ObtenerInfoSubastas()
+            public IActionResult obtenerInfoSubastas()
             {
                 var db = new Informes();
                 var data = db.infoSubastas();
@@ -59,7 +59,7 @@ namespace MotorsApi.Controllers
             // Método para obtener la información de solicitudes
             [HttpGet]
             [Route("infoSolicitudes")]
-            public IActionResult ObtenerInfoSolicitudes()
+            public IActionResult obtenerInfoSolicitudes()
             {
                 var db = new Informes();
                 var data = db.infoSolicitudes();

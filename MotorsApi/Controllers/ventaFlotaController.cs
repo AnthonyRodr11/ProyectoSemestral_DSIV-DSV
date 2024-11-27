@@ -16,7 +16,7 @@ namespace MotorsApi.Controllers
 
         [HttpPost]
         [Route("venta")] 
-        public object VenderAuto(Ventas venta) //Este método agrega a la tabla Flota_Venta, el carro pasa a venderse
+        public object venderAuto(Ventas venta) //Este método agrega a la tabla Flota_Venta, el carro pasa a venderse
         {
             VentaFlota ventaAuto = new VentaFlota();
 
@@ -80,7 +80,7 @@ namespace MotorsApi.Controllers
 
         [HttpGet]
         [Route("flotaDetalle/{id}")]
-        public IActionResult ListaAutosPerfil(string id)
+        public IActionResult listaAutosPerfil(string id)
         {
             Ver_Flotas autos = new Ver_Flotas();
             var listaautos = autos.flota_Venta(id);
@@ -100,7 +100,7 @@ namespace MotorsApi.Controllers
 
         [HttpPost]
         [Route ("vendido")]
-        public IActionResult CarroVendido([FromBody] Flota_Venta vendido)
+        public IActionResult carroVendido([FromBody] Flota_Venta vendido)
         {
             if (vendido == null)
             {

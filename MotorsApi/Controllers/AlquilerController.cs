@@ -96,7 +96,7 @@ namespace MotorsApi.Controllers
 
         [HttpPost]
         [Route("registar")]
-        public IActionResult AlquilerNuevo([FromBody] AlquilerRequest alquiler)
+        public IActionResult alquilerNuevo([FromBody] AlquilerRequest alquiler)
         {
 
             Console.WriteLine("Datos Recibidos: " + JsonConvert.SerializeObject(alquiler));
@@ -124,14 +124,14 @@ namespace MotorsApi.Controllers
 
         [HttpGet]
         [Route ("seguros")]
-        public List<SeguroRequest> GetSeguros()
+        public List<SeguroRequest> getSeguros()
         {
             return new SeguroRead().ObtenerListaSeguros();
         }
     
         [HttpGet]
         [Route("auto/{placa}")]
-        public IActionResult GetAuto(string placa)
+        public IActionResult getAuto(string placa)
         {
             var auto = new AutoRequest().AutoInfo(placa);
             if (auto == null)
@@ -141,7 +141,7 @@ namespace MotorsApi.Controllers
 
         [HttpGet]
         [Route("alquiler")]
-        public IActionResult ObtenerAlquiler()
+        public IActionResult obtenerAlquiler()
         {
 
             List<AlquilerCarrosRequest> guardar = new Ver_Flotas().AlquileresAutos();

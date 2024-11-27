@@ -36,7 +36,7 @@ namespace MotorsApi.Controllers
 
         [HttpPatch]
         [Route("update/state")]
-        public object ActualizarEstado(Update_State carrito) //Este sirve para mover un auto de Subasta hacia Ventas o Alquiler
+        public object actualizarEstado(Update_State carrito) //Este sirve para mover un auto de Subasta hacia Ventas o Alquiler
         {
             AlquilerAuto alquiler = new AlquilerAuto();
 
