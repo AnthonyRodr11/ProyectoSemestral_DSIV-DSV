@@ -5,7 +5,7 @@ using System.Data;
 
 namespace MotorsApi.BD.CRUD.Read
 {
-    public class Ver_Flotas : Conexiondb
+    public class VerFlotas : Conexiondb
     {
 
         //Metodo para devolver una lista segun su estado <Alquiler,venta>

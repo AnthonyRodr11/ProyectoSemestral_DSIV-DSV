@@ -19,7 +19,7 @@ namespace MotorsApi.Controllers
         [Route("tarifas")]
         public List<TarifasAlquiler> ObtenerTarifas()
         {
-            return new Ver_Flotas().obtenerTarifas();
+            return new VerFlotas().obtenerTarifas();
         }
 
         [HttpPost]
@@ -144,7 +144,7 @@ namespace MotorsApi.Controllers
         public IActionResult obtenerAlquiler()
         {
 
-            List<AlquilerCarrosRequest> guardar = new Ver_Flotas().alquileresAutos();
+            List<AlquilerCarrosRequest> guardar = new VerFlotas().alquileresAutos();
 
             if (guardar == null)
                 return NotFound(new

@@ -87,7 +87,7 @@ namespace MotorsApi.Controllers
         [Route("verCarroceria/{estado}")]
         public IActionResult obtenerCarrocerias(string estado)
         {
-            Ver_Flotas flotas = new Ver_Flotas();
+            VerFlotas flotas = new VerFlotas();
             var carrocerias = flotas.listaCarroceria(estado);
 
             if (carrocerias == null || carrocerias.Count == 0)
@@ -110,7 +110,7 @@ namespace MotorsApi.Controllers
         [Route("ofertaActual/{cod_subasta}")]
         public IActionResult obtenerActualOferta(int cod_subasta)
         {
-            Ver_Flotas ver_Flotas = new Ver_Flotas();
+            VerFlotas ver_Flotas = new VerFlotas();
             var oferta = ver_Flotas.obtenerOfertaActual(cod_subasta);
 
 
@@ -134,7 +134,7 @@ namespace MotorsApi.Controllers
         public IActionResult obtenerAutosSubasta()
         {
 
-            Ver_Flotas enSubasta = new Ver_Flotas();
+            VerFlotas enSubasta = new VerFlotas();
 
             var autos = enSubasta.listaSubasta();
 
