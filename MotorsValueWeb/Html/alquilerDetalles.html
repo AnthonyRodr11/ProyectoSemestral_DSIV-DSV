@@ -15,7 +15,8 @@
         <div class="imagen">
             <label id="nombreAuto">Nombre del Auto</label>
             <img id="imgAuto" src="../Img/FordRanger.png" alt="imagen del auto">
-            <p>Tarifa por Día: <span id="tarifaDia">$0</span></p>
+            <label>Tarifa por dia <span id="tarifaDia">$0</span></label>
+            
         </div>
 
         <div class="informacion">
@@ -102,6 +103,16 @@
     <footer>
         <div id="footer"></div>
     </footer>
+
+    <!-- Modal -->
+    <div id="customModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="cerrarModal" onclick="cerrarModal()">&times;</span>
+            <p id="modalMessage"></p>
+            <button id="btnModal" onclick="redirigirRegistro()">Registrarse</button>
+        </div>
+    </div>
+
 </body>
 </html>
 
@@ -324,6 +335,8 @@
         obtenerSeguros();
     });
 
+    const idUser = localStorage.getItem("userId");
+
     document.addEventListener('DOMContentLoaded', () => {
 
         const btnPagar = document.querySelector('button'); // El botón Pagar
@@ -332,9 +345,17 @@
         const btnCancelar = document.getElementById('popupCancelar');
 
         // Mostrar el popup al hacer clic en el botón Pagar
+        
         btnPagar.addEventListener('click', () => {
-            popup.style.display = 'flex';
+            if(!idUser == null){
+                popup.style.display = 'flex';
+            }
+            else{
+                alert("No tienes una cuenta. Regístrate para poder realizar una compra.");
+            }
+            
         });
+        
 
         // Aceptar la compra
         btnAceptar.addEventListener('click', () => {
@@ -352,7 +373,7 @@
             const fechaRetiro = document.getElementById('fechaRetiro').value;
             const fechaEntrega = document.getElementById('fechaEntrega').value;
             const placa = obtenerIdAuto(); // Esto debería actualizarse dinámicamente según tu lógica
-            const idUsuario = localStorage.getItem("userId"); // Este valor debe obtenerse de la sesión o como corresponda
+            const idUsuario = idUser; // Este valor debe obtenerse de la sesión o como corresponda
             const tipoTarifa = seguroIdNumero; // Actualiza según tus requerimientos
             const tarifaTotal = parseFloat(document.getElementById('dineroTotal').textContent.replace('$', ''));
 
@@ -383,8 +404,9 @@
             })
                 .then(response => response.json())
                 .then(data => {
-                    alert(data.Mensaje || 'Operación exitosa.');
+                    mostrarModalExito("Compra realizada con éxito.");
                     popup.style.display = 'none';
+                    window.location.href = "aquiler.html";
                 })
                 .catch(error => {
                     console.error('Error:', error);
@@ -397,6 +419,5 @@
             popup.style.display = 'none';
         });
     });
-
 
 </script>
