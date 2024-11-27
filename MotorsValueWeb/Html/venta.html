@@ -29,13 +29,13 @@
 
         function crearCaja(datos) {
             const contenedor = document.getElementById('contenedor-caja');
-            contenedor.innerHTML = ''; // Limpia el contenedor
+            contenedor.innerHTML = '';
     
             datos.forEach(item => {
                 const caja = document.createElement('div');
                 caja.classList.add('caja');
                 
-                // Agregar atributos data-id y data-placa para usar en eventos
+            
                 caja.setAttribute('data-placa', item.placa);
     
                 caja.innerHTML = `
@@ -44,8 +44,6 @@
                     <img src="${item.foto}" alt="Foto de ${item.marca} ${item.modelo}">
                 `;
                 
-            
-                // Redirige al hacer clic, usando el ID del auto
                 caja.onclick = () => {
                     const id = caja.getAttribute('data-placa');
                     if (id && id !== 'undefined' && id !== '') {
@@ -60,14 +58,14 @@
         }
     
         async function actualizarCaja() {
-            const estado = 'venta'; // Puedes cambiar esto según sea necesario
+            const estado = 'venta';
             const datos = await obtenerDatos(estado);
             if(datos.code != 404){crearCaja(datos);}
             
         }
     
-        actualizarCaja(); // Carga inicial
-        setInterval(actualizarCaja, 10000); // Actualiza cada 10 segundos
+        actualizarCaja();
+        setInterval(actualizarCaja, 10000);
     </script>
     <script>
         const userId = localStorage.getItem('userId');
