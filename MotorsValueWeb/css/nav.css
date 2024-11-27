@@ -16,13 +16,13 @@ header {
 .profile-button {
     display: flex;
     align-items: center;
-    gap: 5px; /* Espacio entre el ícono y el texto */
+    gap: 5px; 
     color: #333;
     font-weight: bold;
 }
 
 .profile-button i {
-    color: #007BFF; /* Color del ícono */
+    color: #007BFF;
 }
 
 .navbar {
@@ -144,7 +144,7 @@ header {
     }
 }
 
-/* Para tablets y dispositivos medianos (1024x736) */
+
 @media (max-width: 1024px) {
     .navbar .links {
         display: none;
@@ -171,7 +171,7 @@ header {
     }
 }
 
-/* Para pantallas de tamaño más pequeño (768x552) */
+
 @media (max-width: 768px) {
     .navbar .links {
         display: none;
@@ -182,7 +182,7 @@ header {
     }
 
     .logo img {
-        width: 150px; /* Ajustar el tamaño del logo */
+        width: 150px; 
     }
 
     .navbar .titulo {
@@ -210,22 +210,22 @@ header {
     }
 }
 
-/* Para pantallas más grandes (2560x1840) */
+
 @media (min-width: 2560px) {
     .navbar .dropdown {
         display: none;
     }
 
     .logo {
-        width: 500px; /* Asegurarse de que el logo tenga un tamaño apropiado */
+        width: 500px;
     }
 
     .navbar .links a {
-        font-size: 1.5rem; /* Aumentar tamaño de los enlaces para pantallas grandes */
+        font-size: 1.5rem;
     }
 }
 
-/* Para pantallas de mayor resolución (992px) */
+
 @media (min-width: 992px) {
     .navbar .dropdown {
         display: none;

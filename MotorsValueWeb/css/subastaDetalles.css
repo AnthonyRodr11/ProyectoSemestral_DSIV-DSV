@@ -118,7 +118,7 @@ body {
 
 /* Botón de pujas */
 #btnPujar {
-    background-color: #ffc107; /* Amarillo */
+    background-color: #ffc107; 
     color: #000;
     font-weight: bold;
     padding: 10px 20px;
@@ -129,7 +129,7 @@ body {
 }
 
 #btnPujar:hover {
-    background-color: #e0a800; /* Amarillo más oscuro */
+    background-color: #e0a800; 
     color: #fff;
 }
 
@@ -173,7 +173,7 @@ body {
 }
 
 #popupAceptar {
-    background-color: #28a745; /* Verde */
+    background-color: #28a745; 
     color: #fff;
 }
 
@@ -182,7 +182,7 @@ body {
 }
 
 #popupCancelar {
-    background-color: #dc3545; /* Rojo */
+    background-color: #dc3545; 
     color: #fff;
 }
 

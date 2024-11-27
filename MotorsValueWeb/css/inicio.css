@@ -163,33 +163,33 @@ button:hover {
 
 /* Media Queries para Responsividad */
 
-/* Pantallas pequeñas (320px+) */
+
 @media (max-width: 320px) {
     body {
         font-size: 14px;
-        /* Ajuste de tamaño de fuente */
+        
     }
 
     .animate-charcter {
         font-size: 25px;
-        /* Texto más pequeño en pantalla pequeña */
+       
     }
 
     .presentacion {
         font-size: 5px;
-        /* Texto más pequeño */
+       
         margin: 0 10px;
-        /* Espacio más pequeño */
+        
     }
 
     .slider-frame {
         height: 200px;
-        /* Alto más pequeño para dispositivos móviles */
+        
     }
 
     .slider-frame img {
         object-fit: cover;
-        /* Ajuste adecuado de imágenes */
+        
     }
 
     .navbar .hamburger {
@@ -197,31 +197,31 @@ button:hover {
     }
 }
 
-/* Pantallas medianas (576px+) */
+
 @media (max-width: 576px) {
     .animate-charcter {
         font-size: 30px;
-        /* Aumenta el tamaño de texto para tablets */
+        
     }
 
     .presentacion {
         font-size: 10px !important;
         margin: 0 20px !important;
-        /* Margen adecuado */
+        
     }
 
     table {
         width: 100%;
-        /* Asegurar que la tabla se ajuste */
+        
     }
 
 }
 
-/* Pantallas grandes (768px+) */
+
 @media (max-width: 768px) {
     .animate-charcter {
         font-size: 35px;
-        /* Aumentar tamaño de texto en pantallas medianas */
+        
     }
 
     .presentacion {
@@ -230,16 +230,16 @@ button:hover {
 
     .slider-frame {
         height: auto;
-        /* Ajustar altura del slider */
+        
     }
 
 }
 
-/* Pantallas extra grandes (992px+) */
+
 @media (max-width: 992px) {
     .animate-charcter {
         font-size: 40px;
-        /* Mantener tamaño adecuado para pantallas grandes */
+        
     }
 
     .presentacion {
@@ -249,7 +249,7 @@ button:hover {
 
 @media (min-width: 1200px) {
     .presentacion {
-        font-size: 30px; /* Aumentar el tamaño del texto */
-        margin: 50px 50px; /* Más espacio para márgenes */
+        font-size: 30px; 
+        margin: 50px 50px; 
     }
 }

@@ -130,10 +130,10 @@ h1{
 }
 
 .imagen img {
-    max-width: 100%; /* Ocupa todo el ancho disponible */
-    max-height: 500px; /* Define una altura máxima para evitar que ocupe demasiado espacio */
-    height: auto; /* Mantiene la proporción */
-    object-fit: contain; /* Ajusta la imagen al contenedor */
+    max-width: 100%; 
+    max-height: 500px;
+    height: auto; 
+    object-fit: contain; 
 }
 
 
