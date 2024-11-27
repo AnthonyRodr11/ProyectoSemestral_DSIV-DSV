@@ -93,7 +93,9 @@ body::before {
     margin: 0;
     align-items: center;
 }
-
+.imagen p{
+    margin-top: -40px;
+}
 /* Iconos y tablas */
 .icono{
     max-width: 40%;
@@ -126,7 +128,6 @@ h1{
     height: 100%;
     width: 100%;
     display: grid;
-
 }
 
 .imagen,#nombreAuto{
@@ -210,7 +211,7 @@ button:hover{
 
 @media (max-width: 1267px) {
     .contenedor {
-        flex-direction: column;
+        flex-direction: row;
         max-width: 100%;
         width: 100%;
         position: relative; /* Añadido para ver si mejora el flujo */
@@ -224,7 +225,8 @@ button:hover{
     }
 
     .imagen{
-        width: 50%;
+        width: 100%;
+        max-height: 600px;
     }
     
     #flecha{
@@ -234,6 +236,10 @@ button:hover{
 }
 
 @media (max-width: 425px){
+    .imagen img{
+        max-width: 100%;
+    }
+    
     .detalles{
         flex-direction: column;
     }
@@ -248,7 +254,13 @@ button:hover{
 
 }
 
-@media (max-width: 536px) {
+@media (max-width: 768px) {
+    .contenedor {
+        flex-direction: column;
+        max-width: 100%;
+        width: 100%;
+        position: relative; /* Añadido para ver si mejora el flujo */
+    }
     #flecha{
         display: none;
     }
