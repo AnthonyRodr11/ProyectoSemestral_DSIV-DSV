@@ -12,7 +12,7 @@ namespace MotorsApi.Controllers
 
         [HttpGet]
         [Route("subasta/{placa}")]
-        public IActionResult GetSubasta(int placa)
+        public IActionResult getSubasta(int placa)
         {
             var tsubaru = new Ver_Flotas().listaSubasta(placa);
 
@@ -25,14 +25,14 @@ namespace MotorsApi.Controllers
 
         [HttpPatch]
         [Route("pujar")]
-        public IActionResult HacerPuja([FromBody] SubastaRequest request)
+        public IActionResult hacerPuja([FromBody] SubastaRequest request)
         {
             if (request == null || request.valor_puja == null || request.usuario == null)
             {
                 return BadRequest("Datos incompletos para realizar la puja.");
             }
 
-            var resultado = new Pujar().InsertarPuja(request);
+            var resultado = new Pujar().insertarPuja(request);
 
             if (resultado == null || resultado == 0)
                 return StatusCode(418, "Puja rechazada o no fue procesada.");
@@ -42,7 +42,7 @@ namespace MotorsApi.Controllers
 
         [HttpGet]
         [Route("placa/{cod_subasta}")]
-        public IActionResult GetPlaca(int cod_subasta)
+        public IActionResult getPlaca(int cod_subasta)
         {
             var guardar = new Pujar().GetPlaca(cod_subasta);
 

@@ -15,7 +15,7 @@ namespace MotorsApi.Controllers
         public object registrarAuto(Flota_Carro autos)
         {
 
-            Flota_Auto regAuto = new Flota_Auto();
+            FlotaAuto regAuto = new FlotaAuto();
 
             var guardado = regAuto.registraAutoflota(autos);
 
@@ -36,9 +36,9 @@ namespace MotorsApi.Controllers
 
         [HttpPatch]
         [Route("update/state")]
-        public object ActualizarEstado(Update_State carrito) //Este sirve para mover un auto de Subasta hacia Ventas o Alquiler
+        public object actualizarEstado(Update_State carrito) //Este sirve para mover un auto de Subasta hacia Ventas o Alquiler
         {
-            Alquiler_Auto alquiler = new Alquiler_Auto();
+            AlquilerAuto alquiler = new AlquilerAuto();
 
             var guardado = alquiler.ActualizarEstado(carrito);
 
@@ -62,7 +62,7 @@ namespace MotorsApi.Controllers
         [Route("create/subasta")]
         public object registrarSubastaCarro(AgregarSubasta carrito)//Este sirve para crear un carro en subasta.
         {
-            Subasta_Flota subastita = new Subasta_Flota();
+            SubastaFlota subastita = new SubastaFlota();
 
             var guardado = subastita.registrarSubastaCarro(carrito);
 

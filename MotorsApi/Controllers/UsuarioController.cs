@@ -14,7 +14,7 @@ namespace MotorsApi.Controllers
     {
         [HttpPost]
         [Route ("user/new")]
-        public IActionResult RegistrarUsuario([FromBody] RegistroUsuario personita)
+        public IActionResult registrarUsuario([FromBody] RegistroUsuario personita)
         {
             if(personita == null)
             {
@@ -26,7 +26,7 @@ namespace MotorsApi.Controllers
                 });
             }
 
-            Registrando_Usuario registro = new Registrando_Usuario();
+            RegistrandoUsuario registro = new RegistrandoUsuario();
             var guardar = registro.CreandoRegistro(personita);
             
 
@@ -52,7 +52,7 @@ namespace MotorsApi.Controllers
 
         [HttpDelete]
         [Route ("user/delete/{id}")]
-        public IActionResult EliminarUsuario(int id)
+        public IActionResult eliminarUsuario(int id)
         {
             if(id == 0)
             {
@@ -66,7 +66,7 @@ namespace MotorsApi.Controllers
 
             EliminarRol borradorcito = new EliminarRol();
 
-            if (borradorcito.RolEliminar(id)>0)
+            if (borradorcito.rolEliminar(id)>0)
             {
                 return Ok(new
                 {
@@ -88,7 +88,7 @@ namespace MotorsApi.Controllers
         
         [HttpPatch]
         [Route ("user/update/{correo}")]
-        public IActionResult ActualizarUsuario(string correo, [FromBody] ActualizarUsuario usuario)
+        public IActionResult actualizarUsuario(string correo, [FromBody] ActualizarUsuario usuario)
         {
             if (usuario == null)
             {
@@ -100,8 +100,8 @@ namespace MotorsApi.Controllers
                 });
             }
 
-            Editar_Usuario itadori = new Editar_Usuario(); 
-            var guarda = itadori.EditarUsuario(correo, usuario);
+            EditarUsuario itadori = new EditarUsuario(); 
+            var guarda = itadori.editarUsuario(correo, usuario);
 
             if (guarda > 0)
             {
@@ -128,7 +128,7 @@ namespace MotorsApi.Controllers
 
         [HttpGet]
         [Route("user/login/{correo}/{contraseña}")]
-        public IActionResult LogearUsuario(string correo, string contraseña)
+        public IActionResult logearUsuario(string correo, string contraseña)
         {
             if (string.IsNullOrWhiteSpace(correo) || string.IsNullOrWhiteSpace(contraseña))
             {
@@ -160,7 +160,7 @@ namespace MotorsApi.Controllers
 
         [HttpGet]
         [Route("user/email/{correo}")]
-        public IActionResult VerificarCorreo(string correo)
+        public IActionResult verificarCorreo(string correo)
         {
             if (string.IsNullOrWhiteSpace(correo))
             {

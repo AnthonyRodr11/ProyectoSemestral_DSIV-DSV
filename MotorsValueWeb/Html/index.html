@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../css/inicio.css">
 </head>
 <header>
+    <!-- Div dedicado al Navbar -->
     <div id="navbar"></div>
 </header>
 <body>
@@ -15,6 +16,7 @@
             <h1 class="animate-charcter">¡Bienvenidos a Motors Value!</h1>
         </div>
     
+        <!-- Imagenes tipo carrusel en pantalla -->
         <div class="slider-frame">
             <div class="slide-images">
                 <div class="img-container"><img src="../img/img1.png" alt="Imagen 1"></div>
@@ -24,72 +26,46 @@
             <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
             <button class="next" onclick="moveSlide(1)">&#10095;</button>
         </div>
+
         <div class="presentacion">
             <p>
                 ¡Bienvenidos a Motors Value! Somos una plataforma líder en la venta, alquiler y subasta de automóviles en línea, donde la pasión por los autos se une con la tecnología más avanzada. En Motors Value, creemos que encontrar el vehículo perfecto debe ser una experiencia emocionante y accesible para todos. Ofrecemos una amplia gama de opciones, desde elegantes sedanes y prácticos hatchbacks hasta imponentes SUVs y clásicos de colección, todo al alcance de un clic.
             </p>
         </div>
+
     </div>
     </div>
 </body>
+
+<!-- Espacio dedicado al footer -->
 <footer id="footer">
 
 </footer>
-<script>
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const userId = localStorage.getItem('userId');
-        const registerButton = document.querySelector('#register-button'); // Asegúrate de que el botón tenga este id
-
-        if (userId) {
-            // Cambia el botón de "Registrarse" a un ícono de usuario
-            registerButton.innerHTML = '<img src="../img/icono-usuario.png" alt="Usuario" style="width: 20px; height: 20px;">';
-            registerButton.href = "perfil.html"; // Cambia el link a la página de perfil
-        } else {
-            // Si no está logueado, mantenemos el botón de "Registrarse"
-            registerButton.innerHTML = 'Registrarse';
-            registerButton.href = "register.html";
-        }
-    });
-
-</script>
-<script>
-    const userId = localStorage.getItem('userId');
-    console.log('ID recuperada:', userId);
-
-    if (userId) {
-        console.log(`Bienvenido usuario con ID: ${userId}`);
-    } else {
-        console.log('No hay usuario autenticado. Redirigiendo...');
-    }
-</script>
-
+<!-- JS dedicado a la animacion de cambio de imagen dinamica -->
 <script>
     let currentIndex = 0; // Índice actual de la imagen
     const slides = document.querySelector('.slide-images');
     const totalSlides = document.querySelectorAll('.img-container').length;
     const sliderFrame = document.querySelector('.slider-frame'); // Contenedor del slider
 
-    // Función para mover las diapositivas manualmente
     function moveSlide(direction) {
         currentIndex += direction;
 
-        // Si se excede el índice, vuelve al inicio o al final
         if (currentIndex < 0) {
             currentIndex = totalSlides - 1;
         } else if (currentIndex >= totalSlides) {
             currentIndex = 0;
         }
 
-        // Cambiar la posición usando transform
         updateSlidePosition();
     }
 
     // Función para actualizar la posición de las diapositivas
     function updateSlidePosition() {
-        const containerWidth = sliderFrame.offsetWidth; // Obtener el ancho dinámico del contenedor
-        const offset = -currentIndex * containerWidth; // Calcular la posición en base al ancho del contenedor
-        slides.style.transform = `translateX(${offset}px)`; // Aplicar el desplazamiento
+        const containerWidth = sliderFrame.offsetWidth; 
+        const offset = -currentIndex * containerWidth; 
+        slides.style.transform = `translateX(${offset}px)`; 
     }
 
     // Desplazamiento automático cada 5 segundos
@@ -101,12 +77,15 @@
     window.addEventListener('resize', updateSlidePosition);
 </script>
 
+<!-- Llamada a Funciones.js -->
 <script src="../JavaScript/Funciones.js"></script>
 
+<!-- Llamada del NavBar a traves de idElento, Archivo -->
 <script>
     cargarHTML('navbar', 'navbar.html')
 </script>
 
+<!-- Llamada del Footer a traves de idElento, Archivo -->
 <script>
     cargarHTML('footer', 'footer.html');
 </script>

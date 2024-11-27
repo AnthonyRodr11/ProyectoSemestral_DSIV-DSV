@@ -16,9 +16,9 @@ namespace MotorsApi.Controllers
 
         [HttpPost]
         [Route("venta")] 
-        public object VenderAuto(Ventas venta) //Este método agrega a la tabla Flota_Venta, el carro pasa a venderse
+        public object venderAuto(Ventas venta) //Este método agrega a la tabla Flota_Venta, el carro pasa a venderse
         {
-            Venta_Flota ventaAuto = new Venta_Flota();
+            VentaFlota ventaAuto = new VentaFlota();
 
             var guardado = ventaAuto.registrarVenta(venta);
 
@@ -64,8 +64,8 @@ namespace MotorsApi.Controllers
         [Route("ventaId/{placa}")]
         public IActionResult listaVenta(string placa)
         {
-            Venta_Flota ventaId = new Venta_Flota();
-            int? id = ventaId.ObtenerVentaIdPorPlaca(placa);
+            VentaFlota ventaId = new VentaFlota();
+            int? id = ventaId.obtenerVentaIdporPlaca(placa);
             if (id == null)
             {
                 return BadRequest(new
@@ -80,7 +80,7 @@ namespace MotorsApi.Controllers
 
         [HttpGet]
         [Route("flotaDetalle/{id}")]
-        public IActionResult ListaAutosPerfil(string id)
+        public IActionResult listaAutosPerfil(string id)
         {
             Ver_Flotas autos = new Ver_Flotas();
             var listaautos = autos.flotaVenta(id);
@@ -100,7 +100,7 @@ namespace MotorsApi.Controllers
 
         [HttpPost]
         [Route ("vendido")]
-        public IActionResult CarroVendido([FromBody] Flota_Venta vendido)
+        public IActionResult carroVendido([FromBody] Flota_Venta vendido)
         {
             if (vendido == null)
             {
@@ -112,15 +112,15 @@ namespace MotorsApi.Controllers
                 });
             }
 
-            Venta_Flota agregar = new Venta_Flota();
+            VentaFlota agregar = new VentaFlota();
             bool dispo = false;
 
-            var guardado = agregar.VenderCarro(vendido); //Para saber si se ingresaron los datos
+            var guardado = agregar.venderCarro(vendido); //Para saber si se ingresaron los datos
              //para saber si se cambió la disponibilidad
 
             if (guardado > 0)
             {
-                var cambiado = agregar.CambiarDisponibilidad(vendido.placa, dispo);
+                var cambiado = agregar.cambiarDisponibilidad(vendido.placa, dispo);
                 return Ok(new
                 {
                     titulo = "Éxito al guardar",

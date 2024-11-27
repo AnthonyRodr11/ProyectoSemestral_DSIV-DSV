@@ -4,7 +4,7 @@ using System.Data;
 
 namespace MotorsApi.BD.CRUD.Create
 {
-    public class Venta_Flota : Conexiondb
+    public class VentaFlota : Conexiondb
     {
         public int registrarVenta(Ventas flota_Venta)
         {
@@ -44,7 +44,7 @@ namespace MotorsApi.BD.CRUD.Create
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo registrar el Auto" + e);
+                throw;
             }
             finally
             {
@@ -58,7 +58,7 @@ namespace MotorsApi.BD.CRUD.Create
 
         }
 
-        public int? ObtenerVentaIdPorPlaca(string placa)
+        public int? obtenerVentaIdporPlaca(string placa)
         {
             int? codVenta = null;
             try
@@ -84,7 +84,7 @@ namespace MotorsApi.BD.CRUD.Create
             }
             catch (Exception e)
             {
-                throw new Exception("Error al obtener el ID del auto", e);
+                throw;
             }
             finally
             {
@@ -96,7 +96,7 @@ namespace MotorsApi.BD.CRUD.Create
 
 
         //Metodo para agregar registro de venta
-        public int VenderCarro(Flota_Venta vendido) 
+        public int venderCarro(Flota_Venta vendido) 
         {
             int insercion;
 
@@ -134,7 +134,7 @@ namespace MotorsApi.BD.CRUD.Create
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo registrar el Auto" + e);
+                throw;
             }
             finally
             {
@@ -145,7 +145,7 @@ namespace MotorsApi.BD.CRUD.Create
 
 
         //Metodo para cambiar la disponibilidad de un carro
-        public int CambiarDisponibilidad(string placa, bool dispo)
+        public int cambiarDisponibilidad(string placa, bool dispo)
         {
             try
             {
@@ -179,7 +179,7 @@ namespace MotorsApi.BD.CRUD.Create
             catch (Exception e)
             {
 
-                Console.WriteLine("No pudo actualizarse" + e);
+                throw;
             }
             finally
             {

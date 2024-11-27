@@ -10,7 +10,6 @@ body {
 #contenedor-caja {
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     display: grid;
-    overflow-x: scroll;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Cambiado a auto-fit y aumentado el min-width */
     gap: 15px;
     padding: 20px;
@@ -60,7 +59,24 @@ body {
     color: green;
     margin-top: 10px;
 }
+@media (min-width: 2560px) {
+    #contenedor-caja {
+        max-width: 80%; /* Limitar el ancho máximo para un diseño centralizado */
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajustar el tamaño mínimo en columnas grandes */
+    }
 
+    .caja {
+        padding: 20px;
+    }
+
+    .caja h3 {
+        font-size: 28px;
+    }
+
+    .precio {
+        font-size: 24px;
+    }
+}
 @media (max-width: 1024px) {
     /* Para tablets y dispositivos medianos */
 

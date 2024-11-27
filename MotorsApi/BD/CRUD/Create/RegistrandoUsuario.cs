@@ -4,7 +4,7 @@ using System.Data;
 
 namespace MotorsApi.BD.CRUD.Create
 {
-    public class Registrando_Usuario : Conexiondb
+    public class RegistrandoUsuario : Conexiondb
     {
 
         //Método para registrar el Login
@@ -67,7 +67,7 @@ namespace MotorsApi.BD.CRUD.Create
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error al registrar el usuario: " + e.Message);
+                throw;
             }
             finally
             {
@@ -118,7 +118,7 @@ namespace MotorsApi.BD.CRUD.Create
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo registrar el Auto" + e);
+                throw;
             }
             finally
             {
