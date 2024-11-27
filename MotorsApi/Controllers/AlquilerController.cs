@@ -71,9 +71,9 @@ namespace MotorsApi.Controllers
                     Mensaje = "El precio no puede ser nulo.",
                 });
             }
-            Alquiler_Auto nuevoAlquiler = new Alquiler_Auto();
+            AlquilerAuto nuevoAlquiler = new AlquilerAuto();
 
-            var actualizado = nuevoAlquiler.EditarTarifa(id, tarifas);
+            var actualizado = nuevoAlquiler.editarTarifa(id, tarifas);
             if (actualizado > 0)
             {
                 return Ok(
