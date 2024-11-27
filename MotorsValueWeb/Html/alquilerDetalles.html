@@ -373,7 +373,7 @@
             const fechaRetiro = document.getElementById('fechaRetiro').value;
             const fechaEntrega = document.getElementById('fechaEntrega').value;
             const placa = obtenerIdAuto(); // Esto debería actualizarse dinámicamente según tu lógica
-            const idUsuario = idUser; // Este valor debe obtenerse de la sesión o como corresponda
+            const idUsuario = localStorage.getItem("userId"); // Este valor debe obtenerse de la sesión o como corresponda
             const tipoTarifa = seguroIdNumero; // Actualiza según tus requerimientos
             const tarifaTotal = parseFloat(document.getElementById('dineroTotal').textContent.replace('$', ''));
 
