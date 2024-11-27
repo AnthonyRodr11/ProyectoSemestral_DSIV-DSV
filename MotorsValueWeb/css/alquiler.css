@@ -1,11 +1,5 @@
-/* General */
-html, body{
-    margin: 0;
-    width: 100%;
-
-    height: 100%;
-    position: relative;
-    overflow-x: hidden;
+body{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 /* Fondo diagonal */
@@ -17,7 +11,7 @@ body::before {
     width: 100%;
     height: 100%;
     background-color:#004a8f;
-    clip-path: polygon(57% 100%, 72% 0, 100% 0, 100% 100%, 70% 100%, 85% 0, 83% 0, 68% 100%); /*No me vuelvan a ponerme a hacer esto por favor, hacer un polígono así sin guía es una tortura por favor ayudenme me están explotando!*/
+    clip-path: polygon(57% 100%, 72% 0, 100% 0, 100% 100%, 70% 100%, 85% 0, 83% 0, 68% 100%); 
     z-index: -1; /* Coloca el fondo detrás de todo el contenido */
 }
 
@@ -31,7 +25,7 @@ body::before {
 }
 
 /* Información del panel */
-.informacion{
+.informacion {
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -41,24 +35,22 @@ body::before {
     max-width: 30%;
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
     margin: 0 2% 0 0;
-    
 }
 
 /* Detalles del panel */
-.Detalles{
+.Detalles {
     display: flex;
     flex-direction: column;
     height: auto;
     margin: 0 0 1em 0;
 }
 
-.Detalles,h1{
+.Detalles, h1 {
     text-align: center;
     color: #004a8f;
-    
 }
 
-.Detalles,div,table,tr,th,input{
+.Detalles, div, table, tr, th, input {
     font-size: x-large;
 }
 
@@ -92,9 +84,7 @@ body::before {
 #pago p{
     margin: 0;
     align-items: center;
-}
-.imagen p{
-    margin-top: -10px;
+
 }
 /* Iconos y tablas */
 .icono{
@@ -102,7 +92,6 @@ body::before {
     width: 100%;
     margin: 3% auto;
 }
-
 
 .seguro{
     max-width: 100%;
@@ -130,16 +119,23 @@ h1{
     display: grid;
 }
 
+.imagen label{
+    font-weight: bold;
+    font-size: 40px;
+    margin-top: -10px !important;
+}
+
 .imagen,#nombreAuto{
     text-align: center;
 }
 
-.imagen,img{
-    max-width: 100%;
-    justify-self: center;
-    max-height: 631px;
-    height: 100%;
+.imagen img {
+    max-width: 100%; /* Ocupa todo el ancho disponible */
+    max-height: 500px; /* Define una altura máxima para evitar que ocupe demasiado espacio */
+    height: auto; /* Mantiene la proporción */
+    object-fit: contain; /* Ajusta la imagen al contenedor */
 }
+
 
 /* Botón pagar */
 button{
@@ -235,9 +231,23 @@ button:hover{
     }
 }
 
+@media screen and (max-width: 1024px) {
+    .informacion {
+        max-width: 40%;
+    }
+
+    .contenedor {
+        margin: 10px;
+    }
+}
+
 @media (max-width: 425px){
     .imagen img{
         max-width: 100%;
+    }
+
+    .contenedor {
+        margin: 0px !important;
     }
     
     .detalles{
@@ -245,11 +255,28 @@ button:hover{
     }
 
     .informacion{
-        max-width: 100%;
+        max-width: 90% !important;
+        margin: 0px !important;
     }
 
     #fechaEntrega,#fechaRetiro{
         width: 60%;
+    }
+
+    .imagen label{
+        font-size: 20px !important;
+        background-color: #a9a9a950;
+    }
+
+    .Detalles, div, table, tr, th, input {
+        font-size: medium;
+    }
+
+    .informacion {
+        max-width: 90%;
+        border: 1px solid black; /* Bordes más finos */
+        padding: 3%;
+        font-size: medium; /* Reducir el tamaño del texto */
     }
 
 }
@@ -261,7 +288,54 @@ button:hover{
         width: 100%;
         position: relative; /* Añadido para ver si mejora el flujo */
     }
+
     #flecha{
         display: none;
+    }
+
+    .imagen label{
+        font-size: 30px;
+        background-color: #a9a9a950;
+    }
+
+    .imagen{
+        margin-bottom: 10px;
+    }
+
+    .Detalles, div, table, tr, th, input {
+        font-size: large;
+    }
+
+    .informacion {
+        max-width: 60%;
+        padding: 2%;
+        margin: 1% ; /* Centrar en pantallas más pequeñas */
+        margin-bottom: 10px !important;
+    }
+    
+}
+
+@media screen and (max-width: 320px) {
+    
+    .contenedor {
+        margin: 0px;
+    }
+
+    
+    
+    .informacion {
+        max-width: 100%; /* Ocupa todo el ancho disponible */
+        padding: 5%; /* Espaciado interno amplio para mejor legibilidad */
+        border: none; /* Elimina el borde para simplificar el diseño */
+        box-shadow: none; /* Elimina el efecto de sombra */
+        margin: 0px;
+    }
+
+    .Detalles, div, table, tr, th, input {
+        font-size: small; /* Reducir el tamaño de la fuente */
+    }
+
+    h1 {
+        font-size: medium; /* Títulos más pequeños */
     }
 }
