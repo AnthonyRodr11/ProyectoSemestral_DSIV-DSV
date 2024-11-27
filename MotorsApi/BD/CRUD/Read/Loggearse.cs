@@ -7,6 +7,7 @@ namespace MotorsApi.BD.CRUD.Read
     public class Loggearse : Conexiondb
     {
 
+        //SE MODIFICO LA CONSULTA MYSQL
         public int VerificarLogin(string correo, string contraseña)
         {
             
