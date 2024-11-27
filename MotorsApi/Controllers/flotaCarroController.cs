@@ -15,7 +15,7 @@ namespace MotorsApi.Controllers
         public object registrarAuto(Flota_Carro autos)
         {
 
-            Flota_Auto regAuto = new Flota_Auto();
+            FlotaAuto regAuto = new FlotaAuto();
 
             var guardado = regAuto.registraAutoflota(autos);
 
@@ -62,7 +62,7 @@ namespace MotorsApi.Controllers
         [Route("create/subasta")]
         public object registrarSubastaCarro(AgregarSubasta carrito)//Este sirve para crear un carro en subasta.
         {
-            Subasta_Flota subastita = new Subasta_Flota();
+            SubastaFlota subastita = new SubastaFlota();
 
             var guardado = subastita.registrarSubastaCarro(carrito);
 

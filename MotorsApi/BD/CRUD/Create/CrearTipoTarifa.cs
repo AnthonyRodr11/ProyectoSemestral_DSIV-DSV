@@ -43,7 +43,7 @@ namespace MotorsApi.BD.CRUD.Create
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo registrar el Auto" + e);
+                throw;
             }
             finally
             {
