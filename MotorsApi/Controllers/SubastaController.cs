@@ -32,7 +32,7 @@ namespace MotorsApi.Controllers
                 return BadRequest("Datos incompletos para realizar la puja.");
             }
 
-            var resultado = new Pujar().InsertarPuja(request);
+            var resultado = new Pujar().insertarPuja(request);
 
             if (resultado == null || resultado == 0)
                 return StatusCode(418, "Puja rechazada o no fue procesada.");

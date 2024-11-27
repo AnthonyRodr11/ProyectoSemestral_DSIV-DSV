@@ -4,7 +4,7 @@ using System.Data;
 
 namespace MotorsApi.BD.CRUD.Create
 {
-    public class Flota_Auto : Conexiondb
+    public class FlotaAuto : Conexiondb
     {
 
         public int registraAutoflota(Flota_Carro regAuto)
@@ -51,7 +51,7 @@ namespace MotorsApi.BD.CRUD.Create
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo registrar el Auto" + e.ToString());
+                throw;
             }
             finally
             {

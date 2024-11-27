@@ -4,7 +4,7 @@ using System.Data;
 
 namespace MotorsApi.BD.CRUD.Create
 {
-    public class Subasta_Flota : Conexiondb
+    public class SubastaFlota : Conexiondb
     {
 
         //Metodo para mandar un auto a Subastar
@@ -45,7 +45,7 @@ namespace MotorsApi.BD.CRUD.Create
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo mandar a subastar el auto"+e);
+                throw;
             }
             finally
             {
@@ -75,11 +75,11 @@ namespace MotorsApi.BD.CRUD.Create
             }
             catch (MySqlException e)
             {
-                Console.WriteLine("error en puerto perico " + e.ToString());
+                throw;
             }
             catch (Exception e)
             {
-                Console.WriteLine("errorsito "+e.ToString());
+                throw;
             }
             finally { cerrarConexion(); }
             return 0;

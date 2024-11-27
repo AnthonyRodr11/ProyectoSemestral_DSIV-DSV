@@ -6,7 +6,7 @@ namespace MotorsApi.BD.CRUD.Delete
 {
     public class EliminarRol : Conexiondb
     {
-         public int RolEliminar(int id)
+         public int rolEliminar(int id)
         {
 
             //declaracion de variable de trabajo 
@@ -38,7 +38,7 @@ namespace MotorsApi.BD.CRUD.Delete
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo Eliminar el usuario" + e.ToString());
+                throw;
             }
             finally {
                 

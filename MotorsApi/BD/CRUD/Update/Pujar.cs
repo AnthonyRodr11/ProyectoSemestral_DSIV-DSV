@@ -5,7 +5,7 @@ namespace MotorsApi.BD.CRUD.Update
 {
     public class Pujar : Conexiondb
     {
-        public int InsertarPuja(SubastaRequest deuda)
+        public int insertarPuja(SubastaRequest deuda)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace MotorsApi.BD.CRUD.Update
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex);
+                throw;
             }
             finally { cerrarConexion(); }
             return 0;
@@ -64,7 +64,10 @@ namespace MotorsApi.BD.CRUD.Update
                         return subasta;
                     }
              }
-            catch (Exception ex) { Console.WriteLine(ex); }
+            catch (Exception ex) {
+
+                throw; 
+            }
             finally { cerrarConexion(); }
             return null;
         }

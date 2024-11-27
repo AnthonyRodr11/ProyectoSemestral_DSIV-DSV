@@ -4,10 +4,10 @@ using System.Data;
 
 namespace MotorsApi.BD.CRUD.Update
 {
-    public class Editar_Usuario : Conexiondb
+    public class EditarUsuario : Conexiondb
     {
 
-        public int EditarUsuario(string correo, ActualizarUsuario usuario)
+        public int editarUsuario(string correo, ActualizarUsuario usuario)
         {
 
             //declaracion de variable de trabajo 
@@ -45,7 +45,7 @@ namespace MotorsApi.BD.CRUD.Update
             }
             catch (Exception e)
             {
-                Console.WriteLine("No se pudo registrar el usuario" + e);
+                throw;
             }
             finally
             {
