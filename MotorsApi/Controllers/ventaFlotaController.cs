@@ -45,7 +45,7 @@ namespace MotorsApi.Controllers
         public IActionResult listaAutos(string estado)
         {
             VerFlotas autos = new VerFlotas();
-            var listaautos = autos.tipoFlota(estado);
+            var listaautos = autos.tiposFlota(estado);
 
             if ( listaautos == null || listaautos.Count == 0)
             {

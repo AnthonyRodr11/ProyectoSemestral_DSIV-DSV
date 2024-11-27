@@ -9,7 +9,7 @@ namespace MotorsApi.BD.CRUD.Read
     {
 
         //Metodo para devolver una lista segun su estado <Alquiler,venta>
-        public List<FlotaCarroRequest> tipos_Flota(string estado)
+        public List<FlotaCarroRequest> tiposFlota(string estado)
         {
             List<FlotaCarroRequest> autos = new List<FlotaCarroRequest>();
 
