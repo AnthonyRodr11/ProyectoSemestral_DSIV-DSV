@@ -1,5 +1,6 @@
 ﻿using MotorsForm.Resource;
 using System;
+using MotorsApi
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -62,6 +63,15 @@ namespace MotorsForm
         private void cmbEstado_Leave(object sender, EventArgs e)
         {
             herra.ValidarComboBox(cmbEstado);
+        }
+
+        private async void btnRegistrar_Click(object sender, EventArgs e)
+        {
+            var user = new 
+
+
+
+
         }
     }
 }
