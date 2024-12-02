@@ -149,12 +149,12 @@ namespace MotorsApi.BD.CRUD.Read
         } 
 
 
-        /*
+        
 
         //Metodo para mostrar todas las solicitudes
-        public List<solicitudRequest> obtenerSolicitudes()
+        public List<Solicitud> obtenerSolicitudes()
         {
-            List<solicitudRequest> solicitudes = new List<solicitudRequest>();
+            List<Solicitud> solicitudes = new List<Solicitud>();
 
             try
             {
@@ -173,8 +173,11 @@ namespace MotorsApi.BD.CRUD.Read
                 {
                     while (reader.Read())
                     {
-                        solicitudRequest solicitud = new solicitudRequest()
+                        Solicitud solicitud = new Solicitud()
                         {    
+                            id_solicitud = reader.GetInt32(0),
+                            nombre = reader.GetString(1),
+                            apellido = reader.GetString(2),
                             estado = reader.GetString(3),
                             f_solicitud = reader.GetDateTime(4),
                             monto = reader.GetDouble(5),
@@ -184,7 +187,6 @@ namespace MotorsApi.BD.CRUD.Read
                         solicitudes.Add(solicitud);
                     }
                 }
-
 
             }
             catch (Exception e)
@@ -198,6 +200,6 @@ namespace MotorsApi.BD.CRUD.Read
 
             return solicitudes;
         }
-        */
+        
     }
 }

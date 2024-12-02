@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lbsSolicitudes = new System.Windows.Forms.ListBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnVer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // listBox1
+            // lbsSolicitudes
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 19;
-            this.listBox1.Location = new System.Drawing.Point(68, 79);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(543, 441);
-            this.listBox1.TabIndex = 0;
+            this.lbsSolicitudes.FormattingEnabled = true;
+            this.lbsSolicitudes.ItemHeight = 19;
+            this.lbsSolicitudes.Location = new System.Drawing.Point(68, 79);
+            this.lbsSolicitudes.Name = "lbsSolicitudes";
+            this.lbsSolicitudes.Size = new System.Drawing.Size(543, 441);
+            this.lbsSolicitudes.TabIndex = 0;
             // 
             // pictureBox1
             // 
@@ -91,12 +91,13 @@
             this.Controls.Add(this.btnVer);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.lbsSolicitudes);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Solicitudes_Primero";
             this.Text = "Solicitudes_Primero";
+            this.Load += new System.EventHandler(this.Solicitudes_Primero_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -105,7 +106,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lbsSolicitudes;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnVer;
