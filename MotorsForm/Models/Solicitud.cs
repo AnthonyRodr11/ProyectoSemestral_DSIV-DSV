@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MotorsForm.Services
+namespace MotorsForm.Models
 {
-    public class SolicitudService
+    public class Solicitud
     {
-        public async Task<>
+
     }
 }

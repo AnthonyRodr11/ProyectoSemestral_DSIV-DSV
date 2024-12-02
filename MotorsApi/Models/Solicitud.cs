@@ -11,8 +11,7 @@ namespace MotorsApi.Models
         public string estado { get; set; }
         public DateTime f_solicitud { get; set; }
         public double monto { get; set; }
-        public string? nombre { get; set; }
-        public string? apellido {  get; set; }
+
 
 
     }
