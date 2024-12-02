@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Usuario - Motors Value</title>
+    <link rel="stylesheet" href="../css/perfil.css">
+    <div id="navbar"></div>
+  </head>
+  <body>
+    
+
+    <div class="contenedor">
+      <!-- Sección de información de usuario -->
+      <div class="informacion-usuario">
+        <img
+          src="../Img/userLogin.png"
+          class="foto-usuario"
+          alt="Foto de usuario"
+        />
+        <div class="info">
+          <h2>
+            <span id="nombre">Nombre</span> <span id="apellido">Apellido</span>
+          </h2>
+          <p>Correo: <span id="correo">correo@ejemplo.com</span></p>
+          <p>Teléfono: <span id="telefono">0000-0000</span></p>
+        </div>
+        <button onclick="mostrarFormularioEdicion()">Editar datos</button>
+        <a  onclick="cerrarSesion()">Cerrar Sesión</a>
+        
+      </div>
+
+      <!-- Modal de edición -->
+      <div id="modal-editar" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="cerrarFormularioEdicion()">&times;</span>
+          <h2>Editar Perfil</h2>
+          <form id="form-editar" onsubmit="actualizarDatos(event)">
+            <label for="nuevaContraseña">Contraseña:</label>
+            <input type="password" id="nuevaContraseña" />
+
+            <label for="confirmarContraseña">Confirmar Contraseña:</label>
+            <input type="password" id="confirmarContraseña" />
+
+            <label for="nuevoTelefono">Número Celular o Teléfono</label>
+            <input
+              type="text"
+              id="nuevoTelefono"
+              pattern="\d*"
+              inputmode="numeric"
+              onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+              pattern="^\+507\s\d{4}-\d{4}$" placeholder="+507 6767-7586" 
+              title="Debe ingresar un numero valido, ejemplo +507 1234-5678"
+              required
+            />
+            <button type="submit">Guardar cambios</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Sección del historial de transacciones -->
+      <div class="historialTransacciones">
+        <h2>HISTORIAL DE TRANSACCIONES</h2>
+        <br />
+        <h3>Transacciones de Alquiler de Autos</h3>
+        <table class="tablaAlquiler" id="alquiler">
+          <thead>
+            <tr>
+              <th>Cod_Alquiler</th>
+              <th>Placa</th>
+              <th>Total</th>
+              <th>Fecha de Retiro</th>
+              <th>Fecha de Entrega</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Las filas se agregarán dinámicamente -->
+          </tbody>
+        </table>
+        <br />
+        <h3>Transacciones de Compra de Autos</h3>
+        <table class="tablaVenta" id="venta">
+          <thead>
+            <tr>
+              <th>Cod_Venta</th>
+              <th>Placa</th>
+              <th>Precio</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Las filas se agregarán dinámicamente -->
+          </tbody>
+        </table>
+
+        <br />
+        <h3>Transacciones de Subasta de Autos</h3>
+        <table class="tablaSubasta" id="subasta">
+          <thead>
+            <tr>
+              <th>Cod_Subasta</th>
+              <th>Placa</th>
+              <th>Valor Puja</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Las filas se agregarán dinámicamente -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+        function cerrarSesion(){
+
+          localStorage.removeItem("userId");
+
+          window.location.href = "index.html";
+
+        }
+
+
+
+    </script>
+    <script>
+      // Cargar información del usuario al iniciar
+      document.addEventListener("DOMContentLoaded", () => {
+
+        const id = localStorage.getItem("userId")
+       
+
+        // Este ID debería venir de tu sistema de autenticación
+        obtenerPerfil(id);
+        cargarTransaccionesAlquiler(id);
+        cargarTransaccionesVenta(id)
+        cargarTransaccionesSubasta(id);
+      });
+
+      function obtenerPerfil() {
+        const id = localStorage.getItem("userId"); // Este ID debería venir de tu sistema de autenticación
+
+        fetch(`https://localhost:7129/MotorsApi/Usuario/userInfo/${id}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `Error al obtener perfil: ${response.statusText}`
+              );
+            }
+            return response.json();
+          })
+
+          .then((data) => {
+            const dataUsuario = data[0];
+            // Actualizar los elementos del perfil con la información obtenida
+            document.getElementById("nombre").innerText = `${
+              dataUsuario.nombre || "No disponible"
+            }`;
+            document.getElementById("apellido").innerText = `${
+              dataUsuario.apellido || ""
+            }`;
+            document.getElementById("correo").innerText = `${
+              dataUsuario.correo || "No disponible"
+            }`;
+            document.getElementById("telefono").innerText = `${
+              dataUsuario.telefono || "No disponible"
+            }`;
+          })
+          .catch((error) => {
+            console.error("Error al obtener los datos:", error);
+            alert(
+              "Error al cargar los datos del usuario. Por favor, intente más tarde."
+            );
+          });
+      }
+
+      function mostrarFormularioEdicion() {
+        document.getElementById("modal-editar").style.display = "block";
+        document.getElementById("nuevoTelefono").value =
+          document.getElementById("telefono").textContent;
+      }
+
+      function cerrarFormularioEdicion() {
+        document.getElementById("modal-editar").style.display = "none";
+
+        // Vaciar todos los campos del formulario
+        document.getElementById("nuevaContraseña").value = "";
+        document.getElementById("confirmarContraseña").value = "";
+        document.getElementById("nuevoTelefono").value = "";
+      }
+
+      async function actualizarDatos(event) {
+        event.preventDefault();
+
+        const nuevaContraseña =
+          document.getElementById("nuevaContraseña").value;
+        const confirmarContraseña = document.getElementById(
+          "confirmarContraseña"
+        ).value;
+        const nuevoTelefono = document.getElementById("nuevoTelefono").value;
+        const correoUsuario = document.getElementById("correo").textContent;
+
+        try {
+          // Caso 1: Solo se están cambiando contraseñas
+          if (nuevaContraseña && confirmarContraseña && !nuevoTelefono) {
+            // Validar que las contraseñas sean iguales
+            if (nuevaContraseña !== confirmarContraseña) {
+              alert("Las contraseñas no coinciden. Por favor, verifique.");
+              return;
+            }
+
+            const response = await fetch(
+              `https://localhost:7129/MotorsApi/Usuario/user/update/${correoUsuario}`,
+              {
+                method: "PATCH",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  contraseña: confirmarContraseña,
+                }),
+              }
+            );
+
+            if (!response.ok) {
+              throw new Error("Error en la red: " + response.status);
+            }
+
+            cerrarFormularioEdicion();
+            alert("Contraseña actualizada exitosamente");
+          }
+
+          // Caso 2: Se están cambiando teléfono y contraseña
+          else if (nuevaContraseña && confirmarContraseña && nuevoTelefono) {
+            // Validar que las contraseñas sean iguales
+            if (nuevaContraseña !== confirmarContraseña) {
+              alert("Las contraseñas no coinciden. Por favor, verifique.");
+              return;
+            }
+
+            const response = await fetch(
+              `https://localhost:7129/MotorsApi/Usuario/user/update/${correoUsuario}`,
+              {
+                method: "PATCH",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  telefono: nuevoTelefono,
+                  contraseña: confirmarContraseña,
+                }),
+              }
+            );
+
+            if (!response.ok) {
+              throw new Error("Error en la red: " + response.status);
+            }
+
+            document.getElementById("telefono").textContent = nuevoTelefono;
+            cerrarFormularioEdicion();
+            alert("Perfil actualizado exitosamente");
+          }
+
+          // Caso 3: Solo se está cambiando teléfono
+          else if (!nuevaContraseña && !confirmarContraseña && nuevoTelefono) {
+            const response = await fetch(
+              `https://localhost:7129/MotorsApi/Usuario/user/update/${correoUsuario}`,
+              {
+                method: "PATCH",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  telefono: nuevoTelefono,
+                }),
+              }
+            );
+
+            if (!response.ok) {
+              throw new Error("Error en la red: " + response.status);
+            }
+
+            document.getElementById("telefono").textContent = nuevoTelefono;
+            cerrarFormularioEdicion();
+            alert("Teléfono actualizado exitosamente");
+          }
+
+          // Caso 4: Ningún campo llenado
+          else {
+            alert("Por favor, ingrese algún dato para actualizar.");
+            return;
+          }
+
+          // Recargar la información del perfil
+          obtenerPerfil();
+        } catch (error) {
+          console.error("Error al actualizar el perfil:", error);
+          alert("Hubo un problema al actualizar el perfil");
+        }
+      }
+
+      // Cerrar modal al hacer clic fuera
+      window.onclick = function (event) {
+        const modal = document.getElementById("modal-editar");
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      };
+      // Función para cargar transacciones de Alquiler
+      function cargarTransaccionesAlquiler(id) {
+        fetch(
+          `https://localhost:7129/MotorsApi/Transacciones/perfil/Alquiler/${id}`
+        )
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `Error al obtener alquileres: ${response.statusText}`
+              );
+            }
+            return response.json();
+          })
+          .then((data) => {
+            const tablaAlquiler = document.querySelector("#alquiler tbody");
+            tablaAlquiler.innerHTML = ""; // Limpiar tabla existente
+
+            data.forEach((alquiler) => {
+              const fila = document.createElement("tr");
+              fila.innerHTML = `
+                <td>${alquiler.cod_alquiler}</td>
+                <td>${alquiler.id_vehiculo}</td>
+                <td>$${alquiler.total.toFixed(2)}</td>
+                <td>${new Date(alquiler.f_retiro).toLocaleDateString()}</td>
+                <td>${new Date(alquiler.f_entrega).toLocaleDateString()}</td>
+            `;
+              tablaAlquiler.appendChild(fila);
+            });
+          })
+          .catch((error) => {
+            console.error("Error al cargar alquileres:", error);
+            const tablaAlquiler = document.querySelector("#alquiler tbody");
+            tablaAlquiler.innerHTML = `<tr><td colspan="5">No hay transacciones de alquiler</td></tr>`;
+          });
+      }
+
+      // Función para cargar transacciones de Venta
+      function cargarTransaccionesVenta(id) {
+        fetch(
+          `https://localhost:7129/MotorsApi/Transacciones/perfil/Venta/${id}`
+        )
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `Error al obtener ventas: ${response.statusText}`
+              );
+            }
+            return response.json();
+          })
+          .then((data) => {
+            const tablaVenta = document.querySelector("#venta tbody");
+            tablaVenta.innerHTML = ""; // Limpiar tabla existente
+
+            data.forEach((venta) => {
+              const fila = document.createElement("tr");
+              fila.innerHTML = `
+                <td>${venta.cod_venta}</td>
+                <td>${venta.placa}</td>
+                <td>$${venta.precio.toFixed(2)}</td>
+            `;
+              tablaVenta.appendChild(fila);
+            });
+          })
+          .catch((error) => {
+            console.error("Error al cargar ventas:", error);
+            const tablaVenta = document.querySelector("#venta tbody");
+            tablaVenta.innerHTML = `<tr><td colspan="3">No hay transacciones de venta</td></tr>`;
+          });
+      }
+
+      // Función para cargar transacciones de Subasta
+      function cargarTransaccionesSubasta(id) {
+        fetch(
+          `https://localhost:7129/MotorsApi/Transacciones/perfil/Subasta/${id}`
+        )
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `Error al obtener subastas: ${response.statusText}`
+              );
+            }
+            return response.json();
+          })
+          .then((data) => {
+            const tablaSubasta = document.querySelector("#subasta tbody");
+            tablaSubasta.innerHTML = ""; // Limpiar tabla existente
+
+            data.forEach((subasta) => {
+              const fila = document.createElement("tr");
+              fila.innerHTML = `
+                <td>${subasta.cod_subasta}</td>
+                <td>${subasta.id_placa}</td>
+                <td>$${subasta.valor_puja.toFixed(2)}</td>
+            `;
+              tablaSubasta.appendChild(fila);
+            });
+          })
+          .catch((error) => {
+            console.error("Error al cargar subastas:", error);
+            const tablaSubasta = document.querySelector("#subasta tbody");
+            tablaSubasta.innerHTML = `<tr><td colspan="3">No hay transacciones de subasta</td></tr>`;
+          });
+      }
+    </script>
+  </body>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Obtener la URL de la página actual
+        const currentPath = window.location.pathname;
+        console.log(currentPath);
+
+        // Seleccionar todos los enlaces del navbar
+        const navLinks = document.querySelectorAll("nav a");
+
+        // Comparar la URL de cada enlace con la URL actual
+        navLinks.forEach(link => {
+            if (link.getAttribute("href") === currentPath) {
+                link.classList.add("active");
+            }
+        });
+    });
+
+  </script>
+
+  <footer id="footer">
+  </footer>
+  <script src="../JavaScript/funciones.js"></script>
+  <script>
+      cargarHTML('navbar', 'navbar.html');
+      </script>
+  
+      <script>
+          cargarHTML('footer', 'footer.html');
+      </script>
+</html>

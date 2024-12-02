@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motors Value inicio</title>
+    <link rel="stylesheet" href="../css/inicio.css">
+</head>
+<header>
+    <!-- Div dedicado al Navbar -->
+    <div id="navbar"></div>
+</header>
+<body>
+    <div class="container">
+        <div class="bienvenida">
+            <h1 class="animate-charcter">¡Bienvenidos a Motors Value!</h1>
+        </div>
+    
+        <!-- Imagenes tipo carrusel en pantalla -->
+        <div class="slider-frame">
+            <div class="slide-images">
+                <div class="img-container"><img src="../img/img1.png" alt="Imagen 1"></div>
+                <div class="img-container"><img src="../img/img2.png" alt="Imagen 2"></div>
+                <div class="img-container"><img src="../img/img3.png" alt="Imagen 3"></div>
+            </div>
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+
+        <div class="presentacion">
+            <p>
+                ¡Bienvenidos a Motors Value! Somos una plataforma líder en la venta, alquiler y subasta de automóviles en línea, donde la pasión por los autos se une con la tecnología más avanzada. En Motors Value, creemos que encontrar el vehículo perfecto debe ser una experiencia emocionante y accesible para todos. Ofrecemos una amplia gama de opciones, desde elegantes sedanes y prácticos hatchbacks hasta imponentes SUVs y clásicos de colección, todo al alcance de un clic.
+            </p>
+        </div>
+
+    </div>
+    </div>
+</body>
+
+<!-- Espacio dedicado al footer -->
+<footer id="footer">
+
+</footer>
+
+<!-- JS dedicado a la animacion de cambio de imagen dinamica -->
+<script>
+    let currentIndex = 0; // Índice actual de la imagen
+    const slides = document.querySelector('.slide-images');
+    const totalSlides = document.querySelectorAll('.img-container').length;
+    const sliderFrame = document.querySelector('.slider-frame'); // Contenedor del slider
+
+    function moveSlide(direction) {
+        currentIndex += direction;
+
+        if (currentIndex < 0) {
+            currentIndex = totalSlides - 1;
+        } else if (currentIndex >= totalSlides) {
+            currentIndex = 0;
+        }
+
+        updateSlidePosition();
+    }
+
+    // Función para actualizar la posición de las diapositivas
+    function updateSlidePosition() {
+        const containerWidth = sliderFrame.offsetWidth; 
+        const offset = -currentIndex * containerWidth; 
+        slides.style.transform = `translateX(${offset}px)`; 
+    }
+
+    // Desplazamiento automático cada 5 segundos
+    setInterval(() => {
+            moveSlide(1);
+    }, 5000);
+
+    // Actualizar la posición en caso de que el tamaño de la ventana cambie
+    window.addEventListener('resize', updateSlidePosition);
+</script>
+
+<!-- Llamada a Funciones.js -->
+<script src="../JavaScript/Funciones.js"></script>
+
+<!-- Llamada del NavBar a traves de idElento, Archivo -->
+<script>
+    cargarHTML('navbar', 'navbar.html')
+</script>
+
+<!-- Llamada del Footer a traves de idElento, Archivo -->
+<script>
+    cargarHTML('footer', 'footer.html');
+</script>
+
+</html>     

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alquiler</title>
+    <link rel="stylesheet" href="../css/alqui.css">
+    <div id="navbar"></div>
+</head>
+<body>
+    <div id="contenedor-caja">
+        <div>
+            <h1>¡Ups!</h1>
+            <H2>Parece que los vehículos fueron muy rápidos y no los alcanzaste :c</H2>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+
+    async function obtenerDatos() {
+        
+        try {
+            const respuesta = await fetch(`https://localhost:7129/MotorsApi/Alquiler/alquiler`);
+            const datos = await respuesta.json();
+            console.log(JSON.stringify(datos));
+            return datos;
+        } catch (error) {
+            console.error('Error al obtener datos del API:', error);
+            return [];
+        }
+    }
+
+    function crearCaja(datos) {
+        const contenedor = document.getElementById('contenedor-caja');
+        contenedor.innerHTML = '';
+
+        datos.forEach(item => {
+            const caja = document.createElement('div');
+            caja.classList.add('caja');
+            
+            caja.setAttribute('data-placa', item.placa);
+
+            caja.innerHTML = `
+                <h3>${item.marca} ${item.modelo}</h3>
+                <img src="${item.foto}" alt="Foto de ${item.marca} ${item.modelo}">
+            `;
+            
+            caja.onclick = () => {
+                const id = caja.getAttribute('data-placa');
+                if (id && id !== 'undefined' && id !== '') {
+                    window.location.href = `alquilerDetalles.html?id=${id}`;
+                } else {
+                    console.error('No se puede redirigir: el ID es inválido');
+                    alert('No se encontró la información del auto.');
+                }
+            };
+
+            contenedor.appendChild(caja);
+        });
+    }
+
+    async function actualizarCaja() {
+        const datos = await obtenerDatos();
+        if(datos[0] != null){crearCaja(datos);}
+    }
+
+    actualizarCaja();
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const currentPath = window.location.pathname;
+        console.log(currentPath);
+        const navLinks = document.querySelectorAll("nav a");
+        navLinks.forEach(link => {
+            if (link.getAttribute("href") === currentPath) {
+                link.classList.add("active");
+            }
+        });
+    });
+
+    setInterval(actualizarCaja, 10000);
+</script>
+<script src="../JavaScript/funciones.js"></script>
+<footer>
+    <div id="footer"></div>
+</footer>
+<script>
+    cargarHTML('navbar', 'navbar.html');
+    </script>
+    
+    <script>
+        cargarHTML('footer', 'footer.html');
+    </script>
+
+</html>

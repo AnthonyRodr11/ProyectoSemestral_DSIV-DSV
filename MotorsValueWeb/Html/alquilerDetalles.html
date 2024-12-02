@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de Alquiler</title>
+    <link rel="stylesheet" href="../css/alquiler.css">
+    <div id="navbar"></div>
+    
+
+</head>
+<body>
+    <div class="contenedor">
+
+        <div class="imagen">
+            <label id="nombreAuto">Nombre del Auto</label>
+            <img id="imgAuto" src="../Img/FordRanger.png" alt="imagen del auto">
+            <label>Tarifa por dia <span id="tarifaDia">$0</span></label>
+            
+        </div>
+
+        <div class="informacion">
+            <div class="Detalles">
+                <table>
+                    <tr>
+                        <th class="polygon"><div class="poligono"></div></th>
+                        <th><h1>Seguro</h1></th>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <th>
+                            <img src="../Img/protection.png" class="icono">
+                        </th>
+                        <th class="seguro">
+                            <p>Seguro 1: <input type="radio" name="seguro" id="rdb_1"></p>
+                            <p>Seguro 2: <input type="radio" name="seguro" id="rdb_2"></p>
+                            <p>Seguro 3: <input type="radio" name="seguro" id="rdb_3"></p>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            <div class="Detalles">
+                <table>
+                    <tr>
+                        <th class="polygon"><div class="poligono"></div></th>
+                    </tr>
+                </table>
+                <div>
+                    <table>
+                        <tr>
+                            <th>
+                                <label for="fechaRetiro">Retiro</label>
+                                <div>
+                                    <img src="../Img/calendar.png" class="icono">
+                                </div>
+                                <input type="date" id="fechaRetiro">
+                            </th>
+                            <th>
+                                <img src="../Img/fast-forward.png" class="icono" id="flecha">
+                            </th>
+                            <th>
+                                <label for="fechaEntrega">Entrega</label>
+                                <div>
+                                    <img src="../Img/calendar.png" class="icono">
+                                </div>                                
+                                <input type="date" id="fechaEntrega">
+                            </th>
+                        </tr>
+                    </table>
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+                <div  class="totales">
+                    <div id="pago">
+                        <p><b>Total a pagar:</b></p>
+                        <label id="dineroTotal">$0.00</label>
+                    </div>
+                    <div id="sumatoria">
+                        <p>Total de Seguro: <label id="precioSeguro">$0.00</label></p>
+                        <p>Total de Tarifa: <label id="tarifaTotal">$0.00</label></p>
+                    </div>
+                </div>
+            </div>
+            <button>Pagar</button>
+        </div>
+    </div>
+
+    <div id="popup" class="popup-overlay" style="display: none;">
+        <div class="popup-content">
+            <h2>Alquiler</h2>
+            <p>¿Seguro que desea realizar la compra?</p>
+            <div class="popup-buttons">
+                <button id="popupAceptar">Aceptar</button>
+                <button id="popupCancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div id="footer"></div>
+    </footer>
+
+
+</body>
+</html>
+
+<script src="../JavaScript/funciones.js"></script>
+
+<script>
+
+    cargarHTML('navbar','navbar.html');
+    cargarHTML('footer','footer.html');
+
+    document.addEventListener("DOMContentLoaded", () => {
+        
+        const currentPath = window.location.pathname;
+
+        const navLinks = document.querySelectorAll("nav a");
+
+        navLinks.forEach(link => {
+            if (link.getAttribute("href") === currentPath) {
+                link.classList.add("active");
+            }
+        });
+    });
+</script>
+<script>
+
+    function obtenerIdAuto() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('id');
+    }
+   
+    async function obtenerCarroPorPlaca(placa) {
+        try {
+            const respuesta = await fetch(`https://localhost:7129/MotorsApi/Alquiler/auto/${placa}`);
+            if (!respuesta.ok) throw new Error('Error al obtener los datos del carro');
+
+            const carro = await respuesta.json();
+
+            if (!carro || !carro.marca || !carro.modelo || !carro.foto || !carro.tarifa) {
+                throw new Error('Datos incompletos del carro');
+            }
+
+            document.getElementById('nombreAuto').textContent = `${carro.marca} ${carro.modelo}`;
+            document.getElementById('imgAuto').src = carro.foto;
+            document.getElementById('tarifaDia').textContent = `$${carro.tarifa.toFixed(2)}`;
+        } catch (error) {
+            console.error('Error:', error.message);
+            alert("No se pudo obtener la información del carro. Verifique la placa ingresada.");
+        }
+    }
+
+
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('nombreAuto');
+        document.getElementById('imgAuto');
+        document.getElementById('tarifaDia');
+
+        const placa = obtenerIdAuto()
+        obtenerCarroPorPlaca(placa);
+    });       
+
+    document.addEventListener("DOMContentLoaded", () => {
+        
+        const fechaRetiroInput = document.getElementById("fechaRetiro");
+        const fechaEntregaInput = document.getElementById("fechaEntrega");
+
+        
+        function obtenerFechaActual() {
+            
+            const hoy = new Date();
+            const year = hoy.getFullYear();
+            const month = String(hoy.getMonth() + 1).padStart(2, '0');
+            const day = String(hoy.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        fechaRetiroInput.addEventListener("change", () => {
+
+            const fechaActual = obtenerFechaActual();
+                if (fechaRetiroInput.value < fechaActual) {
+                alert("La fecha de retiro no puede ser anterior a la fecha actual.");
+                fechaRetiroInput.value = "";
+            }
+
+
+            if (fechaEntregaInput.value && fechaEntregaInput.value <= fechaRetiroInput.value) {
+                
+                alert("La fecha de entrega debe ser posterior a la fecha de retiro.");
+                fechaEntregaInput.value = ""; 
+            }
+        });
+
+       
+        fechaEntregaInput.addEventListener("change", () => {
+            
+            if (!fechaRetiroInput.value) {
+                alert("Seleccione primero una fecha de retiro.");
+                fechaEntregaInput.value = ""; 
+                return;
+            }
+
+            if (fechaEntregaInput.value <= fechaRetiroInput.value) {
+                alert("La fecha de entrega debe ser posterior a la fecha de retiro.");
+                fechaEntregaInput.value = ""; 
+            }
+        });
+
+        
+        const fechaActual = obtenerFechaActual();
+        fechaRetiroInput.min = fechaActual;
+        fechaEntregaInput.min = fechaActual;
+
+        
+        function calcularDias(fechaInicio, fechaFin) {
+            const fecha1 = new Date(fechaInicio);
+            const fecha2 = new Date(fechaFin);
+
+           
+            if (isNaN(fecha1.getTime()) || isNaN(fecha2.getTime())) {
+                return 0;
+            }
+
+            const diferenciaTiempo = fecha2 - fecha1;
+            return Math.ceil(diferenciaTiempo / (1000 * 60 * 60 * 24)+1);
+        }
+
+        
+        function calcularTotal() {
+            const tarifaDia = parseFloat(document.getElementById("tarifaDia").textContent.replace("$", ""));
+            const fechaRetiro = document.getElementById("fechaRetiro").value;
+            const fechaEntrega = document.getElementById("fechaEntrega").value;
+
+            
+            if (!fechaRetiro || !fechaEntrega) {
+                return; 
+            }
+
+            const diasAlquiler = calcularDias(fechaRetiro, fechaEntrega);
+
+            
+            if (diasAlquiler <= 0) {
+                alert("Por favor, seleccione fechas válidas.");
+                return;
+            }
+
+            
+            const seguros = document.querySelectorAll("input[name='seguro']");
+            let precioSeguro = 0;
+            seguros.forEach(seguro => {
+                if (seguro.checked) {
+                   
+                    const textoSeguro = seguro.parentElement.textContent;
+                    const matchPrecio = textoSeguro.match(/\$(\d+)/);
+                    if (matchPrecio) {
+                        precioSeguro = parseFloat(matchPrecio[1]);
+                    }
+                }
+            });
+
+            
+            const tarifaTotal = diasAlquiler * tarifaDia;
+            const totalSeguro = diasAlquiler * precioSeguro;
+            const dineroTotal = tarifaTotal + totalSeguro;
+
+           
+            document.getElementById("tarifaTotal").textContent = `$${tarifaTotal.toFixed(2)}`;
+            document.getElementById("precioSeguro").textContent = `$${totalSeguro.toFixed(2)}`;
+            document.getElementById("dineroTotal").textContent = `$${dineroTotal.toFixed(2)}`;
+        }
+
+        
+        function configurarEventosSeguros() {
+            const seguros = document.querySelectorAll("input[name='seguro']");
+            seguros.forEach(seguro => {
+                seguro.addEventListener("change", calcularTotal);
+            });
+        }
+
+        async function obtenerSeguros() {
+            try {
+                const respuesta = await fetch(`https://localhost:7129/MotorsApi/Alquiler/seguros`);
+                if (!respuesta.ok) throw new Error('Error al obtener los seguros');
+
+                
+                const seguros = await respuesta.json();
+
+                if (seguros.length === 0) {
+                    console.log("No se encontraron seguros");
+                    return;
+                }
+
+                
+                const contenedorSeguros = document.querySelector('.seguro');
+                contenedorSeguros.innerHTML = '';
+
+                seguros.forEach((seguro, index) => {
+                    contenedorSeguros.innerHTML += `
+                        <p>${seguro.tipo_seguro}: $${seguro.precio} 
+                            <input type="radio" name="seguro" id="rdb_${index}" value="${seguro.tipo_seguro}">
+                        </p>
+                    `;
+                });
+
+                configurarEventosSeguros();
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        document.getElementById("fechaRetiro").addEventListener("change", calcularTotal);
+        document.getElementById("fechaEntrega").addEventListener("change", calcularTotal);
+        
+        obtenerSeguros();
+    });
+
+    const idUser = localStorage.getItem("userId");
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const btnPagar = document.querySelector('button');
+        const popup = document.getElementById('popup');
+        const btnAceptar = document.getElementById('popupAceptar');
+        const btnCancelar = document.getElementById('popupCancelar');
+
+        
+        btnPagar.addEventListener('click', () => {
+            if(idUser != null){
+                popup.style.display = 'flex';
+            }
+            else{
+                alert("No tienes una cuenta. Regístrate para poder realizar una compra.");
+            }
+            
+        });
+        
+
+       
+        btnAceptar.addEventListener('click', () => {
+            const seguroSeleccionado = document.querySelector('input[name="seguro"]:checked');
+            if (!seguroSeleccionado) {
+                alert("Por favor, seleccione un seguro antes de continuar.");
+                popup.style.display = 'none';
+                return;
+            }
+
+          
+            const seguroIdString = seguroSeleccionado.id;
+            const seguroIdNumero = parseInt(seguroIdString.split('_')[1], 10) + 1;
+            const fechaRetiro = document.getElementById('fechaRetiro').value;
+            const fechaEntrega = document.getElementById('fechaEntrega').value;
+            const placa = obtenerIdAuto();
+            const idUsuario = localStorage.getItem("userId");
+            const tipoTarifa = seguroIdNumero;
+            const tarifaTotal = parseFloat(document.getElementById('dineroTotal').textContent.replace('$', ''));
+
+            if (!seguroSeleccionado || !fechaRetiro || !fechaEntrega) {
+                alert("Por favor, complete todos los campos antes de continuar.");
+                popup.style.display = 'none';
+                return;
+            }
+
+            const datos = {
+                idSeguro: seguroIdNumero,
+                fechaRetiro:fechaRetiro,
+                fechaEntrega:fechaEntrega,
+                placa: placa,
+                idUsuario: idUsuario,
+                tipoTarifa: tipoTarifa,
+                precioTotal: tarifaTotal,
+            };
+
+            console.log(JSON.stringify(datos));
+            
+            fetch('https://localhost:7129/MotorsApi/Alquiler/registar', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(datos),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert("Alquiler realizado con exito")
+                    popup.style.display = 'none';
+                    document.location.href = "alquiler.html";
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Ocurrió un error al procesar la solicitud.');
+                });
+        });
+
+        btnCancelar.addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
+    });
+
+</script>

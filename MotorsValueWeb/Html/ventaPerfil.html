@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Venta Perfil</title>
+    <link rel="stylesheet" href="../css/ventaPerfil.css">
+
+</head>
+<header>
+    <div id="navbar"></div>
+</header>
+<body>
+    <div class="venta-perfil-container">
+        <div class="venta-perfil-detalles">
+            <div class="venta-perfil-imagen">
+                <div class="fotoAuto" id="fotoAuto"></div>
+            </div>
+            <div class="venta-perfil-info">
+                <div id="detalleAuto" class="detalleAuto"></div>
+                <div class="compra">
+                    <div class="precio-compra"></div>
+                    <button>Comprar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="venta-perfil-especificaciones">
+            <div class="especificacion-item">
+                <img src="../Img/kilometraje.png" class="especificacion-img" alt="Kilometraje">
+                <h2 class="especificacion-titulo">Kilometraje:</h2>
+                <div class="especificacion-texto" id="km"></div>
+            </div>
+            <div class="especificacion-item">
+                <img src="../Img/transmision.png" class="especificacion-img" alt="Transmisión">
+                <h2 class="especificacion-titulo">Transmision:</h2>
+                <div class="especificacion-texto" id="transmision"></div>
+            </div>
+            <div class="especificacion-item">
+                <img src="../Img/gas.png" class="especificacion-img" alt="Gas">
+                <h2 class="especificacion-titulo">Combustible:</h2>
+                <div class="especificacion-texto" id="gas"></div>
+            </div>
+            <div class="especificacion-item">
+                <img src="../Img/carroceria.png" class="especificacion-img" alt="Carrocería">
+                <h2 class="especificacion-titulo">Carrocería:</h2>
+                <div class="especificacion-texto" id="carroceria"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup" class="popup-overlay" style="display: none;">
+        <div class="popup-content">
+            <h2>Compra</h2>
+            <p>¿Seguro que desea realizar la compra?</p>
+            <div class="popup-buttons">
+                <button id="popupAceptar">Aceptar</button>
+                <button id="popupCancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    
+    <div id="customModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="cerrarModal" onclick="cerrarModal()">&times;</span>
+            <p id="modalMessage"></p>
+            <button id="btnModal" onclick="redirigirRegistro()">Registrarse</button>
+        </div>
+    </div>
+</body>
+<script>
+    
+    function obtenerIdAuto() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('id');
+    }
+
+    async function obtenerDatosAuto(id) {
+        const url = `https://localhost:7129/MotorsApi/ventaFlota/flotaDetalle/${id}`;
+        try {
+            const respuesta = await fetch(url);
+            if (!respuesta.ok) {
+                throw new Error(`Error en la respuesta: ${respuesta.status} ${respuesta.statusText}`);
+            }
+            return await respuesta.json();
+        } catch (error) {
+            console.error('Error al obtener los datos del auto:', error);
+            return null;
+        }
+    }
+
+    function mostrarAuto(auto) {
+        const fotoAuto = document.getElementById('fotoAuto');
+        const detalleAuto = document.getElementById('detalleAuto');
+        const precioCompra = document.querySelector('.precio-compra');
+
+        if (Array.isArray(auto) && auto.length > 0) {
+            const datosAuto = auto[0];
+
+            console.log('Datos del auto:', datosAuto);
+
+            fotoAuto.innerHTML = `
+                <img src="${datosAuto.foto}" alt="Foto de ${datosAuto.marca} ${datosAuto.modelo}">
+            `;
+
+            
+            detalleAuto.innerHTML = `
+                <h2>${datosAuto.marca || 'N/A'} ${datosAuto.modelo || 'N/A'}</h2>
+            `;
+
+            document.getElementById('km').innerText = `${datosAuto.km || 'N/A'} km`;
+            document.getElementById('transmision').innerText = datosAuto.transmision || 'N/A';
+            document.getElementById('gas').innerText = datosAuto.tipo_gas || 'N/A';
+            document.getElementById('carroceria').innerText = datosAuto.carroceria || 'N/A';
+
+            
+            precioCompra.innerHTML = `<strong>Precio:</strong> $${datosAuto.precio || 'N/A'}`;
+        } else {
+            detalleAuto.innerHTML = '<p>No se pudo cargar la información del auto.</p>';
+        }
+    }
+
+
+   
+    async function cargarAuto() {
+        const idAuto = obtenerIdAuto(); 
+        if (idAuto) {
+            const auto = await obtenerDatosAuto(idAuto); 
+            if (auto) {
+                mostrarAuto(auto);
+            } else {
+                console.error('No se pudieron obtener los datos del auto.');
+            }
+        } else {
+            console.error('El parámetro ID no está presente en la URL.');
+        }
+    }
+
+    cargarAuto();
+    document.addEventListener('DOMContentLoaded', () => {
+    const btnPagar = document.querySelector('.compra button');
+    const popup = document.getElementById('popup'); 
+    const btnAceptar = document.getElementById('popupAceptar'); 
+    const btnCancelar = document.getElementById('popupCancelar'); 
+
+    
+    btnPagar.addEventListener('click', () => {
+        const userId = localStorage.getItem('userId');
+        if (!userId) {
+            
+            mostrarModal("No tienes una cuenta. Regístrate para poder realizar una compra.");
+        } else {
+            
+            popup.style.display = 'flex';
+        }
+    });
+
+    
+    btnAceptar.addEventListener('click', async () => {
+        try {
+            const id_cliente = localStorage.getItem('userId');
+            if (!id_cliente) {
+                alert("Debes estar registrado para realizar una compra.");
+                return;
+            }
+
+            const id = obtenerIdAuto();
+            const responseFlota = await fetch(`https://localhost:7129/MotorsApi/ventaFlota/flotaDetalle/${id}`);
+            if (!responseFlota.ok) throw new Error("Error al obtener los datos del auto");
+
+            const autoData = await responseFlota.json();
+            if (!autoData || autoData.length === 0) {
+                mostrarModal("No se encontraron datos del auto.");
+                return;
+            }
+
+            const { placa, precio } = autoData[0];
+            const responseVenta = await fetch(`https://localhost:7129/MotorsApi/ventaFlota/ventaId/${placa}`);
+
+            if (!responseVenta.ok) throw new Error("Error al enviar la venta al API");
+
+            const ventaData = await responseVenta.json();
+            const cod_venta = ventaData;
+
+            if (cod_venta != null) {
+                const response = await fetch(`https://localhost:7129/MotorsApi/ventaFlota/vendido`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ cod_venta, id_cliente, precio, placa })
+                });
+
+                if (response.ok) {
+                    mostrarModalExito("Compra realizada con éxito.");
+                } else {
+                    mostrarModal("Hubo un problema al procesar la compra.");
+                }
+            }
+        } catch (error) {
+            console.error('Error en la solicitud:', error);
+            mostrarModal("Ocurrió un error al intentar procesar la compra.");
+        }
+        popup.style.display = 'none'; 
+    });
+
+   
+    btnCancelar.addEventListener('click', () => {
+        popup.style.display = 'none'; 
+    });
+});
+
+
+function mostrarModal(message) {
+    document.getElementById('modalMessage').innerText = message;
+    document.getElementById('customModal').style.display = 'block';
+}
+
+
+function mostrarModalExito(message) {
+    document.getElementById('modalMessage').innerText = message;
+    document.getElementById('customModal').style.display = 'block';
+    document.getElementById('cerrarModal').style.display = 'none';
+    const boton = document.getElementById("btnModal");
+
+    boton.textContent = "Entendido";
+    boton.onclick = function () {
+        window.location.href = "venta.html";
+    };
+}
+
+
+function cerrarModal() {
+    document.getElementById('customModal').style.display = 'none';
+}
+
+
+function redirigirRegistro() {
+    window.location.href = 'register.html';
+}
+
+
+
+function mostrarModal(message) {
+    document.getElementById('modalMessage').innerText = message;
+    document.getElementById('customModal').style.display = 'block';
+}
+
+function mostrarModalExito(message) {
+    document.getElementById('modalMessage').innerText = message;
+    document.getElementById('customModal').style.display = 'block';
+    document.getElementById('cerrarModal').style.display = 'none';
+    const boton = document.getElementById("btnModal");
+
+    
+    boton.textContent = "Entendido";
+
+    
+    boton.onclick = function () {
+        console.log("Redirigiendo a la página de venta");
+        window.location.href = "venta.html";
+    };
+}
+
+function cerrarModal() {
+    document.getElementById('customModal').style.display = 'none';
+}
+
+function redirigirRegistro() {
+    window.location.href = 'register.html';
+}
+
+function redirigirVenta() {
+    window.location.href = 'venta.html';
+}
+    
+</script>
+<footer id="footer">
+</footer>
+<script src="../JavaScript/funciones.js"></script>
+<script>
+    cargarHTML('navbar', 'navbar.html');
+    </script>
+    
+    <script>
+        cargarHTML('footer', 'footer.html');
+    </script>
+</html>

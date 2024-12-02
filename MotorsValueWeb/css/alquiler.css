@@ -1,0 +1,341 @@
+body{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+/* Fondo diagonal */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:#004a8f;
+    clip-path: polygon(57% 100%, 72% 0, 100% 0, 100% 100%, 70% 100%, 85% 0, 83% 0, 68% 100%); 
+    z-index: -1; /* Coloca el fondo detrás de todo el contenido */
+}
+
+/*Contenedor intermedio*/
+.contenedor{
+    padding: 2% 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2%;
+}
+
+/* Información del panel */
+.informacion {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 2%;
+    padding: 1%;
+    max-width: 30%;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+    margin: 0 2% 0 0;
+}
+
+/* Detalles del panel */
+.Detalles {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin: 0 0 1em 0;
+}
+
+.Detalles, h1 {
+    text-align: center;
+    color: #004a8f;
+}
+
+.Detalles, div, table, tr, th, input {
+    font-size: x-large;
+}
+
+.poligono{
+    display: grid;
+    max-height: fit-content;
+    height: 10%;
+    width: 10%;
+    padding: 10px 20px;
+    margin-left: -10px;
+    margin-right: 40px;
+    background-color:#004a8f;
+    clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+}
+
+.polygon{
+    max-width: 3%;
+    width: 100%;
+}
+
+.totales{
+    display:flex;
+    gap:15%;
+    justify-content: center;
+    align-items: center;
+}
+
+#pago{
+    color: #9e951a;
+}
+#pago p{
+    margin: 0;
+    align-items: center;
+
+}
+/* Iconos y tablas */
+.icono{
+    max-width: 40%;
+    width: 100%;
+    margin: 3% auto;
+}
+
+.seguro{
+    max-width: 100%;
+    width: 70%;
+    text-align: left;
+}
+
+#flecha{
+    margin:40%;
+    max-width: 40%;
+    min-width: 20px;
+    width: 100%;
+    display: flex;
+}
+
+h1{
+    margin: 0;
+}
+
+/* Imagen del auto */
+.imagen{
+    max-width: 60%;
+    height: 100%;
+    width: 100%;
+    display: grid;
+}
+
+.imagen label{
+    font-weight: bold;
+    font-size: 40px;
+    margin-top: -10px !important;
+}
+
+.imagen,#nombreAuto{
+    text-align: center;
+}
+
+.imagen img {
+    max-width: 100%; 
+    max-height: 500px;
+    height: auto; 
+    object-fit: contain; 
+}
+
+
+/* Botón pagar */
+button{
+    background-color: #004a8f;
+    max-width: 40%;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+    border:none;
+    border-radius: 100px;
+    cursor:pointer;
+    transition: backgroun-color 0.3s ease;
+    margin:0 30%;
+    min-width: 40%;
+    font-size: large;
+}
+
+button:hover{
+    background-color: #002d62;
+}
+
+/*Pop Up*/
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.popup-buttons {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.popup-buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#popupAceptar {
+    background-color: #4CAF50;
+    color: white;
+    margin: 5%;
+}
+
+#popupCancelar {
+    background-color: #f44336;
+    color: white;
+    margin: 5%;
+}
+
+@media (max-width: 1267px) {
+    .contenedor {
+        flex-direction: row;
+        max-width: 100%;
+        width: 100%;
+        position: relative; /* Añadido para ver si mejora el flujo */
+    }
+
+    .informacion {
+        margin: 0; 
+        max-width: 70%;
+        width: 100%; 
+        position: relative;
+    }
+
+    .imagen{
+        width: 100%;
+        max-height: 600px;
+    }
+    
+    #flecha{
+        max-width: 30%;
+        min-width: 20px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .informacion {
+        max-width: 40%;
+    }
+
+    .contenedor {
+        margin: 10px;
+    }
+}
+
+@media (max-width: 425px){
+    .imagen img{
+        max-width: 100%;
+    }
+
+    .contenedor {
+        margin: 0px !important;
+    }
+    
+    .detalles{
+        flex-direction: column;
+    }
+
+    .informacion{
+        max-width: 90% !important;
+        margin: 0px !important;
+    }
+
+    #fechaEntrega,#fechaRetiro{
+        width: 60%;
+    }
+
+    .imagen label{
+        font-size: 20px !important;
+        background-color: #a9a9a950;
+    }
+
+    .Detalles, div, table, tr, th, input {
+        font-size: medium;
+    }
+
+    .informacion {
+        max-width: 90%;
+        border: 1px solid black; /* Bordes más finos */
+        padding: 3%;
+        font-size: medium; /* Reducir el tamaño del texto */
+    }
+
+}
+
+@media (max-width: 768px) {
+    .contenedor {
+        flex-direction: column;
+        max-width: 100%;
+        width: 100%;
+        position: relative; /* Añadido para ver si mejora el flujo */
+    }
+
+    #flecha{
+        display: none;
+    }
+
+    .imagen label{
+        font-size: 30px;
+        background-color: #a9a9a950;
+    }
+
+    .imagen{
+        margin-bottom: 10px;
+    }
+
+    .Detalles, div, table, tr, th, input {
+        font-size: large;
+    }
+
+    .informacion {
+        max-width: 60%;
+        padding: 2%;
+        margin: 1% ; /* Centrar en pantallas más pequeñas */
+        margin-bottom: 10px !important;
+    }
+    
+}
+
+@media screen and (max-width: 320px) {
+    
+    .contenedor {
+        margin: 0px;
+    }
+
+    
+    
+    .informacion {
+        max-width: 100%; /* Ocupa todo el ancho disponible */
+        padding: 5%; /* Espaciado interno amplio para mejor legibilidad */
+        border: none; /* Elimina el borde para simplificar el diseño */
+        box-shadow: none; /* Elimina el efecto de sombra */
+        margin: 0px;
+    }
+
+    .Detalles, div, table, tr, th, input {
+        font-size: small; /* Reducir el tamaño de la fuente */
+    }
+
+    h1 {
+        font-size: medium; /* Títulos más pequeños */
+    }
+}

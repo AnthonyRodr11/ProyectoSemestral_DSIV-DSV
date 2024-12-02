@@ -1,0 +1,303 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #e6e6e6;
+}
+/* Contenedor principal */
+.venta-perfil-container {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Imagen del auto */
+.venta-perfil-detalles {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.venta-perfil-imagen img {
+    width: 50%;
+    padding: 20px;
+}
+
+.venta-perfil-imagen h1 {
+    margin-top: 10px;
+    font-size: 24px;
+    color: #555;
+}
+
+/* Especificaciones */
+.venta-perfil-especificaciones {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.especificacion-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 22%;
+    margin-bottom: 20px;
+}
+
+.especificacion-img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.especificacion-titulo {
+    font-size: 20px!important;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.especificacion-texto {
+    font-size: 18px!important;
+    color: #555;
+    margin-bottom: 50px;
+}
+
+/* Sección de pujas */
+.pujar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.pujar .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.pujar h3 {
+    font-size: 16px;
+    color: #333;
+}
+
+.pujar input[type="number"] {
+    padding: 10px;
+    width: 100%;
+    max-width: 200px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Botón de pujas */
+#btnPujar {
+    background-color: #ffc107; 
+    color: #000;
+    font-weight: bold;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#btnPujar:hover {
+    background-color: #e0a800; 
+    color: #fff;
+}
+
+/* Popup */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+.popup-content h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.popup-buttons button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+#popupAceptar {
+    background-color: #28a745; 
+    color: #fff;
+}
+
+#popupAceptar:hover {
+    background-color: #218838;
+}
+
+#popupCancelar {
+    background-color: #dc3545; 
+    color: #fff;
+}
+
+#popupCancelar:hover {
+    background-color: #c82333;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+}
+.modal-content {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 25px;
+    background-color: #a9a9a9;
+    margin: 15% auto;
+    padding: 50px;
+    border-radius: 10px;
+    border: 2px solid #202020;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+.modal-content button{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.modal-content button:hover{
+    color:  #007bff;
+    background-color: #515253;
+}
+.close-button {
+    float: right;
+    color: #000000;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+.close-button:hover {
+    color:  #007bff;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .venta-perfil-container {
+        padding: 15px;
+    }
+
+    .venta-perfil-detalles h1 {
+        font-size: 20px;
+    }
+
+    .venta-perfil-especificaciones {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pujar {
+        padding: 15px;
+        justify-items: center;
+    }
+
+    .pujar .info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pujar input[type="number"] {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .venta-perfil-imagen img {
+        max-width: 100%;
+    }
+
+    .venta-perfil-especificaciones {
+        gap: 10px;
+    }
+
+    #imgAuto{
+        min-width: 100%;
+        width: 100%;
+        padding: 0;
+    }
+
+    .especificacion-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: left;
+    }
+
+    .especificacion-img {
+        margin-bottom: 10px;
+    }
+
+    .pujar h3 {
+        font-size: 14px;
+    }
+
+    #btnPujar {
+        width: 100%;
+        text-align: center;
+    }
+}

@@ -1,0 +1,117 @@
+body {
+    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #e6e6e6;
+}
+
+#contenedor-caja {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Cambiado a auto-fit y aumentado el min-width */
+    gap: 15px;
+    padding: 20px;
+    max-width: 100%; /* Establecemos un ancho máximo para evitar que crezca demasiado en pantallas grandes */
+    margin: 0 auto; /* Centrar el contenedor */
+    overflow-x: hidden;
+}
+
+/* Estilo de las cajas individuales */
+.caja {
+    background-color: #f0f8ff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    transition: transform 0.2s;
+    cursor: pointer;
+}
+
+.caja:hover {
+    transform: scale(1.05);
+}
+
+/* Títulos dentro de las cajas */
+.caja h3 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 25px!important;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Imagen del auto */
+.caja img {
+    width: 100%;
+    height: auto;
+    max-height: 180px; /* Controlar el tamaño máximo de la imagen */
+    object-fit: cover;
+    margin-bottom: 10px; /* Espacio inferior para separar de otros elementos */
+}
+
+/* Precio dentro de las cajas */
+.precio {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px!important;
+    font-weight: bold;
+    color: green;
+    margin-top: 10px;
+}
+@media (min-width: 2560px) {
+    #contenedor-caja {
+        max-width: 80%; /* Limitar el ancho máximo para un diseño centralizado */
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajustar el tamaño mínimo en columnas grandes */
+    }
+
+    .caja {
+        padding: 20px;
+    }
+
+    .caja h3 {
+        font-size: 28px;
+    }
+
+    .precio {
+        font-size: 24px;
+    }
+}
+@media (max-width: 1024px) {
+    /* Para tablets y dispositivos medianos */
+
+    #contenedor-caja {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Ajusta el min-width en tablets */
+        max-width: 100%; /* Limita el ancho para evitar desbordamientos */
+    }
+}
+
+@media (max-width: 768px) {
+    /* Para dispositivos más pequeños como tablets verticales */
+    .caja h3 {
+        font-size: 16px;
+    }
+
+    .precio {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Para teléfonos móviles */
+    #contenedor-caja {
+        grid-template-columns: 1fr; /* Forzar una sola columna en móviles */
+    }
+
+    .caja {
+        padding: 10px;
+    }
+
+    .caja h3 {
+        font-size: 14px;
+    }
+
+    .precio {
+        font-size: 12px;
+    }
+}

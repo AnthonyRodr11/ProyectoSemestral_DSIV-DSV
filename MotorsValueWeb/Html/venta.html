@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motors Value Venta</title>
+    <link rel="stylesheet" href="../css/venta.css">
+    <div id="navbar"></div>
+</head>
+<body>
+    <div id="contenedor-caja">
+        <div>
+            <h1>¡Ups!</h1>
+            <H2>Parece que los vehículos fueron muy rápidos y no los alcanzaste :c</H2>
+        </div>
+    </div>
+    <script>
+        async function obtenerDatos(estado) {
+            try {
+                const respuesta = await fetch(`https://localhost:7129/MotorsApi/ventaFlota/listaFlota/${estado}`);
+                const datos = await respuesta.json();
+                console.log('Datos recibidos:', datos);
+                return datos;
+            } catch (error) {
+                console.error('Error al obtener datos del API:', error);
+                return [];
+            }
+        }
+
+        function crearCaja(datos) {
+            const contenedor = document.getElementById('contenedor-caja');
+            contenedor.innerHTML = '';
+    
+            datos.forEach(item => {
+                const caja = document.createElement('div');
+                caja.classList.add('caja');
+                
+            
+                caja.setAttribute('data-placa', item.placa);
+    
+                caja.innerHTML = `
+                    <h3>${item.marca} ${item.modelo}</h3>
+                    <p class="precio">Precio: $${item.precio}</p>
+                    <img src="${item.foto}" alt="Foto de ${item.marca} ${item.modelo}">
+                `;
+                
+                caja.onclick = () => {
+                    const id = caja.getAttribute('data-placa');
+                    if (id && id !== 'undefined' && id !== '') {
+                        window.location.href = `ventaPerfil.html?id=${id}`;
+                    } else {
+                        console.error('No se puede redirigir: el ID es inválido');
+                        alert('No se encontró la información del auto.');
+                    }
+                };
+                contenedor.appendChild(caja);
+            });
+        }
+    
+        async function actualizarCaja() {
+            const estado = 'venta';
+            const datos = await obtenerDatos(estado);
+            if(datos.code != 404){crearCaja(datos);}
+            
+        }
+    
+        actualizarCaja();
+        setInterval(actualizarCaja, 10000);
+    </script>
+    <script>
+        const userId = localStorage.getItem('userId');
+        console.log('ID recuperada:', userId);
+
+        if (userId) {
+            console.log(`Bienvenido usuario con ID: ${userId}`);
+        } else {
+            console.log('No hay usuario autenticado. Redirigiendo...');
+        }
+    </script>
+    
+    
+</body>
+<footer id="footer">
+
+</footer>
+
+<script src="../JavaScript/Funciones.js"></script>
+
+<script>
+    cargarHTML('navbar', 'navbar.html')
+</script>
+
+<script>
+    cargarHTML('footer', 'footer.html');
+</script>
+
+</html>

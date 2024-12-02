@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subasta</title>
+    <div id="navbar"></div>
+    <link rel="stylesheet" href="../css/subasta.css">
+
+</head>
+
+<body>
+        <!-- Línea azul -->
+    <div class="linea-azul"></div>
+    <div id="contenedor-caja">
+        <div>
+            <h1>¡Ups!</h1>
+            <H2>Parece que los vehículos fueron muy rápidos y no los alcanzaste :c</H2>
+        </div>
+    </div>
+
+    <footer>
+        <div id="footer"></div>
+    </footer>
+</body>
+
+</html>
+
+<script src="../JavaScript/funciones.js"></script>
+
+<script>
+
+    cargarHTML('navbar','navbar.html');
+    cargarHTML('footer','footer.html');
+
+    // Función para obtener datos del API
+    async function obtenerDatos() {
+        try {
+            const respuesta = await fetch('https://localhost:7129/MotorsApi/flotaCarro/listaSubasta');
+            const datos = await respuesta.json();
+            console.log('Datos recibidos:', datos);
+            return datos;
+        } catch (error) {
+            console.error('Error al obtener datos del API:', error);
+            return [];
+        }
+    }
+
+    // Función para calcular el tiempo restante
+    function calcularTiempoRestante(tFinal) {
+        const ahora = new Date();
+        const final = new Date(tFinal);
+        const diferencia = final - ahora;
+
+        if (diferencia <= 0) {
+            return "Finalizado";
+        }
+
+        const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+        return `${dias} días, ${horas} horas, ${minutos} minutos`;
+    }
+
+    // Función para crear las cajas con la información
+    function crearCaja(datos) {
+        const contenedor = document.getElementById('contenedor-caja');
+        contenedor.innerHTML = '';
+
+        datos.forEach(item => {
+            const caja = document.createElement('div');
+            caja.classList.add('caja');
+            caja.setAttribute('data-cod-subasta', item.cod_subasta);
+
+            const tiempoRestante = calcularTiempoRestante(item.t_final);
+
+            caja.innerHTML = `
+                <img src="${item.foto}" alt="Foto de ${item.marca} ${item.modelo}">
+                <h3>${item.marca} ${item.modelo}</h3>
+                <br>
+                <p class="precio">Oferta Inicial: $${item.valor_inicial.toFixed(2)}</p>
+                <p class="precio">Oferta Actual: $${item.valor_puja.toFixed(2)}</p>
+                <p class="tiempo-restante">Finaliza en: ${tiempoRestante}</p>
+            `;
+
+            caja.onclick = () => {
+                const codSubasta = caja.getAttribute('data-cod-subasta');
+                if (codSubasta) {
+                    window.location.href = `detalleSubasta.html?cod_subasta=${codSubasta}`;
+                }
+            };
+
+            contenedor.appendChild(caja);
+        });
+    }
+
+    // Función para actualizar las cajas periódicamente
+    async function actualizarCajas() {
+        const datos = await obtenerDatos();
+        if(datos[0] != null){crearCaja(datos);}
+    }
+
+    actualizarCajas(); // Carga inicial
+    setInterval(actualizarCajas, 10000); // Actualizar cada 10 segundos
+</script>
+</body>
+
+<footer id="footer">
+
+</footer>
+
+<script src="../JavaScript/Funciones.js"></script>
+
+<script>
+    cargarHTML('navbar', 'navbar.html')
+</script>
+
+<script>
+    cargarHTML('footer', 'footer.html');
+</script>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/nav.css">
+
+    <!-- Iconos, en este caso el de hamburguesa -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+   <!-- navbar.html -->
+    <header>
+        <div class="navbar">
+            <a class="logo" href="index.html">
+                <img src="../Img/Logo_MV.png" alt="Logo">
+                <span class="titulo">Motors Value</span>
+            </a>
+            <ul class="links">
+                <li><a href="venta.html">Venta</a></li>
+                <li><a href="alquiler.html">Alquiler</a></li>
+                <li><a href="subasta.html">Subasta</a></li>
+                <li><a href="solicitud.html">Solicitud</a></li>
+            </ul>
+            <a href="login.html" class="action_btn pulse" id="actionButton">Iniciar Sesión</a>
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+
+        <!-- Menu dropdown -->
+        <div class="dropdown">
+            <li><a href="venta.html">Venta</a></li>
+            <li><a href="alquiler.html">Alquiler</a></li>
+            <li><a href="subasta.html">Subasta</a></li>
+            <li><a href="solicitud.html">Solicitud</a></li>
+            <li><a href="login.html" class="action_btn" id="dropdownActionButton">Iniciar Sesión</a></li>
+        </div>
+    </header>
+
+</body>
+
+<!-- Script para manejar las funciones del menu hamburguesa -->
+<script>
+    const hamburger = document.querySelector('.hamburger');
+    const hamburgerBtnIcon = document.querySelector('.hamburger i');
+    const dropDown = document.querySelector('.dropdown');
+
+    // Función para alternar el menú dropdown
+    hamburger.onclick = function () {
+        dropDown.classList.toggle('open');
+        const isOpen = dropDown.classList.contains('open');
+
+        // Cambiar el icono del botón hamburguesa
+        hamburgerBtnIcon.classList = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+    };
+
+    //Manejo del menu hamburguesa por si la pantalla es mas grande
+
+    // Función para ajustar el estado del menú en función del tamaño de la pantalla
+    function ajustarMenuDropdown() {
+        const screenWidth = window.innerWidth;
+
+        if (screenWidth >= 992) {
+            // Cerrar el menú si está abierto en pantallas grandes
+            if (dropDown.classList.contains('open')) {
+                dropDown.classList.remove('open');
+                hamburgerBtnIcon.classList = 'fa-solid fa-bars'; // Restablecer el icono
+            }
+        }
+    }
+
+    // Listener para el cambio de tamaño de la ventana
+    window.addEventListener('resize', ajustarMenuDropdown);
+
+    // Llamar la función al cargar la página para manejar el estado inicial
+    ajustarMenuDropdown();
+
+    // Ocultar el dropdown cuando se hace click fuera de él
+
+    document.addEventListener('click', function (event) {
+        const isClickInside = hamburger.contains(event.target) || dropDown.contains(event.target);
+
+        if (!isClickInside && dropDown.classList.contains('open')) {
+            dropDown.classList.remove('open');
+            hamburgerBtnIcon.classList = 'fa-solid fa-bars'; 
+        }
+    });
+
+</script>
+
+</html>
