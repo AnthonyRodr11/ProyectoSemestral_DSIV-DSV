@@ -123,8 +123,6 @@ namespace MotorsApi.Controllers
             }
         }
 
-        
-
 
         [HttpGet]
         [Route("user/login/{correo}/{contraseña}")]
@@ -154,6 +152,45 @@ namespace MotorsApi.Controllers
                     titulo = "Error de autenticación",
                     Mensaje = "El correo o la contraseña son incorrectos.",
                     Code = 401
+                });
+            }
+        }
+
+        [HttpGet]
+        [Route("form/login/{correo}/{contraseña}")]
+        public IActionResult loginForm(string correo, string contraseña)
+        {
+            if (string.IsNullOrWhiteSpace(correo) || string.IsNullOrWhiteSpace(contraseña))
+            {
+                return BadRequest(new
+                {
+                    titulo = "Datos inválidos",
+                    Mensaje = "Debe proporcionar correo y contraseña.",
+                    Code = 400
+                });
+            }
+
+            Loggearse lojin = new Loggearse();
+            var user = lojin.loginForm(correo, contraseña);
+
+            if (user == 1 || user == 2)
+            {
+                return Ok(user);
+            }
+            else if (user > 0 && (user != 1 || user != 2))
+            {
+                return Unauthorized(new
+                {
+                    titulo = "Error de autenticación",
+                    Mensaje = "El usuario no es admin o vendedor",
+                });
+            }
+            else
+            {
+                return Unauthorized(new
+                {
+                    titulo = "Error de autenticación",
+                    Mensaje = "El correo o la contraseña son incorrectos.",
                 });
             }
         }

@@ -11,7 +11,6 @@ namespace MotorsApi.BD.CRUD.Read
         public int verificarLogin(string correo, string contraseña)
         {
             
-
             try
             {
                 
@@ -32,6 +31,43 @@ namespace MotorsApi.BD.CRUD.Read
 
                
                return Convert.ToInt32(cmd.ExecuteScalar());
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+
+            return 0;
+
+        }
+
+        public int loginForm(string correo, string contraseña)
+        {
+
+            try
+            {
+
+                cmd.Parameters.Clear();
+
+
+                cmd.CommandType = CommandType.Text;
+
+
+                cmd.CommandText = "SELECT rol FROM login WHERE correo = @correo AND contraseña = SHA2(@contraseña, 256)";
+
+
+                cmd.Parameters.AddWithValue("@correo", correo);
+                cmd.Parameters.AddWithValue("@contraseña", contraseña);
+
+
+                abrirConexion();
+
+
+                return Convert.ToInt32(cmd.ExecuteScalar());
             }
             catch (Exception e)
             {

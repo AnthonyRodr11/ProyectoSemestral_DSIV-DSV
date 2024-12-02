@@ -18,6 +18,5 @@ namespace MotorsApi.Models
         public bool disponibilidad { get; set; }
         public string foto { get; set; }
 
-
     }
 }
