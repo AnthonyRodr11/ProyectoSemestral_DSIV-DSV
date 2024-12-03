@@ -61,8 +61,9 @@ namespace MotorsForm.Menu_Strip
                 if (result == 1)
                 {
                     MessageBox.Show("La solicitud ha sido aceptada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
 
+                    this.Close();
+                }
             }
             catch (Exception ex)
             {
@@ -81,6 +82,8 @@ namespace MotorsForm.Menu_Strip
                 if (result == 1)
                 {
                     MessageBox.Show("La solicitud ha sido rechazada exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.Close();
                 }
             }
             catch (Exception ex)
