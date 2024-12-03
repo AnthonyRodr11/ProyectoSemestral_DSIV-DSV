@@ -22,6 +22,8 @@
 
         #region Windows Form Designer generated code
 
+        //toolStripContainer1
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -100,7 +102,7 @@
             // 
             this.ventaToolStripMenuItem.Image = global::MotorsForm.Properties.Resources.venta;
             this.ventaToolStripMenuItem.Name = "ventaToolStripMenuItem";
-            this.ventaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ventaToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.ventaToolStripMenuItem.Text = "Venta";
             this.ventaToolStripMenuItem.Click += new System.EventHandler(this.ventaToolStripMenuItem_Click);
             // 
@@ -108,7 +110,7 @@
             // 
             this.alquilerToolStripMenuItem.Image = global::MotorsForm.Properties.Resources.alquiler;
             this.alquilerToolStripMenuItem.Name = "alquilerToolStripMenuItem";
-            this.alquilerToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.alquilerToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.alquilerToolStripMenuItem.Text = "Alquiler";
             this.alquilerToolStripMenuItem.Click += new System.EventHandler(this.alquilerToolStripMenuItem_Click);
             // 
@@ -116,7 +118,7 @@
             // 
             this.subastaToolStripMenuItem.Image = global::MotorsForm.Properties.Resources.subasta;
             this.subastaToolStripMenuItem.Name = "subastaToolStripMenuItem";
-            this.subastaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.subastaToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.subastaToolStripMenuItem.Text = "Subasta";
             this.subastaToolStripMenuItem.Click += new System.EventHandler(this.subastaToolStripMenuItem_Click);
             // 
@@ -187,8 +189,8 @@
 
         }
 
+        //toolStripContainer1
         #endregion
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem flotaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem serviciosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ventaToolStripMenuItem;
@@ -197,8 +199,9 @@
         private System.Windows.Forms.ToolStripMenuItem solicitudesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem informesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manejoDeUsuariosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripContainer toolStripContainer1;
+        public System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStripMenuItem registrarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verFlotaToolStripMenuItem;
+        public System.Windows.Forms.MenuStrip menuStrip1;
     }
 }
