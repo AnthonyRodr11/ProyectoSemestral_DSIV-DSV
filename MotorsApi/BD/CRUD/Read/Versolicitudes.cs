@@ -150,8 +150,9 @@ namespace MotorsApi.BD.CRUD.Read
 
 
         
-
+        
         //Metodo para mostrar todas las solicitudes
+        
         public List<Solicitud> obtenerSolicitudes()
         {
             List<Solicitud> solicitudes = new List<Solicitud>();
@@ -176,8 +177,7 @@ namespace MotorsApi.BD.CRUD.Read
                         Solicitud solicitud = new Solicitud()
                         {    
                             id_solicitud = reader.GetInt32(0),
-                            nombre = reader.GetString(1),
-                            apellido = reader.GetString(2),
+                           
                             estado = reader.GetString(3),
                             f_solicitud = reader.GetDateTime(4),
                             monto = reader.GetDouble(5),

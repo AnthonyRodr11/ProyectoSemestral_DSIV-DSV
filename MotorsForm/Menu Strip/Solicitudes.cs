@@ -21,7 +21,7 @@ namespace MotorsForm.Menu_Strip
 
         private void comboBox1_Leave(object sender, EventArgs e)
         {
-            herra.ValidarComboBox(cmbUsuario);
+            
         }
     }
 }

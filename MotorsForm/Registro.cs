@@ -1,6 +1,5 @@
 ﻿using MotorsForm.Resource;
 using System;
-using MotorsApi
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,15 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MotorsForm.Models;
+using MotorsForm.Services;
 
 namespace MotorsForm
 {
     public partial class Registro : Form
     {
+
+        CarroService carroService;
         Herramientas herra = new Herramientas();
         public Registro()
         {
             InitializeComponent();
+            carroService = new CarroService();
         }
 
         private void txtMarca_Leave(object sender, EventArgs e)
@@ -67,11 +71,26 @@ namespace MotorsForm
 
         private async void btnRegistrar_Click(object sender, EventArgs e)
         {
-            var user = new 
+            var user = new CarroFlotaRequest()
+            {
+                marca = txtMarca.Text,
+                modelo = txtModelo.Text,
+                color = txtColor.Text,
+                km = Convert.ToDouble(txtKm.Text),
+                transmision = cmbTransmision.Text,
+                tipo_gas = cmbCombustible.Text,
+                carroceria = cmbCarroceria.Text,
+                estado = cmbEstado.Text,
+                descripcion = txtDescripcion.Text,
+                foto = pictureBox2.ToString()
+            };
 
-
+            var respuesta = await carroService.obtenerEspec(user);
+            MessageBox.Show(respuesta.Mensaje, respuesta.Titulo);
 
 
         }
+
     }
+
 }

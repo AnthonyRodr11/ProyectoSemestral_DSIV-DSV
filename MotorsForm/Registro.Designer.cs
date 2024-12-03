@@ -31,7 +31,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.cmbCombustible = new System.Windows.Forms.ComboBox();
             this.cmbCarroceria = new System.Windows.Forms.ComboBox();
             this.cmbEstado = new System.Windows.Forms.ComboBox();
@@ -66,7 +66,7 @@
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.btnRegistrar);
             this.groupBox1.Controls.Add(this.pictureBox2);
-            this.groupBox1.Controls.Add(this.textBox3);
+            this.groupBox1.Controls.Add(this.txtDescripcion);
             this.groupBox1.Controls.Add(this.cmbCombustible);
             this.groupBox1.Controls.Add(this.cmbCarroceria);
             this.groupBox1.Controls.Add(this.cmbEstado);
@@ -122,20 +122,24 @@
             this.pictureBox2.TabIndex = 22;
             this.pictureBox2.TabStop = false;
             // 
-            // textBox3
+            // txtDescripcion
             // 
-            this.textBox3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(48, 380);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(450, 341);
-            this.textBox3.TabIndex = 21;
+            this.txtDescripcion.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescripcion.Location = new System.Drawing.Point(48, 380);
+            this.txtDescripcion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtDescripcion.Multiline = true;
+            this.txtDescripcion.Name = "txtDescripcion";
+            this.txtDescripcion.Size = new System.Drawing.Size(450, 341);
+            this.txtDescripcion.TabIndex = 21;
             // 
             // cmbCombustible
             // 
             this.cmbCombustible.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCombustible.FormattingEnabled = true;
+            this.cmbCombustible.Items.AddRange(new object[] {
+            "gasolina",
+            "diesel",
+            "eléctrico"});
             this.cmbCombustible.Location = new System.Drawing.Point(670, 266);
             this.cmbCombustible.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbCombustible.Name = "cmbCombustible";
@@ -147,18 +151,44 @@
             // 
             this.cmbCarroceria.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCarroceria.FormattingEnabled = true;
+            this.cmbCarroceria.Items.AddRange(new object[] {
+            "Micro",
+            "Hatchback",
+            "Crossover",
+            "Sedan",
+            "Coupe",
+            "Coupe Svu",
+            "SUV",
+            "OFF-ROADER",
+            "PiCK-UP",
+            "MPV",
+            "Wagon",
+            "Van",
+            "Sport",
+            "Cabriolet ",
+            "Roadster",
+            "Shooting Brake",
+            "Hyper",
+            "Muscle",
+            "Limousine",
+            "Open Wheel"});
             this.cmbCarroceria.Location = new System.Drawing.Point(978, 266);
             this.cmbCarroceria.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbCarroceria.Name = "cmbCarroceria";
             this.cmbCarroceria.Size = new System.Drawing.Size(248, 37);
             this.cmbCarroceria.TabIndex = 19;
+            this.cmbCarroceria.Text = " ";
             this.cmbCarroceria.Leave += new System.EventHandler(this.cmbCarroceria_Leave);
             // 
             // cmbEstado
             // 
             this.cmbEstado.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbEstado.FormattingEnabled = true;
-            this.cmbEstado.Location = new System.Drawing.Point(144, 780);
+            this.cmbEstado.Items.AddRange(new object[] {
+            "venta ",
+            "alquiler",
+            "subasta"});
+            this.cmbEstado.Location = new System.Drawing.Point(142, 831);
             this.cmbEstado.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbEstado.Name = "cmbEstado";
             this.cmbEstado.Size = new System.Drawing.Size(250, 37);
@@ -169,6 +199,9 @@
             // 
             this.cmbTransmision.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbTransmision.FormattingEnabled = true;
+            this.cmbTransmision.Items.AddRange(new object[] {
+            "manual",
+            "automático"});
             this.cmbTransmision.Location = new System.Drawing.Point(360, 266);
             this.cmbTransmision.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbTransmision.Name = "cmbTransmision";
@@ -286,7 +319,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(138, 746);
+            this.label6.Location = new System.Drawing.Point(136, 797);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(103, 29);
@@ -410,7 +443,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.ComboBox cmbCombustible;
         private System.Windows.Forms.ComboBox cmbCarroceria;
         private System.Windows.Forms.ComboBox cmbEstado;
