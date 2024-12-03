@@ -73,6 +73,7 @@ namespace MotorsForm
         {
             var user = new CarroFlotaRequest()
             {
+                placa = txtPlaca.Text,
                 marca = txtMarca.Text,
                 modelo = txtModelo.Text,
                 color = txtColor.Text,
