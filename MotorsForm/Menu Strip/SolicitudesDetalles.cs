@@ -18,7 +18,6 @@ namespace MotorsForm.Menu_Strip
 
         SolicitudService solici = new SolicitudService();
 
-
         public int solicitoId;
         public SolicitudesDetalles(int id_solicitud)
         {

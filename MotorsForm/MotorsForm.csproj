@@ -188,6 +188,7 @@
       <DependentUpon>Registro.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\CarroService.cs" />
+    <Compile Include="Services\InformesService.cs" />
     <Compile Include="Services\SolicitudService.cs" />
     <EmbeddedResource Include="Alquiler.resx">
       <DependentUpon>Alquiler.cs</DependentUpon>
