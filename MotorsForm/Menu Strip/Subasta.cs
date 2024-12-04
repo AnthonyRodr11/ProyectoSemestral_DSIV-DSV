@@ -62,16 +62,13 @@ namespace MotorsForm.Menu_Strip
                         {
                             subastaService.EliminarDeVentas(datosTuple.Item1);
                         }
-                        await subastaService.ActualizarEstado(new SubastaRequest() { id_placa = datosTuple.Item1 }, "subasta");
+                        var respuesta = await subastaService.EnviarNuevaSubasta(subasta);
+                        if (respuesta.code == 200)
+                        {
+                            await subastaService.ActualizarEstado(new SubastaRequest() { id_placa = datosTuple.Item1 }, "subasta");
+                        }
                     }
                 }
-
-                var respuesta = await subastaService.EnviarNuevaSubasta(subasta);
-                if (respuesta.code == 200)
-                {
-                    await subastaService.ActualizarEstado(subasta);
-                }
-
                 txtPlaca.Clear();
                 CargarListBoxAutosAsync();
             }

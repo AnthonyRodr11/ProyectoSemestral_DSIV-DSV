@@ -160,5 +160,47 @@ namespace MotorsApi.Controllers
             return Ok(carro);
         }
 
+        [HttpGet]
+        [Route("carros")]
+        public IActionResult ObtenerTodosLosAutosMenosVenta()
+        {
+            VerFlotas todo = new VerFlotas();
+
+            var autos = todo.ObtenerTodoMenos("venta");
+
+            if (autos == null)
+            {
+                return NotFound(new
+                {
+                    titulo = "No se encontraron autos",
+                    mensaje = "Ningun auto encontrado",
+                    code = 404
+                });
+            }
+
+            return Ok(autos);
+        }
+
+        [HttpGet]
+        [Route("carros/venta")]
+        public IActionResult ObtenerTodosLosAutosVenta()
+        {
+            VerFlotas subasta = new VerFlotas();
+
+            var carros = subasta.ObtenerTodosLos("venta");
+
+            if (carros == null)
+            {
+                return NotFound(new
+                {
+                    titulo = "No se encontraron autos",
+                    mensaje = "Ningun auto encontrado",
+                    code = 404
+                });
+            }
+
+            return Ok(carros);
+        }
+
     }
 }

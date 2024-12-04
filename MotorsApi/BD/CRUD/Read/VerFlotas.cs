@@ -582,7 +582,7 @@ namespace MotorsApi.BD.CRUD.Read
 
 
         //Metodo para cargar toda la flota menos subasta
-        public List<FlotaCarro> ObtenerTodoMenosSubasta()
+        public List<FlotaCarro> ObtenerTodoMenos(string estado)
         {
             List<FlotaCarro> autos = new List<FlotaCarro>();
             string data;
@@ -596,8 +596,9 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado != 'subasta'";
+                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado != @estado";
 
+                cmd.Parameters.Add(new MySqlParameter("@estado", estado));
 
                 abrirConexion();
 
@@ -642,7 +643,7 @@ namespace MotorsApi.BD.CRUD.Read
 
 
         //Metodo para cargar toda la flota de subasta
-        public List<FlotaCarro> ObtenerTodaSubasta()
+        public List<FlotaCarro> ObtenerTodosLos(string estado)
         {
             List<FlotaCarro> autos = new List<FlotaCarro>();
             string data;
@@ -656,8 +657,9 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado = 'subasta'";
+                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado = @estado";
 
+                cmd.Parameters.Add(new MySqlParameter("@estado", estado));
 
                 abrirConexion();
 
