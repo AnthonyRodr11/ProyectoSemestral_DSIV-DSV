@@ -103,6 +103,9 @@ namespace MotorsForm.Menu_Strip
             }
 
             lsbAutosSubasta.DisplayMember = "Display";
+
+            lblVenta.Visible = false;
+            txtPrecioVenta.Visible = false;
         }
 
         private void Subasta_Load(object sender, EventArgs e)
@@ -138,35 +141,52 @@ namespace MotorsForm.Menu_Strip
                     await subastaService.ActualizarEstado(new SubastaRequest() { id_placa = TuplaDatos.Item1 }, "alquiler");
 
                     subastaService.EliminarDeSubasta(TuplaDatos.Item1);
+                    CargarListBoxAutosAsync();
                 }
             }
-            CargarListBoxAutosAsync();
+            else
+            {
+                MessageBox.Show("Debe Seleccionar un auto para continuar", "Despierta, estás en una simulación");
+            }
+            
         }
 
         private async void btnVender_Click(object sender, EventArgs e)
         {
             if (lsbAutosSubasta.SelectedItem != null)
             {
-                CargarListBoxAutosAsync();
-                // Obtener los datos seleccionados
-                var seleccionado = lsbAutosSubasta.SelectedItem.GetType().GetProperty("Data")?.GetValue(lsbAutosSubasta.SelectedItem);
 
-                if (seleccionado is ValueTuple<string, string> TuplaDatos)
+                if (txtPrecioVenta.Value > 0)
                 {
-                    string placa = TuplaDatos.Item1;
+                    // Obtener los datos seleccionados
+                    var seleccionado = lsbAutosSubasta.SelectedItem.GetType().GetProperty("Data")?.GetValue(lsbAutosSubasta.SelectedItem);
 
-                    // Actualizar estado
-                    await subastaService.ActualizarEstado(new SubastaRequest() { id_placa = placa }, "venta");
+                    if (seleccionado is ValueTuple<string, string> TuplaDatos)
+                    {
+                        string placa = TuplaDatos.Item1;
+                        double total = Convert.ToDouble(txtPrecioVenta.Value);
 
-                    // Eliminar de subasta
-                    subastaService.EliminarDeSubasta(placa);
+                        // Actualizar estado
+                        await subastaService.ActualizarEstado(new SubastaRequest() { id_placa = placa }, "venta");
 
-                    // Crear nueva venta
-                    subastaService.NuevaVenta(placa);
+                        // Eliminar de subasta
+                        subastaService.EliminarDeSubasta(placa);
 
-                    // Actualizar los ListBox
-                    await CargarListBoxAutosAsync();
+                        // Crear nueva venta
+                        subastaService.NuevaVenta(placa, total);
+
+                        // Actualizar los ListBox
+                        await CargarListBoxAutosAsync();
+                    }
                 }
+                else
+                {
+                    MessageBox.Show("Tiene que ponerle un precio a su venta", "Tu muy mal");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe Seleccionar un auto para continuar", "Despierta, estás en una simulación");
             }
         }
 
@@ -192,6 +212,12 @@ namespace MotorsForm.Menu_Strip
                     
                 }
             }
+        }
+
+        private void btnVender_MouseEnter(object sender, EventArgs e)
+        {
+            lblVenta.Visible = true;
+            txtPrecioVenta.Visible = true;
         }
     }
 }

@@ -89,8 +89,10 @@ namespace MotorsForm.Menu_Strip
                     }
                 }
             }
-            
-            
+            else
+            {
+                MessageBox.Show("Debe Seleccionar un auto para continuar", "Despierta, estás en una simulación");
+            }
         }
 
         private async void btnAlquilar_Click(object sender, EventArgs e)
@@ -104,9 +106,14 @@ namespace MotorsForm.Menu_Strip
                     await ventaService.ActualizarEstado(new SubastaRequest() { id_placa = TuplaDatos.Item1 }, "alquiler");
 
                     ventaService.EliminarDeVentas(TuplaDatos.Item1);
+                    CargarListBox();
                 }
             }
-            CargarListBox();
+            else
+            {
+                MessageBox.Show("Debe Seleccionar un auto para continuar", "Despierta, estás en una simulación");
+            }
+
         }
 
         public async Task CargarListBox()
