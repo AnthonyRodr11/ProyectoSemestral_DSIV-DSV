@@ -36,11 +36,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lsbVender = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lblValor = new System.Windows.Forms.Label();
+            this.txtPrecioSubasta = new System.Windows.Forms.NumericUpDown();
             this.btnAlquilar = new System.Windows.Forms.Button();
             this.btnSubastar = new System.Windows.Forms.Button();
             this.lsbVenta = new System.Windows.Forms.ListBox();
-            this.txtPrecioSubasta = new System.Windows.Forms.NumericUpDown();
-            this.lblValor = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrecio)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -145,6 +146,30 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de Autos en Venta";
             // 
+            // lblValor
+            // 
+            this.lblValor.AutoSize = true;
+            this.lblValor.Location = new System.Drawing.Point(52, 363);
+            this.lblValor.Name = "lblValor";
+            this.lblValor.Size = new System.Drawing.Size(105, 19);
+            this.lblValor.TabIndex = 8;
+            this.lblValor.Text = "Valor inicial";
+            this.lblValor.Visible = false;
+            // 
+            // txtPrecioSubasta
+            // 
+            this.txtPrecioSubasta.Location = new System.Drawing.Point(56, 385);
+            this.txtPrecioSubasta.Maximum = new decimal(new int[] {
+            -1981284353,
+            -1966660860,
+            0,
+            0});
+            this.txtPrecioSubasta.Name = "txtPrecioSubasta";
+            this.txtPrecioSubasta.Size = new System.Drawing.Size(188, 27);
+            this.txtPrecioSubasta.TabIndex = 8;
+            this.txtPrecioSubasta.ThousandsSeparator = true;
+            this.txtPrecioSubasta.Visible = false;
+            // 
             // btnAlquilar
             // 
             this.btnAlquilar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
@@ -183,29 +208,16 @@
             this.lsbVenta.Size = new System.Drawing.Size(428, 289);
             this.lsbVenta.TabIndex = 1;
             // 
-            // txtPrecioSubasta
+            // label3
             // 
-            this.txtPrecioSubasta.Location = new System.Drawing.Point(56, 385);
-            this.txtPrecioSubasta.Maximum = new decimal(new int[] {
-            -1981284353,
-            -1966660860,
-            0,
-            0});
-            this.txtPrecioSubasta.Name = "txtPrecioSubasta";
-            this.txtPrecioSubasta.Size = new System.Drawing.Size(188, 27);
-            this.txtPrecioSubasta.TabIndex = 8;
-            this.txtPrecioSubasta.ThousandsSeparator = true;
-            this.txtPrecioSubasta.Visible = false;
-            // 
-            // lblValor
-            // 
-            this.lblValor.AutoSize = true;
-            this.lblValor.Location = new System.Drawing.Point(52, 363);
-            this.lblValor.Name = "lblValor";
-            this.lblValor.Size = new System.Drawing.Size(105, 19);
-            this.lblValor.TabIndex = 8;
-            this.lblValor.Text = "Valor inicial";
-            this.lblValor.Visible = false;
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(413, 28);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(436, 19);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Seleccione un Auto de la lista para ponerlo en Venta";
             // 
             // Venta
             // 
@@ -213,6 +225,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::MotorsForm.Properties.Resources.Background1;
             this.ClientSize = new System.Drawing.Size(1283, 682);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -228,6 +241,7 @@
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrecioSubasta)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -246,5 +260,6 @@
         private System.Windows.Forms.NumericUpDown txtPrecio;
         private System.Windows.Forms.Label lblValor;
         private System.Windows.Forms.NumericUpDown txtPrecioSubasta;
+        private System.Windows.Forms.Label label3;
     }
 }

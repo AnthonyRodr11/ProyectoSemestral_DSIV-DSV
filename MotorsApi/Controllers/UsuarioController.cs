@@ -36,7 +36,6 @@ namespace MotorsApi.Controllers
                 {
                     titulo = "Datos Verificados :3",
                     Mensaje = "Todo bien banda",
-                    Code = 200
                 });
             }
             else
@@ -45,28 +44,26 @@ namespace MotorsApi.Controllers
                 {
                     titulo = "Error al guardar",
                     Mensaje = "Error al crear el usuario.",
-                    Code = 500
                 });
             }
         }
 
         [HttpDelete]
-        [Route ("user/delete/{id}")]
-        public IActionResult eliminarUsuario(int id)
+        [Route ("user/delete/{correo}")]
+        public IActionResult eliminarUsuario(string correo)
         {
-            if(id == 0)
+            if(string.IsNullOrEmpty(correo))
             {
                 return BadRequest(new
-                {
+                { 
                     titulo = "Datos inválidos",
-                    Mensaje = "La tarifa enviada es nula.",
-                    Code = 400
+                    Mensaje = "El correo es necesario.",
                 });
             }
 
             EliminarRol borradorcito = new EliminarRol();
 
-            if (borradorcito.rolEliminar(id)>0)
+            if (borradorcito.rolEliminar(correo)>0)
             {
                 return Ok(new
                 {
@@ -80,7 +77,7 @@ namespace MotorsApi.Controllers
                 return StatusCode(500, new
                 {
                     titulo = "Error al guardar",
-                    Mensaje = "El tipo de tarifa no pudo guardarse.",
+                    Mensaje = "No se pudo realizar la operacion",
                     Code = 500
                 });
             }
@@ -123,8 +120,6 @@ namespace MotorsApi.Controllers
             }
         }
 
-        
-
 
         [HttpGet]
         [Route("user/login/{correo}/{contraseña}")]
@@ -159,6 +154,41 @@ namespace MotorsApi.Controllers
         }
 
         [HttpGet]
+        [Route("form/login/{correo}/{contraseña}")]
+        public IActionResult loginForm(string correo, string contraseña)
+        {
+            if (string.IsNullOrWhiteSpace(correo) || string.IsNullOrWhiteSpace(contraseña))
+            {
+                return BadRequest(new
+                {
+                    titulo = "Datos inválidos",
+                    Mensaje = "Debe proporcionar correo y contraseña.",
+                    Code = 400
+                });
+            }
+
+            Loggearse lojin = new Loggearse();
+            var user = lojin.loginForm(correo, contraseña);
+
+            if (user == 1 || user == 2)
+            {
+                return Ok(user);
+            }
+            else if (user > 0 && (user != 1 || user != 2))
+            {
+                return Ok(user);
+            }
+            else
+            {
+                return Unauthorized(new
+                {
+                    titulo = "Error de autenticación",
+                    Mensaje = "El correo o la contraseña son incorrectos.",
+                });
+            }
+        }
+
+        [HttpGet]
         [Route("user/email/{correo}")]
         public IActionResult verificarCorreo(string correo)
         {
@@ -172,9 +202,9 @@ namespace MotorsApi.Controllers
             }
 
             Loggearse lojin = new Loggearse();
-            var cuera = lojin.verificarCorreo(correo);
+            var cuera = lojin.ObtenerIdPorCorreo(correo);
 
-            if (cuera)
+            if (cuera > 0)
             {
                 return Ok(cuera);
             }

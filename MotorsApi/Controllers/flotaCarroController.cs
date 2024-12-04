@@ -115,6 +115,32 @@ namespace MotorsApi.Controllers
             return Ok(carrocerias);
         }
 
+        [HttpGet]
+        [Route("flota")]
+        public IActionResult ObtenerFlota()
+        {
+            // Instancia del servicio o clase que gestiona las flotas
+            VerFlotas flotas = new VerFlotas();
+
+            // Llamamos al método para obtener la flota
+            var autos = flotas.obtenerFlota();
+
+            // Validamos si la colección está vacía o nula
+            if (autos == null)
+            {
+                return NotFound(new
+                {
+                    titulo = "Sin resultados",
+                    mensaje = "No se encontraron carrocerías para el estado especificado.",
+                    code = 404
+                });
+            }
+
+            // Retornamos la lista de autos con un código HTTP 200 (OK)
+            return Ok(autos);
+        }
+
+
 
         [HttpGet]
         [Route("ofertaActual/{cod_subasta}")]

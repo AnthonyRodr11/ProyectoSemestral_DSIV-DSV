@@ -162,11 +162,12 @@ namespace MotorsForm.Services
             }
         }
 
-        public async void NuevaVenta(string placa)
+        public async void NuevaVenta(string placa, double total)
         {
             var venta = new Ventas()
             {
-                id_vehiculo = placa
+                id_vehiculo = placa,
+                total = total
             };
             var datos = JsonConvert.SerializeObject(venta);
             var content = new StringContent(datos, Encoding.UTF8, "application/json");

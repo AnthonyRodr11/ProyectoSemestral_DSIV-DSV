@@ -49,28 +49,39 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnCrearUsuario = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.btnEditar = new System.Windows.Forms.Button();
-            this.btnEliminar = new System.Windows.Forms.Button();
-            this.tabControl2 = new System.Windows.Forms.TabControl();
-            this.Vendedores = new System.Windows.Forms.TabPage();
-            this.lsbVendedores = new System.Windows.Forms.ListBox();
-            this.Clientes = new System.Windows.Forms.TabPage();
-            this.lsbClientes = new System.Windows.Forms.ListBox();
+            this.gpEliminar = new System.Windows.Forms.GroupBox();
+            this.lblCorreo = new System.Windows.Forms.Label();
+            this.lblTel = new System.Windows.Forms.Label();
+            this.lblApellido = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btnCEliminar = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.gpEditar = new System.Windows.Forms.GroupBox();
+            this.lblName2 = new System.Windows.Forms.Label();
+            this.btnCEditar = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.txtTelefono = new System.Windows.Forms.MaskedTextBox();
             this.txtContra = new System.Windows.Forms.TextBox();
-            this.txtCorreo = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnVerificar = new System.Windows.Forms.Button();
+            this.txtCorreo = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnEditar = new System.Windows.Forms.Button();
+            this.btnEliminar = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
-            this.tabControl2.SuspendLayout();
-            this.Vendedores.SuspendLayout();
-            this.Clientes.SuspendLayout();
+            this.gpEliminar.SuspendLayout();
+            this.gpEditar.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -331,20 +342,17 @@
             this.btnCrearUsuario.TabIndex = 37;
             this.btnCrearUsuario.Text = "Crear";
             this.btnCrearUsuario.UseVisualStyleBackColor = true;
+            this.btnCrearUsuario.Click += new System.EventHandler(this.btnCrearUsuario_Click);
             // 
             // tabPage2
             // 
             this.tabPage2.BackgroundImage = global::MotorsForm.Properties.Resources.Background1;
             this.tabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabPage2.Controls.Add(this.gpEliminar);
+            this.tabPage2.Controls.Add(this.gpEditar);
+            this.tabPage2.Controls.Add(this.groupBox2);
             this.tabPage2.Controls.Add(this.btnEditar);
             this.tabPage2.Controls.Add(this.btnEliminar);
-            this.tabPage2.Controls.Add(this.tabControl2);
-            this.tabPage2.Controls.Add(this.txtTelefono);
-            this.tabPage2.Controls.Add(this.txtContra);
-            this.tabPage2.Controls.Add(this.txtCorreo);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Location = new System.Drawing.Point(4, 28);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -353,88 +361,178 @@
             this.tabPage2.Text = "Editar Usuario";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // btnEditar
+            // gpEliminar
             // 
-            this.btnEditar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.btnEditar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
-            this.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEditar.Font = new System.Drawing.Font("Tahoma", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEditar.ForeColor = System.Drawing.Color.White;
-            this.btnEditar.Location = new System.Drawing.Point(115, 570);
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(180, 40);
-            this.btnEditar.TabIndex = 15;
-            this.btnEditar.Text = "Editar";
-            this.btnEditar.UseVisualStyleBackColor = true;
+            this.gpEliminar.Controls.Add(this.lblCorreo);
+            this.gpEliminar.Controls.Add(this.lblTel);
+            this.gpEliminar.Controls.Add(this.lblApellido);
+            this.gpEliminar.Controls.Add(this.lblName);
+            this.gpEliminar.Controls.Add(this.label15);
+            this.gpEliminar.Controls.Add(this.label13);
+            this.gpEliminar.Controls.Add(this.btnCEliminar);
+            this.gpEliminar.Controls.Add(this.label3);
+            this.gpEliminar.Controls.Add(this.label14);
+            this.gpEliminar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.gpEliminar.Location = new System.Drawing.Point(601, 57);
+            this.gpEliminar.Name = "gpEliminar";
+            this.gpEliminar.Size = new System.Drawing.Size(565, 339);
+            this.gpEliminar.TabIndex = 21;
+            this.gpEliminar.TabStop = false;
+            this.gpEliminar.Text = "Eliminar";
+            this.gpEliminar.Visible = false;
             // 
-            // btnEliminar
+            // lblCorreo
             // 
-            this.btnEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
-            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnEliminar.Font = new System.Drawing.Font("Tahoma", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEliminar.ForeColor = System.Drawing.Color.White;
-            this.btnEliminar.Location = new System.Drawing.Point(373, 570);
-            this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(180, 40);
-            this.btnEliminar.TabIndex = 14;
-            this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.lblCorreo.AutoSize = true;
+            this.lblCorreo.ForeColor = System.Drawing.Color.White;
+            this.lblCorreo.Location = new System.Drawing.Point(236, 209);
+            this.lblCorreo.Name = "lblCorreo";
+            this.lblCorreo.Size = new System.Drawing.Size(19, 19);
+            this.lblCorreo.TabIndex = 26;
+            this.lblCorreo.Text = "n";
             // 
-            // tabControl2
+            // lblTel
             // 
-            this.tabControl2.Controls.Add(this.Vendedores);
-            this.tabControl2.Controls.Add(this.Clientes);
-            this.tabControl2.Location = new System.Drawing.Point(693, 28);
-            this.tabControl2.Name = "tabControl2";
-            this.tabControl2.SelectedIndex = 0;
-            this.tabControl2.Size = new System.Drawing.Size(458, 442);
-            this.tabControl2.TabIndex = 13;
+            this.lblTel.AutoSize = true;
+            this.lblTel.ForeColor = System.Drawing.Color.White;
+            this.lblTel.Location = new System.Drawing.Point(236, 155);
+            this.lblTel.Name = "lblTel";
+            this.lblTel.Size = new System.Drawing.Size(19, 19);
+            this.lblTel.TabIndex = 25;
+            this.lblTel.Text = "n";
             // 
-            // Vendedores
+            // lblApellido
             // 
-            this.Vendedores.Controls.Add(this.lsbVendedores);
-            this.Vendedores.Location = new System.Drawing.Point(4, 28);
-            this.Vendedores.Name = "Vendedores";
-            this.Vendedores.Padding = new System.Windows.Forms.Padding(3);
-            this.Vendedores.Size = new System.Drawing.Size(450, 410);
-            this.Vendedores.TabIndex = 0;
-            this.Vendedores.Text = "Vendedores";
-            this.Vendedores.UseVisualStyleBackColor = true;
+            this.lblApellido.AutoSize = true;
+            this.lblApellido.ForeColor = System.Drawing.Color.White;
+            this.lblApellido.Location = new System.Drawing.Point(236, 103);
+            this.lblApellido.Name = "lblApellido";
+            this.lblApellido.Size = new System.Drawing.Size(19, 19);
+            this.lblApellido.TabIndex = 24;
+            this.lblApellido.Text = "n";
             // 
-            // lsbVendedores
+            // lblName
             // 
-            this.lsbVendedores.FormattingEnabled = true;
-            this.lsbVendedores.ItemHeight = 19;
-            this.lsbVendedores.Location = new System.Drawing.Point(2, 1);
-            this.lsbVendedores.Name = "lsbVendedores";
-            this.lsbVendedores.Size = new System.Drawing.Size(447, 403);
-            this.lsbVendedores.TabIndex = 0;
+            this.lblName.AutoSize = true;
+            this.lblName.ForeColor = System.Drawing.Color.White;
+            this.lblName.Location = new System.Drawing.Point(236, 50);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(19, 19);
+            this.lblName.TabIndex = 23;
+            this.lblName.Text = "n";
             // 
-            // Clientes
+            // label15
             // 
-            this.Clientes.Controls.Add(this.lsbClientes);
-            this.Clientes.Location = new System.Drawing.Point(4, 28);
-            this.Clientes.Name = "Clientes";
-            this.Clientes.Padding = new System.Windows.Forms.Padding(3);
-            this.Clientes.Size = new System.Drawing.Size(450, 410);
-            this.Clientes.TabIndex = 1;
-            this.Clientes.Text = "Clientes";
-            this.Clientes.UseVisualStyleBackColor = true;
+            this.label15.AutoSize = true;
+            this.label15.ForeColor = System.Drawing.Color.White;
+            this.label15.Location = new System.Drawing.Point(95, 208);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(70, 19);
+            this.label15.TabIndex = 22;
+            this.label15.Text = "Correo:";
             // 
-            // lsbClientes
+            // label13
             // 
-            this.lsbClientes.FormattingEnabled = true;
-            this.lsbClientes.ItemHeight = 19;
-            this.lsbClientes.Location = new System.Drawing.Point(2, 1);
-            this.lsbClientes.Name = "lsbClientes";
-            this.lsbClientes.Size = new System.Drawing.Size(447, 403);
-            this.lsbClientes.TabIndex = 2;
+            this.label13.AutoSize = true;
+            this.label13.ForeColor = System.Drawing.Color.White;
+            this.label13.Location = new System.Drawing.Point(95, 154);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(87, 19);
+            this.label13.TabIndex = 21;
+            this.label13.Text = "Teléfono:";
+            // 
+            // btnCEliminar
+            // 
+            this.btnCEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnCEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnCEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCEliminar.Font = new System.Drawing.Font("Tahoma", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCEliminar.ForeColor = System.Drawing.Color.White;
+            this.btnCEliminar.Location = new System.Drawing.Point(189, 276);
+            this.btnCEliminar.Name = "btnCEliminar";
+            this.btnCEliminar.Size = new System.Drawing.Size(180, 40);
+            this.btnCEliminar.TabIndex = 20;
+            this.btnCEliminar.Text = "Eliminar";
+            this.btnCEliminar.UseVisualStyleBackColor = true;
+            this.btnCEliminar.Click += new System.EventHandler(this.btnCEliminar_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(95, 50);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(79, 19);
+            this.label3.TabIndex = 18;
+            this.label3.Text = "Nombre:";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.ForeColor = System.Drawing.Color.White;
+            this.label14.Location = new System.Drawing.Point(95, 103);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(82, 19);
+            this.label14.TabIndex = 3;
+            this.label14.Text = "Apellido:";
+            // 
+            // gpEditar
+            // 
+            this.gpEditar.Controls.Add(this.lblName2);
+            this.gpEditar.Controls.Add(this.btnCEditar);
+            this.gpEditar.Controls.Add(this.label2);
+            this.gpEditar.Controls.Add(this.txtTelefono);
+            this.gpEditar.Controls.Add(this.txtContra);
+            this.gpEditar.Controls.Add(this.label4);
+            this.gpEditar.Controls.Add(this.label6);
+            this.gpEditar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.gpEditar.Location = new System.Drawing.Point(601, 56);
+            this.gpEditar.Name = "gpEditar";
+            this.gpEditar.Size = new System.Drawing.Size(565, 339);
+            this.gpEditar.TabIndex = 19;
+            this.gpEditar.TabStop = false;
+            this.gpEditar.Text = "Editar";
+            this.gpEditar.Visible = false;
+            // 
+            // lblName2
+            // 
+            this.lblName2.AutoSize = true;
+            this.lblName2.ForeColor = System.Drawing.Color.White;
+            this.lblName2.Location = new System.Drawing.Point(203, 49);
+            this.lblName2.Name = "lblName2";
+            this.lblName2.Size = new System.Drawing.Size(19, 19);
+            this.lblName2.TabIndex = 27;
+            this.lblName2.Text = "n";
+            // 
+            // btnCEditar
+            // 
+            this.btnCEditar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnCEditar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnCEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCEditar.Font = new System.Drawing.Font("Tahoma", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCEditar.ForeColor = System.Drawing.Color.White;
+            this.btnCEditar.Location = new System.Drawing.Point(354, 252);
+            this.btnCEditar.Name = "btnCEditar";
+            this.btnCEditar.Size = new System.Drawing.Size(180, 40);
+            this.btnCEditar.TabIndex = 20;
+            this.btnCEditar.Text = "Editar";
+            this.btnCEditar.UseVisualStyleBackColor = true;
+            this.btnCEditar.Click += new System.EventHandler(this.btnCEditar_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(62, 50);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 19);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Nombre:";
             // 
             // txtTelefono
             // 
             this.txtTelefono.CutCopyMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
-            this.txtTelefono.Location = new System.Drawing.Point(86, 107);
+            this.txtTelefono.Location = new System.Drawing.Point(67, 152);
             this.txtTelefono.Mask = "0000-0000";
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.PromptChar = ' ';
@@ -445,49 +543,111 @@
             // 
             // txtContra
             // 
-            this.txtContra.Location = new System.Drawing.Point(86, 390);
+            this.txtContra.Location = new System.Drawing.Point(64, 252);
+            this.txtContra.MaxLength = 20;
             this.txtContra.Name = "txtContra";
+            this.txtContra.PasswordChar = '*';
             this.txtContra.Size = new System.Drawing.Size(243, 27);
             this.txtContra.TabIndex = 11;
             this.txtContra.Leave += new System.EventHandler(this.txtContra_Leave);
-            // 
-            // txtCorreo
-            // 
-            this.txtCorreo.Location = new System.Drawing.Point(86, 245);
-            this.txtCorreo.Name = "txtCorreo";
-            this.txtCorreo.Size = new System.Drawing.Size(243, 27);
-            this.txtCorreo.TabIndex = 10;
-            this.txtCorreo.Leave += new System.EventHandler(this.txtCorreo_Leave);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(82, 367);
+            this.label4.Location = new System.Drawing.Point(62, 209);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(102, 19);
             this.label4.TabIndex = 5;
             this.label4.Text = "Contraseña";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(62, 103);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(81, 19);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "Teléfono";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnVerificar);
+            this.groupBox2.Controls.Add(this.txtCorreo);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.groupBox2.Location = new System.Drawing.Point(112, 56);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(416, 340);
+            this.groupBox2.TabIndex = 16;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Verificar Usuario";
+            // 
+            // btnVerificar
+            // 
+            this.btnVerificar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnVerificar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnVerificar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVerificar.Font = new System.Drawing.Font("Tahoma", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerificar.ForeColor = System.Drawing.Color.White;
+            this.btnVerificar.Location = new System.Drawing.Point(113, 237);
+            this.btnVerificar.Name = "btnVerificar";
+            this.btnVerificar.Size = new System.Drawing.Size(180, 40);
+            this.btnVerificar.TabIndex = 17;
+            this.btnVerificar.Text = "Verificar";
+            this.btnVerificar.UseVisualStyleBackColor = true;
+            this.btnVerificar.Click += new System.EventHandler(this.btnVerificar_Click);
+            // 
+            // txtCorreo
+            // 
+            this.txtCorreo.Location = new System.Drawing.Point(51, 82);
+            this.txtCorreo.Name = "txtCorreo";
+            this.txtCorreo.Size = new System.Drawing.Size(309, 27);
+            this.txtCorreo.TabIndex = 10;
+            this.txtCorreo.Leave += new System.EventHandler(this.txtCorreo_Leave);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(82, 222);
+            this.label5.Location = new System.Drawing.Point(46, 50);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(64, 19);
             this.label5.TabIndex = 4;
             this.label5.Text = "Correo";
             // 
-            // label6
+            // btnEditar
             // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(82, 84);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(81, 19);
-            this.label6.TabIndex = 3;
-            this.label6.Text = "Teléfono";
+            this.btnEditar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnEditar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEditar.Font = new System.Drawing.Font("Tahoma", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEditar.ForeColor = System.Drawing.Color.White;
+            this.btnEditar.Location = new System.Drawing.Point(444, 515);
+            this.btnEditar.Name = "btnEditar";
+            this.btnEditar.Size = new System.Drawing.Size(180, 40);
+            this.btnEditar.TabIndex = 15;
+            this.btnEditar.Text = "Editar";
+            this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Visible = false;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
+            // 
+            // btnEliminar
+            // 
+            this.btnEliminar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnEliminar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnEliminar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnEliminar.Font = new System.Drawing.Font("Tahoma", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEliminar.ForeColor = System.Drawing.Color.White;
+            this.btnEliminar.Location = new System.Drawing.Point(668, 515);
+            this.btnEliminar.Name = "btnEliminar";
+            this.btnEliminar.Size = new System.Drawing.Size(180, 40);
+            this.btnEliminar.TabIndex = 14;
+            this.btnEliminar.Text = "Eliminar";
+            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.Visible = false;
+            this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // Manejo_Usuarios
             // 
@@ -511,10 +671,12 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.tabControl2.ResumeLayout(false);
-            this.Vendedores.ResumeLayout(false);
-            this.Clientes.ResumeLayout(false);
+            this.gpEliminar.ResumeLayout(false);
+            this.gpEliminar.PerformLayout();
+            this.gpEditar.ResumeLayout(false);
+            this.gpEditar.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -542,11 +704,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TabControl tabControl2;
-        private System.Windows.Forms.TabPage Vendedores;
-        private System.Windows.Forms.ListBox lsbVendedores;
-        private System.Windows.Forms.TabPage Clientes;
-        private System.Windows.Forms.ListBox lsbClientes;
         private System.Windows.Forms.Button btnCrearUsuario;
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Button btnEliminar;
@@ -555,5 +712,21 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btnVerificar;
+        private System.Windows.Forms.GroupBox gpEliminar;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btnCEliminar;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.GroupBox gpEditar;
+        private System.Windows.Forms.Button btnCEditar;
+        private System.Windows.Forms.Label lblCorreo;
+        private System.Windows.Forms.Label lblTel;
+        private System.Windows.Forms.Label lblApellido;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.Label lblName2;
     }
 }

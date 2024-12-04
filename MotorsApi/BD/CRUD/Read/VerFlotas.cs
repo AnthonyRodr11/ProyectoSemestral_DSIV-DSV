@@ -9,20 +9,20 @@ namespace MotorsApi.BD.CRUD.Read
     {
 
         //Metodo para devolver una lista segun su estado <Alquiler,venta>
-
+        
         public List<FlotaCarroRequest> tiposFlota(string estado)
         {
             List<FlotaCarroRequest> autos = new List<FlotaCarroRequest>();
 
             try
             {
-
+                
                 cmd.Parameters.Clear();
 
-
+                
                 cmd.CommandType = CommandType.Text;
 
-
+               
                 cmd.CommandText = @"
                     SELECT 
                         c.placa, c.marca, c.modelo, c.foto, 
@@ -36,14 +36,14 @@ namespace MotorsApi.BD.CRUD.Read
 
                 cmd.Parameters.AddWithValue("@estado", estado);
 
-
+               
                 abrirConexion();
 
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-
+                        
                         FlotaCarroRequest flota = new FlotaCarroRequest()
                         {
                             placa = reader["placa"].ToString(),
@@ -53,7 +53,7 @@ namespace MotorsApi.BD.CRUD.Read
                             precio = Convert.ToDouble(reader["precio"])
                         };
 
-
+                        
                         autos.Add(flota);
                     }
                 }
@@ -69,17 +69,17 @@ namespace MotorsApi.BD.CRUD.Read
             }
             return autos;
         }
-
+        
         public List<FlotaCarroRequest> flotaVenta(string id)
         {
             List<FlotaCarroRequest> autos = new List<FlotaCarroRequest>();
 
             try
             {
-
+                
                 cmd.Parameters.Clear();
 
-
+               
                 cmd.CommandType = CommandType.Text;
 
                 // Realizamos un JOIN entre Flota_Carro y Flota_Venta para obtener solo los campos necesarios
@@ -94,10 +94,10 @@ namespace MotorsApi.BD.CRUD.Read
                     WHERE 
                         c.placa = @placa";
 
-
+                
                 cmd.Parameters.AddWithValue("@placa", id);
 
-
+               
                 abrirConexion();
 
                 using (MySqlDataReader reader = cmd.ExecuteReader())
@@ -118,7 +118,7 @@ namespace MotorsApi.BD.CRUD.Read
                             precio = Convert.ToDouble(reader["precio"])
                         };
 
-
+                       
                         autos.Add(flota);
                     }
                 }
@@ -143,14 +143,14 @@ namespace MotorsApi.BD.CRUD.Read
 
             try
             {
-
+                
                 cmd.Parameters.Clear();
 
-
+               
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT * from  flota_carro";
+                cmd.CommandText = "SELECT * from flota_carro";
 
 
                 abrirConexion();
@@ -160,7 +160,7 @@ namespace MotorsApi.BD.CRUD.Read
                 {
                     while (reader.Read())
                     {
-
+                      
                         FlotaCarro flota = new FlotaCarro()
                         {
                             placa = reader["placa"].ToString(),
@@ -202,16 +202,16 @@ namespace MotorsApi.BD.CRUD.Read
 
             try
             {
-
+                
                 cmd.Parameters.Clear();
 
-
+               
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
                 cmd.CommandText = "SELECT  placa,  marca,  modelo,  color,  km,   transmision,   tipo_gas,   carroceria,   estado,    descripcion,    foto   FROM Flota_Carro  WHERE estado = @estado";
 
-
+             
                 cmd.Parameters.AddWithValue("@estado", estado);
 
 
@@ -262,13 +262,13 @@ namespace MotorsApi.BD.CRUD.Read
 
             try
             {
-
+               
                 cmd.Parameters.Clear();
 
-
+                
                 cmd.CommandType = CommandType.Text;
 
-
+               
                 cmd.CommandText = "SELECT * from tarifas_alquiler";
 
 
@@ -279,7 +279,7 @@ namespace MotorsApi.BD.CRUD.Read
                 {
                     while (reader.Read())
                     {
-
+                      
                         TarifasAlquiler alquiler = new TarifasAlquiler()
                         {
                             id_tipo = Convert.ToInt32(reader["id_tipo"]),
@@ -312,16 +312,16 @@ namespace MotorsApi.BD.CRUD.Read
 
             try
             {
-
+                
                 cmd.Parameters.Clear();
 
-
+              
                 cmd.CommandType = CommandType.Text;
 
-
+               
                 cmd.CommandText = "SELECT DISTINCT carroceria FROM Flota_Carro WHERE estado = @estado";
 
-
+               
                 cmd.Parameters.AddWithValue("@estado", estado);
 
                 abrirConexion();
@@ -360,16 +360,16 @@ namespace MotorsApi.BD.CRUD.Read
             double valor = 0;
             try
             {
-
+                
                 cmd.Parameters.Clear();
 
-
+                
                 cmd.CommandType = CommandType.Text;
 
-
+                
                 cmd.CommandText = "SELECT   valor_puja   FROM Flota_Subasta WHERE cod_subasta = @cod_subasta ";
 
-
+              
                 cmd.Parameters.AddWithValue("@cod_subasta", cod_subasta);
 
 
@@ -540,7 +540,7 @@ namespace MotorsApi.BD.CRUD.Read
                                     ON 
                                         fc.placa = fs.id_placa
                                     WHERE fs.cod_subasta = @placa AND fc.disponibilidad = 1";//placa en realidad es el código de subasta pero era más fácil solo dejarlo en placa. QUe si haciendo el comentario me tomó más tiempo que cambiarlo?
-                                                                                             //si, pero estoy aburrido
+                                                                   //si, pero estoy aburrido
 
                 abrirConexion();
 
@@ -596,7 +596,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado != @estado";
+                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado != @estado AND disponibilidad = 1";
 
                 cmd.Parameters.Add(new MySqlParameter("@estado", estado));
 
@@ -724,10 +724,10 @@ namespace MotorsApi.BD.CRUD.Read
                         foto = reader["foto"].ToString();
                     }
                 }
-                if (foto != null)
+                if(foto != null)
                 {
-                    string[] strings = foto.Split(new string[] { ".." }, StringSplitOptions.TrimEntries);
-
+                    string[] strings = foto.Split(new string[] {".."}, StringSplitOptions.TrimEntries);
+                    
                     return strings[1];
                 }
             }
@@ -737,9 +737,7 @@ namespace MotorsApi.BD.CRUD.Read
         }
 
 
-
-        //Metodo para cargar la flota de carrro que es alquiler
-        public List<FlotaCarro> ObtenerFlotaAlquiler()
+        public List<FlotaCarro> ObtenerTodasLasVentasEnCero(string estado)
         {
             List<FlotaCarro> autos = new List<FlotaCarro>();
             string data;
@@ -753,8 +751,11 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado != 'alquile'";
+                cmd.CommandText = @"SELECT DISTINCT fc.placa, fc.marca, fc.modelo, fc.color, fc.km, fc.transmision, fc.tipo_gas, fc.carroceria, fc.estado, fc.descripcion, fc.disponibilidad, fc.foto FROM flota_carro fc 
+                                    JOIN flota_venta fv
+                                    WHERE (fc.estado = 'venta' AND fc.disponibilidad = 1 AND fv.precio = 0)";
 
+                cmd.Parameters.Add(new MySqlParameter("@estado", estado));
 
                 abrirConexion();
 
@@ -797,8 +798,7 @@ namespace MotorsApi.BD.CRUD.Read
             return autos;
         }
 
-        //Metodo para obtener la flota con alquiler
-        public List<FlotaCarro> obtenerAlquilerFR()
+        public List<FlotaCarro> ObtenerTodoMenosPrecioCero(string estado)
         {
             List<FlotaCarro> autos = new List<FlotaCarro>();
             string data;
@@ -812,8 +812,9 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado = 'alquiler'";
+                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado != @estado AND disponibilidad = 1";
 
+                cmd.Parameters.Add(new MySqlParameter("@estado", estado));
 
                 abrirConexion();
 
@@ -855,6 +856,7 @@ namespace MotorsApi.BD.CRUD.Read
             }
             return autos;
         }
+
     }
 }
 
