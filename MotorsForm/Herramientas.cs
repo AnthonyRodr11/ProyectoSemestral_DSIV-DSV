@@ -17,6 +17,20 @@ namespace MotorsForm.Resource
 
         public static bool continuar {  get; set; }
 
+        public static Login LojinForm;
+
+        public static void SetLoginForm(Login form)
+        {
+            LojinForm = form;
+        }
+        public static void MostrarLogin()
+        {
+            if (LojinForm != null)
+            {
+                LojinForm.Show(); // Mostrar el formulario si existe
+            }
+        }
+
         //Herramientas de Validación
         public static bool ValidarFormatoCorreo(string correo)
         {

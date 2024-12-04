@@ -1,4 +1,5 @@
-﻿using MotorsForm.Services;
+﻿using MotorsForm.Resource;
+using MotorsForm.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +19,7 @@ namespace MotorsForm
         {
             InitializeComponent();
             userServices = new UserServices();
+            Herramientas.SetLoginForm(this);
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -28,23 +30,28 @@ namespace MotorsForm
                 string password = txtPassword.Text;
                 var respuesta = await userServices.ObtenerAcceso(correo, password);
                 if (respuesta == 1 || respuesta == 2) {
-                    Home home = new Home();
+                    
                     if (respuesta == 1) {
                         MessageBox.Show("Bienvenido Admin");
+                        Home home = new Home(1);
                         this.Hide();
                         home.Show();
                     }
                     else
                     {
                         MessageBox.Show("Bienvenido Vendedor");
+                        Home home = new Home(2);
                         this.Hide();
                         home.Show();
                     }
+                    txtCorreo.ResetText();
+                    txtPassword.ResetText();
                     
                 }
                 else
                 {
                     MessageBox.Show("El usuario no esta autorizado");
+                    txtPassword.ResetText();
                 }
             }
             else

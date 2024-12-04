@@ -261,6 +261,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\defaultCar.png" />
+    <None Include="Resources\ci--exit.png" />
+    <None Include="Resources\icomoon-free--exit.png" />
     <Content Include="Resource\alquiler.png" />
     <Content Include="Resource\Background1.jpg" />
     <Content Include="Resource\car.png" />

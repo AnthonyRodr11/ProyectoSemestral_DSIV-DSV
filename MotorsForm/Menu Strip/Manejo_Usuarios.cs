@@ -65,7 +65,6 @@ namespace MotorsForm.Menu_Strip
         {
             herra.ValidarMasked(txtPhone);
             string tel = txtPhone.Text;
-            MessageBox.Show(tel);
         }
 
         private void txtPass_Leave(object sender, EventArgs e)

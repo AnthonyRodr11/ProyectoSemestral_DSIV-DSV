@@ -123,6 +123,16 @@ namespace MotorsForm.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icomoon_free__exit {
+            get {
+                object obj = ResourceManager.GetObject("icomoon_free__exit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap informe {
             get {
                 object obj = ResourceManager.GetObject("informe", resourceCulture);
