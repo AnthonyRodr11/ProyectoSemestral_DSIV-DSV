@@ -116,35 +116,54 @@ namespace MotorsForm
         private void Alquiler_Load(object sender, EventArgs e)
         {
             this.cargarTarifas();
+            this.cargarListBoxAutos();
         }
 
 
-        private async void cargarListBox()
+        private async Task cargarListBoxAutos()
         {
-            cmbTipoAuto.Items.Clear(); // Limpiar los elementos anteriores del combo box
-            var tarifin = await carrin.obtenerTarifasAll();
 
-            foreach (var tarif in tarifin)
+            var autitos = await carrin.dameLosCarritos();
+
+            lsblistAlquiler.Items.Clear();
+
+            foreach (var c in autitos)
             {
-                cmbTipoAuto.Items.Add(new
-                {
-                    Display = tarif.tipo_auto,
-                    Data = (tarif.tarifaxauto, tarif.id_tipo)
-                });
+                lsblistAlquiler.Items.Add(new { Display = (c.marca, c.modelo), Data = (c.placa, c.estado) });
             }
 
-            cmbTipoAuto.DisplayMember = "Display"; // Mostrar la propiedad "Display" en el combo box
+            lsblistAlquiler.DisplayMember = "Display";
         }
 
+        private async void btnVenta_Click(object sender, EventArgs e)
+        {
+            if (lsblistAlquiler.SelectedItem != null)
+            {
+                cargarListBoxAutos();
+                // Obtener los datos seleccionados
+                var seleccionado = lsblistAlquiler.SelectedItem.GetType().GetProperty("Data")?.GetValue(lsblistAlquiler.SelectedItem);
+
+                if (seleccionado is ValueTuple<string, string> TuplaDatos)
+                {
+                    string placa = TuplaDatos.Item1;
+
+                    // Actualizar estado
+                    await carrin.actualizarEstado(new AlquilerRecue { id_vehiculo = placa }, "venta");
+
+                    // Eliminar de subasta
+                    
+
+                    // Crear nueva venta
+                    carrin.nuevaVenta(placa);
+
+                    // Actualizar los ListBox
+                    await cargarListBoxAutos();
+                }
 
 
-
-
-
+            }
+        }
 
 
     }
-
-
-
 }

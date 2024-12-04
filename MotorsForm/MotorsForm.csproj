@@ -171,6 +171,7 @@
     <Compile Include="Menu Strip\Venta.Designer.cs">
       <DependentUpon>Venta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\AlquilerRecue.cs" />
     <Compile Include="Models\FlotaCarro.cs" />
     <Compile Include="Models\Respuesta.cs" />
     <Compile Include="Models\SubastaRequest.cs" />

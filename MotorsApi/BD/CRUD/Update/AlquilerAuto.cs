@@ -35,7 +35,7 @@ namespace MotorsApi.BD.CRUD.Update
                     return insertedId;
 
                 }
-                
+
 
             }
 
@@ -53,6 +53,51 @@ namespace MotorsApi.BD.CRUD.Update
         }
 
         //Actualiza el estado en el que se encuentra el veehiculo(Vender, alquilar, subastar)
+        public int actualizarEstadoAlquiler(AlquilerRecue alquilersin, string estado)
+        {
+            try
+            {
+                //Limpiamos parametros
+                cmd.Parameters.Clear();
+
+                //asignamos el tipo
+                cmd.CommandType = System.Data.CommandType.Text;
+
+                //asignamos el cod
+                cmd.CommandText = "UPDATE Flota_Carro SET estado = @estado WHERE placa = @placa";
+
+                //asignamos parametros
+                cmd.Parameters.Add(new MySqlParameter("@placa", alquilersin.id_vehiculo));
+                cmd.Parameters.Add(new MySqlParameter("@estado", estado));
+               
+
+
+                //Abrimos conexion
+                abrirConexion();
+
+                //Validacion de Actualizacion
+                int insertedId = Convert.ToInt32(cmd.ExecuteNonQuery());
+                if (insertedId > 0)
+                {
+                    return insertedId;
+                }
+
+
+            }
+
+            catch (Exception e)
+            {
+
+                throw;
+            }
+            finally
+            {
+                //Cerramos conexion
+                cerrarConexion();
+            }
+            return 0;
+        }
+
         public int ActualizarEstado(UpdateState flota_Carro)
         {
             try
@@ -80,13 +125,13 @@ namespace MotorsApi.BD.CRUD.Update
                 {
                     return insertedId;
                 }
-                    
+
 
             }
 
             catch (Exception e)
             {
-                
+
                 throw;
             }
             finally
