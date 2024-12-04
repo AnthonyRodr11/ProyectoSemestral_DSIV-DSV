@@ -20,12 +20,11 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos el nombre del procedimiento de almacendo
-                cmd.CommandText = "INSERT INTO Flota_Venta (id, placa, precio) VALUES(@id,@placa,@precio)";
+                cmd.CommandText = "INSERT INTO Flota_Venta (placa, precio) VALUES(@placa,@precio)";
 
                 //asignamos parametros
                 cmd.Parameters.Add(new MySqlParameter("@placa", flota_Venta.id_vehiculo));
                 cmd.Parameters.Add(new MySqlParameter("@precio", flota_Venta.total));
-                cmd.Parameters.Add(new MySqlParameter("@precio", flota_Venta.id_cliente));
 
 
 
@@ -186,6 +185,34 @@ namespace MotorsApi.BD.CRUD.Create
                 //Cerramos conexion
                 cerrarConexion();
             }
+            return 0;
+        }
+
+
+        public int SubastaToVenta(string placa)
+        {
+            try
+            {
+                cmd.Parameters.Clear();
+
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "INSERT INTO flota_venta (placa) VALUES @placa";
+
+                cmd.Parameters.Add(new MySqlParameter("@placa", placa));
+
+                abrirConexion();
+
+                var guardar = cmd.ExecuteNonQuery();
+
+                if(guardar != null && guardar > 0)
+                {
+                    return guardar;
+                }
+            }
+
+            catch (Exception e) { throw; }
+            finally { cerrarConexion(); }
             return 0;
         }
 

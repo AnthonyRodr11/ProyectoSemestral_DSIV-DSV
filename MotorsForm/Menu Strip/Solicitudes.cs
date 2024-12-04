@@ -11,17 +11,12 @@ using System.Windows.Forms;
 
 namespace MotorsForm.Menu_Strip
 {
-    public partial class Venta : Form
+    public partial class Solicitudes : Form
     {
         Herramientas herra = new Herramientas();
-        public Venta()
+        public Solicitudes()
         {
             InitializeComponent();
-        }
-
-        private void numericUpDown1_Leave(object sender, EventArgs e)
-        {
-            herra.ValidarNumeric(txtPrecio, null);
         }
     }
 }

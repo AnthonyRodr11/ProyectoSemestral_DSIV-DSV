@@ -154,13 +154,13 @@
             // 
             this.toolStripContainer1.ContentPanel.BackgroundImage = global::MotorsForm.Properties.Resources.Home;
             this.toolStripContainer1.ContentPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1283, 656);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1283, 698);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.LeftToolStripPanelVisible = false;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 26);
             this.toolStripContainer1.Name = "toolStripContainer1";
             this.toolStripContainer1.RightToolStripPanelVisible = false;
-            this.toolStripContainer1.Size = new System.Drawing.Size(1283, 656);
+            this.toolStripContainer1.Size = new System.Drawing.Size(1283, 698);
             this.toolStripContainer1.TabIndex = 3;
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
@@ -171,7 +171,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::MotorsForm.Properties.Resources.Home__2_;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1283, 682);
+            this.ClientSize = new System.Drawing.Size(1283, 724);
             this.Controls.Add(this.toolStripContainer1);
             this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;

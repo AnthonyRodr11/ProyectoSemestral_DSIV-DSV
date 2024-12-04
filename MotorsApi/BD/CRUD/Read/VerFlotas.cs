@@ -579,6 +579,161 @@ namespace MotorsApi.BD.CRUD.Read
             }
             return lista;
         }
+
+
+        //Metodo para cargar toda la flota menos subasta
+        public List<FlotaCarro> ObtenerTodoMenosSubasta()
+        {
+            List<FlotaCarro> autos = new List<FlotaCarro>();
+            string data;
+
+            try
+            {
+
+                cmd.Parameters.Clear();
+
+
+                cmd.CommandType = CommandType.Text;
+
+                //asignamos consulta a realizar
+                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado != 'subasta'";
+
+
+                abrirConexion();
+
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        FlotaCarro flota = new FlotaCarro()
+                        {
+                            placa = reader["placa"].ToString(),
+                            marca = reader["marca"].ToString(),
+                            modelo = reader["modelo"].ToString(),
+                            color = reader["color"].ToString(),
+                            km = Convert.ToDouble(reader["km"]),
+                            tipo_gas = reader["tipo_gas"].ToString(),
+                            carroceria = reader["carroceria"].ToString(),
+                            estado = reader["estado"].ToString(),
+                            descripcion = reader["descripcion"].ToString(),
+                            disponibilidad = Convert.ToBoolean(reader["disponibilidad"]),
+                            foto = reader["foto"].ToString()
+
+                        };
+
+                        autos.Add(flota);
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
+
+                cerrarConexion();
+            }
+            return autos;
+        }
+
+
+        //Metodo para cargar toda la flota de subasta
+        public List<FlotaCarro> ObtenerTodaSubasta()
+        {
+            List<FlotaCarro> autos = new List<FlotaCarro>();
+            string data;
+
+            try
+            {
+
+                cmd.Parameters.Clear();
+
+
+                cmd.CommandType = CommandType.Text;
+
+                //asignamos consulta a realizar
+                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado = 'subasta'";
+
+
+                abrirConexion();
+
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        FlotaCarro flota = new FlotaCarro()
+                        {
+                            placa = reader["placa"].ToString(),
+                            marca = reader["marca"].ToString(),
+                            modelo = reader["modelo"].ToString(),
+                            color = reader["color"].ToString(),
+                            km = Convert.ToDouble(reader["km"]),
+                            tipo_gas = reader["tipo_gas"].ToString(),
+                            carroceria = reader["carroceria"].ToString(),
+                            estado = reader["estado"].ToString(),
+                            descripcion = reader["descripcion"].ToString(),
+                            disponibilidad = Convert.ToBoolean(reader["disponibilidad"]),
+                            foto = reader["foto"].ToString()
+
+                        };
+
+                        autos.Add(flota);
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
+
+                cerrarConexion();
+            }
+            return autos;
+        }
+
+        public string ObtenerFoto(string placa)
+        {
+            string foto = null;
+            try
+            {
+                cmd.Parameters.Clear();
+
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "SELECT foto FROM flota_carro WHERE placa = @placa";
+
+                cmd.Parameters.Add(new MySqlParameter("@placa", placa));
+
+                abrirConexion();
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        foto = reader["foto"].ToString();
+                    }
+                }
+                if(foto != null)
+                {
+                    string[] strings = foto.Split(new string[] {".."}, StringSplitOptions.TrimEntries);
+                    
+                    return strings[1];
+                }
+            }
+            catch (Exception e) { Console.WriteLine(e); }
+            finally { cerrarConexion(); }
+            return null;
+        }
+
     }
 }
 

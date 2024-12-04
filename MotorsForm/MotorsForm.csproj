@@ -171,6 +171,10 @@
     <Compile Include="Menu Strip\Venta.Designer.cs">
       <DependentUpon>Venta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\FlotaCarro.cs" />
+    <Compile Include="Models\Respuesta.cs" />
+    <Compile Include="Models\SubastaRequest.cs" />
+    <Compile Include="Models\Ventas.cs" />
     <Compile Include="Models\CarroFlotaRequest.cs" />
     <Compile Include="Models\Respuesta.cs" />
     <Compile Include="Models\Solicitud.cs" />
@@ -190,6 +194,7 @@
     <Compile Include="Services\CarroService.cs" />
     <Compile Include="Services\InformesService.cs" />
     <Compile Include="Services\SolicitudService.cs" />
+    <Compile Include="Services\SubastaService.cs" />
     <EmbeddedResource Include="Alquiler.resx">
       <DependentUpon>Alquiler.cs</DependentUpon>
     </EmbeddedResource>
