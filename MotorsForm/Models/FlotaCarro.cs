@@ -1,11 +1,15 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace MotorsApi.Models
+namespace MotorsForm.Models
 {
     public class FlotaCarro
     {
         //Atributos de la entidad
-        public string placa {  get; set; }
+        public string placa { get; set; }
         public string marca { get; set; }
         public string modelo { get; set; }
         public string color { get; set; }
@@ -17,7 +21,5 @@ namespace MotorsApi.Models
         public string descripcion { get; set; }
         public bool disponibilidad { get; set; }
         public string foto { get; set; }
-
-
     }
 }

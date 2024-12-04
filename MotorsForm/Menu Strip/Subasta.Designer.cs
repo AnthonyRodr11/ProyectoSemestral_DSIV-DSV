@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpFinal = new System.Windows.Forms.DateTimePicker();
+            this.dtpInicial = new System.Windows.Forms.DateTimePicker();
             this.txtVInicial = new System.Windows.Forms.NumericUpDown();
             this.btnSubastar = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,8 +52,8 @@
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.groupBox1.Controls.Add(this.dateTimePicker2);
-            this.groupBox1.Controls.Add(this.dateTimePicker1);
+            this.groupBox1.Controls.Add(this.dtpFinal);
+            this.groupBox1.Controls.Add(this.dtpInicial);
             this.groupBox1.Controls.Add(this.txtVInicial);
             this.groupBox1.Controls.Add(this.btnSubastar);
             this.groupBox1.Controls.Add(this.label4);
@@ -70,36 +70,43 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lista de Autos";
             // 
-            // dateTimePicker2
+            // dtpFinal
             // 
-            this.dateTimePicker2.CustomFormat = "dd-MM-yyyy";
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(302, 310);
-            this.dateTimePicker2.MaxDate = new System.DateTime(2211, 1, 1, 0, 0, 0, 0);
-            this.dateTimePicker2.MinDate = new System.DateTime(2023, 12, 31, 0, 0, 0, 0);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(185, 27);
-            this.dateTimePicker2.TabIndex = 14;
-            this.dateTimePicker2.Value = new System.DateTime(2024, 11, 17, 0, 0, 0, 0);
+            this.dtpFinal.CustomFormat = "dd-MM-yyyy";
+            this.dtpFinal.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFinal.Location = new System.Drawing.Point(302, 310);
+            this.dtpFinal.MaxDate = new System.DateTime(2211, 1, 1, 0, 0, 0, 0);
+            this.dtpFinal.MinDate = new System.DateTime(2023, 12, 31, 0, 0, 0, 0);
+            this.dtpFinal.Name = "dtpFinal";
+            this.dtpFinal.Size = new System.Drawing.Size(185, 27);
+            this.dtpFinal.TabIndex = 14;
+            this.dtpFinal.Value = new System.DateTime(2024, 11, 17, 0, 0, 0, 0);
             // 
-            // dateTimePicker1
+            // dtpInicial
             // 
-            this.dateTimePicker1.CustomFormat = "dd-MM-yyyy";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(302, 237);
-            this.dateTimePicker1.MaxDate = new System.DateTime(2211, 1, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.MinDate = new System.DateTime(2023, 12, 31, 0, 0, 0, 0);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(185, 27);
-            this.dateTimePicker1.TabIndex = 13;
-            this.dateTimePicker1.Value = new System.DateTime(2024, 10, 17, 0, 0, 0, 0);
+            this.dtpInicial.CustomFormat = "dd-MM-yyyy";
+            this.dtpInicial.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpInicial.Location = new System.Drawing.Point(302, 237);
+            this.dtpInicial.MaxDate = new System.DateTime(2211, 1, 1, 0, 0, 0, 0);
+            this.dtpInicial.MinDate = new System.DateTime(2023, 12, 31, 0, 0, 0, 0);
+            this.dtpInicial.Name = "dtpInicial";
+            this.dtpInicial.Size = new System.Drawing.Size(185, 27);
+            this.dtpInicial.TabIndex = 13;
+            this.dtpInicial.Value = new System.DateTime(2024, 10, 17, 0, 0, 0, 0);
             // 
             // txtVInicial
             // 
+            this.txtVInicial.DecimalPlaces = 2;
             this.txtVInicial.Location = new System.Drawing.Point(302, 167);
+            this.txtVInicial.Maximum = new decimal(new int[] {
+            1569325055,
+            23283064,
+            0,
+            0});
             this.txtVInicial.Name = "txtVInicial";
             this.txtVInicial.Size = new System.Drawing.Size(185, 27);
             this.txtVInicial.TabIndex = 10;
+            this.txtVInicial.ThousandsSeparator = true;
             this.txtVInicial.Leave += new System.EventHandler(this.txtVInicial_Leave_1);
             // 
             // btnSubastar
@@ -168,6 +175,7 @@
             this.lsbAutos.Name = "lsbAutos";
             this.lsbAutos.Size = new System.Drawing.Size(249, 346);
             this.lsbAutos.TabIndex = 0;
+            this.lsbAutos.SelectedIndexChanged += new System.EventHandler(this.lsbAutos_SelectedIndexChanged);
             // 
             // groupBox2
             // 
@@ -195,6 +203,7 @@
             this.btnVender.TabIndex = 11;
             this.btnVender.Text = "Mover a Venta";
             this.btnVender.UseVisualStyleBackColor = true;
+            this.btnVender.Click += new System.EventHandler(this.btnVender_Click);
             // 
             // btnAlquilar
             // 
@@ -208,6 +217,7 @@
             this.btnAlquilar.TabIndex = 10;
             this.btnAlquilar.Text = "Mover a Alquiler";
             this.btnAlquilar.UseVisualStyleBackColor = true;
+            this.btnAlquilar.Click += new System.EventHandler(this.btnAlquilar_Click);
             // 
             // lsbAutosSubasta
             // 
@@ -232,6 +242,7 @@
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "Subasta";
             this.Text = "g";
+            this.Load += new System.EventHandler(this.Subasta_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtVInicial)).EndInit();
@@ -255,7 +266,7 @@
         private System.Windows.Forms.Button btnAlquilar;
         private System.Windows.Forms.ListBox lsbAutosSubasta;
         private System.Windows.Forms.NumericUpDown txtVInicial;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpFinal;
+        private System.Windows.Forms.DateTimePicker dtpInicial;
     }
 }

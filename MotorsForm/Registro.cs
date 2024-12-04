@@ -41,7 +41,7 @@ namespace MotorsForm
 
         private void txtKm_Leave(object sender, EventArgs e)
         {
-            herra.ValidarNumeric(txtKm);
+            herra.ValidarNumeric(txtKm, "No se permiten kilometrajes menores a cero");
         }
 
         private void cmbTransmision_Leave(object sender, EventArgs e)
