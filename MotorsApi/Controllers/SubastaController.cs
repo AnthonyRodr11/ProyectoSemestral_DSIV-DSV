@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MotorsApi.BD.CRUD.Delete;
 using MotorsApi.BD.CRUD.Read;
 using MotorsApi.BD.CRUD.Update;
 using MotorsApi.Models;
@@ -51,6 +52,106 @@ namespace MotorsApi.Controllers
                 return NotFound();
             }
             return Ok(guardar);
+        }
+
+        [HttpPatch]
+        [Route("subasta")]
+        public IActionResult CambiarEstado(AgregarSubasta subastita)
+        {
+            if (subastita == null || subastita.id_placa == null)
+            {
+                return BadRequest("Placa vacía");
+            }
+
+            var resultado = new SubastaUpdate().ActualizarEstadoSubasta(subastita);
+
+            if(resultado == null || resultado == 0)
+            {
+                return NotFound();
+            }
+            return Ok(resultado);
+        }
+
+        [HttpPatch]
+        [Route("subasta/{estado}")]
+        public IActionResult CambiarEstado(AgregarSubasta subastita, string estado)
+        {
+            Console.WriteLine($"Estado recibido: {estado}");
+
+            if (subastita == null || subastita.id_placa == null)
+            {
+                return BadRequest("Placa vacía");
+            }
+
+            var resultado = new SubastaUpdate().ActualizarEstadoSubasta(subastita, estado);
+
+            if (resultado == null || resultado == 0)
+            {
+                return NotFound();
+            }
+            return Ok(resultado);
+        }
+
+        [HttpGet]
+        [Route("carros")]
+        public IActionResult ObtenerTodosLosAutosMenosSubasta()
+        {
+            VerFlotas todo = new VerFlotas();
+
+            var autos = todo.ObtenerTodoMenos("subasta");
+
+            if (autos == null)
+            {
+                return NotFound(new
+                {
+                    titulo = "No se encontraron autos",
+                    mensaje = "Ningun auto encontrado",
+                    code = 404
+                });
+            }
+
+            return Ok(autos);
+        }
+
+        [HttpGet]
+        [Route("carros/subasta")]
+        public IActionResult ObtenerTodosLosAutosSubasta()
+        {
+            VerFlotas subasta = new VerFlotas();
+
+            var carros = subasta.ObtenerTodosLos("subasta");
+
+            if(carros == null)
+            {
+                return NotFound(new
+                {
+                    titulo = "No se encontraron autos",
+                    mensaje = "Ningun auto encontrado",
+                    code = 404
+                });
+            }
+
+            return Ok(carros);
+        }
+
+        [HttpDelete]
+        [Route("carros/subasta/{placa}")]
+        public IActionResult EliminarCarroDeSubasta(string placa)
+        {
+            SubastaDeleter subasta = new SubastaDeleter();
+
+            var carro = subasta.EliminarCarro(placa);
+
+            if (carro == null)
+            {
+                return NotFound(new
+                {
+                    titulo = "No se encontraron autos",
+                    mensaje = "Ningun auto encontrado",
+                    code = 404
+                });
+            }
+            return Ok(carro);
         }
 
     }

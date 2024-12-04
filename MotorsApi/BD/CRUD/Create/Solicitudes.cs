@@ -8,7 +8,7 @@ namespace MotorsApi.BD.CRUD.Create
     {
 
         //Metodo para cargar tabla Solicitud 
-        public int registrarSolicitud(solicitudRequest solicito)
+        public int registrarSolicitud(SolicitudRequest solicito)
         {
 
             //declaracion de variables de trabajo

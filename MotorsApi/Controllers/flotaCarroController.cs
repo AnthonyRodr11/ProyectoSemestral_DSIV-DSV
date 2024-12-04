@@ -12,7 +12,7 @@ namespace MotorsApi.Controllers
     {
         [HttpPost]
         [Route("save")]
-        public object registrarAuto(FlotaCarro autos)
+        public object registrarAuto(FlotaCarroRequest autos)
         {
 
             FlotaAuto regAuto = new FlotaAuto();
@@ -60,25 +60,38 @@ namespace MotorsApi.Controllers
 
         [HttpPost]
         [Route("create/subasta")]
-        public object registrarSubastaCarro(AgregarSubasta carrito)//Este sirve para crear un carro en subasta.
+        public IActionResult RegistrarSubastaCarro([FromBody] AgregarSubasta carrito)
         {
+            if (carrito == null)
+            {
+                return BadRequest(new
+                {
+                    titulo = "Datos inválidos",
+                    mensaje = "El cuerpo de la solicitud está vacío o mal formado.",
+                    code = 400
+                });
+            }
+
             SubastaFlota subastita = new SubastaFlota();
 
             var guardado = subastita.registrarSubastaCarro(carrito);
 
             if (guardado > 0)
-                return new
-                {
-                    titulo = "Exito al Guardar",
-                    mensaje = "Los datos se han guardado Correctamente",
-                    code = 200
-                };
-            return new
             {
-                titulo = "Error al Guardar",
-                mensaje = "No se encontraron tus datos :c",
+                return Ok(new
+                {
+                    titulo = "Éxito al guardar",
+                    mensaje = "Los datos se han guardado correctamente.",
+                    code = 200
+                });
+            }
+
+            return BadRequest(new
+            {
+                titulo = "Error al guardar",
+                mensaje = "No se pudo registrar la subasta.",
                 code = 400
-            };
+            });
         }
 
 
@@ -173,7 +186,34 @@ namespace MotorsApi.Controllers
 
             return Ok(autos);
         }
+
+        [HttpGet]
+        [Route("carros")]
+        public IActionResult ObtenerTodosLosAutos()
+        {
+            VerFlotas todo = new VerFlotas();
+
+            var autos = todo.obtenerFlota();
+
+            if (autos == null)
+            {
+                return NotFound(new
+                {
+                    titulo = "No se encontraron autos",
+                    mensaje = "Ningun auto encontrado",
+                    code = 404
+                });
+            }
+            return Ok(autos);
+        }
+
+        [HttpGet]
+        [Route("Imagen/{placa}")]
+        public string RecibiendoImagenes(string placa)
+        {
+            VerFlotas flota = new VerFlotas();
+
+            return flota.ObtenerFoto(placa);
+        }
     }
-
-
 }

@@ -147,11 +147,11 @@
     <Compile Include="Menu Strip\Manejo_Usuarios.Designer.cs">
       <DependentUpon>Manejo_Usuarios.cs</DependentUpon>
     </Compile>
-    <Compile Include="Menu Strip\Solicitudes.cs">
+    <Compile Include="Menu Strip\SolicitudesDetalles.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Menu Strip\Solicitudes.Designer.cs">
-      <DependentUpon>Solicitudes.cs</DependentUpon>
+    <Compile Include="Menu Strip\SolicitudesDetalles.Designer.cs">
+      <DependentUpon>SolicitudesDetalles.cs</DependentUpon>
     </Compile>
     <Compile Include="Menu Strip\Solicitudes_Primero.cs">
       <SubType>Form</SubType>
@@ -173,6 +173,13 @@
     </Compile>
     <Compile Include="Models\FlotaRequest.cs" />
     <Compile Include="Models\RegistroRequest.cs" />
+    <Compile Include="Models\FlotaCarro.cs" />
+    <Compile Include="Models\FlotaVentaRequest.cs" />
+    <Compile Include="Models\Respuesta.cs" />
+    <Compile Include="Models\SubastaRequest.cs" />
+    <Compile Include="Models\Ventas.cs" />
+    <Compile Include="Models\CarroFlotaRequest.cs" />
+    <Compile Include="Models\Respuesta.cs" />
     <Compile Include="Models\Solicitud.cs" />
     <Compile Include="Models\UpdateRequest.cs" />
     <Compile Include="Models\User.cs" />
@@ -190,8 +197,12 @@
       <DependentUpon>Registro.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\FlotaServices.cs" />
+    <Compile Include="Services\CarroService.cs" />
+    <Compile Include="Services\InformesService.cs" />
     <Compile Include="Services\SolicitudService.cs" />
     <Compile Include="Services\UserServices.cs" />
+    <Compile Include="Services\SubastaService.cs" />
+    <Compile Include="Services\VentaService.cs" />
     <EmbeddedResource Include="Alquiler.resx">
       <DependentUpon>Alquiler.cs</DependentUpon>
     </EmbeddedResource>
@@ -210,8 +221,8 @@
     <EmbeddedResource Include="Menu Strip\Manejo_Usuarios.resx">
       <DependentUpon>Manejo_Usuarios.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Menu Strip\Solicitudes.resx">
-      <DependentUpon>Solicitudes.cs</DependentUpon>
+    <EmbeddedResource Include="Menu Strip\SolicitudesDetalles.resx">
+      <DependentUpon>SolicitudesDetalles.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu Strip\Solicitudes_Primero.resx">
       <DependentUpon>Solicitudes_Primero.cs</DependentUpon>
