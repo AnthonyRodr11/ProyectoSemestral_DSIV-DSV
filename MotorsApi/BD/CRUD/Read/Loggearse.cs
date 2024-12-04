@@ -1,4 +1,4 @@
-﻿using MotorsApi.Models;
+﻿ using MotorsApi.Models;
 using MySql.Data.MySqlClient;
 using System.Data;
 
@@ -132,41 +132,45 @@ namespace MotorsApi.BD.CRUD.Read
 
 
         //Metodo para contar la cantidad de Correos por los usuarios
-        public bool verificarCorreo(string correo)
+        public int ObtenerIdPorCorreo(string correo)
         {
             try
             {
-                
+              
                 cmd.Parameters.Clear();
 
                 cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "SELECT id_usuario FROM login WHERE correo = @correo";
 
-               
-                cmd.CommandText = "SELECT COUNT(*) FROM login WHERE correo = @correo";
-
-              
+                // Asignar el parámetro
                 cmd.Parameters.AddWithValue("@correo", correo);
 
-               
+                // Abrir la conexión
                 abrirConexion();
 
-               
-                int count = Convert.ToInt32(cmd.ExecuteScalar());
+                // Ejecutar la consulta y obtener el resultado
+                var result = cmd.ExecuteScalar();
 
-             
-                return count > 0;
+                // Verificar si el resultado es nulo (correo no encontrado)
+                if (result == null || result == DBNull.Value)
+                {
+                    throw new Exception("El correo proporcionado no existe en la base de datos.");
+                }
+
+                // Convertir el resultado a entero (ID del usuario)
+                return Convert.ToInt32(result);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                throw;
+                // Manejo de excepciones
+                Console.WriteLine($"Error: {ex.Message}");
+                throw new Exception("Error al obtener el ID del usuario.", ex);
             }
             finally
             {
+                // Asegurar el cierre de la conexión
                 cerrarConexion();
             }
-
-            
-            return false;
         }
 
 

@@ -36,7 +36,6 @@ namespace MotorsApi.Controllers
                 {
                     titulo = "Datos Verificados :3",
                     Mensaje = "Todo bien banda",
-                    Code = 200
                 });
             }
             else
@@ -45,28 +44,26 @@ namespace MotorsApi.Controllers
                 {
                     titulo = "Error al guardar",
                     Mensaje = "Error al crear el usuario.",
-                    Code = 500
                 });
             }
         }
 
         [HttpDelete]
-        [Route ("user/delete/{id}")]
-        public IActionResult eliminarUsuario(int id)
+        [Route ("user/delete/{correo}")]
+        public IActionResult eliminarUsuario(string correo)
         {
-            if(id == 0)
+            if(string.IsNullOrEmpty(correo))
             {
                 return BadRequest(new
-                {
+                { 
                     titulo = "Datos inválidos",
-                    Mensaje = "La tarifa enviada es nula.",
-                    Code = 400
+                    Mensaje = "El correo es necesario.",
                 });
             }
 
             EliminarRol borradorcito = new EliminarRol();
 
-            if (borradorcito.rolEliminar(id)>0)
+            if (borradorcito.rolEliminar(correo)>0)
             {
                 return Ok(new
                 {
@@ -80,7 +77,7 @@ namespace MotorsApi.Controllers
                 return StatusCode(500, new
                 {
                     titulo = "Error al guardar",
-                    Mensaje = "El tipo de tarifa no pudo guardarse.",
+                    Mensaje = "No se pudo realizar la operacion",
                     Code = 500
                 });
             }
@@ -179,11 +176,7 @@ namespace MotorsApi.Controllers
             }
             else if (user > 0 && (user != 1 || user != 2))
             {
-                return Unauthorized(new
-                {
-                    titulo = "Error de autenticación",
-                    Mensaje = "El usuario no es admin o vendedor",
-                });
+                return Ok(user);
             }
             else
             {
@@ -209,9 +202,9 @@ namespace MotorsApi.Controllers
             }
 
             Loggearse lojin = new Loggearse();
-            var cuera = lojin.verificarCorreo(correo);
+            var cuera = lojin.ObtenerIdPorCorreo(correo);
 
-            if (cuera)
+            if (cuera > 0)
             {
                 return Ok(cuera);
             }
