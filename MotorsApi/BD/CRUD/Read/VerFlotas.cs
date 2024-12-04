@@ -724,12 +724,6 @@ namespace MotorsApi.BD.CRUD.Read
                         foto = reader["foto"].ToString();
                     }
                 }
-                if(foto != null)
-                {
-                    string[] strings = foto.Split(new string[] {".."}, StringSplitOptions.TrimEntries);
-                    
-                    return strings[1];
-                }
             }
             catch (Exception e) { Console.WriteLine(e); }
             finally { cerrarConexion(); }

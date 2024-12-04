@@ -1,4 +1,5 @@
-﻿using MotorsForm.Services;
+﻿using MotorsForm.Resource;
+using MotorsForm.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ namespace MotorsForm
     public partial class Flota : Form
     {
         FlotaServices flotaServices;
+        Herramientas herra = new Herramientas();
         public Flota()
         {
             InitializeComponent();
@@ -46,6 +48,8 @@ namespace MotorsForm
                 {
                     // Crear el ListViewItem vacío
                     var item = new ListViewItem();
+
+                    auto.foto = herra.ParaCambiarLaRuta(auto.foto);
 
                     // Agregar imagen (en la primera columna, "Foto")
                     if (!string.IsNullOrEmpty(auto.foto) && System.IO.File.Exists(auto.foto))

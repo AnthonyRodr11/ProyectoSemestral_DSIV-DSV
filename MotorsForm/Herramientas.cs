@@ -169,5 +169,16 @@ namespace MotorsForm.Resource
             return relativa;
         }
 
+        public string ParaCambiarLaRuta(string foto)
+        {
+            if (foto != null)
+            {
+                string[] strings = foto.Split(new string[] { ".." }, StringSplitOptions.RemoveEmptyEntries);
+
+                return ConseguirRutaAbsoluta(strings[0]);
+            }
+            return null;
+        }
+
     }
 }
