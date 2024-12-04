@@ -18,55 +18,51 @@ namespace MotorsForm
     {
         CarroService carrin = new CarroService();
         Herramientas herra = new Herramientas();
+        
         public Alquiler()
         {
             InitializeComponent();
             CarroService carrin;
         }
 
-        private void cmbTipoAuto_Leave(object sender, EventArgs e)
-        {
-            herra.ValidarComboBox(cmbTipoAuto);
-        }
+
 
         private async void btnEditar_Click(object sender, EventArgs e)
         {
-            // Intentar convertir el valor de txtTarifaEdit a double
-            if (!double.TryParse(txtTarifaEdit.Text, out double tarifaNueva))
+            // Validar selección de tipo de auto
+            if (cmbTipoAuto.SelectedItem == null)
             {
-                MessageBox.Show("El valor ingresado no es válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Debe seleccionar un tipo de auto.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            var newInfoCage = new TarifasAlquilerRequest
+            // Validar tarifa ingresada
+            if (!double.TryParse(txtTarifaEdit.Text, out double tarifaNueva) || tarifaNueva <= 0)
             {
-                tarifaxauto = tarifaNueva
-            };
+                MessageBox.Show("Debe ingresar una tarifa válida mayor a 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            // Validar si hay un elemento seleccionado en cmbTipoAuto
-            if (cmbTipoAuto.SelectedItem != null)
+            try
             {
-                dynamic seleccionado = cmbTipoAuto.SelectedItem; // Usar dinámico para acceder a propiedades anónimas
+                dynamic seleccionado = cmbTipoAuto.SelectedItem;
                 if (seleccionado.Data is ValueTuple<double, int> datos)
                 {
-                    double tarifaxauto = datos.Item1; // Datos del ValueTuple
                     int id_tipo = datos.Item2;
 
-                    // Llamar al método asincrónico
-                    var respuesta = await carrin.enviarNuevaTarifa(id_tipo, new TarifasAlquilerRequest() { tarifaxauto = tarifaxauto });
-
-                    // Mostrar el resultado al usuario
-                    MessageBox.Show(respuesta.Mensaje, respuesta.Titulo);
-                    this.cargarTarifas(); // Recargar tarifas después de editar
+                    // Enviar nueva tarifa
+                    await carrin.enviarNuevaTarifa(id_tipo, new TarifasAlquilerRequest { tarifaxauto = tarifaNueva });
+                    MessageBox.Show("Tarifa actualizada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.cargarTarifas();
                 }
                 else
                 {
                     MessageBox.Show("Error al procesar el elemento seleccionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Debe seleccionar un tipo de auto.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"Ocurrió un error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -137,9 +133,15 @@ namespace MotorsForm
 
         private async void btnVenta_Click(object sender, EventArgs e)
         {
-            if (lsblistAlquiler.SelectedItem != null)
+            // Validar que se haya seleccionado un elemento
+            if (lsblistAlquiler.SelectedItem == null)
             {
-                cargarListBoxAutos();
+                MessageBox.Show("Debe seleccionar un auto de la lista para moverlo a venta.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
                 // Obtener los datos seleccionados
                 var seleccionado = lsblistAlquiler.SelectedItem.GetType().GetProperty("Data")?.GetValue(lsblistAlquiler.SelectedItem);
 
@@ -147,23 +149,117 @@ namespace MotorsForm
                 {
                     string placa = TuplaDatos.Item1;
 
-                    // Actualizar estado
+                    // Actualizar el estado del auto a "venta"
                     await carrin.actualizarEstado(new AlquilerRecue { id_vehiculo = placa }, "venta");
 
-                    // Eliminar de subasta
-                    
-
-                    // Crear nueva venta
+                    // Crear una nueva venta
                     carrin.nuevaVenta(placa);
 
                     // Actualizar los ListBox
                     await cargarListBoxAutos();
+
+                    MessageBox.Show("El auto ha sido movido correctamente a venta.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
-
+                else
+                {
+                    MessageBox.Show("Error al procesar el elemento seleccionado. Intente nuevamente.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ocurrió un error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
 
+
+
+
+
+        private async void btnMoverSubasta_Click(object sender, EventArgs e)
+        {
+            if (lsblistAlquiler.SelectedItem == null)
+            {
+                MessageBox.Show("Debe seleccionar un auto de la lista.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (txtSubastaAdd.Value <= 0)
+            {
+                MessageBox.Show("Debe ingresar un valor inicial válido para la subasta.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                var seleccionado = lsblistAlquiler.SelectedItem.GetType().GetProperty("Data")?.GetValue(lsblistAlquiler.SelectedItem);
+                if (seleccionado is ValueTuple<string, string> TuplaDatos)
+                {
+                    await carrin.enviarNuevaSubasta(new SubastaRequest
+                    {
+                        id_placa = TuplaDatos.Item1,
+                        valor_inicial = Convert.ToDouble(txtSubastaAdd.Value)
+                    });
+                    await carrin.actualizarEstado(new AlquilerRecue { id_vehiculo = TuplaDatos.Item1 }, "subasta");
+                    MessageBox.Show("El auto se movió a subasta correctamente.", "Éxito");
+                    cargarListBoxAutos();
+                }
+                else
+                {
+                    MessageBox.Show("Error al procesar el elemento seleccionado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void btnAgragar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtTipoAuto.Text))
+            {
+                MessageBox.Show("Debe ingresar un tipo de auto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (txtTarifaAdd.Value <= 0)
+            {
+                MessageBox.Show("Debe ingresar una tarifa diaria válida mayor a 0.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                var nuevoAuto = new TarifasAlquilerRequest
+                {
+                    tipo_auto = txtTipoAuto.Text,
+                    tarifaxauto = Convert.ToDouble(txtTarifaAdd.Value)
+                };
+
+                var respuesta = await carrin.nuevaTarifa(nuevoAuto);
+                if (respuesta.code == 200)
+                {
+                    MessageBox.Show("Nuevo tipo de auto agregado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtTipoAuto.Clear();
+                    txtTarifaAdd.Value = 0;
+                    cargarTarifas();
+                }
+                else
+                {
+                    MessageBox.Show($"Error al agregar: {respuesta.mensaje}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
+
+
+
 }
+
+    
+

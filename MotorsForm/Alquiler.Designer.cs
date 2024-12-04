@@ -35,21 +35,23 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtSubastaAdd = new System.Windows.Forms.NumericUpDown();
             this.lsblistAlquiler = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnMoverSubasta = new System.Windows.Forms.Button();
             this.btnVenta = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtTarifaAdd = new System.Windows.Forms.NumericUpDown();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAgragar = new System.Windows.Forms.Button();
             this.txtTipoAuto = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtTarifaEdit)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSubastaAdd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtTarifaAdd)).BeginInit();
@@ -111,7 +113,7 @@
             this.cmbTipoAuto.Size = new System.Drawing.Size(167, 27);
             this.cmbTipoAuto.TabIndex = 21;
             this.cmbTipoAuto.SelectedIndexChanged += new System.EventHandler(this.cmbTipoAuto_SelectedIndexChanged);
-            this.cmbTipoAuto.Leave += new System.EventHandler(this.cmbTipoAuto_Leave);
+            
             // 
             // label2
             // 
@@ -136,18 +138,28 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.txtSubastaAdd);
             this.groupBox2.Controls.Add(this.lsblistAlquiler);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.button3);
+            this.groupBox2.Controls.Add(this.btnMoverSubasta);
             this.groupBox2.Controls.Add(this.btnVenta);
             this.groupBox2.Font = new System.Drawing.Font("Tahoma", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.SystemColors.Control;
             this.groupBox2.Location = new System.Drawing.Point(447, 172);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(408, 387);
+            this.groupBox2.Size = new System.Drawing.Size(408, 440);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Editar Estado";
+            // 
+            // txtSubastaAdd
+            // 
+            this.txtSubastaAdd.DecimalPlaces = 2;
+            this.txtSubastaAdd.Font = new System.Drawing.Font("Tahoma", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSubastaAdd.Location = new System.Drawing.Point(240, 324);
+            this.txtSubastaAdd.Name = "txtSubastaAdd";
+            this.txtSubastaAdd.Size = new System.Drawing.Size(120, 26);
+            this.txtSubastaAdd.TabIndex = 25;
             // 
             // lsblistAlquiler
             // 
@@ -156,7 +168,7 @@
             this.lsblistAlquiler.ItemHeight = 14;
             this.lsblistAlquiler.Location = new System.Drawing.Point(18, 67);
             this.lsblistAlquiler.Name = "lsblistAlquiler";
-            this.lsblistAlquiler.Size = new System.Drawing.Size(372, 242);
+            this.lsblistAlquiler.Size = new System.Drawing.Size(372, 228);
             this.lsblistAlquiler.TabIndex = 25;
             // 
             // label4
@@ -169,19 +181,20 @@
             this.label4.TabIndex = 23;
             this.label4.Text = "Lista de Autos en Alquiler";
             // 
-            // button3
+            // btnMoverSubasta
             // 
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(220, 313);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(151, 59);
-            this.button3.TabIndex = 24;
-            this.button3.Text = "Mover a Subasta";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnMoverSubasta.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnMoverSubasta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnMoverSubasta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoverSubasta.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMoverSubasta.ForeColor = System.Drawing.Color.White;
+            this.btnMoverSubasta.Location = new System.Drawing.Point(221, 363);
+            this.btnMoverSubasta.Name = "btnMoverSubasta";
+            this.btnMoverSubasta.Size = new System.Drawing.Size(151, 59);
+            this.btnMoverSubasta.TabIndex = 24;
+            this.btnMoverSubasta.Text = "Mover a Subasta";
+            this.btnMoverSubasta.UseVisualStyleBackColor = true;
+            this.btnMoverSubasta.Click += new System.EventHandler(this.btnMoverSubasta_Click);
             // 
             // btnVenta
             // 
@@ -190,7 +203,7 @@
             this.btnVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVenta.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVenta.ForeColor = System.Drawing.Color.White;
-            this.btnVenta.Location = new System.Drawing.Point(43, 313);
+            this.btnVenta.Location = new System.Drawing.Point(38, 364);
             this.btnVenta.Name = "btnVenta";
             this.btnVenta.Size = new System.Drawing.Size(151, 58);
             this.btnVenta.TabIndex = 23;
@@ -225,7 +238,7 @@
             // 
             this.groupBox3.BackColor = System.Drawing.Color.Transparent;
             this.groupBox3.Controls.Add(this.txtTarifaAdd);
-            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this.btnAgragar);
             this.groupBox3.Controls.Add(this.txtTipoAuto);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.label6);
@@ -248,19 +261,20 @@
             this.txtTarifaAdd.TabIndex = 24;
             this.txtTarifaAdd.ThousandsSeparator = true;
             // 
-            // button1
+            // btnAgragar
             // 
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(63, 282);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(151, 44);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "Agregar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAgragar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnAgragar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnAgragar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgragar.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgragar.ForeColor = System.Drawing.Color.White;
+            this.btnAgragar.Location = new System.Drawing.Point(63, 282);
+            this.btnAgragar.Name = "btnAgragar";
+            this.btnAgragar.Size = new System.Drawing.Size(151, 44);
+            this.btnAgragar.TabIndex = 22;
+            this.btnAgragar.Text = "Agregar";
+            this.btnAgragar.UseVisualStyleBackColor = true;
+            this.btnAgragar.Click += new System.EventHandler(this.btnAgragar_Click);
             // 
             // txtTipoAuto
             // 
@@ -295,7 +309,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::MotorsForm.Properties.Resources.Background1;
-            this.ClientSize = new System.Drawing.Size(1283, 624);
+            this.ClientSize = new System.Drawing.Size(1283, 648);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.label3);
@@ -311,6 +325,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtTarifaEdit)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSubastaAdd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -330,16 +345,17 @@
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnMoverSubasta;
         private System.Windows.Forms.Button btnVenta;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown txtTarifaEdit;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.NumericUpDown txtTarifaAdd;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAgragar;
         private System.Windows.Forms.TextBox txtTipoAuto;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ListBox lsblistAlquiler;
+        private System.Windows.Forms.NumericUpDown txtSubastaAdd;
     }
 }
