@@ -9,6 +9,7 @@ namespace MotorsApi.BD.CRUD.Read
     {
 
         //Metodo para devolver una lista segun su estado <Alquiler,venta>
+        
         public List<FlotaCarroRequest> tiposFlota(string estado)
         {
             List<FlotaCarroRequest> autos = new List<FlotaCarroRequest>();
@@ -68,7 +69,7 @@ namespace MotorsApi.BD.CRUD.Read
             }
             return autos;
         }
-
+        
         public List<FlotaCarroRequest> flotaVenta(string id)
         {
             List<FlotaCarroRequest> autos = new List<FlotaCarroRequest>();

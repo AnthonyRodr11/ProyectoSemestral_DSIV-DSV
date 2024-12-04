@@ -22,6 +22,8 @@
 
         #region Windows Form Designer generated code
 
+        //toolStripContainer1
+
         /// <summary>
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
@@ -187,8 +189,8 @@
 
         }
 
+        //toolStripContainer1
         #endregion
-        private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem flotaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem serviciosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ventaToolStripMenuItem;
@@ -197,8 +199,9 @@
         private System.Windows.Forms.ToolStripMenuItem solicitudesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem informesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manejoDeUsuariosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripContainer toolStripContainer1;
+        public System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStripMenuItem registrarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verFlotaToolStripMenuItem;
+        public System.Windows.Forms.MenuStrip menuStrip1;
     }
 }

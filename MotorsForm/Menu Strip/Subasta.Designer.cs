@@ -121,7 +121,6 @@
             this.btnSubastar.TabIndex = 9;
             this.btnSubastar.Text = "Subastar";
             this.btnSubastar.UseVisualStyleBackColor = true;
-            this.btnSubastar.Click += new System.EventHandler(this.btnSubastar_Click);
             // 
             // label4
             // 

@@ -7,7 +7,7 @@ namespace MotorsApi.BD.CRUD.Create
     public class FlotaAuto : Conexiondb
     {
 
-        public int registraAutoflota(FlotaCarro regAuto)
+        public int registraAutoflota(FlotaCarroRequest regAuto)
         {
             //declaracion de variables de trabajo
             int insercion = 0;
@@ -34,7 +34,6 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.Parameters.Add(new MySqlParameter("@p_carroceria", regAuto.carroceria));
                 cmd.Parameters.Add(new MySqlParameter("@p_estado", regAuto.estado));
                 cmd.Parameters.Add(new MySqlParameter("@p_descripcion", regAuto.descripcion));
-                cmd.Parameters.Add(new MySqlParameter("@p_disponibilidad", regAuto.disponibilidad));
                 cmd.Parameters.Add(new MySqlParameter("@p_foto", regAuto.foto));
 
                 //abrir Conexion

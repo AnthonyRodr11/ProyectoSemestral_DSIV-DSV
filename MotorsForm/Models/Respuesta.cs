@@ -11,5 +11,8 @@ namespace MotorsForm.Models
         public string titulo { get; set; }  
         public string mensaje { get; set; }
         public int code { get; set; }
+        public string Titulo { get; set; }
+        public string Mensaje { get; set; }
+        public int Code { get; set; }
     }
 }

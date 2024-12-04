@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MotorsApi.BD.CRUD.Create;
 using MotorsApi.BD.CRUD.Read;
+using MotorsApi.BD.CRUD.Update;
 using MotorsApi.Models;
 namespace MotorsApi.Controllers
 {
@@ -11,7 +12,7 @@ namespace MotorsApi.Controllers
 
         [HttpPost]
         [Route("save")]
-        public IActionResult registrarSolicitud([FromBody] solicitudRequest peticion)
+        public IActionResult registrarSolicitud([FromBody] SolicitudRequest peticion)
         {
             try
             {
@@ -65,29 +66,29 @@ namespace MotorsApi.Controllers
 
         //Metodo para obtener la descripcion y foto dado el id_usuario 
         [HttpGet]
-        [Route("descripcionFoto/{id_usuario}")]
-        public List<string> obtenerInfo(int id_usuario)
+        [Route("descripcion/{id_solicitud}")]
+        public string obtenerInfo(int id_solicitud)
         {
 
             //declaracion de objeto que retorna la foto y descripcion
             Versolicitudes verSoli = new Versolicitudes();
 
             //retorna la lista con la descripcion y ruta de la imagen
-            return verSoli.obtenerDescripcion(id_usuario);
+            return verSoli.obtenerDescripcion(id_solicitud);
 
         }
 
         //Metodo para obtener el monto de la solicitud del cliente  dado el id_usuario
         [HttpGet]
-        [Route("monto/{id_usuario}")]
-        public double obtenerMonto(int id_usuario)
+        [Route("monto/{id_solicitud}")]
+        public double obtenerMonto(int id_solicitud)
         {
 
             //declaracion de objeto que retorna la foto y descripcion
             Versolicitudes verMonto = new Versolicitudes();
 
             //retorna la lista con la descripcion y ruta de la imagen
-            return verMonto.obtenerMonto(id_usuario);
+            return verMonto.obtenerMonto(id_solicitud);
 
         }
 
@@ -105,13 +106,11 @@ namespace MotorsApi.Controllers
         }
 
 
-
-
-        /*
+  
         //Metodo para retornar la lista de usuarios que han enviado solicitud 
         [HttpGet]
         [Route("listaSolicitantes")]
-        public List<solicitudRequest> mostrarSolicitudes()
+        public List<SolicitudesRequest> mostrarSolicitudes()
         {
             //declaracion de objeto de la clase que obtiene la informacion 
             Versolicitudes listaSolis = new Versolicitudes();
@@ -119,8 +118,28 @@ namespace MotorsApi.Controllers
             return listaSolis.obtenerSolicitudes();
         }
 
+        //Metodo para aceptar solicitud
+        [HttpPatch]
+        [Route("aceptarSolicitud/{id_solicitud}")]
+        public int aceptandoSolicitud(int id_solicitud)
+        {
+            //declaracion de obejto
+            SolicitudUpdate aceptando = new SolicitudUpdate();
 
+            return aceptando.aceptarSolicitud(id_solicitud);
 
-        */
+        }
+
+        //Metodo para aceptar solicitud
+        [HttpPatch]
+        [Route("rechazarSolicitud/{id_solicitud}")]
+        public int rechazandoSolicitud(int id_solicitud)
+        {
+            //declaracion de obejto
+            SolicitudUpdate rechazando = new SolicitudUpdate();
+
+            return rechazando.rechazarSolicitud(id_solicitud);
+
+        }
     }
 }

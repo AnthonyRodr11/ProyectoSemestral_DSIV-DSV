@@ -39,6 +39,7 @@ namespace MotorsForm.Menu_Strip
             herra.ValidarNumeric(txtVInicial, "No se permiten valores menores o iguales a cero");
         }
 
+        /*
         private async void btnSubastar_Click(object sender, EventArgs e)
         {
             var subasta = new SubastaRequest()
@@ -190,5 +191,6 @@ namespace MotorsForm.Menu_Strip
                 }
             }
         }
+        */
     }
 }
