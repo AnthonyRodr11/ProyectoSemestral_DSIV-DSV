@@ -166,7 +166,7 @@ namespace MotorsApi.Controllers
         {
             VerFlotas alquiler = new VerFlotas();
 
-            var carros = alquiler.obtenerAlquilerFR();
+            var carros = alquiler.ObtenerTodosLos("alquiler");
 
             if (carros == null)
             {

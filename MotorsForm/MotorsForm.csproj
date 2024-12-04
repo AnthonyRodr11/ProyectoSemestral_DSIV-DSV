@@ -171,12 +171,14 @@
     <Compile Include="Menu Strip\Venta.Designer.cs">
       <DependentUpon>Venta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\AlquilerRecue.cs" />
     <Compile Include="Models\FlotaRequest.cs" />
     <Compile Include="Models\RegistroRequest.cs" />
     <Compile Include="Models\FlotaCarro.cs" />
     <Compile Include="Models\FlotaVentaRequest.cs" />
     <Compile Include="Models\Respuesta.cs" />
     <Compile Include="Models\SubastaRequest.cs" />
+    <Compile Include="Models\TarifasAlquilerRequest.cs" />
     <Compile Include="Models\Ventas.cs" />
     <Compile Include="Models\CarroFlotaRequest.cs" />
     <Compile Include="Models\Respuesta.cs" />
