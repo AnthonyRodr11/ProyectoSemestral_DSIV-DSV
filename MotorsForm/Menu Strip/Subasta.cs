@@ -32,7 +32,7 @@ namespace MotorsForm.Menu_Strip
         /*
         private async void btnSubastar_Click(object sender, EventArgs e)
         {
-            var subasta = new SubastaRequest();
+           
         }
         */
     }
