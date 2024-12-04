@@ -173,6 +173,7 @@
     </Compile>
     <Compile Include="Models\AlquilerRecue.cs" />
     <Compile Include="Models\FlotaCarro.cs" />
+    <Compile Include="Models\FlotaVentaRequest.cs" />
     <Compile Include="Models\Respuesta.cs" />
     <Compile Include="Models\SubastaRequest.cs" />
     <Compile Include="Models\Ventas.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="Services\InformesService.cs" />
     <Compile Include="Services\SolicitudService.cs" />
     <Compile Include="Services\SubastaService.cs" />
+    <Compile Include="Services\VentaService.cs" />
     <EmbeddedResource Include="Alquiler.resx">
       <DependentUpon>Alquiler.cs</DependentUpon>
     </EmbeddedResource>

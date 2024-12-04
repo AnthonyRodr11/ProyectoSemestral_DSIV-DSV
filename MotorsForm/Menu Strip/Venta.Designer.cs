@@ -34,14 +34,17 @@
             this.btnVender = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lsbVender = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAlquilar = new System.Windows.Forms.Button();
             this.btnSubastar = new System.Windows.Forms.Button();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.lsbVenta = new System.Windows.Forms.ListBox();
+            this.txtPrecioSubasta = new System.Windows.Forms.NumericUpDown();
+            this.lblValor = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrecio)).BeginInit();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPrecioSubasta)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -52,7 +55,7 @@
             this.groupBox1.Controls.Add(this.btnVender);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.listBox1);
+            this.groupBox1.Controls.Add(this.lsbVender);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
             this.groupBox1.Location = new System.Drawing.Point(85, 61);
             this.groupBox1.Name = "groupBox1";
@@ -73,9 +76,15 @@
             // txtPrecio
             // 
             this.txtPrecio.Location = new System.Drawing.Point(311, 276);
+            this.txtPrecio.Maximum = new decimal(new int[] {
+            -1981284353,
+            -1966660860,
+            0,
+            0});
             this.txtPrecio.Name = "txtPrecio";
             this.txtPrecio.Size = new System.Drawing.Size(188, 27);
             this.txtPrecio.TabIndex = 6;
+            this.txtPrecio.ThousandsSeparator = true;
             this.txtPrecio.Leave += new System.EventHandler(this.numericUpDown1_Leave);
             // 
             // btnVender
@@ -90,6 +99,7 @@
             this.btnVender.TabIndex = 5;
             this.btnVender.Text = "Vender Auto";
             this.btnVender.UseVisualStyleBackColor = true;
+            this.btnVender.Click += new System.EventHandler(this.btnVender_Click);
             // 
             // label2
             // 
@@ -109,21 +119,24 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Matrícula";
             // 
-            // listBox1
+            // lsbVender
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 19;
-            this.listBox1.Location = new System.Drawing.Point(36, 46);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(237, 441);
-            this.listBox1.TabIndex = 0;
+            this.lsbVender.FormattingEnabled = true;
+            this.lsbVender.ItemHeight = 19;
+            this.lsbVender.Location = new System.Drawing.Point(36, 46);
+            this.lsbVender.Name = "lsbVender";
+            this.lsbVender.Size = new System.Drawing.Size(237, 441);
+            this.lsbVender.TabIndex = 0;
+            this.lsbVender.SelectedIndexChanged += new System.EventHandler(this.lsbVender_SelectedIndexChanged);
             // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.lblValor);
+            this.groupBox2.Controls.Add(this.txtPrecioSubasta);
             this.groupBox2.Controls.Add(this.btnAlquilar);
             this.groupBox2.Controls.Add(this.btnSubastar);
-            this.groupBox2.Controls.Add(this.listBox2);
+            this.groupBox2.Controls.Add(this.lsbVenta);
             this.groupBox2.ForeColor = System.Drawing.Color.White;
             this.groupBox2.Location = new System.Drawing.Point(662, 61);
             this.groupBox2.Name = "groupBox2";
@@ -144,6 +157,7 @@
             this.btnAlquilar.TabIndex = 7;
             this.btnAlquilar.Text = "Mover a Alquiler";
             this.btnAlquilar.UseVisualStyleBackColor = true;
+            this.btnAlquilar.Click += new System.EventHandler(this.btnAlquilar_Click);
             // 
             // btnSubastar
             // 
@@ -157,15 +171,41 @@
             this.btnSubastar.TabIndex = 6;
             this.btnSubastar.Text = "Mover a Subasta";
             this.btnSubastar.UseVisualStyleBackColor = true;
+            this.btnSubastar.Click += new System.EventHandler(this.btnSubastar_Click);
+            this.btnSubastar.MouseEnter += new System.EventHandler(this.btnSubastar_MouseEnter);
             // 
-            // listBox2
+            // lsbVenta
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 19;
-            this.listBox2.Location = new System.Drawing.Point(56, 46);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(428, 289);
-            this.listBox2.TabIndex = 1;
+            this.lsbVenta.FormattingEnabled = true;
+            this.lsbVenta.ItemHeight = 19;
+            this.lsbVenta.Location = new System.Drawing.Point(56, 46);
+            this.lsbVenta.Name = "lsbVenta";
+            this.lsbVenta.Size = new System.Drawing.Size(428, 289);
+            this.lsbVenta.TabIndex = 1;
+            // 
+            // txtPrecioSubasta
+            // 
+            this.txtPrecioSubasta.Location = new System.Drawing.Point(56, 385);
+            this.txtPrecioSubasta.Maximum = new decimal(new int[] {
+            -1981284353,
+            -1966660860,
+            0,
+            0});
+            this.txtPrecioSubasta.Name = "txtPrecioSubasta";
+            this.txtPrecioSubasta.Size = new System.Drawing.Size(188, 27);
+            this.txtPrecioSubasta.TabIndex = 8;
+            this.txtPrecioSubasta.ThousandsSeparator = true;
+            this.txtPrecioSubasta.Visible = false;
+            // 
+            // lblValor
+            // 
+            this.lblValor.AutoSize = true;
+            this.lblValor.Location = new System.Drawing.Point(52, 363);
+            this.lblValor.Name = "lblValor";
+            this.lblValor.Size = new System.Drawing.Size(105, 19);
+            this.lblValor.TabIndex = 8;
+            this.lblValor.Text = "Valor inicial";
+            this.lblValor.Visible = false;
             // 
             // Venta
             // 
@@ -180,10 +220,13 @@
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "Venta";
             this.Text = "Venta";
+            this.Load += new System.EventHandler(this.Venta_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPrecio)).EndInit();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.txtPrecioSubasta)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -195,11 +238,13 @@
         private System.Windows.Forms.Button btnVender;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lsbVender;
         private System.Windows.Forms.Button btnAlquilar;
         private System.Windows.Forms.Button btnSubastar;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox lsbVenta;
         private System.Windows.Forms.Label lblMatricula;
         private System.Windows.Forms.NumericUpDown txtPrecio;
+        private System.Windows.Forms.Label lblValor;
+        private System.Windows.Forms.NumericUpDown txtPrecioSubasta;
     }
 }

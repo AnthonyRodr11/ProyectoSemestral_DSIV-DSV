@@ -98,7 +98,7 @@ namespace MotorsApi.Controllers
         {
             VerFlotas todo = new VerFlotas();
 
-            var autos = todo.ObtenerTodoMenosSubasta();
+            var autos = todo.ObtenerTodoMenos("subasta");
 
             if (autos == null)
             {
@@ -119,7 +119,7 @@ namespace MotorsApi.Controllers
         {
             VerFlotas subasta = new VerFlotas();
 
-            var carros = subasta.ObtenerTodaSubasta();
+            var carros = subasta.ObtenerTodosLos("subasta");
 
             if(carros == null)
             {
