@@ -21,7 +21,7 @@ namespace MotorsForm
         public Registro()
         {
             InitializeComponent();
-            carroService = new CarroService();
+           CarroService carroService;
         }
 
         private void txtMarca_Leave(object sender, EventArgs e)
@@ -73,6 +73,7 @@ namespace MotorsForm
         {
             var user = new CarroFlotaRequest()
             {
+                placa = txtPlaca.Text,
                 marca = txtMarca.Text,
                 modelo = txtModelo.Text,
                 color = txtColor.Text,
@@ -85,7 +86,7 @@ namespace MotorsForm
                 foto = pictureBox2.ToString()
             };
 
-            var respuesta = await carroService.obtenerEspec(user);
+            var respuesta = await carroService.enviarEspecs(user);
             MessageBox.Show(respuesta.Mensaje, respuesta.Titulo);
 
 

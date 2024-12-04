@@ -35,22 +35,23 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.txtSubastaAdd = new System.Windows.Forms.NumericUpDown();
+            this.lsblistAlquiler = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnMoverSubasta = new System.Windows.Forms.Button();
+            this.btnVenta = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.txtTarifaAdd = new System.Windows.Forms.NumericUpDown();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAgragar = new System.Windows.Forms.Button();
             this.txtTipoAuto = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtTarifaEdit)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSubastaAdd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtTarifaAdd)).BeginInit();
@@ -66,9 +67,11 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Tahoma", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox1.Location = new System.Drawing.Point(97, 172);
+            this.groupBox1.Location = new System.Drawing.Point(146, 265);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(279, 387);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Size = new System.Drawing.Size(418, 595);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Editar Tarifa";
@@ -77,9 +80,20 @@
             // 
             this.txtTarifaEdit.DecimalPlaces = 2;
             this.txtTarifaEdit.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTarifaEdit.Location = new System.Drawing.Point(58, 192);
+            this.txtTarifaEdit.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.txtTarifaEdit.Location = new System.Drawing.Point(87, 295);
+            this.txtTarifaEdit.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtTarifaEdit.Maximum = new decimal(new int[] {
+            1215752191,
+            23,
+            0,
+            0});
             this.txtTarifaEdit.Name = "txtTarifaEdit";
-            this.txtTarifaEdit.Size = new System.Drawing.Size(162, 30);
+            this.txtTarifaEdit.Size = new System.Drawing.Size(243, 42);
             this.txtTarifaEdit.TabIndex = 23;
             this.txtTarifaEdit.ThousandsSeparator = true;
             // 
@@ -90,30 +104,34 @@
             this.btnEditar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEditar.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEditar.ForeColor = System.Drawing.Color.White;
-            this.btnEditar.Location = new System.Drawing.Point(63, 282);
+            this.btnEditar.Location = new System.Drawing.Point(94, 434);
+            this.btnEditar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(151, 44);
+            this.btnEditar.Size = new System.Drawing.Size(226, 68);
             this.btnEditar.TabIndex = 22;
             this.btnEditar.Text = "Editar";
             this.btnEditar.UseVisualStyleBackColor = true;
+            this.btnEditar.Click += new System.EventHandler(this.btnEditar_Click);
             // 
             // cmbTipoAuto
             // 
             this.cmbTipoAuto.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbTipoAuto.FormattingEnabled = true;
-            this.cmbTipoAuto.Location = new System.Drawing.Point(54, 105);
+            this.cmbTipoAuto.Location = new System.Drawing.Point(81, 162);
+            this.cmbTipoAuto.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbTipoAuto.Name = "cmbTipoAuto";
-            this.cmbTipoAuto.Size = new System.Drawing.Size(167, 27);
+            this.cmbTipoAuto.Size = new System.Drawing.Size(248, 37);
             this.cmbTipoAuto.TabIndex = 21;
-            this.cmbTipoAuto.Leave += new System.EventHandler(this.cmbTipoAuto_Leave);
+            this.cmbTipoAuto.SelectedIndexChanged += new System.EventHandler(this.cmbTipoAuto_SelectedIndexChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(49, 164);
+            this.label2.Location = new System.Drawing.Point(74, 252);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(118, 19);
+            this.label2.Size = new System.Drawing.Size(168, 29);
             this.label2.TabIndex = 14;
             this.label2.Text = "Tarifa Diaria:";
             // 
@@ -121,77 +139,105 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(49, 83);
+            this.label1.Location = new System.Drawing.Point(74, 128);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(120, 19);
+            this.label1.Size = new System.Drawing.Size(173, 29);
             this.label1.TabIndex = 12;
             this.label1.Text = "Tipo de Auto:";
             // 
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox2.Controls.Add(this.dataGridView1);
+            this.groupBox2.Controls.Add(this.txtSubastaAdd);
+            this.groupBox2.Controls.Add(this.lsblistAlquiler);
             this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.button3);
-            this.groupBox2.Controls.Add(this.button2);
+            this.groupBox2.Controls.Add(this.btnMoverSubasta);
+            this.groupBox2.Controls.Add(this.btnVenta);
             this.groupBox2.Font = new System.Drawing.Font("Tahoma", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox2.Location = new System.Drawing.Point(447, 172);
+            this.groupBox2.Location = new System.Drawing.Point(670, 265);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(408, 387);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox2.Size = new System.Drawing.Size(612, 677);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Editar Estado";
             // 
-            // dataGridView1
+            // txtSubastaAdd
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonFace;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(21, 70);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(370, 237);
-            this.dataGridView1.TabIndex = 25;
+            this.txtSubastaAdd.DecimalPlaces = 2;
+            this.txtSubastaAdd.Font = new System.Drawing.Font("Tahoma", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSubastaAdd.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.txtSubastaAdd.Location = new System.Drawing.Point(360, 498);
+            this.txtSubastaAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtSubastaAdd.Maximum = new decimal(new int[] {
+            1661992959,
+            1808227885,
+            5,
+            0});
+            this.txtSubastaAdd.Name = "txtSubastaAdd";
+            this.txtSubastaAdd.Size = new System.Drawing.Size(180, 35);
+            this.txtSubastaAdd.TabIndex = 25;
+            // 
+            // lsblistAlquiler
+            // 
+            this.lsblistAlquiler.Font = new System.Drawing.Font("Tahoma", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lsblistAlquiler.FormattingEnabled = true;
+            this.lsblistAlquiler.ItemHeight = 22;
+            this.lsblistAlquiler.Location = new System.Drawing.Point(27, 103);
+            this.lsblistAlquiler.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lsblistAlquiler.Name = "lsblistAlquiler";
+            this.lsblistAlquiler.Size = new System.Drawing.Size(556, 334);
+            this.lsblistAlquiler.TabIndex = 25;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(20, 45);
+            this.label4.Location = new System.Drawing.Point(30, 69);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(219, 19);
+            this.label4.Size = new System.Drawing.Size(315, 29);
             this.label4.TabIndex = 23;
             this.label4.Text = "Lista de Autos en Alquiler";
             // 
-            // button3
+            // btnMoverSubasta
             // 
-            this.button3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(220, 313);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(151, 59);
-            this.button3.TabIndex = 24;
-            this.button3.Text = "Mover a Subasta";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnMoverSubasta.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnMoverSubasta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnMoverSubasta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMoverSubasta.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMoverSubasta.ForeColor = System.Drawing.Color.White;
+            this.btnMoverSubasta.Location = new System.Drawing.Point(332, 558);
+            this.btnMoverSubasta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnMoverSubasta.Name = "btnMoverSubasta";
+            this.btnMoverSubasta.Size = new System.Drawing.Size(226, 91);
+            this.btnMoverSubasta.TabIndex = 24;
+            this.btnMoverSubasta.Text = "Mover a Subasta";
+            this.btnMoverSubasta.UseVisualStyleBackColor = true;
+            this.btnMoverSubasta.Click += new System.EventHandler(this.btnMoverSubasta_Click);
             // 
-            // button2
+            // btnVenta
             // 
-            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(43, 313);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(151, 58);
-            this.button2.TabIndex = 23;
-            this.button2.Text = "Mover a venta";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnVenta.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnVenta.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVenta.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVenta.ForeColor = System.Drawing.Color.White;
+            this.btnVenta.Location = new System.Drawing.Point(57, 560);
+            this.btnVenta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnVenta.Name = "btnVenta";
+            this.btnVenta.Size = new System.Drawing.Size(226, 89);
+            this.btnVenta.TabIndex = 23;
+            this.btnVenta.Text = "Mover a venta";
+            this.btnVenta.UseVisualStyleBackColor = true;
+            this.btnVenta.Click += new System.EventHandler(this.btnVenta_Click);
             // 
             // label3
             // 
@@ -199,9 +245,10 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Tahoma", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(433, 30);
+            this.label3.Location = new System.Drawing.Point(650, 46);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(437, 58);
+            this.label3.Size = new System.Drawing.Size(653, 87);
             this.label3.TabIndex = 4;
             this.label3.Text = "Alquiler de Autos";
             // 
@@ -210,9 +257,10 @@
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.BackgroundImage = global::MotorsForm.Properties.Resources.Logo_MV;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox3.Location = new System.Drawing.Point(927, 12);
+            this.pictureBox3.Location = new System.Drawing.Point(1390, 18);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(259, 154);
+            this.pictureBox3.Size = new System.Drawing.Size(388, 237);
             this.pictureBox3.TabIndex = 24;
             this.pictureBox3.TabStop = false;
             // 
@@ -220,15 +268,17 @@
             // 
             this.groupBox3.BackColor = System.Drawing.Color.Transparent;
             this.groupBox3.Controls.Add(this.txtTarifaAdd);
-            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this.btnAgragar);
             this.groupBox3.Controls.Add(this.txtTipoAuto);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Font = new System.Drawing.Font("Tahoma", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox3.Location = new System.Drawing.Point(917, 172);
+            this.groupBox3.Location = new System.Drawing.Point(1376, 265);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(279, 387);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox3.Size = new System.Drawing.Size(418, 595);
             this.groupBox3.TabIndex = 23;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Tipo de Auto";
@@ -237,41 +287,56 @@
             // 
             this.txtTarifaAdd.DecimalPlaces = 2;
             this.txtTarifaAdd.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTarifaAdd.Location = new System.Drawing.Point(54, 192);
+            this.txtTarifaAdd.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.txtTarifaAdd.Location = new System.Drawing.Point(81, 295);
+            this.txtTarifaAdd.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtTarifaAdd.Maximum = new decimal(new int[] {
+            -1486618625,
+            232830643,
+            0,
+            0});
             this.txtTarifaAdd.Name = "txtTarifaAdd";
-            this.txtTarifaAdd.Size = new System.Drawing.Size(162, 30);
+            this.txtTarifaAdd.Size = new System.Drawing.Size(243, 42);
             this.txtTarifaAdd.TabIndex = 24;
             this.txtTarifaAdd.ThousandsSeparator = true;
             // 
-            // button1
+            // btnAgragar
             // 
-            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(63, 282);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(151, 44);
-            this.button1.TabIndex = 22;
-            this.button1.Text = "Agregar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAgragar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnAgragar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnAgragar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAgragar.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgragar.ForeColor = System.Drawing.Color.White;
+            this.btnAgragar.Location = new System.Drawing.Point(94, 434);
+            this.btnAgragar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnAgragar.Name = "btnAgragar";
+            this.btnAgragar.Size = new System.Drawing.Size(226, 68);
+            this.btnAgragar.TabIndex = 22;
+            this.btnAgragar.Text = "Agregar";
+            this.btnAgragar.UseVisualStyleBackColor = true;
+            this.btnAgragar.Click += new System.EventHandler(this.btnAgragar_Click);
             // 
             // txtTipoAuto
             // 
             this.txtTipoAuto.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTipoAuto.Location = new System.Drawing.Point(54, 105);
+            this.txtTipoAuto.Location = new System.Drawing.Point(81, 162);
+            this.txtTipoAuto.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtTipoAuto.Name = "txtTipoAuto";
-            this.txtTipoAuto.Size = new System.Drawing.Size(168, 27);
+            this.txtTipoAuto.Size = new System.Drawing.Size(250, 36);
             this.txtTipoAuto.TabIndex = 15;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(49, 164);
+            this.label5.Location = new System.Drawing.Point(74, 252);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(118, 19);
+            this.label5.Size = new System.Drawing.Size(168, 29);
             this.label5.TabIndex = 14;
             this.label5.Text = "Tarifa Diaria:";
             // 
@@ -279,33 +344,36 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(49, 83);
+            this.label6.Location = new System.Drawing.Point(74, 128);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(120, 19);
+            this.label6.Size = new System.Drawing.Size(173, 29);
             this.label6.TabIndex = 12;
             this.label6.Text = "Tipo de Auto:";
             // 
             // Alquiler
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::MotorsForm.Properties.Resources.Background1;
-            this.ClientSize = new System.Drawing.Size(1283, 682);
+            this.ClientSize = new System.Drawing.Size(1924, 997);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Alquiler";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Alquiler";
+            this.Load += new System.EventHandler(this.Alquiler_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtTarifaEdit)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtSubastaAdd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -325,16 +393,17 @@
         private System.Windows.Forms.Button btnEditar;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnMoverSubasta;
+        private System.Windows.Forms.Button btnVenta;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.NumericUpDown txtTarifaEdit;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.NumericUpDown txtTarifaAdd;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAgragar;
         private System.Windows.Forms.TextBox txtTipoAuto;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ListBox lsblistAlquiler;
+        private System.Windows.Forms.NumericUpDown txtSubastaAdd;
     }
 }
