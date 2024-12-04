@@ -700,6 +700,40 @@ namespace MotorsApi.BD.CRUD.Read
             return autos;
         }
 
+        public string ObtenerFoto(string placa)
+        {
+            string foto = null;
+            try
+            {
+                cmd.Parameters.Clear();
+
+                cmd.CommandType = CommandType.Text;
+
+                cmd.CommandText = "SELECT foto FROM flota_carro WHERE placa = @placa";
+
+                cmd.Parameters.Add(new MySqlParameter("@placa", placa));
+
+                abrirConexion();
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        foto = reader["foto"].ToString();
+                    }
+                }
+                if(foto != null)
+                {
+                    string[] strings = foto.Split(new string[] {".."}, StringSplitOptions.TrimEntries);
+                    
+                    return strings[1];
+                }
+            }
+            catch (Exception e) { Console.WriteLine(e); }
+            finally { cerrarConexion(); }
+            return null;
+        }
+
     }
 }
 

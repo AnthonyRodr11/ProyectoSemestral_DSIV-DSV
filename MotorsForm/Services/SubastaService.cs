@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using MySqlX.XDevAPI;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace MotorsForm.Services
 {
@@ -183,6 +184,20 @@ namespace MotorsForm.Services
                 var mensajeError = await respuesta.Content.ReadAsStringAsync();
                 MessageBox.Show($"Error: {mensajeError}");
             }
+        }
+
+        public async Task<string> RegresarFoto(string placa)
+        {
+            var respuesta = await client.GetAsync($"https://localhost:7129/MotorsApi/flotaCarro/Imagen/{placa}");
+
+            if (!respuesta.IsSuccessStatusCode)
+            {
+                var mensajeError = await respuesta.Content.ReadAsStringAsync();
+                MessageBox.Show($"Error: {mensajeError}");
+                return "que mal";
+            }
+            
+            return  await respuesta.Content.ReadAsStringAsync();
         }
 
     }

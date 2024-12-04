@@ -159,5 +159,15 @@ namespace MotorsForm.Resource
                 errorXD.Clear();
             }
         }
+
+
+        public string ConseguirRutaAbsoluta(string relativa)
+        {
+
+            relativa =  "../../../MotorsValueWeb"+relativa;
+
+            return relativa;
+        }
+
     }
 }

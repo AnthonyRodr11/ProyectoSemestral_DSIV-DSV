@@ -180,5 +180,14 @@ namespace MotorsApi.Controllers
             }
             return Ok(autos);
         }
+
+        [HttpGet]
+        [Route("Imagen/{placa}")]
+        public string RecibiendoImagenes(string placa)
+        {
+            VerFlotas flota = new VerFlotas();
+
+            return flota.ObtenerFoto(placa);
+        }
     }
 }
