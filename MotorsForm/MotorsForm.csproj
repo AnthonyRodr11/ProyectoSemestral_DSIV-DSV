@@ -193,6 +193,7 @@
       <DependentUpon>Registro.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\CarroService.cs" />
+    <Compile Include="Services\InformesService.cs" />
     <Compile Include="Services\SolicitudService.cs" />
     <Compile Include="Services\SubastaService.cs" />
     <Compile Include="Services\VentaService.cs" />

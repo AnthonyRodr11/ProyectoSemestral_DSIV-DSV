@@ -2,9 +2,6 @@
 using MotorsApi.BD.CRUD.Read;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
-
-
 namespace MotorsApi.Controllers
 
 {
@@ -29,10 +26,10 @@ namespace MotorsApi.Controllers
             // Método para obtener la información de ventas
             [HttpGet]
             [Route("infoVentas")]
-            public async Task<IActionResult> obtenerInfoVentas()
+            public IActionResult obtenerInfoVentas()
             {
                 var db = new Informes();
-                var data = await db.infoVentas();
+                var data = db.infoVentas();
                 return Ok(data);
             }
 
