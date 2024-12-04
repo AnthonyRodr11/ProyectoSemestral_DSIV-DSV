@@ -657,7 +657,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado = @estado";
+                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado = @estado AND disponibilidad = 1";
 
                 cmd.Parameters.Add(new MySqlParameter("@estado", estado));
 

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtPlaca = new System.Windows.Forms.Label();
             this.dtpFinal = new System.Windows.Forms.DateTimePicker();
             this.dtpInicial = new System.Windows.Forms.DateTimePicker();
             this.txtVInicial = new System.Windows.Forms.NumericUpDown();
@@ -36,13 +37,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtPlaca = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lsbAutos = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnVender = new System.Windows.Forms.Button();
             this.btnAlquilar = new System.Windows.Forms.Button();
             this.lsbAutosSubasta = new System.Windows.Forms.ListBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtVInicial)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -52,6 +53,8 @@
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.txtPlaca);
             this.groupBox1.Controls.Add(this.dtpFinal);
             this.groupBox1.Controls.Add(this.dtpInicial);
             this.groupBox1.Controls.Add(this.txtVInicial);
@@ -59,7 +62,6 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.txtPlaca);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.lsbAutos);
             this.groupBox1.ForeColor = System.Drawing.Color.White;
@@ -69,6 +71,16 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Lista de Autos";
+            // 
+            // txtPlaca
+            // 
+            this.txtPlaca.BackColor = System.Drawing.Color.White;
+            this.txtPlaca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.txtPlaca.ForeColor = System.Drawing.Color.Black;
+            this.txtPlaca.Location = new System.Drawing.Point(303, 100);
+            this.txtPlaca.Name = "txtPlaca";
+            this.txtPlaca.Size = new System.Drawing.Size(184, 27);
+            this.txtPlaca.TabIndex = 15;
             // 
             // dtpFinal
             // 
@@ -121,6 +133,7 @@
             this.btnSubastar.TabIndex = 9;
             this.btnSubastar.Text = "Subastar";
             this.btnSubastar.UseVisualStyleBackColor = true;
+            this.btnSubastar.Click += new System.EventHandler(this.btnSubastar_Click);
             // 
             // label4
             // 
@@ -148,14 +161,6 @@
             this.label2.Size = new System.Drawing.Size(107, 19);
             this.label2.TabIndex = 3;
             this.label2.Text = "Valor Inicial";
-            // 
-            // txtPlaca
-            // 
-            this.txtPlaca.Location = new System.Drawing.Point(302, 98);
-            this.txtPlaca.Name = "txtPlaca";
-            this.txtPlaca.Size = new System.Drawing.Size(185, 27);
-            this.txtPlaca.TabIndex = 2;
-            this.txtPlaca.Leave += new System.EventHandler(this.txtPlaca_Leave);
             // 
             // label1
             // 
@@ -227,6 +232,15 @@
             this.lsbAutosSubasta.Size = new System.Drawing.Size(486, 308);
             this.lsbAutosSubasta.TabIndex = 0;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(43, 35);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(453, 19);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Seleccione un Auto de la lista para ponerlo en Subasta\r\n";
+            // 
             // Subasta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
@@ -257,7 +271,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtPlaca;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox lsbAutos;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -267,5 +280,7 @@
         private System.Windows.Forms.NumericUpDown txtVInicial;
         private System.Windows.Forms.DateTimePicker dtpFinal;
         private System.Windows.Forms.DateTimePicker dtpInicial;
+        private System.Windows.Forms.Label txtPlaca;
+        private System.Windows.Forms.Label label5;
     }
 }

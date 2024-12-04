@@ -86,7 +86,7 @@ namespace MotorsForm.Resource
 
         public void ValidarNumeric(NumericUpDown control, string cadena)
         {
-            if (control.Value < 0)
+            if (control.Value > 0)
             {
                 MensajeError(control, null, true);
                 continuar = true;
