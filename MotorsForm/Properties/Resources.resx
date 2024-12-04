@@ -178,4 +178,7 @@
   <data name="Vehiculos_Slocitud" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resource\Vehiculos_Slocitud.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="defaultCar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\defaultCar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

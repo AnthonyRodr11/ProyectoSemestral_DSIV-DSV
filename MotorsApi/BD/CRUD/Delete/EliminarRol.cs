@@ -6,7 +6,7 @@ namespace MotorsApi.BD.CRUD.Delete
 {
     public class EliminarRol : Conexiondb
     {
-         public int rolEliminar(int id)
+         public int rolEliminar(string correo)
         {
 
             //declaracion de variable de trabajo 
@@ -22,10 +22,10 @@ namespace MotorsApi.BD.CRUD.Delete
                 cmd.CommandType =CommandType.Text;
 
                 //asignamos el nombre del procedimiento de almacendo
-                cmd.CommandText = "DELETE FROM login WHERE id = @id";
+                cmd.CommandText = "DELETE FROM login WHERE correo = @correo";
 
                 //Agregar parametros 
-                cmd.Parameters.Add(new MySqlParameter("@id", id));
+                cmd.Parameters.Add(new MySqlParameter("@correo", correo));
 
                 //abrir Conexion
                 abrirConexion();

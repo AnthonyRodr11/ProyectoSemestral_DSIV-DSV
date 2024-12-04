@@ -150,7 +150,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT * from  flota_carro";
+                cmd.CommandText = "SELECT * from flota_carro";
 
 
                 abrirConexion();
