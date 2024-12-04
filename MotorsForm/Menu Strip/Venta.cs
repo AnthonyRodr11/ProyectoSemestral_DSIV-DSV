@@ -21,7 +21,7 @@ namespace MotorsForm.Menu_Strip
 
         private void numericUpDown1_Leave(object sender, EventArgs e)
         {
-            herra.ValidarNumeric(txtPrecio);
+            herra.ValidarNumeric(txtPrecio, null);
         }
     }
 }

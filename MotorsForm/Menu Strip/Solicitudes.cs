@@ -18,10 +18,5 @@ namespace MotorsForm.Menu_Strip
         {
             InitializeComponent();
         }
-
-        private void comboBox1_Leave(object sender, EventArgs e)
-        {
-            
-        }
     }
 }

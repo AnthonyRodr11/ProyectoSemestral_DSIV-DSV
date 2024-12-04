@@ -62,7 +62,7 @@ namespace MotorsApi.BD.CRUD.Read
         }
         
         //Metodo que guarda registros de la tabla ventas
-        public async Task<string[]> infoVentas()
+        public string[] infoVentas()
         {
             List<string> data = new List<string>();
 
@@ -80,7 +80,7 @@ namespace MotorsApi.BD.CRUD.Read
                 abrirConexion();
 
                
-                using (MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync())
+                using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {

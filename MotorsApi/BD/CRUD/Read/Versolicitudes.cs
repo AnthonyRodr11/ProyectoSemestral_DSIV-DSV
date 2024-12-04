@@ -55,7 +55,7 @@ namespace MotorsApi.BD.CRUD.Read
         }
 
         //Metodo para obtener el valor que pide compra el usuario
-        public double obtenerMonto(int id_usuario)
+        public double obtenerMonto(int id_solicitud)                  //cambiar por id_solicitud
         {
             double monto = 0;
 
@@ -69,10 +69,10 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT monto FROM Solicitud WHERE id_usuario = @id_usuario";
+                cmd.CommandText = "SELECT monto FROM Solicitud WHERE id_solicitud = @id_solicitud";
 
                 // Agregamos el parámetro
-                cmd.Parameters.AddWithValue("@id_usuario", id_usuario);
+                cmd.Parameters.AddWithValue("@id_solicitud", id_solicitud);
 
                 abrirConexion();
 
@@ -99,11 +99,11 @@ namespace MotorsApi.BD.CRUD.Read
             return monto;
         }
 
-        //Metodo para obtener foto y descripcion de la solicitud
-        public List<string> obtenerDescripcion(int id_usuario)
+        //Metodo para obtener descripcion de la solicitud
+        public string obtenerDescripcion(int id_solicitud)          //cambiar por id_solicitud
         {
-            List<string> data = new List<string>();
-            string rutaFoto, descripcion;
+            
+            string descripcion = "";
 
             try
             {
@@ -114,10 +114,10 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT descripcion, foto FROM Solicitud WHERE id_usuario = @id_usuario";
+                cmd.CommandText = "SELECT descripcion FROM Solicitud WHERE id_solicitud = @id_solicitud";
 
                 // Agregamos el parámetro
-                cmd.Parameters.AddWithValue("@id_usuario", id_usuario);
+                cmd.Parameters.AddWithValue("@id_solicitud", id_solicitud);
 
                 abrirConexion();
 
@@ -128,10 +128,6 @@ namespace MotorsApi.BD.CRUD.Read
                     {
                         //obtenemos la data y guardamos 
                         descripcion = reader.GetString(0); //descripciion
-                        rutaFoto = reader.GetString(1); //ruta de la imagen
-
-                        data.Add(descripcion); // en la posicion 0 esta
-                        data.Add(rutaFoto); //en la posicion 1 esta
 
                     }
                 }
@@ -145,17 +141,16 @@ namespace MotorsApi.BD.CRUD.Read
                 cerrarConexion();
             }
 
-            return data;
+            return descripcion;
         } 
 
 
         
-        
+
         //Metodo para mostrar todas las solicitudes
-        
-        public List<Solicitud> obtenerSolicitudes()
+        public List<SolicitudesRequest> obtenerSolicitudes()
         {
-            List<Solicitud> solicitudes = new List<Solicitud>();
+            List<SolicitudesRequest> solicitudes = new List<SolicitudesRequest>();
 
             try
             {
@@ -174,10 +169,11 @@ namespace MotorsApi.BD.CRUD.Read
                 {
                     while (reader.Read())
                     {
-                        Solicitud solicitud = new Solicitud()
+                        SolicitudesRequest solicitud = new SolicitudesRequest()
                         {    
                             id_solicitud = reader.GetInt32(0),
-                           
+                            nombre = reader.GetString(1),
+                            apellido = reader.GetString(2),
                             estado = reader.GetString(3),
                             f_solicitud = reader.GetDateTime(4),
                             monto = reader.GetDouble(5),

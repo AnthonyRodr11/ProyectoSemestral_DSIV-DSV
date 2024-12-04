@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using MotorsApi.Models;
 using MotorsApi.BD.CRUD.Update;
 using MotorsApi.BD.CRUD.Read;
+using MotorsApi.BD.CRUD.Delete;
 
 namespace MotorsApi.Controllers
 {
@@ -137,8 +138,27 @@ namespace MotorsApi.Controllers
                     Code = 500
                 });
             }
-            }
+        }
 
+        [HttpDelete]
+        [Route("Delete/{placa}")]
+        public IActionResult BorrarCarroEnVenta(string placa)
+        {
+            FlotaVentaDeleter delete = new FlotaVentaDeleter();
+
+            var carro = delete.BorrarAutoEnVenta(placa);
+
+            if (carro == null)
+            {
+                return NotFound(new
+                {
+                    titulo = "No se encontraron autos",
+                    mensaje = "Ningun auto encontrado",
+                    code = 404
+                });
+            }
+            return Ok(carro);
+        }
 
     }
 }

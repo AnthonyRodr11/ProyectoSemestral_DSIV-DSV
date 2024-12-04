@@ -16,10 +16,18 @@ namespace MotorsForm
         public Home()
         {
             InitializeComponent();
+            this.IsMdiContainer = true;
         }
 
         public void LimpiarForm()
         {
+            foreach (Control control in this.toolStripContainer1.ContentPanel.Controls)
+            {
+                if (control is Form form)
+                {
+                    form.Close();
+                }
+            }
             this.toolStripContainer1.ContentPanel.Controls.Clear();
         }
 
@@ -46,8 +54,11 @@ namespace MotorsForm
         private void solicitudesToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             LimpiarForm();
-            Solicitudes_Primero solicitud = new Solicitudes_Primero();
-            solicitud.MdiParent = this;
+            Solicitudes_Primero solicitud = new Solicitudes_Primero
+            {
+                MdiParent = this, // Asignar el contenedor MDI
+                Dock = DockStyle.Fill // Ajustar al contenedor
+            };
             this.toolStripContainer1.ContentPanel.Controls.Add(solicitud);
             solicitud.Show();
         }

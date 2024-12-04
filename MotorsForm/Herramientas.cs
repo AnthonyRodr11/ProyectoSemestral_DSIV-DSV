@@ -84,7 +84,7 @@ namespace MotorsForm.Resource
             }
         }
 
-        public void ValidarNumeric(NumericUpDown control)
+        public void ValidarNumeric(NumericUpDown control, string cadena)
         {
             if (control.Value < 0)
             {
@@ -93,7 +93,7 @@ namespace MotorsForm.Resource
             }
             else
             {
-                MensajeError(control, "No puede poner un Kilometraje menor a 0", false);
+                MensajeError(control, cadena , false);
                 continuar = false;
             }
         }
@@ -159,5 +159,15 @@ namespace MotorsForm.Resource
                 errorXD.Clear();
             }
         }
+
+
+        public string ConseguirRutaAbsoluta(string relativa)
+        {
+
+            relativa =  "../../../MotorsValueWeb"+relativa;
+
+            return relativa;
+        }
+
     }
 }
