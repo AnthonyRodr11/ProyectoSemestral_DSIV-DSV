@@ -40,7 +40,7 @@ namespace MotorsForm.Menu_Strip
         {
             
 
-            if ((txtPlaca.Text != null || txtPlaca.Text != "") && !(txtVInicial.Value <= 0))
+            if ((txtPlaca.Text != null && txtPlaca.Text != "") && (!(txtVInicial.Value <= 0) && txtVInicial != null))
             {
                 var subasta = new SubastaRequest()
                 {
@@ -68,7 +68,6 @@ namespace MotorsForm.Menu_Strip
                     }
                 }
                 MessageBox.Show("Carro Agregado a Subasta con éxito","Que bien!");
-                txtPlaca.ResetText();
                 CargarListBoxAutosAsync();
             }
             else
@@ -106,6 +105,9 @@ namespace MotorsForm.Menu_Strip
 
             lblVenta.Visible = false;
             txtPrecioVenta.Visible = false;
+            txtPlaca.ResetText();
+            txtVInicial.ResetText();
+            txtPrecioVenta.ResetText();
         }
 
         private void Subasta_Load(object sender, EventArgs e)

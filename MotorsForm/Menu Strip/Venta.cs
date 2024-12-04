@@ -35,7 +35,7 @@ namespace MotorsForm.Menu_Strip
                 id_vehiculo = lblMatricula.Text,
             };
 
-            if ((lblMatricula.Text != null || lblMatricula.Text != "") && !(txtPrecio.Value <= 0))
+            if ((lblMatricula.Text != null && lblMatricula.Text != "") && (!(txtPrecio.Value <= 0)&& txtPrecio.Value != null))
             {
                 if (lsbVender.SelectedItem != null)
                 {
@@ -52,6 +52,7 @@ namespace MotorsForm.Menu_Strip
                         if (respuesta.code == 200)
                         {
                             await ventaService.ActualizarEstado(new SubastaRequest() { id_placa = datosTuple.Item1 }, "venta");
+                            MessageBox.Show("Carro Agregado a Venta con éxito", "Que bien!");
                         }
                     }
                 }
@@ -143,6 +144,10 @@ namespace MotorsForm.Menu_Strip
 
             lblValor.Visible = false;
             txtPrecioSubasta.Visible = false;
+            txtPrecio.ResetText();
+            txtPrecioSubasta.ResetText();
+            lblMatricula.ResetText();
+            lblValor.ResetText();
         }
 
         private void Venta_Load(object sender, EventArgs e)
