@@ -178,8 +178,11 @@ namespace MotorsForm
                 // Nombre del archivo de la imagen
                 string nombreImagen = Path.GetFileName(rutaImagenOriginal);
 
+                string rutaloca = "../../../MotorsValueWeb/Img";
+
+
                 // Ruta absoluta para guardar la imagen en la carpeta Img del proyecto
-                string directorioImg = @"C:\Users\Patrick\OneDrive - Universidad Tecnológica de Panamá\DSIV\MotorsValueWeb\Img";
+                string directorioImg = Path.GetFullPath(rutaloca);
                 string rutaDestino = Path.Combine(directorioImg, nombreImagen);
 
                 try
