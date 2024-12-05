@@ -30,7 +30,7 @@
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnRegistrar = new System.Windows.Forms.Button();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pcbImgGuardar = new System.Windows.Forms.PictureBox();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.cmbCombustible = new System.Windows.Forms.ComboBox();
             this.cmbCarroceria = new System.Windows.Forms.ComboBox();
@@ -54,8 +54,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ofdGuardarImg = new System.Windows.Forms.OpenFileDialog();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbImgGuardar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -65,7 +66,7 @@
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
             this.groupBox1.Controls.Add(this.btnRegistrar);
-            this.groupBox1.Controls.Add(this.pictureBox2);
+            this.groupBox1.Controls.Add(this.pcbImgGuardar);
             this.groupBox1.Controls.Add(this.txtDescripcion);
             this.groupBox1.Controls.Add(this.cmbCombustible);
             this.groupBox1.Controls.Add(this.cmbCarroceria);
@@ -91,7 +92,7 @@
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox1.Location = new System.Drawing.Point(34, 21);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(854, 631);
+            this.groupBox1.Size = new System.Drawing.Size(882, 631);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Registrar Vehículos ";
@@ -102,7 +103,7 @@
             this.btnRegistrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
             this.btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRegistrar.Font = new System.Drawing.Font("Tahoma", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegistrar.Location = new System.Drawing.Point(318, 578);
+            this.btnRegistrar.Location = new System.Drawing.Point(70, 578);
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(184, 47);
             this.btnRegistrar.TabIndex = 23;
@@ -110,18 +111,23 @@
             this.btnRegistrar.UseVisualStyleBackColor = true;
             this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
-            // pictureBox2
+            // pcbImgGuardar
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(377, 247);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(443, 308);
-            this.pictureBox2.TabIndex = 22;
-            this.pictureBox2.TabStop = false;
+            this.pcbImgGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pcbImgGuardar.Image = global::MotorsForm.Properties.Resources._5798294;
+            this.pcbImgGuardar.Location = new System.Drawing.Point(351, 247);
+            this.pcbImgGuardar.Name = "pcbImgGuardar";
+            this.pcbImgGuardar.Size = new System.Drawing.Size(509, 358);
+            this.pcbImgGuardar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pcbImgGuardar.TabIndex = 22;
+            this.pcbImgGuardar.TabStop = false;
+            this.pcbImgGuardar.Click += new System.EventHandler(this.pcbImgGuardar_Click);
             // 
             // txtDescripcion
             // 
             this.txtDescripcion.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescripcion.Location = new System.Drawing.Point(32, 247);
+            this.txtDescripcion.Location = new System.Drawing.Point(32, 332);
+            this.txtDescripcion.MaxLength = 150;
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(301, 223);
@@ -129,6 +135,7 @@
             // 
             // cmbCombustible
             // 
+            this.cmbCombustible.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCombustible.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCombustible.FormattingEnabled = true;
             this.cmbCombustible.Items.AddRange(new object[] {
@@ -139,10 +146,10 @@
             this.cmbCombustible.Name = "cmbCombustible";
             this.cmbCombustible.Size = new System.Drawing.Size(167, 27);
             this.cmbCombustible.TabIndex = 20;
-            this.cmbCombustible.Leave += new System.EventHandler(this.cmbCombustible_Leave);
             // 
             // cmbCarroceria
             // 
+            this.cmbCarroceria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCarroceria.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCarroceria.FormattingEnabled = true;
             this.cmbCarroceria.Items.AddRange(new object[] {
@@ -170,25 +177,24 @@
             this.cmbCarroceria.Name = "cmbCarroceria";
             this.cmbCarroceria.Size = new System.Drawing.Size(167, 27);
             this.cmbCarroceria.TabIndex = 19;
-            this.cmbCarroceria.Text = " ";
-            this.cmbCarroceria.Leave += new System.EventHandler(this.cmbCarroceria_Leave);
             // 
             // cmbEstado
             // 
+            this.cmbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEstado.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbEstado.FormattingEnabled = true;
             this.cmbEstado.Items.AddRange(new object[] {
             "venta ",
             "alquiler",
             "subasta"});
-            this.cmbEstado.Location = new System.Drawing.Point(95, 540);
+            this.cmbEstado.Location = new System.Drawing.Point(32, 241);
             this.cmbEstado.Name = "cmbEstado";
             this.cmbEstado.Size = new System.Drawing.Size(168, 27);
             this.cmbEstado.TabIndex = 18;
-            this.cmbEstado.Leave += new System.EventHandler(this.cmbEstado_Leave);
             // 
             // cmbTransmision
             // 
+            this.cmbTransmision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTransmision.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbTransmision.FormattingEnabled = true;
             this.cmbTransmision.Items.AddRange(new object[] {
@@ -198,59 +204,62 @@
             this.cmbTransmision.Name = "cmbTransmision";
             this.cmbTransmision.Size = new System.Drawing.Size(168, 27);
             this.cmbTransmision.TabIndex = 17;
-            this.cmbTransmision.Leave += new System.EventHandler(this.cmbTransmision_Leave);
             // 
             // txtKm
             // 
             this.txtKm.DecimalPlaces = 2;
             this.txtKm.Font = new System.Drawing.Font("Tahoma", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtKm.Location = new System.Drawing.Point(32, 176);
+            this.txtKm.Location = new System.Drawing.Point(32, 172);
+            this.txtKm.Maximum = new decimal(new int[] {
+            -727379969,
+            232,
+            0,
+            0});
             this.txtKm.Name = "txtKm";
             this.txtKm.Size = new System.Drawing.Size(167, 27);
             this.txtKm.TabIndex = 16;
-            this.txtKm.Leave += new System.EventHandler(this.txtKm_Leave);
             // 
             // txtColor
             // 
             this.txtColor.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtColor.Location = new System.Drawing.Point(652, 98);
+            this.txtColor.MaxLength = 50;
             this.txtColor.Name = "txtColor";
             this.txtColor.Size = new System.Drawing.Size(168, 27);
             this.txtColor.TabIndex = 15;
-            this.txtColor.Leave += new System.EventHandler(this.txtColor_Leave);
             // 
             // txtMarca
             // 
             this.txtMarca.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMarca.Location = new System.Drawing.Point(31, 98);
+            this.txtMarca.MaxLength = 50;
             this.txtMarca.Name = "txtMarca";
             this.txtMarca.Size = new System.Drawing.Size(168, 27);
             this.txtMarca.TabIndex = 14;
-            this.txtMarca.Leave += new System.EventHandler(this.txtMarca_Leave);
             // 
             // txtModelo
             // 
             this.txtModelo.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtModelo.Location = new System.Drawing.Point(240, 98);
+            this.txtModelo.MaxLength = 50;
             this.txtModelo.Name = "txtModelo";
             this.txtModelo.Size = new System.Drawing.Size(168, 27);
             this.txtModelo.TabIndex = 12;
-            this.txtModelo.Leave += new System.EventHandler(this.txtModelo_Leave);
             // 
             // txtPlaca
             // 
             this.txtPlaca.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPlaca.Location = new System.Drawing.Point(447, 98);
+            this.txtPlaca.MaxLength = 50;
             this.txtPlaca.Name = "txtPlaca";
             this.txtPlaca.Size = new System.Drawing.Size(168, 27);
             this.txtPlaca.TabIndex = 11;
-            this.txtPlaca.Leave += new System.EventHandler(this.txtPlaca_Leave);
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(373, 225);
+            this.label11.Location = new System.Drawing.Point(347, 225);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(51, 19);
             this.label11.TabIndex = 10;
@@ -260,7 +269,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(28, 225);
+            this.label10.Location = new System.Drawing.Point(27, 310);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(113, 19);
             this.label10.TabIndex = 9;
@@ -300,7 +309,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(91, 518);
+            this.label6.Location = new System.Drawing.Point(28, 219);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 19);
             this.label6.TabIndex = 5;
@@ -330,7 +339,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(28, 151);
+            this.label3.Location = new System.Drawing.Point(28, 148);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 19);
             this.label3.TabIndex = 2;
@@ -361,9 +370,9 @@
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.BackgroundImage = global::MotorsForm.Properties.Resources.Logo_MV;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.pictureBox3.Location = new System.Drawing.Point(906, 12);
+            this.pictureBox3.Location = new System.Drawing.Point(977, 21);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(349, 277);
+            this.pictureBox3.Size = new System.Drawing.Size(236, 179);
             this.pictureBox3.TabIndex = 23;
             this.pictureBox3.TabStop = false;
             // 
@@ -372,19 +381,24 @@
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Image = global::MotorsForm.Properties.Resources.venta1;
-            this.pictureBox1.Location = new System.Drawing.Point(848, 123);
+            this.pictureBox1.Location = new System.Drawing.Point(922, 160);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(469, 484);
+            this.pictureBox1.Size = new System.Drawing.Size(395, 425);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            // 
+            // ofdGuardarImg
+            // 
+            this.ofdGuardarImg.FileName = "openFileDialog1";
+            this.ofdGuardarImg.Filter = "png|*.png";
             // 
             // Registro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::MotorsForm.Properties.Resources.Background1;
-            this.ClientSize = new System.Drawing.Size(1283, 732);
+            this.ClientSize = new System.Drawing.Size(1283, 682);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox1);
@@ -394,7 +408,7 @@
             this.Text = "Registro";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pcbImgGuardar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtKm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -427,8 +441,9 @@
         private System.Windows.Forms.TextBox txtPlaca;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pcbImgGuardar;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button btnRegistrar;
+        private System.Windows.Forms.OpenFileDialog ofdGuardarImg;
     }
 }

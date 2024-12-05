@@ -27,54 +27,6 @@ namespace MotorsForm.Services
             return JsonConvert.DeserializeObject<Respuesta>(respuesta.Content.ReadAsStringAsync().Result);
         }
 
-        public async Task<List<TarifasAlquilerRequest>> obtenerTarifasAll()
-        {
-            HttpClient client = new HttpClient();
-            var carnalito = await client.GetAsync("https://localhost:7129/MotorsApi/Alquiler/tarifas");
-
-            return JsonConvert.DeserializeObject<List<TarifasAlquilerRequest>>(carnalito.Content.ReadAsStringAsync().Result);
-        }
-
-
-        public async Task<Respuesta> enviarNuevaTarifa(double id, TarifasAlquilerRequest carro)
-        {
-            HttpClient client = new HttpClient();
-
-            var datos = JsonConvert.SerializeObject(carro);
-            var content = new StringContent(datos, Encoding.UTF8, "application/json");
-            var request = new HttpRequestMessage(new HttpMethod("PATCH"), ($"https://localhost:7129/MotorsApi/Alquiler/editar/Tarifa/{id}"))
-            {
-                Content = content
-            };
-
-            var respuestaHttp = await client.SendAsync(request);
-
-            if (!respuestaHttp.IsSuccessStatusCode)
-            {
-                return new Respuesta
-                {
-                    Titulo = "Error de comunicación",
-                    Mensaje = $"Error: {respuestaHttp.StatusCode} - {respuestaHttp.ReasonPhrase}",
-                    Code = (int)respuestaHttp.StatusCode
-                };
-            }
-
-            var respuestaJson = await respuestaHttp.Content.ReadAsStringAsync();
-            var respuesta = JsonConvert.DeserializeObject<Respuesta>(respuestaJson);
-
-            return respuesta;
-
-        }
-
-
-
-        public async Task<List<FlotaCarro>> dameLosCarritos()
-        {
-            var respuesta = await client.GetAsync("https://localhost:7129/MotorsApi/Alquiler/carros/alquiler");
-
-            return JsonConvert.DeserializeObject<List<FlotaCarro>>(respuesta.Content.ReadAsStringAsync().Result);
-        }
-
         public async Task<Respuesta> actualizarEstado(AlquilerRecue recue, string estado)
         {
             try
@@ -188,6 +140,49 @@ namespace MotorsForm.Services
             return JsonConvert.DeserializeObject<Respuesta>(respuesta.Content.ReadAsStringAsync().Result);
         }
 
+        public async Task<List<FlotaCarro>> dameLosCarritos()
+        {
+            var respuesta = await client.GetAsync("https://localhost:7129/MotorsApi/Alquiler/carros/alquiler");
 
+            return JsonConvert.DeserializeObject<List<FlotaCarro>>(respuesta.Content.ReadAsStringAsync().Result);
+        }
+
+        public async Task<List<TarifasAlquilerRequest>> obtenerTarifasAll()
+        {
+            HttpClient client = new HttpClient();
+            var carnalito = await client.GetAsync("https://localhost:7129/MotorsApi/Alquiler/tarifas");
+
+            return JsonConvert.DeserializeObject<List<TarifasAlquilerRequest>>(carnalito.Content.ReadAsStringAsync().Result);
+        }
+
+        public async Task<Respuesta> enviarNuevaTarifa(double id, TarifasAlquilerRequest carro)
+        {
+            HttpClient client = new HttpClient();
+
+            var datos = JsonConvert.SerializeObject(carro);
+            var content = new StringContent(datos, Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage(new HttpMethod("PATCH"), ($"https://localhost:7129/MotorsApi/Alquiler/editar/Tarifa/%7Bid%7D"))
+            {
+                Content = content
+            };
+
+            var respuestaHttp = await client.SendAsync(request);
+
+            if (!respuestaHttp.IsSuccessStatusCode)
+            {
+                return new Respuesta
+                {
+                    Titulo = "Error de comunicación",
+                    Mensaje = $"Error: {respuestaHttp.StatusCode} - {respuestaHttp.ReasonPhrase}",
+                    Code = (int)respuestaHttp.StatusCode
+                };
+            }
+
+            var respuestaJson = await respuestaHttp.Content.ReadAsStringAsync();
+            var respuesta = JsonConvert.DeserializeObject<Respuesta>(respuestaJson);
+
+            return respuesta;
+
+        }
     }
 }

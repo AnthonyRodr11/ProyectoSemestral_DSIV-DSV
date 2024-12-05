@@ -63,6 +63,16 @@ namespace MotorsForm.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _5798294 {
+            get {
+                object obj = ResourceManager.GetObject("5798294", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap alquiler {
             get {
                 object obj = ResourceManager.GetObject("alquiler", resourceCulture);

@@ -160,8 +160,8 @@
             // 
             this.txtPrecioSubasta.Location = new System.Drawing.Point(56, 385);
             this.txtPrecioSubasta.Maximum = new decimal(new int[] {
-            -1981284353,
-            -1966660860,
+            999999999,
+            0,
             0,
             0});
             this.txtPrecioSubasta.Name = "txtPrecioSubasta";

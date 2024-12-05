@@ -49,6 +49,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnCrearUsuario = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.gpEliminar = new System.Windows.Forms.GroupBox();
             this.lblCorreo = new System.Windows.Forms.Label();
             this.lblTel = new System.Windows.Forms.Label();
@@ -79,6 +80,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.gpEliminar.SuspendLayout();
             this.gpEditar.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -194,6 +196,7 @@
             this.txtPass.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtPass.Location = new System.Drawing.Point(42, 379);
+            this.txtPass.MaxLength = 20;
             this.txtPass.Name = "txtPass";
             this.txtPass.Size = new System.Drawing.Size(293, 30);
             this.txtPass.TabIndex = 35;
@@ -204,6 +207,7 @@
             this.txtMail.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMail.Location = new System.Drawing.Point(42, 316);
+            this.txtMail.MaxLength = 50;
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(293, 30);
             this.txtMail.TabIndex = 34;
@@ -214,6 +218,7 @@
             this.txtIID.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtIID.Location = new System.Drawing.Point(42, 189);
+            this.txtIID.MaxLength = 20;
             this.txtIID.Name = "txtIID";
             this.txtIID.Size = new System.Drawing.Size(293, 30);
             this.txtIID.TabIndex = 33;
@@ -224,6 +229,7 @@
             this.txtApel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtApel.Location = new System.Drawing.Point(42, 125);
+            this.txtApel.MaxLength = 50;
             this.txtApel.Name = "txtApel";
             this.txtApel.Size = new System.Drawing.Size(293, 30);
             this.txtApel.TabIndex = 32;
@@ -234,6 +240,7 @@
             this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtName.Location = new System.Drawing.Point(42, 60);
+            this.txtName.MaxLength = 50;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(293, 30);
             this.txtName.TabIndex = 31;
@@ -348,6 +355,7 @@
             // 
             this.tabPage2.BackgroundImage = global::MotorsForm.Properties.Resources.Background1;
             this.tabPage2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.tabPage2.Controls.Add(this.pictureBox3);
             this.tabPage2.Controls.Add(this.gpEliminar);
             this.tabPage2.Controls.Add(this.gpEditar);
             this.tabPage2.Controls.Add(this.groupBox2);
@@ -361,6 +369,14 @@
             this.tabPage2.Text = "Editar Usuario";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Location = new System.Drawing.Point(951, 487);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox3.TabIndex = 22;
+            this.pictureBox3.TabStop = false;
+            // 
             // gpEliminar
             // 
             this.gpEliminar.Controls.Add(this.lblCorreo);
@@ -373,7 +389,7 @@
             this.gpEliminar.Controls.Add(this.label3);
             this.gpEliminar.Controls.Add(this.label14);
             this.gpEliminar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gpEliminar.Location = new System.Drawing.Point(600, 56);
+            this.gpEliminar.Location = new System.Drawing.Point(601, 56);
             this.gpEliminar.Name = "gpEliminar";
             this.gpEliminar.Size = new System.Drawing.Size(565, 339);
             this.gpEliminar.TabIndex = 21;
@@ -538,7 +554,6 @@
             this.txtTelefono.PromptChar = ' ';
             this.txtTelefono.Size = new System.Drawing.Size(240, 27);
             this.txtTelefono.TabIndex = 12;
-            this.txtTelefono.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.txtTelefono.Leave += new System.EventHandler(this.txtTelefono_Leave);
             this.txtTelefono.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtTelefono_MouseDown);
             // 
@@ -603,6 +618,7 @@
             // txtCorreo
             // 
             this.txtCorreo.Location = new System.Drawing.Point(51, 82);
+            this.txtCorreo.MaxLength = 50;
             this.txtCorreo.Name = "txtCorreo";
             this.txtCorreo.Size = new System.Drawing.Size(309, 27);
             this.txtCorreo.TabIndex = 10;
@@ -672,6 +688,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.gpEliminar.ResumeLayout(false);
             this.gpEliminar.PerformLayout();
             this.gpEditar.ResumeLayout(false);
@@ -729,5 +746,6 @@
         private System.Windows.Forms.Label lblApellido;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblName2;
+        private System.Windows.Forms.PictureBox pictureBox3;
     }
 }
