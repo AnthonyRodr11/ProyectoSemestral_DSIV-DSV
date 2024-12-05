@@ -43,7 +43,9 @@
             this.MenuStripUser = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
+            this.toolStripContainer1.ContentPanel.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -166,6 +168,7 @@
             // 
             this.toolStripContainer1.ContentPanel.BackgroundImage = global::MotorsForm.Properties.Resources.Home;
             this.toolStripContainer1.ContentPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.toolStripContainer1.ContentPanel.Controls.Add(this.label1);
             this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1283, 698);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.LeftToolStripPanelVisible = false;
@@ -176,6 +179,18 @@
             this.toolStripContainer1.TabIndex = 3;
             this.toolStripContainer1.Text = "toolStripContainer1";
             this.toolStripContainer1.TopToolStripPanelVisible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Tahoma", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(312, 293);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(687, 58);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "¡Bienvenido a MotorsValue!";
             // 
             // Home
             // 
@@ -194,6 +209,8 @@
             this.Text = "Home";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.toolStripContainer1.ContentPanel.ResumeLayout(false);
+            this.toolStripContainer1.ContentPanel.PerformLayout();
             this.toolStripContainer1.ResumeLayout(false);
             this.toolStripContainer1.PerformLayout();
             this.ResumeLayout(false);
@@ -216,5 +233,6 @@
         private System.Windows.Forms.ToolStripMenuItem verFlotaToolStripMenuItem;
         public System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
     }
 }
