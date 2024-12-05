@@ -39,8 +39,9 @@
             this.alquilerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.subastaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.solicitudesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.informesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.manejoDeUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Informes = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuStripUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.menuStrip1.SuspendLayout();
             this.toolStripContainer1.SuspendLayout();
@@ -55,8 +56,9 @@
             this.flotaToolStripMenuItem,
             this.serviciosToolStripMenuItem,
             this.solicitudesToolStripMenuItem,
-            this.informesToolStripMenuItem,
-            this.manejoDeUsuariosToolStripMenuItem});
+            this.Informes,
+            this.MenuStripUser,
+            this.salirToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1283, 26);
@@ -130,21 +132,31 @@
             this.solicitudesToolStripMenuItem.Text = "Solicitudes";
             this.solicitudesToolStripMenuItem.Click += new System.EventHandler(this.solicitudesToolStripMenuItem_Click_1);
             // 
-            // informesToolStripMenuItem
+            // Informes
             // 
-            this.informesToolStripMenuItem.Image = global::MotorsForm.Properties.Resources.informe;
-            this.informesToolStripMenuItem.Name = "informesToolStripMenuItem";
-            this.informesToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
-            this.informesToolStripMenuItem.Text = "Informes";
-            this.informesToolStripMenuItem.Click += new System.EventHandler(this.informesToolStripMenuItem_Click);
+            this.Informes.Image = global::MotorsForm.Properties.Resources.informe;
+            this.Informes.Name = "Informes";
+            this.Informes.Size = new System.Drawing.Size(104, 22);
+            this.Informes.Text = "Informes";
+            this.Informes.Visible = false;
+            this.Informes.Click += new System.EventHandler(this.informesToolStripMenuItem_Click);
             // 
-            // manejoDeUsuariosToolStripMenuItem
+            // MenuStripUser
             // 
-            this.manejoDeUsuariosToolStripMenuItem.Image = global::MotorsForm.Properties.Resources.usuario;
-            this.manejoDeUsuariosToolStripMenuItem.Name = "manejoDeUsuariosToolStripMenuItem";
-            this.manejoDeUsuariosToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.manejoDeUsuariosToolStripMenuItem.Text = "Manejo de Usuarios";
-            this.manejoDeUsuariosToolStripMenuItem.Click += new System.EventHandler(this.manejoDeUsuariosToolStripMenuItem_Click);
+            this.MenuStripUser.Image = global::MotorsForm.Properties.Resources.usuario;
+            this.MenuStripUser.Name = "MenuStripUser";
+            this.MenuStripUser.Size = new System.Drawing.Size(182, 22);
+            this.MenuStripUser.Text = "Manejo de Usuarios";
+            this.MenuStripUser.Visible = false;
+            this.MenuStripUser.Click += new System.EventHandler(this.manejoDeUsuariosToolStripMenuItem_Click);
+            // 
+            // salirToolStripMenuItem
+            // 
+            this.salirToolStripMenuItem.Image = global::MotorsForm.Properties.Resources.icomoon_free__exit;
+            this.salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            this.salirToolStripMenuItem.Size = new System.Drawing.Size(72, 22);
+            this.salirToolStripMenuItem.Text = "Salir";
+            this.salirToolStripMenuItem.Click += new System.EventHandler(this.salirToolStripMenuItem_Click);
             // 
             // toolStripContainer1
             // 
@@ -197,11 +209,12 @@
         private System.Windows.Forms.ToolStripMenuItem alquilerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem subastaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem solicitudesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem informesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem manejoDeUsuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Informes;
+        private System.Windows.Forms.ToolStripMenuItem MenuStripUser;
         public System.Windows.Forms.ToolStripContainer toolStripContainer1;
         private System.Windows.Forms.ToolStripMenuItem registrarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verFlotaToolStripMenuItem;
         public System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem salirToolStripMenuItem;
     }
 }

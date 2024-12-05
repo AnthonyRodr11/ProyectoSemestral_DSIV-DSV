@@ -22,16 +22,12 @@ namespace MotorsForm.Menu_Strip
         {
             InitializeComponent();
             // Inicializar los DateTimePicker con la fecha actual
-            dtpInicial.Value = DateTime.Now;
-            dtpFinal.Value = DateTime.Now;
+            dtpFinal.MinDate = DateTime.Now;
+            dtpInicial.MinDate = DateTime.Now;
+            dtpFinal.Value = dtpFinal.Value.AddDays(1);
 
             dtpInicial.ValueChanged += ValidarFechas;
             dtpFinal.ValueChanged += ValidarFechas;
-        }
-
-        private void txtPlaca_Leave(object sender, EventArgs e)
-        {
-            herra.ValidarTextBox(txtPlaca);
         }
 
         private void txtVInicial_Leave_1(object sender, EventArgs e)
@@ -42,16 +38,18 @@ namespace MotorsForm.Menu_Strip
         
         private async void btnSubastar_Click(object sender, EventArgs e)
         {
-            var subasta = new SubastaRequest()
-            {
-                id_placa = txtPlaca.Text,
-                valor_inicial = Convert.ToDouble(txtVInicial.Value),
-                t_inicio = dtpInicial.Value,
-                t_final = dtpFinal.Value,
-            };
+            
 
-            if ((txtPlaca.Text != null || txtPlaca.Text != "") && !(txtVInicial.Value <= 0))
+            if ((txtPlaca.Text != null && txtPlaca.Text != "") && (!(txtVInicial.Value <= 0) && txtVInicial != null))
             {
+                var subasta = new SubastaRequest()
+                {
+                    id_placa = txtPlaca.Text,
+                    valor_inicial = Convert.ToDouble(txtVInicial.Value),
+                    t_inicio = dtpInicial.Value,
+                    t_final = dtpFinal.Value,
+                };
+
                 if (lsbAutos.SelectedItem != null)
                 {
                     var seleccionado = lsbAutos.SelectedItem.GetType().GetProperty("Data")?.GetValue(lsbAutos.SelectedItem);
@@ -69,7 +67,7 @@ namespace MotorsForm.Menu_Strip
                         }
                     }
                 }
-                txtPlaca.Clear();
+                MessageBox.Show("Carro Agregado a Subasta con éxito","Que bien!");
                 CargarListBoxAutosAsync();
             }
             else
@@ -104,12 +102,17 @@ namespace MotorsForm.Menu_Strip
             }
 
             lsbAutosSubasta.DisplayMember = "Display";
+
+            lblVenta.Visible = false;
+            txtPrecioVenta.Visible = false;
+            txtPlaca.ResetText();
+            txtVInicial.ResetText();
+            txtPrecioVenta.ResetText();
         }
 
         private void Subasta_Load(object sender, EventArgs e)
         {
             CargarListBoxAutosAsync();
-            dtpFinal.Value.AddDays(1);
             
         }
 
@@ -125,7 +128,6 @@ namespace MotorsForm.Menu_Strip
                     txtPlaca.Text = datosTuple.Item1; // La placa
                 }
             }
-            CargarListBoxAutosAsync();
 
             
         }
@@ -141,55 +143,83 @@ namespace MotorsForm.Menu_Strip
                     await subastaService.ActualizarEstado(new SubastaRequest() { id_placa = TuplaDatos.Item1 }, "alquiler");
 
                     subastaService.EliminarDeSubasta(TuplaDatos.Item1);
+                    CargarListBoxAutosAsync();
                 }
             }
-            CargarListBoxAutosAsync();
+            else
+            {
+                MessageBox.Show("Debe Seleccionar un auto para continuar", "Despierta, estás en una simulación");
+            }
+            
         }
 
         private async void btnVender_Click(object sender, EventArgs e)
         {
             if (lsbAutosSubasta.SelectedItem != null)
             {
-                CargarListBoxAutosAsync();
-                // Obtener los datos seleccionados
-                var seleccionado = lsbAutosSubasta.SelectedItem.GetType().GetProperty("Data")?.GetValue(lsbAutosSubasta.SelectedItem);
 
-                if (seleccionado is ValueTuple<string, string> TuplaDatos)
+                if (txtPrecioVenta.Value > 0)
                 {
-                    string placa = TuplaDatos.Item1;
+                    // Obtener los datos seleccionados
+                    var seleccionado = lsbAutosSubasta.SelectedItem.GetType().GetProperty("Data")?.GetValue(lsbAutosSubasta.SelectedItem);
 
-                    // Actualizar estado
-                    await subastaService.ActualizarEstado(new SubastaRequest() { id_placa = placa }, "venta");
+                    if (seleccionado is ValueTuple<string, string> TuplaDatos)
+                    {
+                        string placa = TuplaDatos.Item1;
+                        double total = Convert.ToDouble(txtPrecioVenta.Value);
 
-                    // Eliminar de subasta
-                    subastaService.EliminarDeSubasta(placa);
+                        // Actualizar estado
+                        await subastaService.ActualizarEstado(new SubastaRequest() { id_placa = placa }, "venta");
 
-                    // Crear nueva venta
-                    subastaService.NuevaVenta(placa);
+                        // Eliminar de subasta
+                        subastaService.EliminarDeSubasta(placa);
 
-                    // Actualizar los ListBox
-                    await CargarListBoxAutosAsync();
+                        // Crear nueva venta
+                        subastaService.NuevaVenta(placa, total);
+
+                        // Actualizar los ListBox
+                        await CargarListBoxAutosAsync();
+                    }
                 }
+                else
+                {
+                    MessageBox.Show("Tiene que ponerle un precio a su venta", "Tu muy mal");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe Seleccionar un auto para continuar", "Despierta, estás en una simulación");
             }
         }
 
 
         private void ValidarFechas(object sender, EventArgs e)
         {
-            if (dtpInicial.Value > dtpFinal.Value)
+            if (dtpInicial.Value >= dtpFinal.Value)
             {
                 MessageBox.Show("La fecha inicial no puede ser mayor que la fecha final.", "Validación de Fechas", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 // Corregir la inconsistencia si se detecta
-                if (sender == dtpInicial)
-                {
-                    dtpInicial.Value = dtpFinal.Value.AddDays(-1); // Ajusta hacia atrás un día
-                }
-                else if (sender == dtpFinal)
+                if (sender == dtpFinal)
                 {
                     dtpFinal.Value = dtpInicial.Value.AddDays(1); // Ajusta hacia adelante un día
                 }
+                else if (sender == dtpInicial)
+                {
+                    try
+                    {
+                        dtpInicial.Value = dtpFinal.Value.AddDays(-1); // Ajusta hacia atrás un día
+                    }
+                    catch(ArgumentOutOfRangeException) { dtpFinal.Value = dtpInicial.Value.AddDays(1); }
+                    
+                }
             }
+        }
+
+        private void btnVender_MouseEnter(object sender, EventArgs e)
+        {
+            lblVenta.Visible = true;
+            txtPrecioVenta.Visible = true;
         }
     }
 }

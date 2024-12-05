@@ -150,7 +150,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT * from  flota_carro";
+                cmd.CommandText = "SELECT * from flota_carro";
 
 
                 abrirConexion();
@@ -596,7 +596,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado != @estado";
+                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado != @estado AND disponibilidad = 1";
 
                 cmd.Parameters.Add(new MySqlParameter("@estado", estado));
 
@@ -657,7 +657,7 @@ namespace MotorsApi.BD.CRUD.Read
                 cmd.CommandType = CommandType.Text;
 
                 //asignamos consulta a realizar
-                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado = @estado";
+                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado = @estado AND disponibilidad = 1";
 
                 cmd.Parameters.Add(new MySqlParameter("@estado", estado));
 
@@ -724,16 +724,131 @@ namespace MotorsApi.BD.CRUD.Read
                         foto = reader["foto"].ToString();
                     }
                 }
-                if(foto != null)
-                {
-                    string[] strings = foto.Split(new string[] {".."}, StringSplitOptions.TrimEntries);
-                    
-                    return strings[1];
-                }
             }
             catch (Exception e) { Console.WriteLine(e); }
             finally { cerrarConexion(); }
             return null;
+        }
+
+
+        public List<FlotaCarro> ObtenerTodasLasVentasEnCero(string estado)
+        {
+            List<FlotaCarro> autos = new List<FlotaCarro>();
+            string data;
+
+            try
+            {
+
+                cmd.Parameters.Clear();
+
+
+                cmd.CommandType = CommandType.Text;
+
+                //asignamos consulta a realizar
+                cmd.CommandText = @"SELECT DISTINCT fc.placa, fc.marca, fc.modelo, fc.color, fc.km, fc.transmision, fc.tipo_gas, fc.carroceria, fc.estado, fc.descripcion, fc.disponibilidad, fc.foto FROM flota_carro fc 
+                                    JOIN flota_venta fv
+                                    WHERE (fc.estado = 'venta' AND fc.disponibilidad = 1 AND fv.precio = 0)";
+
+                cmd.Parameters.Add(new MySqlParameter("@estado", estado));
+
+                abrirConexion();
+
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        FlotaCarro flota = new FlotaCarro()
+                        {
+                            placa = reader["placa"].ToString(),
+                            marca = reader["marca"].ToString(),
+                            modelo = reader["modelo"].ToString(),
+                            color = reader["color"].ToString(),
+                            km = Convert.ToDouble(reader["km"]),
+                            tipo_gas = reader["tipo_gas"].ToString(),
+                            carroceria = reader["carroceria"].ToString(),
+                            estado = reader["estado"].ToString(),
+                            descripcion = reader["descripcion"].ToString(),
+                            disponibilidad = Convert.ToBoolean(reader["disponibilidad"]),
+                            foto = reader["foto"].ToString()
+
+                        };
+
+                        autos.Add(flota);
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
+
+                cerrarConexion();
+            }
+            return autos;
+        }
+
+        public List<FlotaCarro> ObtenerTodoMenosPrecioCero(string estado)
+        {
+            List<FlotaCarro> autos = new List<FlotaCarro>();
+            string data;
+
+            try
+            {
+
+                cmd.Parameters.Clear();
+
+
+                cmd.CommandType = CommandType.Text;
+
+                //asignamos consulta a realizar
+                cmd.CommandText = "SELECT * FROM flota_carro WHERE estado != @estado AND disponibilidad = 1";
+
+                cmd.Parameters.Add(new MySqlParameter("@estado", estado));
+
+                abrirConexion();
+
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+
+                        FlotaCarro flota = new FlotaCarro()
+                        {
+                            placa = reader["placa"].ToString(),
+                            marca = reader["marca"].ToString(),
+                            modelo = reader["modelo"].ToString(),
+                            color = reader["color"].ToString(),
+                            km = Convert.ToDouble(reader["km"]),
+                            tipo_gas = reader["tipo_gas"].ToString(),
+                            carroceria = reader["carroceria"].ToString(),
+                            estado = reader["estado"].ToString(),
+                            descripcion = reader["descripcion"].ToString(),
+                            disponibilidad = Convert.ToBoolean(reader["disponibilidad"]),
+                            foto = reader["foto"].ToString()
+
+                        };
+
+                        autos.Add(flota);
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+            finally
+            {
+
+                cerrarConexion();
+            }
+            return autos;
         }
 
     }

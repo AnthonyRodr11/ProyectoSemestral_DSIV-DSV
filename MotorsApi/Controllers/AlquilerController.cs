@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MotorsApi.BD.CRUD.Create;
+using MotorsApi.BD.CRUD.Delete;
 using MotorsApi.BD.CRUD.Read;
 using MotorsApi.BD.CRUD.Update;
 using MotorsApi.Models;
@@ -24,7 +25,7 @@ namespace MotorsApi.Controllers
 
         [HttpPost]
         [Route("nueva/Tarifa")]
-        public IActionResult registrarTarifa([FromBody]TarifasAlquiler tarifa)
+        public IActionResult registrarTarifa([FromBody] TarifasAlquiler tarifa)
         {
             if (tarifa == null)
             {
@@ -63,7 +64,7 @@ namespace MotorsApi.Controllers
         [Route("editar/Tarifa/{id}")]
         public IActionResult actualizarTarifa(int id, [FromBody] TarifaRequest tarifas)
         {
-            if(tarifas == null)
+            if (tarifas == null)
             {
                 return BadRequest(new
                 {
@@ -123,12 +124,12 @@ namespace MotorsApi.Controllers
         }
 
         [HttpGet]
-        [Route ("seguros")]
+        [Route("seguros")]
         public List<SeguroRequest> getSeguros()
         {
             return new SeguroRead().obtenerListaSeguros();
         }
-    
+
         [HttpGet]
         [Route("auto/{placa}")]
         public IActionResult getAuto(string placa)
@@ -156,5 +157,71 @@ namespace MotorsApi.Controllers
             return Ok(guardar);
 
         }
+
+
+
+        [HttpGet]
+        [Route("carros/alquiler")]
+        public IActionResult obtenerTodosLosCarrines()
+        {
+            VerFlotas alquiler = new VerFlotas();
+
+            var carros = alquiler.ObtenerTodosLos("alquiler");
+
+            if (carros == null)
+            {
+                return NotFound(new
+                {
+                    titulo = "No se encontraron autos",
+                    mensaje = "Ningun auto encontrado",
+                    code = 404
+                });
+            }
+
+            return Ok(carros);
+        }
+
+
+        [HttpPatch]
+        [Route("alquiler/{estado}")]
+        public IActionResult CambiarEstado(AlquilerRecue alquilersin, string estado)
+        {
+            Console.WriteLine($"Estado recibido: {estado}");
+
+            if (alquilersin == null || alquilersin.id_vehiculo == null)
+            {
+                return BadRequest("Placa vacía");
+            }
+
+            var resultado = new AlquilerAuto().actualizarEstadoAlquiler(alquilersin, estado);
+
+            if (resultado == null || resultado == 0)
+            {
+                return NotFound();
+            }
+            return Ok(resultado);
+        }
+
+
+        [HttpDelete]
+        [Route("carros/alquiler/{placa}")]
+        public IActionResult eliminarCarroAlquiler(string placa)
+        {
+            SubastaDeleter alquilersin = new SubastaDeleter();
+
+            var carro = alquilersin.EliminarCarro(placa);
+
+            if (carro == null)
+            {
+                return NotFound(new
+                {
+                    titulo = "No se encontraron autos",
+                    mensaje = "Ningun auto encontrado",
+                    code = 404
+                });
+            }
+            return Ok(carro);
+        }
+
     }
 }

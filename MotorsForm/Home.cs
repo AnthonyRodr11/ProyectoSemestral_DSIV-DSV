@@ -1,4 +1,5 @@
 ﻿using MotorsForm.Menu_Strip;
+using MotorsForm.Resource;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,10 +14,11 @@ namespace MotorsForm
 {
     public partial class Home : Form
     {
-        public Home()
+        public Home(int rol)
         {
             InitializeComponent();
             this.IsMdiContainer = true;
+            ValidarRol(rol);
         }
 
         public void LimpiarForm()
@@ -112,6 +114,26 @@ namespace MotorsForm
             };
             this.toolStripContainer1.ContentPanel.Controls.Add(venta);
             venta.Show();
+        }
+
+        public void ValidarRol(int rol)
+        {
+            if (rol == 1)
+            {
+                menuStrip1.Items[3].Visible = true;
+                menuStrip1.Items[4].Visible = true;
+            }
+            else
+            {
+                menuStrip1.Items[3].Visible = false;
+                menuStrip1.Items[4].Visible = false;
+            }
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Herramientas.MostrarLogin();
+            this.Close();
         }
     }
 }

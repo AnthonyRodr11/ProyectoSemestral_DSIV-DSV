@@ -17,6 +17,20 @@ namespace MotorsForm.Resource
 
         public static bool continuar {  get; set; }
 
+        public static Login LojinForm;
+
+        public static void SetLoginForm(Login form)
+        {
+            LojinForm = form;
+        }
+        public static void MostrarLogin()
+        {
+            if (LojinForm != null)
+            {
+                LojinForm.Show(); // Mostrar el formulario si existe
+            }
+        }
+
         //Herramientas de Validación
         public static bool ValidarFormatoCorreo(string correo)
         {
@@ -86,7 +100,7 @@ namespace MotorsForm.Resource
 
         public void ValidarNumeric(NumericUpDown control, string cadena)
         {
-            if (control.Value < 0)
+            if (control.Value > 0)
             {
                 MensajeError(control, null, true);
                 continuar = true;
@@ -167,6 +181,17 @@ namespace MotorsForm.Resource
             relativa =  "../../../MotorsValueWeb"+relativa;
 
             return relativa;
+        }
+
+        public string ParaCambiarLaRuta(string foto)
+        {
+            if (foto != null)
+            {
+                string[] strings = foto.Split(new string[] { ".." }, StringSplitOptions.RemoveEmptyEntries);
+
+                return ConseguirRutaAbsoluta(strings[0]);
+            }
+            return null;
         }
 
     }

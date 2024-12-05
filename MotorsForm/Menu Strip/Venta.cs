@@ -35,7 +35,7 @@ namespace MotorsForm.Menu_Strip
                 id_vehiculo = lblMatricula.Text,
             };
 
-            if ((lblMatricula.Text != null || lblMatricula.Text != "") && !(txtPrecio.Value <= 0))
+            if ((lblMatricula.Text != null && lblMatricula.Text != "") && (!(txtPrecio.Value <= 0)&& txtPrecio.Value != null))
             {
                 if (lsbVender.SelectedItem != null)
                 {
@@ -52,6 +52,7 @@ namespace MotorsForm.Menu_Strip
                         if (respuesta.code == 200)
                         {
                             await ventaService.ActualizarEstado(new SubastaRequest() { id_placa = datosTuple.Item1 }, "venta");
+                            MessageBox.Show("Carro Agregado a Venta con éxito", "Que bien!");
                         }
                     }
                 }
@@ -89,8 +90,10 @@ namespace MotorsForm.Menu_Strip
                     }
                 }
             }
-            
-            
+            else
+            {
+                MessageBox.Show("Debe Seleccionar un auto para continuar", "Despierta, estás en una simulación");
+            }
         }
 
         private async void btnAlquilar_Click(object sender, EventArgs e)
@@ -104,9 +107,14 @@ namespace MotorsForm.Menu_Strip
                     await ventaService.ActualizarEstado(new SubastaRequest() { id_placa = TuplaDatos.Item1 }, "alquiler");
 
                     ventaService.EliminarDeVentas(TuplaDatos.Item1);
+                    CargarListBox();
                 }
             }
-            CargarListBox();
+            else
+            {
+                MessageBox.Show("Debe Seleccionar un auto para continuar", "Despierta, estás en una simulación");
+            }
+
         }
 
         public async Task CargarListBox()
@@ -136,6 +144,10 @@ namespace MotorsForm.Menu_Strip
 
             lblValor.Visible = false;
             txtPrecioSubasta.Visible = false;
+            txtPrecio.ResetText();
+            txtPrecioSubasta.ResetText();
+            lblMatricula.ResetText();
+            lblValor.ResetText();
         }
 
         private void Venta_Load(object sender, EventArgs e)
