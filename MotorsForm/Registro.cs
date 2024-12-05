@@ -26,7 +26,7 @@ namespace MotorsForm
         public Registro()
         {
             InitializeComponent();
-           CarroService carroService;
+            carroService = new CarroService();
         }
 
 
@@ -50,14 +50,34 @@ namespace MotorsForm
                     foto = obtenerRuta()
                 };
 
-                var respuesta = await carroService.obtenerEspec(auto);
+                var respuesta = await carroService.enviarEspecs(auto);
 
-                MessageBox.Show("Se ingreso correctamente el Auto", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information );
+                if (respuesta.code == 200)
+                {
+                    MessageBox.Show("Se ingreso correctamente el Auto", "Guardado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtColor.Clear();
+                    txtDescripcion.Clear();
+                    txtMarca.Clear();
+                    txtModelo.Clear();
+                    txtPlaca.Clear();
+                    txtKm.Value = 0;
+                    cmbCarroceria.SelectedIndex = -1;
+                    cmbCombustible.SelectedIndex = -1;
+                    cmbEstado.SelectedIndex = -1;
+                    cmbTransmision.SelectedIndex = -1;
+                    pcbImgGuardar.Image = null;
+                    pcbImgGuardar.Image = Properties.Resources._5798294;
+                }
+                else
+                {
+                    MessageBox.Show("Hubo erro al ingresar el Auto", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+                
 
             }
             else
-            {
-
+            {   
                 MessageBox.Show("Debe Ingresar los datos del Auto", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -159,7 +179,7 @@ namespace MotorsForm
                 string nombreImagen = Path.GetFileName(rutaImagenOriginal);
 
                 // Ruta absoluta para guardar la imagen en la carpeta Img del proyecto
-                string directorioImg = @"C:\Users\Anthony\source\repos\MotorsValues\MotorsValueWeb\Img";
+                string directorioImg = @"C:\Users\Patrick\OneDrive - Universidad Tecnológica de Panamá\DSIV\MotorsValueWeb\Img";
                 string rutaDestino = Path.Combine(directorioImg, nombreImagen);
 
                 try

@@ -127,6 +127,7 @@
             // 
             this.txtDescripcion.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDescripcion.Location = new System.Drawing.Point(32, 332);
+            this.txtDescripcion.MaxLength = 150;
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
             this.txtDescripcion.Size = new System.Drawing.Size(301, 223);
@@ -208,7 +209,7 @@
             // 
             this.txtKm.DecimalPlaces = 2;
             this.txtKm.Font = new System.Drawing.Font("Tahoma", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtKm.Location = new System.Drawing.Point(32, 176);
+            this.txtKm.Location = new System.Drawing.Point(32, 172);
             this.txtKm.Maximum = new decimal(new int[] {
             -727379969,
             232,
@@ -222,6 +223,7 @@
             // 
             this.txtColor.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtColor.Location = new System.Drawing.Point(652, 98);
+            this.txtColor.MaxLength = 50;
             this.txtColor.Name = "txtColor";
             this.txtColor.Size = new System.Drawing.Size(168, 27);
             this.txtColor.TabIndex = 15;
@@ -230,6 +232,7 @@
             // 
             this.txtMarca.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMarca.Location = new System.Drawing.Point(31, 98);
+            this.txtMarca.MaxLength = 50;
             this.txtMarca.Name = "txtMarca";
             this.txtMarca.Size = new System.Drawing.Size(168, 27);
             this.txtMarca.TabIndex = 14;
@@ -238,6 +241,7 @@
             // 
             this.txtModelo.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtModelo.Location = new System.Drawing.Point(240, 98);
+            this.txtModelo.MaxLength = 50;
             this.txtModelo.Name = "txtModelo";
             this.txtModelo.Size = new System.Drawing.Size(168, 27);
             this.txtModelo.TabIndex = 12;
@@ -246,6 +250,7 @@
             // 
             this.txtPlaca.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPlaca.Location = new System.Drawing.Point(447, 98);
+            this.txtPlaca.MaxLength = 50;
             this.txtPlaca.Name = "txtPlaca";
             this.txtPlaca.Size = new System.Drawing.Size(168, 27);
             this.txtPlaca.TabIndex = 11;
@@ -334,7 +339,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(28, 151);
+            this.label3.Location = new System.Drawing.Point(28, 148);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 19);
             this.label3.TabIndex = 2;
