@@ -288,7 +288,6 @@ namespace MotorsForm
 
                         carrin.EliminarDeSubasta(TuplaDatos.Item1);
 
-                        cargarListBoxAutos();
                     }
                     else if(TuplaDatos.Item2 == "venta")
                     {
@@ -297,16 +296,16 @@ namespace MotorsForm
 
                         carrin.EliminarDeVentas(TuplaDatos.Item1);
 
-                        cargarListBoxAutos();
+                        
 
                     }
                     else
                     {
                         carrin.actualizarEstado(new AlquilerRecue() { id_vehiculo = TuplaDatos.Item1 }, "alquiler");
                     }
-                    
 
-                    
+                    await cargarListBoxAutos();
+
                 }
             }
             else
