@@ -144,7 +144,7 @@ namespace MotorsForm.Menu_Strip
 
             lblValor.Visible = false;
             txtPrecioSubasta.Visible = false;
-            txtPrecio.ResetText();
+            txtPrecio.Value = 0;
             txtPrecioSubasta.ResetText();
             lblMatricula.ResetText();
             lblValor.ResetText();

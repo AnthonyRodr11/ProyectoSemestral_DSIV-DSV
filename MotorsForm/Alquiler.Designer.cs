@@ -48,6 +48,10 @@
             this.txtTipoAuto = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lsbEspera = new System.Windows.Forms.ListBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnAlquilar = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtTarifaEdit)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -55,6 +59,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtTarifaAdd)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -67,7 +72,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Font = new System.Drawing.Font("Tahoma", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox1.Location = new System.Drawing.Point(97, 172);
+            this.groupBox1.Location = new System.Drawing.Point(14, 172);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(279, 387);
             this.groupBox1.TabIndex = 0;
@@ -149,9 +154,9 @@
             this.groupBox2.Controls.Add(this.btnVenta);
             this.groupBox2.Font = new System.Drawing.Font("Tahoma", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox2.Location = new System.Drawing.Point(447, 172);
+            this.groupBox2.Location = new System.Drawing.Point(608, 172);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(408, 440);
+            this.groupBox2.Size = new System.Drawing.Size(375, 440);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Editar Estado";
@@ -165,7 +170,7 @@
             0,
             0,
             0});
-            this.txtSubastaAdd.Location = new System.Drawing.Point(240, 324);
+            this.txtSubastaAdd.Location = new System.Drawing.Point(131, 331);
             this.txtSubastaAdd.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -180,16 +185,16 @@
             this.lsblistAlquiler.Font = new System.Drawing.Font("Tahoma", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lsblistAlquiler.FormattingEnabled = true;
             this.lsblistAlquiler.ItemHeight = 14;
-            this.lsblistAlquiler.Location = new System.Drawing.Point(18, 67);
+            this.lsblistAlquiler.Location = new System.Drawing.Point(38, 67);
             this.lsblistAlquiler.Name = "lsblistAlquiler";
-            this.lsblistAlquiler.Size = new System.Drawing.Size(372, 214);
+            this.lsblistAlquiler.Size = new System.Drawing.Size(297, 214);
             this.lsblistAlquiler.TabIndex = 25;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(20, 45);
+            this.label4.Location = new System.Drawing.Point(105, 42);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(219, 19);
             this.label4.TabIndex = 23;
@@ -202,7 +207,7 @@
             this.btnMoverSubasta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnMoverSubasta.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMoverSubasta.ForeColor = System.Drawing.Color.White;
-            this.btnMoverSubasta.Location = new System.Drawing.Point(221, 363);
+            this.btnMoverSubasta.Location = new System.Drawing.Point(207, 363);
             this.btnMoverSubasta.Name = "btnMoverSubasta";
             this.btnMoverSubasta.Size = new System.Drawing.Size(151, 59);
             this.btnMoverSubasta.TabIndex = 24;
@@ -217,7 +222,7 @@
             this.btnVenta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnVenta.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnVenta.ForeColor = System.Drawing.Color.White;
-            this.btnVenta.Location = new System.Drawing.Point(38, 364);
+            this.btnVenta.Location = new System.Drawing.Point(24, 364);
             this.btnVenta.Name = "btnVenta";
             this.btnVenta.Size = new System.Drawing.Size(151, 58);
             this.btnVenta.TabIndex = 23;
@@ -258,12 +263,12 @@
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Font = new System.Drawing.Font("Tahoma", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.ForeColor = System.Drawing.SystemColors.Control;
-            this.groupBox3.Location = new System.Drawing.Point(917, 172);
+            this.groupBox3.Location = new System.Drawing.Point(989, 172);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(279, 387);
             this.groupBox3.TabIndex = 23;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Tipo de Auto";
+            this.groupBox3.Text = "Agregar tipo de auto";
             // 
             // txtTarifaAdd
             // 
@@ -329,12 +334,63 @@
             this.label6.TabIndex = 12;
             this.label6.Text = "Tipo de Auto:";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox4.Controls.Add(this.lsbEspera);
+            this.groupBox4.Controls.Add(this.label7);
+            this.groupBox4.Controls.Add(this.btnAlquilar);
+            this.groupBox4.Font = new System.Drawing.Font("Tahoma", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.ForeColor = System.Drawing.SystemColors.Control;
+            this.groupBox4.Location = new System.Drawing.Point(299, 172);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(303, 440);
+            this.groupBox4.TabIndex = 26;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Editar Estado";
+            // 
+            // lsbEspera
+            // 
+            this.lsbEspera.Font = new System.Drawing.Font("Tahoma", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lsbEspera.FormattingEnabled = true;
+            this.lsbEspera.ItemHeight = 14;
+            this.lsbEspera.Location = new System.Drawing.Point(18, 67);
+            this.lsbEspera.Name = "lsbEspera";
+            this.lsbEspera.Size = new System.Drawing.Size(255, 214);
+            this.lsbEspera.TabIndex = 25;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(20, 45);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(219, 19);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "Lista de Autos en Alquiler";
+            // 
+            // btnAlquilar
+            // 
+            this.btnAlquilar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGray;
+            this.btnAlquilar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
+            this.btnAlquilar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAlquilar.Font = new System.Drawing.Font("Tahoma", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAlquilar.ForeColor = System.Drawing.Color.White;
+            this.btnAlquilar.Location = new System.Drawing.Point(67, 363);
+            this.btnAlquilar.Name = "btnAlquilar";
+            this.btnAlquilar.Size = new System.Drawing.Size(151, 58);
+            this.btnAlquilar.TabIndex = 23;
+            this.btnAlquilar.Text = "Mover a Alquiler";
+            this.btnAlquilar.UseVisualStyleBackColor = true;
+            this.btnAlquilar.Click += new System.EventHandler(this.btnAlquilar_Click);
+            // 
             // Alquiler
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::MotorsForm.Properties.Resources.Background1;
             this.ClientSize = new System.Drawing.Size(1283, 648);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.label3);
@@ -355,6 +411,8 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtTarifaAdd)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -382,5 +440,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ListBox lsblistAlquiler;
         private System.Windows.Forms.NumericUpDown txtSubastaAdd;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.ListBox lsbEspera;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnAlquilar;
     }
 }

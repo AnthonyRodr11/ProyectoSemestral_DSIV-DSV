@@ -223,5 +223,26 @@ namespace MotorsApi.Controllers
             return Ok(carro);
         }
 
+        [HttpGet]
+        [Route("carros")]
+        public IActionResult ObtenerTodosLosAutosMenosAlquiler()
+        {
+            VerFlotas todo = new VerFlotas();
+
+            var autos = todo.ObtenerTodoMenos("alquiler");
+
+            if (autos == null)
+            {
+                return NotFound(new
+                {
+                    titulo = "No se encontraron autos",
+                    mensaje = "Ningun auto encontrado",
+                    code = 404
+                });
+            }
+
+            return Ok(autos);
+        }
+
     }
 }

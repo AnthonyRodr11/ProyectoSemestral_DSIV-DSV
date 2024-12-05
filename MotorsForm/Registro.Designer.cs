@@ -34,7 +34,6 @@
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.cmbCombustible = new System.Windows.Forms.ComboBox();
             this.cmbCarroceria = new System.Windows.Forms.ComboBox();
-            this.cmbEstado = new System.Windows.Forms.ComboBox();
             this.cmbTransmision = new System.Windows.Forms.ComboBox();
             this.txtKm = new System.Windows.Forms.NumericUpDown();
             this.txtColor = new System.Windows.Forms.TextBox();
@@ -46,7 +45,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -70,7 +68,6 @@
             this.groupBox1.Controls.Add(this.txtDescripcion);
             this.groupBox1.Controls.Add(this.cmbCombustible);
             this.groupBox1.Controls.Add(this.cmbCarroceria);
-            this.groupBox1.Controls.Add(this.cmbEstado);
             this.groupBox1.Controls.Add(this.cmbTransmision);
             this.groupBox1.Controls.Add(this.txtKm);
             this.groupBox1.Controls.Add(this.txtColor);
@@ -82,7 +79,6 @@
             this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
@@ -103,7 +99,7 @@
             this.btnRegistrar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Black;
             this.btnRegistrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRegistrar.Font = new System.Drawing.Font("Tahoma", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRegistrar.Location = new System.Drawing.Point(70, 578);
+            this.btnRegistrar.Location = new System.Drawing.Point(70, 499);
             this.btnRegistrar.Name = "btnRegistrar";
             this.btnRegistrar.Size = new System.Drawing.Size(184, 47);
             this.btnRegistrar.TabIndex = 23;
@@ -126,7 +122,7 @@
             // txtDescripcion
             // 
             this.txtDescripcion.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescripcion.Location = new System.Drawing.Point(32, 332);
+            this.txtDescripcion.Location = new System.Drawing.Point(32, 253);
             this.txtDescripcion.MaxLength = 150;
             this.txtDescripcion.Multiline = true;
             this.txtDescripcion.Name = "txtDescripcion";
@@ -153,44 +149,14 @@
             this.cmbCarroceria.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbCarroceria.FormattingEnabled = true;
             this.cmbCarroceria.Items.AddRange(new object[] {
-            "Micro",
-            "Hatchback",
-            "Crossover",
-            "Sedan",
-            "Coupe",
-            "Coupe Svu",
-            "SUV",
-            "OFF-ROADER",
-            "PiCK-UP",
-            "MPV",
-            "Wagon",
-            "Van",
-            "Sport",
-            "Cabriolet ",
-            "Roadster",
-            "Shooting Brake",
-            "Hyper",
-            "Muscle",
-            "Limousine",
-            "Open Wheel"});
+            "sedan",
+            "suv",
+            "4x4",
+            "hatchback"});
             this.cmbCarroceria.Location = new System.Drawing.Point(652, 173);
             this.cmbCarroceria.Name = "cmbCarroceria";
             this.cmbCarroceria.Size = new System.Drawing.Size(167, 27);
             this.cmbCarroceria.TabIndex = 19;
-            // 
-            // cmbEstado
-            // 
-            this.cmbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbEstado.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbEstado.FormattingEnabled = true;
-            this.cmbEstado.Items.AddRange(new object[] {
-            "venta ",
-            "alquiler",
-            "subasta"});
-            this.cmbEstado.Location = new System.Drawing.Point(32, 241);
-            this.cmbEstado.Name = "cmbEstado";
-            this.cmbEstado.Size = new System.Drawing.Size(168, 27);
-            this.cmbEstado.TabIndex = 18;
             // 
             // cmbTransmision
             // 
@@ -269,7 +235,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(27, 310);
+            this.label10.Location = new System.Drawing.Point(27, 222);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(113, 19);
             this.label10.TabIndex = 9;
@@ -304,16 +270,6 @@
             this.label7.Size = new System.Drawing.Size(100, 19);
             this.label7.TabIndex = 6;
             this.label7.Text = "Carroceria:";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(28, 219);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(70, 19);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Estado:";
             // 
             // label5
             // 
@@ -422,7 +378,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -432,7 +387,6 @@
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.ComboBox cmbCombustible;
         private System.Windows.Forms.ComboBox cmbCarroceria;
-        private System.Windows.Forms.ComboBox cmbEstado;
         private System.Windows.Forms.ComboBox cmbTransmision;
         private System.Windows.Forms.NumericUpDown txtKm;
         private System.Windows.Forms.TextBox txtColor;

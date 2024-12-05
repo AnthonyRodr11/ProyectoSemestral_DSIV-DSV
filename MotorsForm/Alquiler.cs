@@ -53,7 +53,7 @@ namespace MotorsForm
                     // Enviar nueva tarifa
                     await carrin.enviarNuevaTarifa(id_tipo, new TarifasAlquilerRequest { tarifaxauto = tarifaNueva });
                     MessageBox.Show("Tarifa actualizada correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.cargarTarifas();
+                    cargarTarifas();
                 }
                 else
                 {
@@ -119,9 +119,10 @@ namespace MotorsForm
         private async Task cargarListBoxAutos()
         {
 
-            var autitos = await carrin.dameLosCarritos();
+            var autitos = await carrin.RecibirCarrosAlquiler();
 
             lsblistAlquiler.Items.Clear();
+            lsbEspera.Items.Clear();
 
             foreach (var c in autitos)
             {
@@ -129,6 +130,16 @@ namespace MotorsForm
             }
 
             lsblistAlquiler.DisplayMember = "Display";
+
+            autitos = await carrin.RecibirCarros();
+
+            foreach(var c in autitos)
+            {
+                lsbEspera.Items.Add(new { Display = (c.marca, c.modelo), Data = (c.placa, c.estado) });
+            }
+
+            lsbEspera.DisplayMember = "Display";
+
         }
 
         private async void btnVenta_Click(object sender, EventArgs e)
@@ -202,7 +213,7 @@ namespace MotorsForm
                     });
                     await carrin.actualizarEstado(new AlquilerRecue { id_vehiculo = TuplaDatos.Item1 }, "subasta");
                     MessageBox.Show("El auto se movió a subasta correctamente.", "Éxito");
-                    cargarListBoxAutos();
+                    await cargarListBoxAutos();
                 }
                 else
                 {
@@ -253,6 +264,47 @@ namespace MotorsForm
             catch (Exception ex)
             {
                 MessageBox.Show($"Error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void btnAlquilar_Click(object sender, EventArgs e)
+        {
+            if (lsbEspera.SelectedItem != null)
+            {
+                var seleccionado = lsbEspera.SelectedItem.GetType().GetProperty("Data")?.GetValue(lsbEspera.SelectedItem);
+
+                if (seleccionado is ValueTuple<string, string> TuplaDatos)
+                {
+                    if(TuplaDatos.Item2 == "subasta")
+                    {
+                        await carrin.actualizarEstado(new AlquilerRecue() { id_vehiculo = TuplaDatos.Item1 }, "alquiler");
+
+                        carrin.EliminarDeSubasta(TuplaDatos.Item1);
+
+                        cargarListBoxAutos();
+                    }
+                    else if(TuplaDatos.Item2 == "venta")
+                    {
+
+                        await carrin.actualizarEstado(new AlquilerRecue() { id_vehiculo = TuplaDatos.Item1 }, "alquiler");
+
+                        carrin.EliminarDeVentas(TuplaDatos.Item1);
+
+                        cargarListBoxAutos();
+
+                    }
+                    else
+                    {
+                        carrin.actualizarEstado(new AlquilerRecue() { id_vehiculo = TuplaDatos.Item1 }, "alquiler");
+                    }
+                    
+
+                    
+                }
+            }
+            else
+            {
+                MessageBox.Show("Debe Seleccionar un auto para continuar", "Despierta, estás en una simulación");
             }
         }
     }

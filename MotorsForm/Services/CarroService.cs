@@ -140,12 +140,12 @@ namespace MotorsForm.Services
             return JsonConvert.DeserializeObject<Respuesta>(respuesta.Content.ReadAsStringAsync().Result);
         }
 
-        public async Task<List<FlotaCarro>> dameLosCarritos()
-        {
-            var respuesta = await client.GetAsync("https://localhost:7129/MotorsApi/Alquiler/carros/alquiler");
+        //public async Task<List<FlotaCarro>> dameLosCarritos()
+        //{
+        //    var respuesta = await client.GetAsync("https://localhost:7129/MotorsApi/Alquiler/carros/alquiler");
 
-            return JsonConvert.DeserializeObject<List<FlotaCarro>>(respuesta.Content.ReadAsStringAsync().Result);
-        }
+        //    return JsonConvert.DeserializeObject<List<FlotaCarro>>(respuesta.Content.ReadAsStringAsync().Result);
+        //}
 
         public async Task<List<TarifasAlquilerRequest>> obtenerTarifasAll()
         {
@@ -183,6 +183,42 @@ namespace MotorsForm.Services
 
             return respuesta;
 
+        }
+
+        public async void EliminarDeSubasta(string placa)
+        {
+            var respuesta = await client.DeleteAsync($"https://localhost:7129/MotorsApi/Subasta/carros/subasta/{placa}");
+
+            if (!respuesta.IsSuccessStatusCode)
+            {
+                var mensajeError = await respuesta.Content.ReadAsStringAsync();
+                MessageBox.Show($"Error: {mensajeError}");
+            }
+        }
+
+        public async void EliminarDeVentas(string placa)
+        {
+            var respuesta = await client.DeleteAsync($"https://localhost:7129/MotorsApi/ventaFlota/Delete/{placa}");
+
+            if (!respuesta.IsSuccessStatusCode)
+            {
+                var mensajeError = await respuesta.Content.ReadAsStringAsync();
+                MessageBox.Show($"Error: {mensajeError}");
+            }
+        }
+
+        public async Task<List<FlotaCarro>> RecibirCarros()
+        {
+            var respuesta = await client.GetAsync("https://localhost:7129/MotorsApi/Alquiler/carros");
+
+            return JsonConvert.DeserializeObject<List<FlotaCarro>>(respuesta.Content.ReadAsStringAsync().Result);
+        }
+
+        public async Task<List<FlotaCarro>> RecibirCarrosAlquiler()
+        {
+            var respuesta = await client.GetAsync("https://localhost:7129/MotorsApi/Alquiler/carros/alquiler");
+
+            return JsonConvert.DeserializeObject<List<FlotaCarro>>(respuesta.Content.ReadAsStringAsync().Result);
         }
     }
 }

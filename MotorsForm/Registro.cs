@@ -45,7 +45,6 @@ namespace MotorsForm
                     transmision = cmbTransmision.Text,
                     tipo_gas = cmbCombustible.Text,
                     carroceria = cmbCarroceria.Text,
-                    estado = cmbEstado.Text,
                     descripcion = txtDescripcion.Text,
                     foto = obtenerRuta()
                 };
@@ -63,7 +62,6 @@ namespace MotorsForm
                     txtKm.Value = 0;
                     cmbCarroceria.SelectedIndex = -1;
                     cmbCombustible.SelectedIndex = -1;
-                    cmbEstado.SelectedIndex = -1;
                     cmbTransmision.SelectedIndex = -1;
                     pcbImgGuardar.Image = null;
                     pcbImgGuardar.Image = Properties.Resources._5798294;
@@ -134,11 +132,6 @@ namespace MotorsForm
             {
                 MessageBox.Show("Debe Ingresar la descripcion del Auto", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return true;
-            }
-            if (cmbEstado.SelectedIndex == -1)
-            {
-                MessageBox.Show("Debe Seleccionar el estado del Auto", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return dañado = true;
             }
             //validamos que la ruta no este vacia o nula
             if (string.IsNullOrEmpty(ruta))
