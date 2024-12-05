@@ -19,9 +19,7 @@ namespace MotorsForm.Models
         public string carroceria { get; set; }
         public string estado { get; set; }
         public string descripcion { get; set; }
+        public bool? disponibildad { get; set; }
         public string foto { get; set; }
-
-
-
     }
 }

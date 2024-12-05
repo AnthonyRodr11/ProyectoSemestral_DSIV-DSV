@@ -21,10 +21,6 @@ namespace MotorsForm.Services
             var data = new StringContent(datos, Encoding.UTF8, "application/json");
             var respuesta = await client.PostAsync("https://localhost:7129/MotorsApi/flotaCarro/save", data );
             return JsonConvert.DeserializeObject<Respuesta>(respuesta.Content.ReadAsStringAsync().Result);
-
-
         }
-
-
     }
 }

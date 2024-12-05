@@ -46,6 +46,7 @@ namespace MotorsForm.Menu_Strip
             lblMonto.Text = monto.ToString();
 
             lblDescripcion.Text = await solici.obtenerDescripcion(solicitud);
+
         }
 
 

@@ -254,6 +254,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resource\5798294.png" />
     <Content Include="Resource\alquiler.png" />
     <Content Include="Resource\Background1.jpg" />
     <Content Include="Resource\car.png" />
