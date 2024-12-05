@@ -45,6 +45,7 @@ namespace MotorsForm
                     transmision = cmbTransmision.Text,
                     tipo_gas = cmbCombustible.Text,
                     carroceria = cmbCarroceria.Text,
+                    estado = "espera",
                     descripcion = txtDescripcion.Text,
                     foto = obtenerRuta()
                 };

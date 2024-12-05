@@ -32,7 +32,6 @@ namespace MotorsApi.BD.CRUD.Create
                 cmd.Parameters.Add(new MySqlParameter("@p_transmision", regAuto.transmision));
                 cmd.Parameters.Add(new MySqlParameter("@p_tipo_gas", regAuto.tipo_gas));
                 cmd.Parameters.Add(new MySqlParameter("@p_carroceria", regAuto.carroceria));
-                cmd.Parameters.Add(new MySqlParameter("@p_estado", regAuto.estado));
                 cmd.Parameters.Add(new MySqlParameter("@p_descripcion", regAuto.descripcion));
                 cmd.Parameters.Add(new MySqlParameter("@p_foto", regAuto.foto));
 

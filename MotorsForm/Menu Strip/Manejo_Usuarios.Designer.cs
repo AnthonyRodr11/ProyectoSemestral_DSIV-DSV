@@ -389,7 +389,7 @@
             this.gpEliminar.Controls.Add(this.label3);
             this.gpEliminar.Controls.Add(this.label14);
             this.gpEliminar.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.gpEliminar.Location = new System.Drawing.Point(601, 56);
+            this.gpEliminar.Location = new System.Drawing.Point(601, 57);
             this.gpEliminar.Name = "gpEliminar";
             this.gpEliminar.Size = new System.Drawing.Size(565, 339);
             this.gpEliminar.TabIndex = 21;
@@ -554,6 +554,7 @@
             this.txtTelefono.PromptChar = ' ';
             this.txtTelefono.Size = new System.Drawing.Size(240, 27);
             this.txtTelefono.TabIndex = 12;
+            this.txtTelefono.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             this.txtTelefono.Leave += new System.EventHandler(this.txtTelefono_Leave);
             this.txtTelefono.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtTelefono_MouseDown);
             // 

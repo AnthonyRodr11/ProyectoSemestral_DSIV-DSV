@@ -164,7 +164,7 @@ namespace MotorsApi.BD.CRUD.Read
             {
                 // Manejo de excepciones
                 Console.WriteLine($"Error: {ex.Message}");
-                throw new Exception("Error al obtener el ID del usuario.", ex);
+                return 0;
             }
             finally
             {

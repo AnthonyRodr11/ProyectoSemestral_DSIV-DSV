@@ -242,6 +242,10 @@ namespace MotorsForm.Menu_Strip
                     }
                 }
             }
+            else
+            {
+                MessageBox.Show("Debe completar los campos primero");
+            }
             
         }
 

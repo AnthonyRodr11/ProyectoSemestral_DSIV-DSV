@@ -151,6 +151,12 @@ namespace MotorsForm
                 return;
             }
 
+            if (txtSubastaAdd.Value == 0) 
+            {
+                MessageBox.Show("Debe poner un precio minimo para moverlo a venta.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
                 // Obtener los datos seleccionados
@@ -159,12 +165,13 @@ namespace MotorsForm
                 if (seleccionado is ValueTuple<string, string> TuplaDatos)
                 {
                     string placa = TuplaDatos.Item1;
+                    double precio = Convert.ToDouble(txtSubastaAdd.Value);
 
                     // Actualizar el estado del auto a "venta"
                     await carrin.actualizarEstado(new AlquilerRecue { id_vehiculo = placa }, "venta");
 
                     // Crear una nueva venta
-                    carrin.nuevaVenta(placa);
+                    carrin.nuevaVenta(placa, precio);
 
                     // Actualizar los ListBox
                     await cargarListBoxAutos();
